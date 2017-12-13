@@ -1,0 +1,179 @@
+@font-face { /*REGULAR FONT*/
+    font-family: "PT Light";
+    src: url("../fonts/PTThin.ttf");
+}
+body{
+	background: #fff;
+	font-family: "FiraSans", sans-serif;
+
+	--main-color: #f38536;
+	--main-color-light: #fcebdf;
+	--accent-color: #4351a2;
+	--accent-color-light: #98a1c8;
+	--light-color: #f3f3f3;
+
+	--main-color-darker: #744d8f;
+}
+
+#loginWrapper{
+	position: relative;
+}
+
+#loginWrapper > aside{
+	position: fixed;
+	height: 100vh;
+	width: 40%;
+	color: #fff;
+	background-color: #000;
+	background-image: url(../images/login-image.jpg);
+}
+
+#loginWrapper > aside:before{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	/*background: var(--main-color);*/
+	background: #000;
+	opacity: 0.6;
+}
+
+#loginWrapper > aside.light:before{
+	opacity: 0.55;
+	opacity: 0.25;
+}
+
+#loginWrapper > aside #text{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 100%;
+	z-index: 1;
+	padding: 30px;
+}
+
+#loginLogo{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+#loginLogo img{
+	height: 50px;
+}
+
+#navbar a{
+	color: #fff6ec;
+}
+
+#testimonials{
+	margin-top: 80px;
+	width: 100%;
+	position: relative;
+	height: 200px;
+	overflow: hidden;
+}
+
+.testimonial{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	padding-right: 24px;
+	text-align: center;
+}
+
+.testimonial h3{
+	margin-top: 12px;
+	font-family: "PT Bold", sans-serif;
+	color: #fff6ec;
+	font-size: 1.15em;
+}
+
+.testimonial p{
+	font-family: "FiraSans Light", sans-serif;
+	color: #ffebdd;
+	font-size: 1.15em;
+	line-height: 1.82em;
+}
+
+.testimonial:not(.current){
+	opacity: 0;
+}
+
+#testimonialLinks{
+	padding: 30px 12px;
+}
+
+#testimonialLinks a{
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	border: 3px solid #fff6ec;
+	margin-right: 12px;
+}
+
+#testimonialLinks a.active{
+	background: #fff6ec;
+}
+
+#loginWrapper > main{
+	position: relative;
+	margin-left: 45%;
+	width: 55%;
+}
+
+#otherLink{
+	padding: 30px;
+	margin-bottom: 30px;
+}
+
+#otherLink a:first-letter{
+	text-transform: uppercase;
+}
+#otherLink a{
+	margin-left: 20px;
+	line-height: 28px;
+}
+
+#formWrapper{
+	min-height: calc(100vh - 240px);
+	/*background: #000;*/
+	min-width: 450px;
+	max-width: 450px;
+	margin: auto;
+}
+
+.input{
+	display: block;
+	width: 100%;
+	margin-bottom: 8px;
+	height: 50px;
+}
+
+label{
+	display: block;
+	font-size: 1.1em;
+	letter-spacing: 2px;
+	margin-top: 24px;
+	margin-bottom: 4px;
+}
+
+.btn.block{
+	height: 50px;
+	line-height: 47px;
+	margin-top: 8px;
+	text-transform: uppercase !important;
+}
+
+#pageTitle{
+	margin-top: 20px;
+	color: #000;
+	font-size: 2em;
+}
+#loginForm

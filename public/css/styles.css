@@ -1,0 +1,493 @@
+body{
+  /*font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+  /*font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  --main-color: #f38536;
+  --main-color-light: #fcebdf;
+  --accent-color: #4351a2;
+  --accent-color-light: #98a1c8;
+  --light-color: #f3f3f3;
+
+  --main-color-darker: #744d8f;
+
+  font-family: "FiraSans", sans-serif;
+}
+
+body.locked{
+    overflow: hidden;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes slideInDown {
+    from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInDown {
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown;
+}
+
+
+@-webkit-keyframes slideOutUp {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+@keyframes slideOutUp {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+.slideOutUp {
+    -webkit-animation-name: slideOutUp;
+    animation-name: slideOutUp;
+}
+
+
+.section-wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+#topNav{
+    padding: 8px 0; 
+}
+
+#navRightThings{
+    font-size: 16px;
+}
+
+#loginLink{
+    margin-right: 24px;
+}
+
+#navRightThings i{
+    font-size: 22px;
+    margin-right: 12px;
+    color: var(--accent-color);
+}
+
+#miniCartToggle i{
+    font-size: 18px;
+}
+
+#mainNav.fixed #navRightThings i{
+    /*color: var(--main-color);*/
+}
+
+#mainLogo{
+    font-family: "Futura Bold", sans-serif;
+    font-size: 2em;
+    color: var(--main-color-darker);
+}
+
+#mainLogo img{
+    height: 40px;
+    /*margin-left: 30px;*/
+}
+
+#navAd{
+    /*margin: 4px 0;*/
+    margin-top: 4px;
+    margin-right: -12px;
+    max-width: 600px;
+}
+
+#navAd img{
+    width: 100%;
+}
+
+#mainNav{
+    padding: 8px 0;
+    background: var(--main-color);
+    z-index: 9;
+    color: #fff;
+}
+
+@keyframes slideDown {
+    from{
+        transform: translateY(-110%);
+    }
+
+    to{
+        transform: none;
+    }
+}
+
+#mainNav.fixed,
+#mainNav.thin{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#mainNav.fixed{
+    background-color: inherit !important;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#mainNav.fixed:before,
+#mainNav.thin:before{
+    content: "";
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    transition: opacity 0.25s ease-in-out;
+}
+
+#mainNav.fixed.shadowed:before,
+#mainNav.thin.shadowed:before{
+    opacity: 1;
+}
+
+#mainNav.fixed.shadowed,
+#mainNav.thin.shadowed{
+    border-bottom-color: transparent;
+}
+
+#mainNav.fixed{
+    background: #fff;
+    color: #444;
+}
+
+#mainNav.thin{
+    animation: slideDown 0.35s ease-out;
+}
+
+#mainNav .section-wrapper{
+    padding-left: calc(2em - 20px);
+}
+
+#navLinks a{
+    padding: 16px 20px;
+    font-size: 1.1em;
+    font-family: "PT Bold", sans-serif;
+}
+
+#navLinks a.active{
+    border-left:none;
+}
+
+#mainNav #searchBar{
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#mainNav.fixed #searchBar{
+    background: #eee;
+    color: #444;
+}
+
+#mainNav.fixed #searchBar{
+    max-width: 550px;
+    margin-left: 22px;
+    margin-right: 22px;
+    height: 45px;
+    border-radius: 2px;
+
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 40px;
+}
+
+#mainNav #searchBar i{
+    padding: 8px;
+    color: #888;
+}
+
+#mainNav.fixed #searchBar i{
+    padding: 12px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+#mainNav #searchBar input{
+    width: 200px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#mainNav.fixed #searchBar input{
+    flex: 1;
+    width: 220px;
+    font-size: 16px;
+}
+
+#mainNav #searchBar button{
+    height: 25px;
+    width: 35px;
+    line-height: 27px;
+    text-align: center;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    margin-right: 4px;
+}
+
+#mainNav.fixed #searchBar button{
+    background-color: var(--main-color);
+    font-family: FiraSans, sans-serif;
+    color: #fdefe5;
+    font-size: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 25px;
+    border-radius: 4px;
+    width: auto !important;
+    margin-right: 8px;
+}
+
+.section-title h1{
+    font-family: "PT Bold", sans-serif;
+    font-size: 2.5em;
+}
+
+.section-title p{
+    font-size: 1.7em;
+    font-family: "Futura", sans-serif;
+}
+
+.section-title h1 + p{
+    margin-top: 6px;
+    margin-left: 6px;
+}
+
+/*PRODUCT*/
+.product{
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.product .image{
+    height: 250px;
+    margin-bottom: 12px;
+}
+
+.product img{
+    max-height: 250px;
+    max-width: 70%;
+}
+
+.product .name{
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.product .price{
+    font-family: FiraSans Light, sans-serif;
+    color: #555;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.btn{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    transition: all .3s ease;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    text-transform: lowercase;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    height: 30px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 27px;
+    background: var(--main-color);
+    color: #fff; 
+}
+
+.btn.accent{
+    background: var(--accent-color);
+}
+
+.btn.large{
+    height: 40px;
+    padding: 0 40px;
+    font-size: 15px;
+    line-height: 37px;
+}
+
+.btn.block{
+    width: 100%;
+}
+
+.input{
+    display: inline-block;
+    position: relative;
+    height: 40px;
+    min-width: 170px;
+    padding: 0 15px 0 15px;
+    border: 1px solid #999;
+    border-radius: 0;
+    outline: 0;
+    color: #414141;
+    font: 400 12px/40px Arial,sans-serif;
+    font-style: normal!important;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.input{
+    cursor: pointer;
+    padding: 0 28px 0 15px;
+    background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
+}
+
+/*FOOTER*/
+footer{
+    /*height: 260px;*/
+}
+
+.footer-wrapper{
+    background-color: #f8f8f8;
+    padding: 4em 6em;
+    padding-bottom: 2.5em;
+}
+
+footer #copyright{
+    background-color: transparent;
+    /*max-width: 800px;*/
+    font-size: 12px;
+    color: #ccc;
+    font-family: "FiraSans", sans-serif;
+    padding: 20px 0;
+    background: #000;
+}
+
+footer .highlight{
+    color: #fff;
+    /*color: var(--color-primary-0);*/
+}
+
+footer #subscribe{
+    padding-right: 40px;
+    width: 350px;
+    min-width: 350px;
+}
+
+footer #subscribe h3{
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+footer #subscribe p{
+    font-family: "FiraSans", sans-serif;
+    font-size: 17px;
+    line-height: 1.8em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+footer #subscribe input,
+footer #subscribe button{
+    display: inline-block;
+}
+
+footer #subscribe input{
+    width: 240px;
+    padding: 10px 17px;
+    font-size: 18px;
+}
+
+footer #subscribe button{
+    padding: 10px 17px;
+    border: 0;
+    color: #fff;
+    background: var(--accent-color);
+}
+
+#footerNav{
+    margin-bottom: 25px;
+}
+
+#footerNav h5{
+    font-family: "FiraSans", sans-serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+#footerNav a{
+    font-family: "FiraSans", sans-serif;
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+footer #socialMediaLinks a{
+    font-size: 30px;
+    margin: 12px;
+    margin-top: 0;
+    margin-left: 0;
+}

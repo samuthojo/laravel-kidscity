@@ -1,0 +1,125 @@
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Bold";
+    src: url("../fonts/firasans/FiraSans-Medium.ttf");
+}
+
+body{
+	background: #fdfdfd;
+	padding-top: 70px;
+}
+
+.section-wrapper{
+    max-width: 1220px;
+}
+
+.footer-wrapper{
+	/*background: #f0f0f0;*/
+}
+
+#cartPage{
+	position: relative;
+	min-height: 100vh;
+	min-height: calc(100vh - 160px);
+	padding-top: 40px;
+	padding-bottom: 80px;
+}
+
+#cartItems{
+	padding-right: 48px;
+}
+
+#cartItems h2{
+	font-size: 1.5em;
+	margin-bottom: 12px;
+}
+
+.cart-item{
+	padding: 24px 0;
+}
+
+.cart-item + .cart-item{
+	border-top: 1px solid #eee;
+	padding: 24px 0;
+}
+
+.cart-item .item-image{
+	
+}
+
+.cart-item .item-image img{
+	width: 100%;
+}
+
+.cart-item h3{
+	margin-left: 16px;
+	font-size: 18px;
+}
+
+.item-qty-bar button{
+	padding: 0 4px;
+	font-size: 1em;
+	padding: 4px 8px;
+	background-color: transparent;
+	border: 1px solid #ddd;
+}
+
+.item-qty-bar input{
+	font-size: 1.11em;
+	box-sizing: border-box;
+	min-width: 30px; width: 42px;
+	text-align: center;
+	padding: 3px 12px;
+	margin: 0 8px; 
+}
+
+#checkoutArea{
+	padding: 32px;
+	border-radius: 4px;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+	width: 100%;
+}
+
+#checkoutArea h3{
+	margin-bottom: 16px;
+	font-size: 1.5em;
+}
+
+#orderSummary{
+	display: none;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+#orderSummary h3{
+	margin-top: 12px;
+	margin-bottom: 20px;
+}
+
+#orderSummary p{
+	margin-bottom: 16px;
+}
+
+#orderSummary p{
+	font-family: "FiraSans Light", sans-serif;
+	font-size: 1em;
+}
+
+#orderSummary p b{
+	font-family: "FiraSans", sans-serif;
+}
+
+#checkoutForm{
+	margin-top: 40px;
+	margin-top: 12px;
+	margin-bottom: 30px;
+	margin-bottom: 20px;
+}
+
+#checkoutForm h3{
+	margin-bottom: 30px;
+}
+
+#checkoutForm .input{
+	width: 100%;
+	margin-bottom: 24px;
+}

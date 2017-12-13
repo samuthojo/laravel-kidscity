@@ -1,0 +1,149 @@
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Bold";
+    src: url("../fonts/firasans/FiraSans-Medium.ttf");
+}
+
+body{
+	background: #fdfdfd;
+	padding-top: 70px;
+}
+
+.section-wrapper{
+    max-width: 1220px;
+}
+
+.footer-wrapper{
+	/*background: #f0f0f0;*/
+}
+
+#shopPage{
+	position: relative;
+	min-height: 100vh;
+	min-height: calc(100vh - 160px);
+	padding: 30px 0;
+}
+
+#shopFilters{
+	padding-left: 0;
+	margin-left: -12px;
+}
+
+.filter-group{
+	
+}
+
+.filter-title,
+.filter-options{
+	padding: 12px 0;
+}
+
+.filter-title{
+	padding: 12px 16px;
+	background: #e5e5e5;
+}
+
+.filter-title h3{
+	font-size: 15px;
+}
+
+.option-wrapper input{
+	display: none;
+}
+
+.filter-options .option{
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;
+
+	color: #333;
+	font-size: 15px;
+	font-family: "FiraSans", sans-serif;
+	padding: 12px 16px;
+	display: block;
+	margin-bottom: 1px;
+}
+
+.filter-options .option.active{
+	font-family: "FiraSans Bold", sans-serif;
+}
+
+.filter-options .option-wrapper .option{
+	padding: 8px 16px;
+	font-family: "FiraSans", sans-serif;
+}
+
+.filter-options .option:hover{
+	background: #f2f2f2;
+}
+
+.filter-options .option i{
+	margin-right: 12px;
+	width: 16px;
+}
+
+.filter-options .option i:before{
+	content: "\f096";
+}
+
+.option-wrapper input:checked + .option i:before{
+	content: "\f046";
+}
+
+#shopContent{
+	padding-left: 32px;
+	padding-right: 0;
+}
+
+#productsTitle h3{
+	font-size: 1.5em;
+}
+
+#productsTitle span{
+	font-size: 12px;
+}
+
+#actionBar{
+	padding-bottom: 16px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+}
+
+#actionBar #sorter{
+	
+}
+
+#actionBar #sorter span{
+	font-size: 16px;
+}
+
+#actionBar #sorterInput{
+	display: inline-block;
+    position: relative;
+    height: 40px;
+    min-width: 170px;
+    padding: 0 28px 0 15px;
+    border: 1px solid #999;
+    border-radius: 0;
+    outline: 0;
+    background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
+    color: #414141;
+    font: 400 12px/40px Arial,sans-serif;
+    font-style: normal!important;
+    text-align: left;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#sorterInput label i{
+	font-size: 20px;
+	margin-left: 12px;
+}
+
+#sorterInput select{
+	position: absolute;
+}

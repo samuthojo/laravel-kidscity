@@ -1,0 +1,97 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/*@import url(http://fonts.googleapis.com/css?family=Oxygen:700|Source+Sans+Pro:300);*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, main {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    font-family:'Gotham medium',"Helvetica Neue Light","Helvetica Neue",serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+}
+html,body{
+    width: 100%;
+    /*height: 100%;*/
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative
+}
+
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Light";
+    src: url("../fonts/firasans/FiraSans-Light.ttf");
+}
+
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans";
+    src: url("../fonts/firasans/FiraSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Futura Bold"; /*Logo Title*/
+    src:url("../fonts/FuturaBold.woff");
+}
+
+@font-face { /*SECTION THIN TEXT*/
+    font-family: "Futura";
+    src:url("../fonts/Futura.woff");
+}
+
+@font-face { /*SECTION TITLES AND BOLD TEXT*/
+    font-family: "PT Bold";
+    src: url("../fonts/PTBold.ttf");
+}

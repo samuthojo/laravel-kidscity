@@ -1,0 +1,173 @@
+/*SECTION BANNER*/
+#sectionBanner{
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    max-height: 450px;
+    background: #000;
+    color: #fff;
+}
+
+#sectionBanner img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+#sectionBanner:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: -webkit-linear-gradient(top right, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+    background: -o-linear-gradient(top right, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+    background: linear-gradient(to bottom left, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+}
+
+#sectionBanner .section-title{
+    z-index: 1
+}
+
+#sectionBanner .section-title h1{
+    margin-top: 40px;
+    margin-bottom: 8px;
+    line-height: 1.1em;
+}
+
+#sectionBanner .section-title p{
+    margin-bottom: 20px;
+}
+
+#sectionBanner .section-title .btn{
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-family: 'FiraSans',arial,sans-serif;
+    font-size: 16px;
+    height: 38px;
+    line-height: 40px;
+    padding: 0 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 3.5em;
+    margin-left: 7px;
+    background: var(--accent-color);
+}
+
+
+/*CARD CTAS*/
+#cardCtas{
+    padding: 3em 0;
+}
+
+.card-cta{
+    position: relative;
+    /*width: calc(33.333% - 12px);*/
+    padding: 40px 20px;
+    border-radius: 5px;
+    min-height: 160px;
+    overflow: hidden;
+}
+
+.card-cta:before, .card-cta .image{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-cta:before{
+    content: '';
+    z-index: 1;
+    background: rgba(0,0,0,0.5);
+}
+
+.card-cta .image{
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background: #fff;
+}
+
+.card-cta h3{
+    text-align: center;
+    z-index: 1;
+    font-size: 2em;
+    font-family: "PT Bold", sans-serif;
+    color: #fff;
+}
+/*END CARD CTAS*/
+#featuredTitle{
+    font-size: 1.8em;
+    margin-top: 1em;
+}
+
+.featured-row{
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.featured-row:first-child{
+    /*margin-top: 40px;*/
+}
+
+.featured-row .product{
+    margin-bottom: 40px;
+}
+
+.feature-section-title{
+    min-height: 100%;
+    min-height: 380px;
+    position: relative;
+    margin-top: 12px;
+    background-color: #ddd;
+    color: #333;
+    color: #fff;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-image: url(../images/featured-boys.jpg);
+    margin-bottom: 40px;
+}
+
+.featured-row:nth-child(2) .feature-section-title{
+   background-image: url(../images/featured-girls2.jpg);
+}
+
+.title-text{
+    padding: 30px 0px;
+    background: #fff !important;
+    z-index: 1;
+    color: #000;
+}
+
+.feature-section-title h3{
+    z-index: 1;
+    font-size: 1.5em;
+    margin-bottom: 4px;
+}
+
+.feature-section-title p{
+    z-index: 1;
+    font-family: FiraSans Light, sans-serif;
+    font-size: 1.2em;
+    line-height: 1.3em;
+}
+
+.feature-section-title:before{
+    display: none;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0,0,0,0.6);
+}
