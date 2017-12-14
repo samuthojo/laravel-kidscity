@@ -8,7 +8,7 @@
         <p style="margin-bottom: 30px;">
             Get your kid the best that money can buy <br> and get free clothes next time.
         </p>
-        <a class="btn" href="shop.php">
+        <a class="btn" href="{{url('/shop')}}">
             BROWSE PRODUCTS</a>
     </div>
 </section>

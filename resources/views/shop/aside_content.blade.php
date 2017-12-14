@@ -23,21 +23,16 @@
 		<h3>Category</h3>
 	</div>
 	<div class="filter-options">
-		<?php
-			for ($i=0; $i < count($categories) ; $i++) {
+		@foreach($categories as $category)
+			@php
 				$category_class =
-					$i == $category ? 'active' : '';
-
-				$category_link = $i == 0 ? '' : '?category=' . $i;
-				$link = "shop.php" . $category_link;
-
-				echo '
-					<a href="'.$link.'" class="option '. $category_class .' ">
-						'. $categories[$i] .'
-					</a>
-				';
-			}
-		?>
+					($category->id == $selectedCategory->id) ? 'active' : '';
+			@endphp
+			<a href="{{url('shop/' . $category->id)}}"
+				class='{{"option " . $category_class}}'>
+				{{$category->name}}
+			</a>
+		@endforeach
 	</div>
 </div>
 

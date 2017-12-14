@@ -14,3 +14,9 @@
 Route::get('/', 'KidsCity@index');
 Route::get('/shop/{category?}', 'KidsCity@shop');
 Route::get('/products/{product}', 'Products@product');
+Route::get('/cart', 'Products@cart');
+Route::get('/register', 'KidsCity@register');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

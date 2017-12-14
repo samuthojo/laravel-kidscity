@@ -9,12 +9,12 @@
 		</div>
 
 	    <div id="navRightThings" class="layout center">
-	    	<a id="loginLink" href="login.php" class="layout center">
+	    	<a id="loginLink" href="{{url('/login')}}" class="layout center">
 	    		<i class="fa fa-user"></i>
 	    		SIGN IN
 	    	</a>
 
-	    	<a href="cart.php" id="miniCartToggle" class="layout center">
+	    	<a href="{{url('/cart')}}" id="miniCartToggle" class="layout center">
 	    		<i class="fa fa-shopping-basket"></i>
 	    		4 ITEM(S)
 	    	</a>

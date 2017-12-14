@@ -7,15 +7,26 @@
     <meta name="description" content="A platform that aims to bridge the gap in innovation for women.">
     <meta name="author" content="iPF Softwares ">
     <meta charset="UTF-8">
-    <link href="fav.png" rel="shortcut icon" type="image">
+    <link href="{{asset('fav.png')}}" rel="shortcut icon" type="image">
     <title>Kid City | Login</title>
 
     <!-- Styles -->
-    <link href="css/reset.css" rel="stylesheet">
+    <link href="{{asset('css/reset.css')}}" rel="stylesheet">
     <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
-    <link href="css/flex.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
+    <link href="{{asset('css/flex.css')}}" rel="stylesheet">
+    <link href="{{asset('css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('css/login.css')}}" rel="stylesheet">
+    <style>
+      .alert-danger {
+        background-color: #f44336;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        color: #fff;
+        z-index: 1;
+        opacity: 0.85;
+      }
+    </style>
 </head>
 <body>
 	<div id="loginWrapper">
@@ -23,12 +34,12 @@
 			<div id="text" class="layout vertical">
 				<div id="navbar" class="layout center">
 					<div id="loginLogo">
-						<a href="index.php">
-							<img src="images/logo.png" alt="">
+						<a href="{{url('/')}}">
+							<img src="{{asset('images/logo.png')}}" alt="">
 						</a>
 					</div>
 
-					<a href="index.php">
+					<a href="{{url('/')}}">
 						HOME
 					</a>
 				</div>
@@ -41,20 +52,35 @@
 		<main>
 			<div id="otherLink" class="layout center end-justified">
 				<h3>Don't have an account yet?</h3>
-				<a href="register.php" class="btn">
+				<a href="{{url('/register')}}" class="btn">
 					Register
 				</a>
 			</div>
 			<div id="formWrapper" class="layout vertical center-justified">
+
+        @if ($errors->any())
+          <div class="alert alert-danger" style="display: inline-block;">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+        @endif
+
 				<h3 id="pageTitle">
 					Sign In to Kidcity
 				</h3>
 
-				<form action="index.php" id="form" method="POST">
+				<form action="{{ route('login') }}" id="form" method="POST">
+          {{ csrf_field() }}
+
 					<label>PHONE NUMBER</label>
-					<input type="text" class="input" placeholder="Enter phone number">
+					<input type="text" class="input" placeholder="Enter phone number"
+            name="phone_number" value="{{old('phone_number')}}" autofocus>
 					<label>PASSWORD</label>
-					<input type="password" class="input" placeholder="Your Password">
+					<input type="password" class="input" placeholder="Your Password"
+            name="password">
 					<button class="btn block large">
 						SUBMIT
 					</button>

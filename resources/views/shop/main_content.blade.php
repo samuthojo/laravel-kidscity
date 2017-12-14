@@ -1,6 +1,6 @@
 <div id="actionBar" class="layout justified center">
 	<div id="productsTitle">
-		<h3><?php echo $categories[$category]; ?></h3>
+		<h3>{{$selectedCategory->name}}</h3>
 		<span>Showing products 1 - 12 of 30</span>
 	</div>
 

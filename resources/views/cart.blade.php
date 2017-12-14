@@ -1,14 +1,9 @@
-@php
-	$page = "cart";
-@endphp
 
-	@include('header');
-	@include('nav.shop_nav');
+@extends('layouts.shopping')
 
-@php
-	$products = ["Boy Jeans", "Girl Fur Coat", "Awakii Uniforms"];
-@endphp
+	{{--$products = ["Boy Jeans", "Girl Fur Coat", "Awakii Uniforms"];--}}
 
+@section('content')
 <div class="main-wrapper">
 	@include('cart.index');
 	@include('scripts');
@@ -31,5 +26,4 @@
     .setPin("#checkoutArea")
     .addTo(controller);
 </script>
-
-	@include('footer');
+@endsection

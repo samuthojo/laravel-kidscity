@@ -1,11 +1,12 @@
 <div class="cart-item row">
 	<div class="item-image col-md-1">
-		<img src="<?php echo 'images/cart/' . ($i+1) . '.png'?>" alt="">
+		{{--<img src="'images/cart/' . ($i+1) . '.png'" alt="">--}}
+		<img src="{{asset('images/cart/' . $product->id . '.png')}}" alt="">
 	</div>
 	<div class="layout flex center">
 		<div class="item-name col-md">
 			<h3>
-				Cart Item Full Name
+				{{$product->name}}
 			</h3>
 		</div>
 		<div class="item-qty-bar item-qty layout center-center">
@@ -18,7 +19,7 @@
 			</button>
 		</div>
 		<span style="padding: 0 32px;">
-			Tshs. 43,000/=
+			Tshs. {{number_format($product->price)}}/=
 		</span>
 		<button class="btn">REMOVE</button>
 	</div>
