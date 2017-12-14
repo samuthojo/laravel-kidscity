@@ -13,7 +13,7 @@ class BrandsTableSeeder extends Seeder
     {
       // $faker = Faker\Factory::create();
 
-      $brands = ['Phillips', 'Sony G', 'Gucci'];
+      $brands = ['All', 'Phillips', 'Sony G', 'Gucci'];
       foreach ($brands as $brand) {
         App\Brand::create([
           'name' => $brand,
