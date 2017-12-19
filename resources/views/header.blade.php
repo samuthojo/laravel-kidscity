@@ -7,7 +7,7 @@
     <meta name="description" content="A platform that aims to bridge the gap in innovation for women.">
     <meta name="author" content="iPF Softwares ">
     <meta charset="UTF-8">
-    <link href="{{asset('fav.png')}}" rel="shortcut icon" type="image">
+    {{--<link href="{{asset('fav.png')}}" rel="shortcut icon" type="image">--}}
     <title>Kid City</title>
 
     <!-- Styles -->
@@ -17,8 +17,6 @@
     <link href="{{asset('css/flexboxgrid.min.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
-
-    <link href="{{asset('css/' . $page . '.css')}}" rel="stylesheet">
 
     <style>
         #alertMessage{

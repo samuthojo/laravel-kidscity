@@ -10,4 +10,8 @@ class Brand extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    function products(){
+        return $this->hasMany('App\Product');
+    }
 }

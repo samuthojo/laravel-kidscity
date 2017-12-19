@@ -1,6 +1,5 @@
 <div class="cart-item row">
 	<div class="item-image col-md-1">
-		{{--<img src="'images/cart/' . ($i+1) . '.png'" alt="">--}}
 		<img src="{{asset('images/cart/' . $product->id . '.png')}}" alt="">
 	</div>
 	<div class="layout flex center">

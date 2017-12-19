@@ -13,7 +13,7 @@ class PriceCategoriesTableSeeder extends Seeder
     {
       // $faker = Faker\Factory::create();
 
-      $price_categories = ['All', '12,000 - 30,000',
+      $price_categories = ['12,000 - 30,000',
                            '40,000 - 60,000', '70,000 - Above'];
       foreach ($price_categories as $price_category) {
         App\PriceCategory::create([
