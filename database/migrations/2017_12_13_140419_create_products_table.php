@@ -26,7 +26,9 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('price_category_id')->unsigned();
+            $table->integer('age_range_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('age_range_id')->references('id')->on('product_age_ranges');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('price_category_id')->references('id')
                                                 ->on('price_categories');
