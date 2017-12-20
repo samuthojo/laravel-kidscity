@@ -5,15 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Brand extends Model
+class Order extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-      'name', 'description', 'image_url',
+      'user_id', 'delivery_location_id',
     ];
-
-    function products(){
-        return $this->hasMany('App\Product');
-    }
 }

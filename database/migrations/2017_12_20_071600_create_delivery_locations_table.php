@@ -18,6 +18,7 @@ class CreateDeliveryLocationsTable extends Migration
             $table->string('location');
             $table->string('delivery_price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
