@@ -34,5 +34,17 @@
         })
             .setClassToggle("#mainNav", "shadowed")
             .addTo(controller);
+
+        $("#brandInput input")
+            .keyup(function (e) {
+                if(e.keyCode === 27)
+                	$(this).trigger(focusout());
+            })
+			.focusin(function () {
+				$(this).parent("#brandInput").addClass("open");
+			})
+            .focusout(function () {
+                $(this).parent("#brandInput").removeClass("open");
+            })
 	</script>
 @endsection

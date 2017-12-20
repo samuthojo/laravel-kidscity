@@ -8,21 +8,26 @@
                 ($selectedBrand == -1) ? 'active' : '';
 		@endphp
 
-		<a href="{{url('shop/')}}" class="option {{$all_brands_class}}">
-			All
-		</a>
+		<div id="brandInput">
+			<input type="text" value="All">
+			<div id="brandOptions">
+				<a href="{{url('shop/')}}" class="option {{$all_brands_class}}">
+					All
+				</a>
 
-		@foreach($brands as $brand)
-			@php
-				$brand_class =
-					($brand->id == $selectedBrand) ? 'active' : '';
-			@endphp
+				@foreach($brands as $brand)
+					@php
+						$brand_class =
+                            ($brand->id == $selectedBrand) ? 'active' : '';
+					@endphp
 
-			<a href="{{url('shop/brand/' . $brand->id)}}"
-			   class='{{"option " . $brand_class}}'>
-				{{$brand->name}}
-			</a>
-		@endforeach
+					<a href="{{url('shop/brand/' . $brand->id)}}"
+					   class='{{"option " . $brand_class}}'>
+						{{$brand->name}}
+					</a>
+				@endforeach
+			</div>
+		</div>
 	</div>
 </div>
 
