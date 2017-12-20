@@ -1,7 +1,21 @@
 <div id="actionBar" class="layout justified center">
 	<div id="productsTitle">
-		<h3>{{$selectedCategory->name}}</h3>
-		<span>Showing products 1 - 12 of 30</span>
+		<h3>
+			@if($selectedCategory != -1)
+				{{$selectedCategoryName}}
+			@endif
+
+			@if($selectedBrand != -1)
+				{{$selectedBrandName}}
+			@endif
+
+			@if($selectedCategory == -1 && $selectedBrand == -1)
+				All products
+			@endif
+		</h3>
+		@if(count($products) > 0)
+			<span>Showing products 1 - 9 of {{count($products)}}</span>
+		@endif
 	</div>
 
 	<div id="sorter" class="layout center">
@@ -15,8 +29,8 @@
 	</div>
 </div>
 <div id="productsGrid">
-	<p style="display: none;">
-		No products found.
+	<p style="display: {{count($products) > 0 ? 'none' : ''}};">
+		No products found for {{$selectedCategoryName}}{{$selectedBrandName}}.
 	</p>
 	<div class="row">
 

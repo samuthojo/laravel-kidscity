@@ -1,0 +1,40 @@
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Bold";
+    src: url("../fonts/firasans/FiraSans-Medium.ttf");
+}
+
+body{
+	background: #fdfdfd;
+	padding-top: 70px;
+}
+
+.product .image{
+	position: relative;
+	height: 120px;
+	overflow: hidden;
+}
+
+.product .image img{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.section-wrapper{
+    max-width: 1220px;
+}
+
+.footer-wrapper{
+	/*background: #f0f0f0;*/
+}
+
+#brandsPage{
+	position: relative;
+	min-height: 100vh;
+	min-height: calc(100vh - 160px);
+	padding-top: 15px;
+	padding-bottom: 40px;
+}

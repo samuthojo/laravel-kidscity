@@ -3,18 +3,31 @@
 		<h3>Brands</h3>
 	</div>
 	<div class="filter-options">
-		<a href="#" class="option active">
-			All
-		</a>
-		<a href="#" class="option">
-			Phillips
-		</a>
-		<a href="#" class="option">
-			Sony G
-		</a>
-		<a href="#" class="option">
-			Gucci
-		</a>
+		@php
+			$all_brands_class =
+                ($selectedBrand == -1) ? 'active' : '';
+		@endphp
+
+		<div id="brandInput">
+			<input type="text" value="All">
+			<div id="brandOptions">
+				<a href="{{url('shop/')}}" class="option {{$all_brands_class}}">
+					All
+				</a>
+
+				@foreach($brands as $brand)
+					@php
+						$brand_class =
+                            ($brand->id == $selectedBrand) ? 'active' : '';
+					@endphp
+
+					<a href="{{url('shop/brand/' . $brand->id)}}"
+					   class='{{"option " . $brand_class}}'>
+						{{$brand->name}}
+					</a>
+				@endforeach
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -23,12 +36,21 @@
 		<h3>Category</h3>
 	</div>
 	<div class="filter-options">
+		@php
+			$all_categories_class =
+                ($selectedCategory == -1) ? 'active' : '';
+		@endphp
+
+		<a href="{{url('shop/')}}" class="option {{$all_categories_class}}">
+			All
+		</a>
+
 		@foreach($categories as $category)
 			@php
 				$category_class =
-					($category->id == $selectedCategory->id) ? 'active' : '';
+					($category->id == $selectedCategory) ? 'active' : '';
 			@endphp
-			<a href="{{url('shop/' . $category->id)}}"
+			<a href="{{url('shop/category/' . $category->id)}}"
 				class='{{"option " . $category_class}}'>
 				{{$category->name}}
 			</a>

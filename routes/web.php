@@ -12,7 +12,9 @@
 */
 
 Route::get('/', 'KidsCity@index');
-Route::get('/shop/{category?}', 'KidsCity@shop');
+Route::get('/brands', 'KidsCity@brands');
+//Route::get('/shop/{category?}', 'KidsCity@shop');
+Route::get('/shop/{filterer?}/{category?}', 'KidsCity@shop');
 Route::get('/products/{product}', 'Products@product');
 Route::get('/cart', 'Products@cart');
 Route::get('/register', 'KidsCity@register');

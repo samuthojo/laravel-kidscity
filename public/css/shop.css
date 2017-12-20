@@ -117,7 +117,8 @@ body{
 	font-size: 16px;
 }
 
-#actionBar #sorterInput{
+#actionBar #sorterInput,
+#brandInput input{
 	display: inline-block;
     position: relative;
     height: 40px;
@@ -146,4 +147,38 @@ body{
 
 #sorterInput select{
 	position: absolute;
+}
+
+#brandInput{
+	background: #fff;
+	margin-top: 12px;
+	margin-bottom: 24px;
+}
+
+#brandInput input{
+	padding: 20px 15px;
+	background: transparent;
+	width: 100%;
+	cursor: text;
+}
+
+#brandInput #brandOptions{
+	position: absolute;
+	left: 0;
+	top: 100%;
+	width: 100%;
+	overflow-y: auto;
+	max-height: 160px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	background-color: #fff;
+	z-index: 1;
+}
+
+#brandInput:not(.open) #brandOptions{
+	display: none;
+}
+
+#brandInput #brandOptions a.active{
+	font-family: "FiraSans", sans-serif;
+	background: rgba(120,120,120,0.1);
 }

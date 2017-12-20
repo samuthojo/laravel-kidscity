@@ -18,6 +18,6 @@ class Products extends Controller
     {
       $page = "cart";
       $boysProducts = Utils\Utils::getBoysProducts();
-      return view('cart', compact('page', 'boysProducts'));
+      return view('cart.index', compact('page', 'boysProducts'));
     }
 }

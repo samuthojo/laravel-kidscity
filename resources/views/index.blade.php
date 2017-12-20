@@ -1,8 +1,10 @@
+@extends('layouts.app')
 
-	@include('header')
+@section('styles')
+	<link href="{{asset('css/home.css')}}" rel="stylesheet">
+@endsection
 
-	@include('nav.common_nav')
-
+@section('content')
 	{{-- ... SITE SUB SECTIONS --}}
 	@include('home.banner')
 	@include('home.card_ctas')
@@ -19,5 +21,4 @@
 	    .setClassToggle("#mainNav", "thin")
 	    .addTo(controller);
 	</script>
-
-	@include('footer')
+@endsection

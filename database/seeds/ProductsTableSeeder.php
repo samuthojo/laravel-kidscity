@@ -11,13 +11,16 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-      $index = 1;
+      $brand_ids = \App\Brand::all()->modelKeys();
+      $category_ids = \App\Category::all()->modelKeys();
+      $price_category_ids = \App\PriceCategory::all()->modelKeys();
+
       for ($i = 0; $i < 5; $i++) {
         App\Product::create([
-          'brand_id' => $index,
-          'category_id' => $index,
-          'price_category_id' => $index,
-          'name' => "Cloth for Boys " . $i,
+          'brand_id' => array_random($brand_ids),
+          'category_id' => array_random($category_ids),
+          'price_category_id' => array_random($price_category_ids),
+          'name' => "Cloth for Boys " . ($i + 1),
           'price' => round(rand(12000, 30000), -3),
           'image_url' => "boy". (($i%9) + 1) .".png",
           'gender' => false, //male
@@ -26,16 +29,14 @@ class ProductsTableSeeder extends Seeder
                            'repellendus reiciendis suscipit, debitis ' .
                            'laboriosam nesciunt.',
         ]);
-        $index = (++$index > 3) ? 1 : $index;
       }
 
-      $index = 1;
       for ($i = 0; $i < 4; $i++) {
         App\Product::create([
-          'brand_id' => $index,
-          'category_id' => $index,
-          'price_category_id' => $index,
-          'name' => "Girls dressing " . $i,
+          'brand_id' => array_random($brand_ids),
+          'category_id' => array_random($category_ids),
+          'price_category_id' => array_random($price_category_ids),
+          'name' => "Girls dressing " . ($i + 1),
           'price' => round(rand(12000, 30000), -3),
           'image_url' => "girl". (($i%9) + 1) .".png",
           'gender' => true, //female
@@ -44,7 +45,6 @@ class ProductsTableSeeder extends Seeder
                            'repellendus reiciendis suscipit, debitis ' .
                            'laboriosam nesciunt.',
         ]);
-        $index = (++$index > 3) ? 1 : $index;
       }
 
     }

@@ -8,17 +8,7 @@
 			<img src="{{asset('images/wide-ad.png')}}" alt="">
 		</div>
 
-	    <div id="navRightThings" class="layout center">
-	    	<a id="loginLink" href="{{url('/login')}}" class="layout center">
-	    		<i class="fa fa-user"></i>
-	    		SIGN IN
-	    	</a>
-
-	    	<a href="{{url('/cart')}}" id="miniCartToggle" class="layout center">
-	    		<i class="fa fa-shopping-basket"></i>
-	    		4 ITEM(S)
-	    	</a>
-	    </div>
+		@include('nav.right_nav')
 	</div>
 </div>
 
@@ -26,7 +16,7 @@
     <div class="section-wrapper layout center justified">
         <div id="navLinks" class="layout center justified">
             <a href="{{url('/shop')}}">SHOP</a>
-            <a href="#">BRANDS</a>
+            <a href="{{url('/brands')}}">BRANDS</a>
             <a href="#">CATEGORIES</a>
             <a href="#">BY GENDER</a>
             <a href="#">NEW ARRIVALS</a>

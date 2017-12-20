@@ -15,9 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('brand_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            $table->integer('price_category_id')->unsigned();
             $table->string('name');
             $table->bigInteger('price');
             $table->text('description')->nullable();
@@ -26,7 +23,12 @@ class CreateProductsTable extends Migration
             $table->string('color')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('brand_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->integer('price_category_id')->unsigned();
+            $table->integer('age_range_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('age_range_id')->references('id')->on('product_age_ranges');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('price_category_id')->references('id')
                                                 ->on('price_categories');

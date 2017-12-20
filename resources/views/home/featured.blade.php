@@ -14,10 +14,9 @@
 			</div>
 
 			@foreach($boysProducts as $product)
-
-				<div class="col-md-4">'
-			  	@include('shop.product')
-			 </div>
+				<div class="col-md-4">
+					@include('shop.product')
+				 </div>
 			@endforeach
 		</div>
 
@@ -35,9 +34,8 @@
 			</div>
 
 			@foreach($girlsProducts as $product)
-
-				<div class="col-md-4"> .
-					  @include('shop.product') .
+				<div class="col-md-4">
+					  @include('shop.product')
 				</div>
 			@endforeach
 		</div>
