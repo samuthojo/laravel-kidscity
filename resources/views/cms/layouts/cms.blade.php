@@ -117,5 +117,12 @@
 
   @yield('content')
 
+  <div class="footer">
+    <div class="footer-div">KidsCity &copy; {{ Date('Y') }}</div>
+    <div class="footer-div footer-right pull-right">
+      Built by <a href="http://ipfsoftwares.com">iPF Softwares</a>
+    </div>
+  </div>
+
   </body>
 </html>

@@ -44,3 +44,22 @@
     color: #f0ad4e;
     /*color: #3c763d;*/
 }
+.footer {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-top: thin solid #e7e7e7;
+  text-align: center;
+  padding: 15px 0;
+  padding-right: 10px;
+  color: #000;
+  background-color: #rgba(255, 255, 255, 1);
+}
+.footer-div {
+  display: inline-block;
+}
+.footer-right>a {
+  color: #0d47a1;
+  text-decoration: none;
+}
