@@ -27,4 +27,10 @@ class Utils
       return App\Product::all();
     }
 
+    public static function saveImage($image, $destination)
+    {
+      $imageName = time() . "." . $image->getClientOriginalExtension();
+      $image->move($destination, $imageName);
+      return $destination . $imageName;
+    }
 }

@@ -1,0 +1,46 @@
+.kidscity_logo {
+  width: 60px;
+}
+.kidscity_logo:hover {
+  cursor: pointer;
+}
+.navbar-default {
+  background-color: rgba(255, 255, 255, 1);
+  /*background-color: rgba(0, 255, 0, 0.2);*/
+  /*border-color: rgba(0, 255, 0, 0.2);*/
+}
+.navbar-default .navbar-nav>li>a {
+  /*color: #3c763d;*/
+  /*color: #0d47a1;*/
+  color: #000;
+  /*color: #555;*/
+  /*color: #777;*/
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  /*color: #0d47a1;*/
+  color: #f0ad4e;
+  background-color: #e7e7e7;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color: #f0ad4e;
+  /*background-color: #e7e7e7;*/
+  cursor: pointer;
+  /*background-color: rgba(255, 255, 255, 0.7);*/
+  /*color: #777;*/
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  color: #f0ad4e;
+  background-color: #e7e7e7;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    /*color: #555;*/
+    color: #000;
+    /*color: #0d47a1;*/
+    /*color: #3c763d;*/
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+    /*color: #555;*/
+    color: #f0ad4e;
+    /*color: #3c763d;*/
+}
