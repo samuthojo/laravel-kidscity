@@ -44,8 +44,11 @@
     color: #f0ad4e;
     /*color: #3c763d;*/
 }
+body {
+   margin-top: 70px;
+}
 .footer {
-  position: absolute;
+  position: fixed;
   width: 100%;
   left: 0;
   bottom: 0;
