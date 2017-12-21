@@ -6,9 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-9">
+
 {{--@include('cms.modals.add_category_modal')--}}
 @include('cms.modals.edit_category_modal')
 @include('cms.modals.confirmation_modal',
@@ -70,9 +68,7 @@
   </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+
 <script>
   $(document).ready(function () {
     $("#myTable").dataTable({

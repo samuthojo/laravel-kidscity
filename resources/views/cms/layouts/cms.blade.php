@@ -117,7 +117,15 @@
   </div>
 </nav>
 
-  @yield('content')
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 cms-dataTable">
+
+      @yield('content')
+
+    </div>
+  </div>
+</div>
 
   <div class="footer">
     <div class="footer-div">KidsCity &copy; {{ Date('Y') }}</div>
