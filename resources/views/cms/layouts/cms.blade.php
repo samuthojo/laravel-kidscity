@@ -14,6 +14,8 @@
 
     <link href="{{asset('images/fav.png')}}" rel="shortcut icon" type="image">
 
+    @yield('more')
+
     <link rel="stylesheet" href="{{asset('css/cms_styles.css')}}">
 
     <script
