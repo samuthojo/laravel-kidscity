@@ -13,7 +13,7 @@ class Brands extends Controller
 
     public function index()
     {
-      //$brands = App\Brand::all();
+      $brands = App\Brand::all();
       return view('cms.brands', compact('brands'));
     }
 
