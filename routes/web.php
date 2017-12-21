@@ -28,7 +28,7 @@ Route::post('/admin/login', 'Auth\LoginController@cmsLogin')->name('cms_authenti
 Route::post('/admin/logout', 'Auth\LoginController@cmsLogout')->name('cms_logout');
 Route::get('/admin', 'Brands@index')->name('main');
 
-Route::middleware('auth')->prefix('/admin')->group(function() {
+Route::prefix('/admin')->group(function() {
   // Route::get('/', 'Brands@index')->name('main');
   Route::get('/brands', 'Brands@index')->name('brands.index');
   Route::post('/brands', 'Brands@store')->name('brands.store');
