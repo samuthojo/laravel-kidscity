@@ -70,5 +70,4 @@
       </div>
     </form>
   </div>
->>>>>>> brands_page
 @endsection
