@@ -1,9 +1,5 @@
 @extends('cms.layouts.cms')
 
-<<<<<<< HEAD
-@section('content')
-
-=======
 @section('more')
   <link rel="stylesheet" href="{{asset('css/cms_brands.css')}}">
 @endsection
