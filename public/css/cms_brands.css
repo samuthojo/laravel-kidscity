@@ -69,3 +69,7 @@
   .brands {
     margin: 0 20px;
   }
+.brands-form {
+  float: right;
+  margin: 10px;
+}
