@@ -9,9 +9,9 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-9">
-{{--@include('modals.add_category_modal')--}}
-@include('modals.edit_category_modal')
-@include('modals.confirmation_modal',
+{{--@include('cms.modals.add_category_modal')--}}
+@include('cms.modals.edit_category_modal')
+@include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
   'text' =>  'Delete this category and its Prices!',
