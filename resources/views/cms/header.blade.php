@@ -1,6 +1,6 @@
 <!-- DataTable Css-->
-<link rel="stylesheet" type="text/css"
-  href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css"
+    href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
 <!-- DataTable Css For Copy, Csv, Excel, Pdf, Print buttons-->
 <link rel="stylesheet" type="text/css"
