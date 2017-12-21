@@ -17,7 +17,7 @@
                   data-dismiss="modal">Cancel</button>
                 <button class="btn btn-success"
                   type="button" onclick="{{$function}}">{{$action}}</button>
-                @include('inline_loader')
+                @include('cms.inline_loader')
               </div>
             </form>
           </div>
