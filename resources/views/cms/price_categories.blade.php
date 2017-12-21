@@ -1,16 +1,20 @@
 @extends('cms.layouts.cms')
 
 @section('more')
-
+@include('cms.header')
+<script src="{{asset('js/cms_categories.js')}}"></script>
 @endsection
 
 @section('content')
-@include('modals.add_category_modal')
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-9">
+{{--@include('modals.add_category_modal')--}}
 @include('modals.edit_category_modal')
 @include('modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete this category and its products!',
+  'text' =>  'Delete this category and its Prices!',
   'action' => 'Confirm',
   'function' => 'deleteCategory()',])
 
@@ -23,32 +27,32 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;"class="panel-title pull-left">
-      Product Categories: </h3>
-     <span onclick="showModal('add_category_modal')" class="pull-right"
+      Price Categories: </h3>
+     {{--<span onclick="showModal('add_category_modal')" class="pull-right"
       title="add category">
        <i class="fa fa-plus-circle fa-2x text-success" style="cursor: pointer;"></i>
-     </span>
+     </span>--}}
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div id="categoriesTable" class="table-responsive">
+    <div id="priceCategoriesTable" class="table-responsive">
     <table id="myTable" class="table table-hover">
       <thead>
         <th>No.</th>
-        <th>Name</th>
+        <th>Price Category</th>
         <th>Action</th>
       </thead>
       <tbody>
-        @foreach($categories as $category)
+        @foreach($priceCategories as $category)
         <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
           <td>{{$loop->iteration}}</td>
-          <td id="{{'category_' . $category->id}}">{{$category->name}}</td>
+          <td id="{{'category_' . $category->id}}">{{$category->range}}</td>
           <td>
             <div class="btn-group" title="edit category">
-              <a class="btn btn-default" title="view products"
-               href="{{url('/categories/' . $category->id . '/products')}}">
+              {{--<a class="btn btn-default" title="view Prices"
+               href="{{url('/categories/' . $category->id . '/Prices')}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning"
                 onclick="showEditCategoryModal({{$category->id}})">
                 <span class="glyphicon glyphicon-pencil"></span>
@@ -66,6 +70,9 @@
   </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 <script>
   $(document).ready(function () {
     $("#myTable").dataTable({
@@ -77,7 +84,7 @@
                 columns: ":not(:last-child)"
               },
               title: "Categories",
-              messageTop: "The List Of Product Categories As Of {{date('d-m-Y')}}"
+              messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'excel',
@@ -85,7 +92,7 @@
                  columns: ":not(:last-child)"
                },
                title: "Categories",
-               messageTop: "The List Of Product Categories As Of {{date('d-m-Y')}}"
+               messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'pdf',
@@ -93,7 +100,7 @@
                  columns: ":not(:last-child)"
                },
                title: "Categories",
-               messageTop: "The List Of Product Categories As Of {{date('d-m-Y')}}"
+               messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             }
         ],
         iDisplayLength: 8,

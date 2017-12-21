@@ -14,9 +14,9 @@
 
     <link href="{{asset('images/fav.png')}}" rel="shortcut icon" type="image">
 
-    <link rel="stylesheet" href="{{asset('css/cms_styles.css')}}">
-
     @yield('more')
+
+    <link rel="stylesheet" href="{{asset('css/cms_styles.css')}}">
 
     <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
