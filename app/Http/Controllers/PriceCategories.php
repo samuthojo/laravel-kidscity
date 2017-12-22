@@ -7,7 +7,7 @@ use App;
 
 class PriceCategories extends Controller
 {
-    public function index()
+    public function cmsIndex()
     {
       $priceCategories = App\PriceCategory::all();
       return view('cms.price_categories', compact('priceCategories'));

@@ -11,4 +11,9 @@ class PriceCategory extends Model
 
   protected $fillable = ['range',];
 
+  public function products()
+  {
+    return $this->hasMany('App\Product');
+  }
+
 }
