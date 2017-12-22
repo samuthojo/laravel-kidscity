@@ -35,4 +35,9 @@ class Product extends Model
     return $this->belongsTo('App\ProductAgeRange');
   }
 
+  public function orderItems()
+  {
+    return $this->hasMany('App\OrderItem');
+  }
+
 }
