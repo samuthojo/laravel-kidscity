@@ -20,4 +20,9 @@ class Products extends Controller
       $boysProducts = Utils\Utils::getBoysProducts();
       return view('cart.index', compact('page', 'boysProducts'));
     }
+
+    public function cmsIndex()
+    {
+      
+    }
 }
