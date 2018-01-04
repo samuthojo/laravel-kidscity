@@ -24,12 +24,12 @@
 @include('cms.alerts.success-alert')
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 style="font-weight: bold;"class="panel-title pull-left">
+    <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
       Price Categories: </h3>
-     {{--<span onclick="showModal('add_category_modal')" class="pull-right"
-      title="add category">
-       <i class="fa fa-plus-circle fa-2x text-success" style="cursor: pointer;"></i>
-     </span>--}}
+      <span onclick="showModal('add_category_modal')" class="pull-right"
+       title="add category">
+        <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
+      </span>
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">

@@ -2,7 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin</title>
+
+    <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+
+    @yield('more')
+
+    <!-- Latest compiled JavaScript -->
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="{{asset('js/cms.js')}}">
+    </script>
 
     <!--Pulling Awesome Font -->
     <link
@@ -14,131 +29,80 @@
 
     <link href="{{asset('images/fav.png')}}" rel="shortcut icon" type="image">
 
-    @yield('more')
-
     <link rel="stylesheet" href="{{asset('css/cms_styles.css')}}">
 
-    @yield('more')
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{{asset('css/cms_styles2.css')}}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-    <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-
-    <!-- Latest compiled JavaScript -->
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript" src="{{asset('js/cms.js')}}">
-    </script>
   </head>
   <body>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="{{asset('images/logo.png')}}" class="kidscity_logo"
+                  alt="KidCity Logo">
+            </div>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{url('/admin')}}">
-        <img src="{{asset('images/logo.png')}}" alt="KidsCity Logo"
-          class="kidscity_logo">
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav" id="link_section">
-      <li class="{{ areActiveRoutes(['main', 'brands.index']) }}"
-        id="brands">
-        <a href="{{ route('brands.index') }}">
-          Brands
-        </a>
-      </li>
-      <li class="{{ isActiveRoute('categories.index') }}"
-         id="categories">
-        <a href="{{ route('categories.index') }}">
-          Categories
-        </a>
-      </li>
-      <li class="{{ isActiveRoute('price_categories.index') }}"
-        id="price_categories">
-        <a href="{{ route('price_categories.index') }}">
-          PriceCategories
-        </a>
-      </li>
-      <li class="{{ isActiveRoute('products.index') }}"
-        id="products">
-        <a href="{{ route('products.index') }}">
-          Products
-        </a>
-      </li>
-      <li class="{{ isActiveRoute('orders.index') }}"
-        id="orders">
-        <a href="{{ route('orders.index') }}">
-          Orders
-        </a>
-      </li>
-      <li class="{{ isActiveRoute('locations.index') }}"
-        id="locations">
-        <a href="{{ route('locations.index') }}"
-          title="Delivery Locations">
-          Locations
-        </a>
-      </li>
+            <ul class="list-unstyled components">
+                <p>KidCity CMS</p>
+                <li class="{{areActiveRoutes(['main', 'brands.index'])}}">
+                    <a href="{{ route('brands.index') }}">Brands</a>
+                </li>
+                <li class="{{isActiveRoute('categories.index')}}">
+                    <a href="{{ route('categories.index') }}">Categories</a>
+                </li>
+                <li class="{{isActiveRoute('price_categories.index')}}">
+                    <a href="{{ route('price_categories.index') }}">
+                      PriceCategories
+                    </a>
+                </li>
+                <li class="{{isActiveRoute('products.index')}}">
+                    <a href="{{ route('products.index') }}">Products</a>
+                </li>
+                <li class="{{isActiveRoute('orders.index')}}">
+                    <a href="{{ route('orders.index') }}">Orders</a>
+                </li>
+                <li class="{{isActiveRoute('locations.index')}}">
+                    <a href="{{ route('locations.index') }}">Locations</a>
+                </li>
+                <li class="{{isActiveRoute('change_password')}}">
+                  <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-user">&nbsp;Account</i>
+                  </a>
+                  <ul class="collapse list-unstyled" id="accountSubmenu">
+                      <li><a href="#">Logout</a></li>
+                      <li><a href="{{ route('change_password') }}">Change Password</a></li>
+                  </ul>
+                </li>
+            </ul>
+        </nav>
 
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle {{ isActiveRoute('change_password') }}"
-          data-toggle="dropdown">
-          <span class="glyphicon glyphicon-user"></span> Account
-          <span class="caret"></span>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Logout
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}"
-                method="POST" style="display: none;">{{ csrf_field() }}</form>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="{{ route('change_password') }}">
-                Change password
-              </a>
-           </li>
-          </ul>
-        </a>
-      </li>
-    </ul>
-  </div>
-  </div>
-</nav>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-8 cms-dataTable">
-
-      @yield('content')
-
-    </div>
-  </div>
-</div>
-
-      </div>
-    </div>
+  <div class="container-fluid" id="content">
+    @yield('content')
   </div>
 
-  <div class="footer">
-    <div class="footer-div">KidsCity &copy; {{ Date('Y') }}</div>
-    <div class="footer-div footer-right pull-right">
-      Built by <a href="http://ipfsoftwares.com">iPF Softwares</a>
-    </div>
-  </div>
+</div> <!--wrapper-->
 
+  <!-- jQuery Custom Scroller CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $("#sidebar").mCustomScrollbar({
+              theme: "minimal"
+          });
+
+          $('#sidebarCollapse').on('click', function () {
+              $('#sidebar, #content').toggleClass('active');
+              $('.collapse.in').toggleClass('in');
+              $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+          });
+      });
+  </script>
   </body>
 </html>

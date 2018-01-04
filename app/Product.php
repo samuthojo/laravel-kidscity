@@ -15,4 +15,29 @@ class Product extends Model
     'price_category_id', 'product_age_range_id',
   ];
 
+  public function category()
+  {
+    return $this->belongsTo('App\Category');
+  }
+
+  public function brand()
+  {
+    return $this->belongsTo('App\Brand');
+  }
+
+  public function priceCategory()
+  {
+    return $this->belongsTo('App\PriceCategory');
+  }
+
+  public function productAgeRange()
+  {
+    return $this->belongsTo('App\ProductAgeRange');
+  }
+
+  public function orderItems()
+  {
+    return $this->hasMany('App\OrderItem');
+  }
+
 }

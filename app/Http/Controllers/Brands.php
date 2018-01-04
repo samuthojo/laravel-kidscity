@@ -11,7 +11,7 @@ class Brands extends Controller
 {
     private $brandsImages = '/uploads/brands/';
 
-    public function index()
+    public function cmsIndex()
     {
       $brands = App\Brand::all();
       return view('cms.brands', compact('brands'));
