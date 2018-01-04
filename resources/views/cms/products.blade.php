@@ -33,10 +33,10 @@
 @include('cms.alerts.success-alert')
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 style="font-weight: bold;" class="panel-title pull-left">
+      <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         Products:
       </h3>
-      <span class="pull-right text-success"
+      <span class="pull-right text-primary"
         title="add product" style="cursor: pointer;"
         onclick="showModal('add_product_modal')">
         <i class="fa fa-plus-circle fa-2x"></i>

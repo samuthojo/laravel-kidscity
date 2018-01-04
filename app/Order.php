@@ -27,4 +27,9 @@ class Order extends Model
     {
       return $this->belongsTo('App\DeliveryLocation');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+      return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
 }

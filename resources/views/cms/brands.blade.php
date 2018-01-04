@@ -1,5 +1,4 @@
 @extends('cms.layouts.cms')
-{{--
 @section('more')
 @include('cms.header')
 <script type="text/javascript" src="{{asset('js/cms_brands.js')}}"></script>
@@ -32,7 +31,7 @@
 @include('cms.alerts.success-alert')
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 style="font-weight: bold;"class="panel-title pull-left">
+    <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
       Brands: </h3>
      <span onclick="showModal('add_brand_modal')" class="pull-right"
       title="add brand">
@@ -116,4 +115,3 @@
   });
 </script>
 @endsection
---}}

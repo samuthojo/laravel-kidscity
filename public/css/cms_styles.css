@@ -4,6 +4,10 @@
 .kidscity_logo:hover {
   cursor: pointer;
 }
+.panel-heading>h3 {
+  color: #337ab7;
+  font-weight: bold;
+}
 .navbar-default {
   background-color: rgba(255, 255, 255, 1);
   /*background-color: rgba(0, 255, 0, 0.2);*/
