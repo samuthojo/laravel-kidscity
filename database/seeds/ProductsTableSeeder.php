@@ -13,13 +13,18 @@ class ProductsTableSeeder extends Seeder
     {
       $brand_ids = \App\Brand::all()->modelKeys();
       $category_ids = \App\Category::all()->modelKeys();
+      $sub_category_ids = \App\SubCategory::all()->modelKeys();
       $price_category_ids = \App\PriceCategory::all()->modelKeys();
       $product_age_range_ids = \App\ProductAgeRange::all()->modelKeys();
 
       for ($i = 0; $i < 5; $i++) {
+        $subCategoryId = array_random($sub_category_ids);
+        $categoryId = App\SubCategory::find($subCategoryId)
+                                        ->category()->first()->id;
         App\Product::create([
           'brand_id' => array_random($brand_ids),
-          'category_id' => array_random($category_ids),
+          'category_id' => $categoryId,
+          'sub_category_id' => $subCategoryId,
           'price_category_id' => array_random($price_category_ids),
           'product_age_range_id' => array_random($product_age_range_ids),
           'name' => "Cloth for Boys " . ($i + 1),
@@ -34,9 +39,13 @@ class ProductsTableSeeder extends Seeder
       }
 
       for ($i = 0; $i < 4; $i++) {
+        $subCategoryId = array_random($sub_category_ids);
+        $categoryId = App\SubCategory::find($subCategoryId)
+                                        ->category()->first()->id;
         App\Product::create([
           'brand_id' => array_random($brand_ids),
-          'category_id' => array_random($category_ids),
+          'category_id' => $categoryId,
+          'sub_category_id' => $subCategoryId,
           'price_category_id' => array_random($price_category_ids),
           'product_age_range_id' => array_random($product_age_range_ids),
           'name' => "Girls dressing " . ($i + 1),

@@ -24,10 +24,12 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
+            $table->integer('sub_category_id')->unsigned();
             $table->integer('price_category_id')->unsigned();
             $table->integer('product_age_range_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
             $table->foreign('price_category_id')->references('id')
                                                 ->on('price_categories');
             $table->foreign('product_age_range_id')->references('id')
