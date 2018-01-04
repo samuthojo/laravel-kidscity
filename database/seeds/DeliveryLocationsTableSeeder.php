@@ -11,6 +11,14 @@ class DeliveryLocationsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $locations = ['Kinondoni', 'Ilala', 'Temeke', ];
+        $prices = [15000, 20000, 25000];
+
+        for($i = 0; $i < 3; $i++) {
+          App\DeliveryLocation::create([
+            'location' => $locations[$i],
+            'delivery_price' => $prices[$i],
+          ]);
+        }
     }
 }

@@ -13,9 +13,10 @@ class KidsCity extends Controller
 {
     public function index()
     {
-      $boysProducts = Utils\Utils::getBoysProducts();
-      $girlsProducts = Utils\Utils::getGirlsProducts();
-      return view('index', compact('boysProducts', 'girlsProducts'));
+        $boysProducts = Utils\Utils::getBoysProducts();
+        $girlsProducts = Utils\Utils::getGirlsProducts();
+
+        return view('index', compact('boysProducts', 'girlsProducts'));
     }
 
     public function shop($filter = "category", $id = -1)

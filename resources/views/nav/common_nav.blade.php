@@ -15,11 +15,11 @@
 <nav id="mainNav">
     <div class="section-wrapper layout center justified">
         <div id="navLinks" class="layout center justified">
-            <a href="{{url('/shop')}}">SHOP</a>
-            <a href="{{url('/brands')}}">BRANDS</a>
-            <a href="#">CATEGORIES</a>
-            <a href="#">BY GENDER</a>
-            <a href="#">NEW ARRIVALS</a>
+            <a href="{{url('/shop')}}">CLOTHING &nbsp;<i class="fa fa-angle-down"></i> {{--girls, boys, by age--}}</a>
+            <a href="{{url('/shop')}}">BABY PRODUCTS &nbsp;<i class="fa fa-angle-down"></i> {{--walker, car seats, high chairs, stroller, by age--}}</a>
+            <a href="{{url('/shop')}}">SCHOOL ITEMS &nbsp; <i class="fa fa-angle-down"></i> {{--uniforms, bags, socks--}}</a>
+            <a href="{{url('/shop')}}">SHOES &nbsp; <i class="fa fa-angle-down"></i> {{--running, sandals, slippers, fancy--}}</a>
+            <a href="{{url('/shop')}}">TOYS & DOLLS &nbsp; <i class="fa fa-angle-down"></i> {{--toys, dolls--}}</a>
         </div>
 
         <div id="searchBar" class="layout center">

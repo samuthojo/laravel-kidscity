@@ -17,7 +17,6 @@ class Products extends Controller
     public function cart()
     {
       $page = "cart";
-      $boysProducts = Utils\Utils::getBoysProducts();
-      return view('cart.index', compact('page', 'boysProducts'));
+      return view('cart.index', compact('page'));
     }
 }

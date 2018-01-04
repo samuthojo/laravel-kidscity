@@ -16,7 +16,12 @@
 				<div class="row">
 					<div id="cartItems" class="col-md-8">
 						<h2>Cart Items</h2>
-						@foreach($boysProducts as $product)
+						@foreach($cart_items as $item)
+							<?php
+								$product = $item['item'];
+								$quantity = $item['quantity'];
+							?>
+
 							@include('cart.cart_item')
 						@endforeach
 					</div>

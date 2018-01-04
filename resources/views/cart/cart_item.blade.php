@@ -12,13 +12,13 @@
 			<button>
 				<i class="fa fa-minus"></i>
 			</button>
-			<input type="text" value="1">
+			<input type="text" value="{{$quantity}}">
 			<button>
 				<i class="fa fa-plus"></i>
 			</button>
 		</div>
 		<span style="padding: 0 32px;">
-			Tshs. {{number_format($product->price)}}/=
+			Tshs. {{number_format($product->price * $quantity)}}/=
 		</span>
 		<button class="btn">REMOVE</button>
 	</div>

@@ -39,7 +39,7 @@
 }
 
 #sectionBanner .section-title p{
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 #sectionBanner .section-title .btn{
@@ -106,12 +106,13 @@
 /*END CARD CTAS*/
 #featuredTitle{
     font-size: 1.8em;
+    font-size: 1.4em;
     margin-top: 1em;
 }
 
 .featured-row{
     margin-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .featured-row:first-child{
@@ -132,8 +133,6 @@
     color: #fff;
     -webkit-background-size: cover;
     background-size: cover;
-    background-image: url(../images/featured-boys.jpg);
-    margin-bottom: 40px;
 }
 
 .featured-row:nth-child(2) .feature-section-title{

@@ -1,7 +1,7 @@
 <div id="navRightThings" class="layout center">
     <a href="{{url('/cart')}}" id="miniCartToggle" class="layout center">
         <i class="fa fa-shopping-basket"></i>
-        4 ITEM(S)
+        {{count($cart_items)}} ITEM(S)
     </a>
 
     @guest()

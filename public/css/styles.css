@@ -384,6 +384,17 @@ body.locked{
     width: 100%;
 }
 
+.product.added .btn{
+    background: #ddd;
+    color: #aaa;
+    pointer-events: none;
+}
+
+.product.added .btn span:first-child,
+.product:not(.added) .btn span:last-child{
+    display: none;
+}
+
 .input{
     display: inline-block;
     position: relative;

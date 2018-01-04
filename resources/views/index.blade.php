@@ -8,6 +8,7 @@
 	{{-- ... SITE SUB SECTIONS --}}
 	@include('home.banner')
 	@include('home.card_ctas')
+	@include('home.category_ctas')
 	@include('home.featured')
 
 	@include('scripts')
