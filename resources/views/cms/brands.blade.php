@@ -1,73 +1,119 @@
 @extends('cms.layouts.cms')
-
+{{--
 @section('more')
-  <link rel="stylesheet" href="{{asset('css/cms_brands.css')}}">
+@include('cms.header')
+<script type="text/javascript" src="{{asset('js/cms_brands.js')}}"></script>
+<style>
+  td.details-control {
+    background: url('../images/details_open.png') no-repeat center;
+    cursor: pointer;
+  }
+  tr.shown td.details-control {
+    background: url('../images/details_close.png') no-repeat center;
+  }
+</style>
 @endsection
 
 @section('content')
-<div class="brands-header">
-    <h3 class="title">Brands</h3>
-    <div class="clearfix"></div>
+@include('cms.modals.add_brand_modal')
+@include('cms.modals.edit_brand_modal')
+@include('cms.modals.confirmation_modal',
+  ['id' => 'delete_confirmation_modal',
+  'title' => 'Confirm',
+  'text' =>  'Delete this brand!',
+  'action' => 'Confirm',
+  'function' => 'deleteCategory()',])
+
+@if(request()->session()->has('message'))
+<div id="alert-success" class="alert alert-success">
+  {{request()->session()->pull('message')}}
+</div>
+@endif
+@include('cms.alerts.success-alert')
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 style="font-weight: bold;"class="panel-title pull-left">
+      Brands: </h3>
+     <span onclick="showModal('add_brand_modal')" class="pull-right"
+      title="add brand">
+       <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
+     </span>
+     <div class="clearfix"></div>
   </div>
-
-  <div class="brands col-sm-9">
-
-    <div class="row">
-      @foreach($brands as $brand)
-      <div class="col-sm-4">
-        <div class="brand">
-          <div class="brand-picture ">
-            <img src="{{asset('images/brands/' . $brand->image_url)}}"
-              class="img-rounded">
-          </div>
-          <div class="brand-info ">
-            <div class="brand-name ">
-              {{$brand->name}}
+  <div class="panel-body">
+    <div id="brandsTable" class="table-responsive">
+    <table id="myTable" class="table table-hover">
+      <thead>
+        <th></th>
+        <th style="display: none;"></th>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        @foreach($brands as $brand)
+        <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
+          <td class="details-control" title="view more"></td>
+          <td style="display: none;">{{$brand->id}}</td>
+          <td>{{$loop->iteration}}</td>
+          <td>{{$brand->name}}</td>
+          <td>
+            <div class="btn-group" title="edit brand">
+              <a class="btn btn-default" title="view products"
+               href="{{url('/brands/' . $brand->id . '/products')}}">
+                <span class="glyphicon glyphicon-eye-open"></span>
+              </a>
+              <button class="btn btn-warning"
+                onclick="showEditBrandModal({{$brand->id}})">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+              <button class="btn btn-danger" title="delete brand"
+                onclick="showDeleteConfirmationModal({{$brand->id}})">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
             </div>
-            <div class="brand-description ">
-              {{$brand->description}}
-            </div>
-            <div class="controls">
-              <div class="btn-group pull-right">
-                <button type="button" name="button" class="btn btn-warning"
-                  title="edit">
-                  <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button type="button" name="button" class="btn btn-danger"
-                  title="delete">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endforeach
-   </div>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
-
-  </div>
-
-  <div class="col-sm-3 brands-form">
-    <h3 class="brand-form-title text-primary">Create New Brand</h3>
-    <form name="brands-form" id="brands-form">
-      <div class="form-group">
-        <input type="text" name="name" placeholder="Brand Name"
-          class="form-control" autofocus>
-      </div>
-      <div class="form-group">
-        <textarea name="description" rows="8" cols="13"
-          class="form-control" placeholder="Short Description"></textarea>
-      </div>
-      <div class="form-group">
-        <input type="file" name="image_url">
-      </div>
-      <div class="form-group">
-        <button type="button" name="create-brand"
-          class="btn btn-primary pull-right">
-          Create
-        </button>
-      </div>
-    </form>
-  </div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#myTable").dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+              extend: 'print',
+              exportOptions: {
+                columns: ":not(:last-child)"
+              },
+              title: "Brands",
+              messageTop: "The List Of Brands As Of {{date('d-m-Y')}}"
+            },
+             {
+               extend: 'excel',
+               exportOptions: {
+                 columns: ":not(:last-child)"
+               },
+               title: "Brands",
+               messageTop: "The List Of Brands As Of {{date('d-m-Y')}}"
+            },
+             {
+               extend: 'pdf',
+               exportOptions: {
+                 columns: ":not(:last-child)"
+               },
+               title: "Brands",
+               messageTop: "The List Of Brands As Of {{date('d-m-Y')}}"
+            }
+        ],
+        iDisplayLength: 8,
+        bLengthChange: false
+    });
+  });
+</script>
 @endsection
+--}}
