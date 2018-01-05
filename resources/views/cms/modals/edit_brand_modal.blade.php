@@ -34,7 +34,7 @@
                 <button class="btn btn-default"
                   data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success"
-                  onclick="editBrand()">Add</button>
+                  onclick="attemptEditBrand()">Save</button>
                 @include('cms.inline_loader')
               </div>
             </form>

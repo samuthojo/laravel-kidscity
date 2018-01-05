@@ -17,6 +17,27 @@ class Brands extends Controller
       return view('cms.brands', compact('brands'));
     }
 
+    public function brand(App\Brand $brand)
+    {
+      return $brand;
+    }
+
+    public function products(App\Brand $brand)
+    {
+      $products =  $brand->products()->get()->map(function ($prod) {
+        $product = $prod;
+        $product->category_name = $prod->category()->first()->name;
+        $product->age_range = $prod->productAgeRange()->first()->range;
+        $product->price_category = $prod->priceCategory()->first()->range;
+        $product->brand_name = $prod->brand()->first()->name;
+
+        return $product;
+      });
+
+      $categories = App\Category::all();
+      return view('cms.brand_products', compact('brand', 'categories', 'products'));
+    }
+
     public function store(Requests\CreateBrand $request)
     {
       if($request->hasFile('image_url')) {
@@ -52,4 +73,5 @@ class Brands extends Controller
     {
       return App\Brand::create($request->all());
     }
+
 }

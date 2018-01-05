@@ -30,6 +30,8 @@ Route::post('/admin/logout', 'Auth\LoginController@cmsLogout')->name('cms_logout
 Route::prefix('/admin')->group(function() {
   Route::get('/', 'Brands@cmsIndex')->name('main');
   Route::get('/brands', 'Brands@cmsIndex')->name('brands.index');
+  Route::get('/brands/{brand}/brand', 'Brands@brand')->name('brands.brand');
+  Route::get('/brands/{brand}/products', 'Brands@products')->name('brands.products');
   Route::post('/brands', 'Brands@store')->name('brands.store');
   Route::post('/brands/{brand}', 'Brands@update')->name('brands.update');
   Route::delete('/brands/{brand}', 'Brands@destroy')->name('brands.destroy');

@@ -43,8 +43,10 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
+              <a href="{{ route('main') }}">
                 <img src="{{asset('images/logo.png')}}" class="kidscity_logo"
                   alt="KidCity Logo">
+              </a>
             </div>
 
             <ul class="list-unstyled components">

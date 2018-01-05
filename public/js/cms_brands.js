@@ -1,24 +1,47 @@
+var table = null;
+
 var brand_id = "";
 
-$(document).ready(function () {
-  $(":text").keydown(function() {
-    $(this).next().fadeOut(0);
-  });
-});
+function format(brand) {
+  return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<th>Picture:</th>'+
+            '<td>'+
+              "<img class='img-rounded' alt='product picture' " +
+                  "src=" + "/images/brands/" + brand.image_url + " height='30%' width='auto'>" +
+            '</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<th>Description:</th>'+
+            '<td>'+ brand.description +'</td>'+
+        '</tr>'+
+    '</table>';
+}
+
+function format2() {
+  return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+      '<tr>'+
+          '<td>'+ '<span> Fetching...' +
+            '<i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"></i>' +
+          '</span>' +'</td>'+
+      '</tr>'+
+  '</table>';
+}
+
 
 function addBrand() {
   var form = document.getElementById('add_brand_form');
   var formData = new FormData(form);
   $.ajax({
          type: "post",
-         url: "/brands",
+         url: "/admin/brands",
          contentType: false,
          processData: false,
          data: formData,
          success: function() {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = "/brands";
+           window.location.href = "/admin/brands";
          },
          error: function(error) {
            $(".btn-success").prop("disabled", false);
@@ -54,7 +77,7 @@ function attemptEditBrand() {
   var formData = new FormData(form);
   $.ajax({
     type: "post",
-    url: "/brands/" + brand_id,
+    url: "/admin/brands/" + brand_id,
     contentType: false,
     processData: false,
     data: formData,
@@ -94,7 +117,7 @@ function showDeleteConfirmationModal(id) {
 function deleteBrand() {
   $.ajax({
     type: 'delete',
-    url: '/brands/' + brand_id,
+    url: '/admin/brands/' + brand_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

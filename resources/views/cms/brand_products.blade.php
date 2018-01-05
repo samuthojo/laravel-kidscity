@@ -34,13 +34,20 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
-        Products:
+        {{$brand->name}} Products:
       </h3>
-      <span class="pull-right text-primary"
-        title="add product" style="cursor: pointer;"
-        onclick="showModal('add_product_modal')">
-        <i class="fa fa-plus-circle fa-2x"></i>
-      </span>
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary" href="{{url('admin/brands')}}"
+          title="back">
+          <i class="fa fa-arrow-left"
+            style="font-size: 16px;"></i>
+        </a>
+        <button class="btn btn-primary"
+          title="add product" style="cursor: pointer;"
+          onclick="showModal('add_product_modal')">
+          <i class="fa fa-plus-circle" style="font-size: 16px;"></i>
+        </button>
+      </div>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">

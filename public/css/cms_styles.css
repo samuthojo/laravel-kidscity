@@ -11,6 +11,7 @@
   color: #337ab7;
 }
 .panel-heading>h3 {
+  text-transform: capitalize !important;
   color: #337ab7;
   font-weight: bold;
 }
