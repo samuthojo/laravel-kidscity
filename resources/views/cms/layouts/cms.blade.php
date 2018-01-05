@@ -16,6 +16,7 @@
     <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     </script>
+
     <script type="text/javascript" src="{{asset('js/cms.js')}}">
     </script>
 
@@ -24,15 +25,13 @@
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
       rel="stylesheet">
 
-    <link rel="stylesheet"
-    	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <link href="{{asset('images/fav.png')}}" rel="shortcut icon" type="image">
 
     <link rel="stylesheet" href="{{asset('css/cms_styles.css')}}">
 
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{{asset('css/cms_styles2.css')}}">
     <!-- Scrollbar Custom CSS -->
@@ -55,6 +54,10 @@
                 </li>
                 <li class="{{isActiveRoute('categories.index')}}">
                     <a href="{{ route('categories.index') }}">Categories</a>
+                </li>
+                <li class="{{isActiveRoute('sub_categories')}}">
+                    <a href="{{ route('sub_categories') }}">
+                      SubCategories</a>
                 </li>
                 <li class="{{isActiveRoute('price_categories.index')}}">
                     <a href="{{ route('price_categories.index') }}">

@@ -20,7 +20,12 @@
                  style="display: none;"></span>
               </div>
               <div class="form-group">
-                <label for="edit_brand_image">Picture:</label>
+                <label for="edit_brand_description">Description:</label>
+                <textarea name="description" class="form-control"
+                 rows="8" cols="80"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="edit_brand_image">Replace Picture:</label>
                 <input type="file" name="image_url" id="edit_brand_image">
                 <span id="edit_brand_image_error" class="text-danger"
                  style="display: none;"></span>
@@ -29,7 +34,7 @@
                 <button class="btn btn-default"
                   data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success"
-                  onclick="addBrand()">Add</button>
+                  onclick="editBrand()">Add</button>
                 @include('cms.inline_loader')
               </div>
             </form>

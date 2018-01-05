@@ -35,6 +35,7 @@ Route::prefix('/admin')->group(function() {
   Route::delete('/brands/{brand}', 'Brands@destroy')->name('brands.destroy');
 
   Route::get('/categories', 'Categories@cmsIndex')->name('categories.index');
+  Route::get('/sub_categories', 'Categories@subCategories')->name('sub_categories');
   Route::get('/price_categories', 'PriceCategories@cmsIndex')->name('price_categories.index');
   Route::get('/products', 'Products@cmsIndex')->name('products.index');
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');

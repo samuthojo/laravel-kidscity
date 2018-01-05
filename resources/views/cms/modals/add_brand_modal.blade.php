@@ -20,6 +20,11 @@
                  style="display: none;"></span>
               </div>
               <div class="form-group">
+                <label for="brand_description">Description:</label>
+                <textarea name="description" class="form-control"
+                 rows="8" cols="80" placeholder="Description (optional)"></textarea>
+              </div>
+              <div class="form-group">
                 <label for="brand_image">Picture:</label>
                 <input type="file" name="image_url" id="brand_image">
                 <span id="brand_image_error" class="text-danger"

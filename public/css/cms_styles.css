@@ -1,8 +1,14 @@
+.form-control {
+  width: 200px !important;
+}
 .kidscity_logo {
   width: 60px;
 }
 .kidscity_logo:hover {
   cursor: pointer;
+}
+.modal-title {
+  color: #337ab7;
 }
 .panel-heading>h3 {
   color: #337ab7;
