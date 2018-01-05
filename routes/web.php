@@ -36,9 +36,18 @@ Route::prefix('/admin')->group(function() {
   Route::post('/brands/{brand}', 'Brands@update')->name('brands.update');
   Route::delete('/brands/{brand}', 'Brands@destroy')->name('brands.destroy');
 
+  Route::get('/age_ranges', 'AgeRanges@cmsIndex')->name('age_ranges.index');
+
+  Route::get('/customers', 'Users@cmsIndex')->name('users.index');
+
   Route::get('/categories', 'Categories@cmsIndex')->name('categories.index');
-  Route::get('/sub_categories', 'Categories@subCategories')->name('sub_categories');
+  Route::get('/categories/{category}/products', 'Categories@products')->name('categories.products');
+  Route::get('/sub_categories', 'SubCategories@cmsIndex')->name('sub_categories.index');
+  Route::get('/sub_categories/{subCategory}/products', 'SubCategories@products')->name('sub_categories.products');
+
   Route::get('/price_categories', 'PriceCategories@cmsIndex')->name('price_categories.index');
+  Route::get('/price_categories/{priceCategory}/products', 'PriceCategories@products')->name('price_categories.products');
+
   Route::get('/products', 'Products@cmsIndex')->name('products.index');
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
   Route::get('/locations', 'DeliveryLocations@cmsIndex')->name('locations.index');

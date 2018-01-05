@@ -35,7 +35,11 @@ class Brands extends Controller
       });
 
       $categories = App\Category::all();
-      return view('cms.brand_products', compact('brand', 'categories', 'products'));
+      $brands = App\Brand::all();
+      $priceCategories = App\PriceCategory::all();
+      $ageRanges = App\ProductAgeRange::all();
+      return view('cms.brand_products', compact('brand', 'categories',
+        'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
     public function store(Requests\CreateBrand $request)

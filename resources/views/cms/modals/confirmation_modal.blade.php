@@ -1,5 +1,5 @@
 <div id="{{$id}}" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" data-dismiss="modal">
@@ -11,7 +11,7 @@
           <div class="container">
             <form name="action_confirmation_form"
               id="action_confirmation_form">
-              {{$text}}
+              <p id="confirmation_text">{{$text}}</p>
               <div class="form-group">
                 <button class="btn btn-default"
                   data-dismiss="modal">Cancel</button>

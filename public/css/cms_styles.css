@@ -1,6 +1,9 @@
 .form-control {
   width: 200px !important;
 }
+#confirmation_text {
+  color: #000 !important;
+}
 .kidscity_logo {
   width: 60px;
 }

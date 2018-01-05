@@ -2,19 +2,19 @@
 
 @section('more')
 @include('cms.header')
-<script src="{{asset('js/cms_categories.js')}}"></script>
+<script src="{{asset('js/cms_price_categories.js')}}"></script>
 @endsection
 
 @section('content')
 
-{{--@include('cms.modals.add_category_modal')--}}
-@include('cms.modals.edit_category_modal')
+@include('cms.modals.add_price_category_modal')
+@include('cms.modals.edit_price_category_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete this category and its Prices!',
+  'text' =>  'Delete PriceCategory!',
   'action' => 'Confirm',
-  'function' => 'deleteCategory()',])
+  'function' => 'deletePriceCategory()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -26,8 +26,8 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
       Price Categories: </h3>
-      <span onclick="showModal('add_category_modal')" class="pull-right"
-       title="add category">
+      <span onclick="showModal('add_price_category_modal')" class="pull-right"
+       title="add price-category">
         <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
       </span>
      <div class="clearfix"></div>
@@ -41,22 +41,22 @@
         <th>Action</th>
       </thead>
       <tbody>
-        @foreach($priceCategories as $category)
+        @foreach($priceCategories as $priceCategory)
         <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
           <td>{{$loop->iteration}}</td>
-          <td id="{{'category_' . $category->id}}">{{$category->range}}</td>
+          <td>{{$priceCategory->range}}</td>
           <td>
-            <div class="btn-group" title="edit category">
-              {{--<a class="btn btn-default" title="view Prices"
-               href="{{url('/categories/' . $category->id . '/Prices')}}">
+            <div class="btn-group" title="edit price-category">
+              <a class="btn btn-default" title="view products"
+               href="{{route('price_categories.products', ['priceCategory' => $priceCategory->id])}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>--}}
+              </a>
               <button class="btn btn-warning"
-                onclick="showEditCategoryModal({{$category->id}})">
+                onclick="showEditPriceCategoryModal({{$priceCategory}})">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
-              <button class="btn btn-danger" title="delete category"
-                onclick="showDeleteConfirmationModal({{$category->id}})">
+              <button class="btn btn-danger" title="delete price-category"
+                onclick="showDeleteConfirmationModal({{$priceCategory}})">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>
@@ -79,7 +79,7 @@
               exportOptions: {
                 columns: ":not(:last-child)"
               },
-              title: "Categories",
+              title: "Price Categories",
               messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             },
              {
@@ -87,7 +87,7 @@
                exportOptions: {
                  columns: ":not(:last-child)"
                },
-               title: "Categories",
+               title: "Price Categories",
                messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             },
              {
@@ -95,7 +95,7 @@
                exportOptions: {
                  columns: ":not(:last-child)"
                },
-               title: "Categories",
+               title: "Price Categories",
                messageTop: "The List Of Price Categories As Of {{date('d-m-Y')}}"
             }
         ],

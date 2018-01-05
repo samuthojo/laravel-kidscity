@@ -51,22 +51,27 @@
 
             <ul class="list-unstyled components">
                 <p>KidCity CMS</p>
-                <li class="{{areActiveRoutes(['main', 'brands.index'])}}">
+                <li class="{{areActiveRoutes(['main', 'brands.index', 'brands.products', 'brands.brand'])}}">
                     <a href="{{ route('brands.index') }}">Brands</a>
                 </li>
-                <li class="{{isActiveRoute('categories.index')}}">
+                <li class="{{areActiveRoutes(['categories.index', 'categories.products'])}}">
                     <a href="{{ route('categories.index') }}">Categories</a>
                 </li>
-                <li class="{{isActiveRoute('sub_categories')}}">
-                    <a href="{{ route('sub_categories') }}">
+                <li class="{{areActiveRoutes(['sub_categories.index', 'sub_categories.products'])}}">
+                    <a href="{{ route('sub_categories.index') }}">
                       SubCategories</a>
                 </li>
-                <li class="{{isActiveRoute('price_categories.index')}}">
+                <li class="{{areActiveRoutes(['price_categories.index', 'price_categories.products'])}}">
                     <a href="{{ route('price_categories.index') }}">
                       PriceCategories
                     </a>
                 </li>
-                <li class="{{isActiveRoute('products.index')}}">
+                <li class="{{areActiveRoutes(['age_ranges.index', 'age_ranges.products'])}}">
+                    <a href="{{ route('age_ranges.index') }}">
+                      AgeRanges
+                    </a>
+                </li>
+                <li class="{{areActiveRoutes(['products.index', 'products.product'])}}">
                     <a href="{{ route('products.index') }}">Products</a>
                 </li>
                 <li class="{{isActiveRoute('orders.index')}}">
@@ -74,6 +79,9 @@
                 </li>
                 <li class="{{isActiveRoute('locations.index')}}">
                     <a href="{{ route('locations.index') }}">Locations</a>
+                </li>
+                <li class="{{isActiveRoute('users.index')}}">
+                    <a href="{{ route('users.index') }}">Customers</a>
                 </li>
                 <li class="{{isActiveRoute('change_password')}}">
                   <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false">

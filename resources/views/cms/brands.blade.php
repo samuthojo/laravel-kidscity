@@ -19,9 +19,9 @@
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete this brand!',
+  'text' =>  'Delete this brand and its products!',
   'action' => 'Confirm',
-  'function' => 'deleteCategory()',])
+  'function' => 'deleteBrand()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -67,7 +67,7 @@
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
               <button class="btn btn-danger" title="delete brand"
-                onclick="showDeleteConfirmationModal({{$brand->id}})">
+                onclick="showDeleteConfirmationModal({{$brand}})">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>

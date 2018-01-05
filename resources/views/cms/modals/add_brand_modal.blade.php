@@ -15,7 +15,7 @@
                 <label for="brand_name">Name:</label>
                 <input type="text" class="form-control"
                   placeholder="brand name"
-                  name="name" id="brand_name">
+                  name="name" id="brand_name" autofocus>
                 <span id="brand_name_error" class="text-danger"
                  style="display: none;"></span>
               </div>

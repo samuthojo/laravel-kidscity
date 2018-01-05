@@ -26,6 +26,42 @@
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
+              <label for="brand_id">Brand:</label>
+              <select class="form-control" name="brand_id"
+                id="brand_id" style="width: 180px">
+                <option value="" selected disabled>choose brand</option>
+                @foreach($brands as $brand)
+                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+                @endforeach
+              </select>
+              <span id="brand_id_error"
+                class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
+              <label for="price_category_id">PriceCategory:</label>
+              <select class="form-control" name="price_category_id"
+                id="price_category_id" style="width: 180px">
+                <option value="" selected disabled>choose price-category</option>
+                @foreach($priceCategories as $priceCategory)
+                  <option value="{{$priceCategory->id}}">{{$priceCategory->range}}</option>
+                @endforeach
+              </select>
+              <span id="price_category_id_error"
+                class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
+              <label for="product_age_range_id">AgeRange:</label>
+              <select class="form-control" name="product_age_range_id"
+                id="product_age_range_id" style="width: 180px">
+                <option value="" selected disabled>choose age-range</option>
+                @foreach($ageRanges as $ageRange)
+                  <option value="{{$ageRange->id}}">{{$ageRange->range}}</option>
+                @endforeach
+              </select>
+              <span id="product_age_range_id_error"
+                class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
               <label for="product_name">Name:</label>
               <input type="text" class="form-control" name="name"
                 id="product_name" placeholder="product name">
@@ -33,17 +69,10 @@
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
-              <label for="product_code">Code:</label>
-              <input type="text" class="form-control" name="code"
-                id="product_code" placeholder="product code">
-              <span id="product_code_error"
-                class="text-danger" style="display: none;"></span>
-            </div>
-            <div class="form-group">
-              <label for="product_cc">CC:</label>
-              <input type="text" class="form-control" name="cc"
-                id="product_cc" placeholder="product cc">
-              <span id="product_cc_error"
+              <label for="product_price">Price:</label>
+              <input type="text" class="form-control" name="price"
+                id="product_price" placeholder="product price">
+              <span id="product_price_error"
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
@@ -54,7 +83,7 @@
             </div>
             <div class="form-group">
               <label for="product_image">Picture:</label>
-              <input type="file" name="image" id="product_image">
+              <input type="file" name="image_url" id="product_image">
               <span id="product_image_error"
                 class="text-danger" style="display: none;"></span>
             </div>

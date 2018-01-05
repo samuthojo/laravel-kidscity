@@ -2,18 +2,17 @@
 
 @section('more')
 @include('cms.header')
-<script src="{{asset('js/cms_sub_categories.js')}}"></script>
+<link rel="stylesheet" href="{{asset('js/cms_age_ranges.js')}}">
 @endsection
 
 @section('content')
-@include('cms.modals.add_sub_category_modal')
-@include('cms.modals.edit_sub_category_modal')
+@include('cms.modals.edit_category_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete SubCategory and its products!',
+  'text' =>  'Delete this category and its products!',
   'action' => 'Confirm',
-  'function' => 'deleteSubCategory()',])
+  'function' => 'deleteCategory()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -24,40 +23,38 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
-      Product SubCategories: </h3>
-     <span onclick="showModal('add_sub_category_modal')" class="pull-right"
-      title="add sub-category">
+      Age Ranges: </h3>
+     <span onclick="showModal('add_category_modal')" class="pull-right"
+      title="add category">
        <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
      </span>
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div id="subCategoriesTable" class="table-responsive">
+    <div id="Age RangesTable" class="table-responsive">
     <table id="myTable" class="table table-hover">
       <thead>
         <th>No.</th>
-        <th>Name</th>
-        <th>Category</th>
+        <th>Range (yrs)</th>
         <th>Action</th>
       </thead>
       <tbody>
-        @foreach($subCategories as $subCategory)
+        @foreach($ageRanges as $ageRange)
         <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
           <td>{{$loop->iteration}}</td>
-          <td>{{$subCategory->name}}</td>
-          <td>{{$subCategory->category}}</td>
+          <td>{{$ageRange->range}}</td>
           <td>
             <div class="btn-group">
               <a class="btn btn-default" title="view products"
-               href="{{ route('sub_categories.products', ['subCategory' => $subCategory->id]) }}">
+               href="{{url('/age_ranges/' . $ageRange->id . '/products')}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
               </a>
-              <button class="btn btn-warning" title="Edit SubCategory"
-                onclick="showEditSubCategoryModal({{$subCategory}})">
+              <button class="btn btn-warning" title="edit age-range"
+                onclick="showEditCategoryModal()">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
-              <button class="btn btn-danger" title="Delete SubCategory"
-                onclick="showDeleteConfirmationModal({{$subCategory}})">
+              <button class="btn btn-danger" title="delete age-range"
+                onclick="showDeleteConfirmationModal()">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>
@@ -79,24 +76,24 @@
               exportOptions: {
                 columns: ":not(:last-child)"
               },
-              title: "SubCategories",
-              messageTop: "The List Of Product SubCategories As Of {{date('d-m-Y')}}"
+              title: "Age Ranges",
+              messageTop: "The List Of Age Ranges As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'excel',
                exportOptions: {
                  columns: ":not(:last-child)"
                },
-               title: "SubCategories",
-               messageTop: "The List Of Product SubCategories As Of {{date('d-m-Y')}}"
+               title: "Age Ranges",
+               messageTop: "The List Of Age Ranges As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'pdf',
                exportOptions: {
                  columns: ":not(:last-child)"
                },
-               title: "SubCategories",
-               messageTop: "The List Of Product SubCategories As Of {{date('d-m-Y')}}"
+               title: "Age Ranges",
+               messageTop: "The List Of Age Ranges As Of {{date('d-m-Y')}}"
             }
         ],
         iDisplayLength: 8,

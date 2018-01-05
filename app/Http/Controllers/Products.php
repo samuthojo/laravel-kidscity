@@ -34,6 +34,10 @@ class Products extends Controller
       });
 
       $categories = App\Category::all();
-      return view('cms.products', compact('products', 'categories'));
+      $brands = App\Brand::all();
+      $priceCategories = App\PriceCategory::all();
+      $ageRanges = App\ProductAgeRange::all();
+      return view('cms.products', compact('categories',
+        'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 }

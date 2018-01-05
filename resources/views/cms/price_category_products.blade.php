@@ -2,7 +2,7 @@
 
 @section('more')
 @include('cms.header')
-  <script src="{{asset('js/cms_products.js')}}"></script>
+  <script src="{{asset('js/cms_price_category_products.js')}}"></script>
   <style>
     td.details-control {
       background: url('../images/details_open.png') no-repeat center;
@@ -34,20 +34,13 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
-        {{$brand->name}} Products:
+        {{$priceCategory->range}} Products:
       </h3>
-      <div class="btn-group pull-right">
-        <a class="btn btn-primary" href="{{url('admin/brands')}}"
-          title="back">
-          <i class="fa fa-arrow-left"
-            style="font-size: 16px;"></i>
-        </a>
-        <button class="btn btn-primary"
-          title="add product" style="cursor: pointer;"
-          onclick="showModal('add_product_modal')">
-          <i class="fa fa-plus-circle" style="font-size: 16px;"></i>
-        </button>
-      </div>
+      <span class="pull-right text-primary"
+        title="add product" style="cursor: pointer;"
+        onclick="showModal('add_product_modal')">
+        <i class="fa fa-plus-circle fa-2x"></i>
+      </span>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">
@@ -59,8 +52,8 @@
             <th>No.</th>
             <th>Name</th>
             <th>Category</th>
-            <th>PriceCategory</th>
             <th>AgeRange</th>
+            <th>Brand</th>
             <th>Price</th>
             <th>Action</th>
           </thead>
@@ -70,13 +63,15 @@
                 <td class="details-control" title="view more"></td>
                 <td style="display: none;">{{$product->id}}</td>
                 <td>{{$loop->iteration}}</td>
-                <td id="">{{$product->name}}</td>
-                <td id="">{{$product->category_name}}</td>
-                <td id="">{{$product->price_category}}</td>
-                <td id="">
+                <td>{{$product->name}}</td>
+                <td>{{$product->category_name}}</td>
+                <td>
                   {{$product->age_range}}
                 </td>
-                <td id="">
+                <td>
+                  {{$product->brand_name}}
+                </td>
+                <td>
                   {{ number_format($product->price) }}
                 </td>
                 <td>

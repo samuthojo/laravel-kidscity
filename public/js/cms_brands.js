@@ -30,8 +30,9 @@ function format2() {
 
 
 function addBrand() {
-  var form = document.getElementById('add_brand_form');
+  var form = document.getElementById("add_brand_form");
   var formData = new FormData(form);
+  console.log(formData);
   $.ajax({
          type: "post",
          url: "/admin/brands",
@@ -44,6 +45,7 @@ function addBrand() {
            window.location.href = "/admin/brands";
          },
          error: function(error) {
+           console.log(error);
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
            data = JSON.parse(error.responseText);
@@ -92,6 +94,7 @@ function attemptEditBrand() {
       });
     },
     error: function(error) {
+      console.log(error);
       data = JSON.parse(error.responseText);
       showEditBrandErrors(data.errors);
     }
@@ -109,9 +112,10 @@ function showEditBrandErrors(errors) {
   }
 }
 
-function showDeleteConfirmationModal(id) {
+function showDeleteConfirmationModal(brand) {
   showModal("delete_confirmation_modal");
-  brand_id = id;
+  $("#confirmation_text").text("Delete " + brand.name);
+  brand_id = brand.id;
 }
 
 function deleteBrand() {
