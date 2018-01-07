@@ -4,12 +4,23 @@
 	<link href="{{asset('css/shop.css')}}" rel="stylesheet">
 @endsection
 
-@section('nav_items')
-	<a href="{{url('/')}}">HOME</a>
+@section('page-title')
+	Shop
+@endsection
+
+@section('appbar-content')
+	<div id="cateGoryTabs" style="overflow-x: auto;">
+		<div class="layout center">
+			<a href="{{url('shop')}}" class="active layout center-center">All</a>
+			@foreach($categories as $category)
+				<a href="{{url('shop/?category='. $category->id)}}" class="layout center-center">{{$category->name}}</a>
+			@endforeach
+		</div>
+	</div>
 @endsection
 
 @section('content')
-	<div class="page-wrapper main-wrapper">
+	<div class="page-wrapper main-wrapper for-lg">
 		<div id="shopPage">
 			<div class="section-wrapper">
 				<div class="row">

@@ -10,8 +10,10 @@ class Products extends Controller
 {
     public function product(App\Product $product)
     {
-      $page = 'product_detail';
-      return view('product_detail', compact('page', 'product'));
+      $page = 'shop';
+      $back = true;
+
+      return view('product_detail', compact('page', 'back', 'product'));
     }
 
     public function cmsIndex()

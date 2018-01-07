@@ -321,8 +321,8 @@ function addToCart(e, id, qty){
             else
                 showMessage(res.msg);
         },
-        error: function (e) {
-            console.log(e);
+        error: function (err) {
+            console.log(err);
             e.target.removeAttribute("disabled");
             e.target.innerText = "add to cart";
 
@@ -331,7 +331,7 @@ function addToCart(e, id, qty){
     });
 }
 
-//ADD TO CART
+//SET QTY
 function setQty(id, qty){
     var url='setQty';
     var remarkJSONObj = {
@@ -357,7 +357,7 @@ function setQty(id, qty){
             else
                 showMessage(res.msg);
         },
-        error: function (e) {
+        error: function (err) {
             console.log(e);
             showMessage("Couldn't change item price!");
         }
@@ -401,7 +401,7 @@ function removeFromCart(e, id){
             else
                 showMessage(res.msg);
         },
-        error: function () {
+        error: function (err) {
             e.target.removeAttribute("disabled");
             e.target.innerText = "remove";
             showMessage("Couldn't remove item from cart!");

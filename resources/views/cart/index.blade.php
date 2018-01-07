@@ -4,12 +4,12 @@
 	<link href="{{asset('css/cart.css')}}" rel="stylesheet">
 @endsection
 
-@section('nav_items')
-	<a href="{{url('/shop')}}">SHOP</a>
+@section('page-title')
+	Your Cart
 @endsection
 
 @section('content')
-	<div class="page-wrapper main-wrapper">
+	<div class="page-wrapper main-wrapper for-lg">
 		<div id="cartPage">
 			<div class="section-wrapper">
 				<div class="row">

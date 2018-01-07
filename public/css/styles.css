@@ -618,3 +618,127 @@ footer #socialMediaLinks a{
     margin-top: 0;
     margin-left: 0;
 }
+
+/*MOBILE ONLY STYLES*/
+
+/*APP BAR*/
+#appBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: var(--main-color);
+    color: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+#mainActionBar{
+    height: 58px;
+    padding: 0 8px;
+}
+
+#mainActionBar #mainLogo{
+    margin-left: 8px;
+    font-size: 20px;
+    color: #fff;
+}
+
+#mainActionBar #mainLogo img{
+    align-self: flex-start;
+    width: 53px;
+    height: auto;
+    display: inline-block;
+    margin-right: 12px;
+}
+
+#mainActionBar #optionsMenu button{
+    background-color: transparent;
+    padding: 4px;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+}
+
+#mainActionBar #optionsMenu button:active,
+#mainActionBar #optionsMenu button:focus{
+    background-color: rgba(0,0,0,0.04);
+}
+
+#cateGoryTabs{
+    margin-top: -6px;
+}
+
+#cateGoryTabs a{
+    position: relative;
+    min-width: 70px;
+    flex-shrink: 0;
+    padding: 20px 24px;
+}
+
+#cateGoryTabs a:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    display: none;
+}
+
+#cateGoryTabs a.active:before{
+    display: block !important;
+}
+
+
+/*BOTTOM NAV*/
+#bottomNav{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
+    z-index: 99;
+}
+
+#bottomNav a{
+    opacity: 0.5;
+    min-width: 25%;
+    height: 50px;
+    font-size: 1em !important;
+    flex-shrink: 0;
+    transition: transform 0.35s ease-out;
+}
+
+#bottomNav a i{
+    font-size: 1.1em;
+    margin-bottom: 6px;
+}
+
+#bottomNav a.active{
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#bottomNav a:nth-child(1) i{
+    /*font-size: 24px;*/
+}
+
+@media screen and (min-width: 681px){
+    .for-mob{
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 680px){
+    .for-lg{
+        display: none !important;
+    }
+}

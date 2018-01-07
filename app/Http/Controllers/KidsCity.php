@@ -13,6 +13,7 @@ class KidsCity extends Controller
 {
     public function index()
     {
+        $page = "home";
         $boysProducts = Utils\Utils::getBoysProducts();
         $girlsProducts = Utils\Utils::getGirlsProducts();
         $brands = DB::table('brands')
@@ -22,11 +23,12 @@ class KidsCity extends Controller
             ->orderBy('product_count', 'desc')
             ->get();
 
-        return view('index', compact('boysProducts', 'girlsProducts', 'brands'));
+        return view('index', compact('boysProducts', 'girlsProducts', 'brands', 'page'));
     }
 
     public function shop($filter = "category", $id = -1)
     {
+        $page = "shop";
         $categories = Utils\Utils::getAllCategories();
         $products = Utils\Utils::getAllProducts();
         $brands = Brand::all();
@@ -50,18 +52,19 @@ class KidsCity extends Controller
         }
 
         return view('shop.index', compact('selectedCategory', 'selectedCategoryName', 'selectedBrand',
-            'selectedBrandName', 'categories', 'brands', 'products'));
+            'selectedBrandName', 'categories', 'brands', 'products', 'page'));
     }
 
     public function brands()
     {
+        $page = "brands";
         $brands = DB::table('brands')
             ->leftJoin('products', 'brands.id', '=', 'products.brand_id')
             ->select(DB::raw('brands.*, count(products.id) as product_count'))
             ->groupBy('brands.id')
             ->orderBy('product_count', 'desc')
             ->get();
-        return view('brands.index', compact('brands'));
+        return view('brands.index', compact('brands', 'page'));
     }
 
     public function register()

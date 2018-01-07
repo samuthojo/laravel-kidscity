@@ -73,6 +73,28 @@
 
     @yield('content')
 
+    <div id="bottomNav" class="for-mob layout center justified">
+        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+
+        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
+            <i class="fa fa-shopping-basket"></i>
+            Shop
+        </a>
+
+        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
+            <i class="fa fa fa-shopping-cart"></i>
+            Cart
+        </a>
+
+        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
+            <i class="fa fa-user"></i>
+            Profile
+        </a>
+    </div>
+
     @include('scripts')
 
     <script src="{{asset('js/scripts.js')}}"></script>
@@ -93,12 +115,18 @@
             }, 3200);
         }
 
-        var controller = new ScrollMagic.Controller();
-        new ScrollMagic.Scene({
-            triggerElement: '.page-wrapper',
-            triggerHook: -1
-        })
-            .setClassToggle("#mainNav", "thin")
-            .addTo(controller);
+        function enableScrollLocker() {
+            var controller = new ScrollMagic.Controller();
+            new ScrollMagic.Scene({
+                triggerElement: '.page-wrapper',
+                triggerHook: -1
+            })
+                .setClassToggle("#mainNav", "thin")
+                .addTo(controller);
+        }
+
+        if(window.innerWidth >= 680){
+            enableScrollLocker();
+        }
     </script>
 @include('footer')

@@ -1,4 +1,4 @@
-<footer>
+<footer class="for-lg">
     <div class="footer-wrapper layout vertical">
         <div class="layout">
             <div id="subscribe" class="layout vertical end-justifie" style="display: none;">

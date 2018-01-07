@@ -98,6 +98,15 @@ body{
 	border: 1px solid #ddd;
 }
 
+.qty-bar button:active{
+	background: #eee;
+}
+
+.qty-bar button[disabled]{
+	background: #eee;
+	opacity: 0.5;
+}
+
 .qty-bar input{
 	font-size: 20px;
 	height: 30px;
@@ -108,4 +117,9 @@ body{
 #addButton{
 	max-width: 300px;
 	margin-top: 32px;
+}
+
+.product-infos.added .add-btn,
+.product-infos:not(.added) .remove-btn{
+	display: none;
 }
