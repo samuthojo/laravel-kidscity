@@ -94,11 +94,34 @@ body.locked{
 }
 
 #topNav{
-    padding: 8px 0; 
+    padding: 8px 0;
+}
+
+#topNav.mini{
+    padding: 4px 0;
+}
+
+#topNav.mini .section-wrapper{
+    padding-left: calc(2em - 20px);
+}
+
+#topNav.mini + #mainNav .section-wrapper{
+    padding-left: calc(2em - 40px);
 }
 
 #navRightThings{
     font-size: 16px;
+}
+
+#navRightThings i{
+    font-size: 22px;
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+#topNav.mini #navRightThings,
+#topNav.mini #navRightThings i{
+    font-size: 15px;
 }
 
 #loginLink{
@@ -110,18 +133,9 @@ body.locked{
     color: var(--accent-color);
 }
 
-#navRightThings i{
-    font-size: 22px;
-    margin-right: 8px;
-    color: var(--accent-color);
-}
 
 #miniCartToggle i{
     font-size: 18px;
-}
-
-#mainNav.fixed #navRightThings i{
-    /*color: var(--main-color);*/
 }
 
 #mainLogo{
@@ -135,11 +149,18 @@ body.locked{
     /*margin-left: 30px;*/
 }
 
+#topNav.mini #mainLogo img{
+    height: 30px;
+}
+
 #navAd{
-    /*margin: 4px 0;*/
     margin-top: 4px;
     margin-right: -12px;
     max-width: 600px;
+}
+
+#topNav.mini #navAd{
+    display: none;
 }
 
 #navAd img{
@@ -151,6 +172,11 @@ body.locked{
     background: var(--main-color);
     z-index: 9;
     color: #fff;
+}
+
+#mainNavPlaceHolder{
+    height: 66px;
+    display: none;
 }
 
 @keyframes slideDown {
@@ -169,6 +195,10 @@ body.locked{
     top: 0;
     left: 0;
     width: 100%;
+}
+
+#mainNav.thin + #mainNavPlaceHolder{
+    display: block;
 }
 
 #mainNav.fixed{
@@ -212,57 +242,90 @@ body.locked{
     padding-left: calc(2em - 20px);
 }
 
-#navLinks a{
+#navLinks > a,
+#navLinks .dropdown-menu > a{
+    position: relative;
+    display: inline-block;
     padding: 16px 20px;
     font-size: 1.1em;
     font-family: "PT Bold", sans-serif;
 }
 
-#navLinks a.active{
+#navLinks > a.active{
     border-left:none;
+}
+
+#navLinks .dropdown{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    display: inline-block;
+    font-size: 1.1em;
+    font-family: "PT Bold", sans-serif;
+    background-color: #fff;
+    color: #000;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.15s ease-out;
+}
+
+#navLinks .dropdown-menu > a:not(:hover) + .dropdown:not(:hover){
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10%);
+}
+
+#navLinks .dropdown a{
+    display: block;
+    position: relative;
+    padding: 16px 20px;
+    font-size: 0.9em;
+    font-family: PT, sans-serif;
+    min-width: 170px;
+}
+
+#navLinks .dropdown a:hover{
+    background-color: #f5f5f5;
 }
 
 #mainNav #searchBar{
     background: #fff;
-    border-radius: 4px;
+    border-radius: 2px;
     overflow: hidden;
+    max-width: 320px;
 }
 
 #mainNav.fixed #searchBar{
-    background: #eee;
     color: #444;
-}
-
-#mainNav.fixed #searchBar{
-    max-width: 550px;
+    position: relative;
     margin-left: 22px;
     margin-right: 22px;
-    height: 45px;
-    border-radius: 2px;
-
     background: #f0f0f0;
     border-radius: 4px;
     overflow: hidden;
-    height: 40px;
+    height: 45px;
 }
 
 #mainNav #searchBar i{
-    padding: 8px;
+    padding: 8px 12px;
     color: #888;
+    margin-bottom: 4px;
+    /*background: #000;*/
 }
 
 #mainNav.fixed #searchBar i{
-    padding: 12px;
+    padding: 12px 20px;
     color: #888;
     margin-bottom: 2px;
 }
 
 #mainNav #searchBar input{
-    width: 200px;
-    height: 30px;
+    position: relative;
+    width: 100%;
+    height: 40px;
     border: none;
     outline: none;
-    background-color: transparent;
+    font-size: 1.05em;
 }
 
 #mainNav.fixed #searchBar input{
@@ -272,14 +335,15 @@ body.locked{
 }
 
 #mainNav #searchBar button{
-    height: 25px;
+    display: none;
+    height: 30px;
     width: 35px;
     line-height: 27px;
     text-align: center;
     background-color: var(--accent-color);
     color: #fff;
     border: none;
-    border-radius: 2px;
+    border-radius: 1px;
     outline: none;
     margin-right: 4px;
 }
@@ -312,8 +376,46 @@ body.locked{
     margin-left: 6px;
 }
 
+/*BRAND*/
+.brand{
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+.brand .image{
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.brand .image img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 70%;
+}
+
+.brand .name{
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.brand .price{
+    font-family: FiraSans Light, sans-serif;
+    color: #555;
+    margin-bottom: 12px;
+    display: none;
+}
+
 /*PRODUCT*/
 .product{
+    padding: 24px 0;
+    border: 1px solid #f5f5f5;
     display: block;
     text-align: center;
     margin-top: 22px;
@@ -340,6 +442,11 @@ body.locked{
     color: #555;
     margin-bottom: 12px;
     display: block;
+}
+
+.product.added .price span:first-child,
+.product:not(.added) .price span:last-child {
+    display: none;
 }
 
 .btn{
@@ -373,6 +480,10 @@ body.locked{
     background: var(--accent-color);
 }
 
+.btn.danger{
+    background: #ff3a3c;
+}
+
 .btn.large{
     height: 40px;
     padding: 0 40px;
@@ -384,14 +495,14 @@ body.locked{
     width: 100%;
 }
 
-.product.added .btn{
+.btn[disabled]{
     background: #ddd;
     color: #aaa;
     pointer-events: none;
 }
 
-.product.added .btn span:first-child,
-.product:not(.added) .btn span:last-child{
+.product.added .btn.add-btn,
+.product:not(.added) .btn.remove-btn{
     display: none;
 }
 
@@ -428,7 +539,7 @@ footer{
 
 .footer-wrapper{
     background-color: #f8f8f8;
-    padding: 4em 6em;
+    padding: 4em;
     padding-bottom: 2.5em;
 }
 

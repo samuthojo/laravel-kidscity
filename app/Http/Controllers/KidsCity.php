@@ -15,8 +15,14 @@ class KidsCity extends Controller
     {
         $boysProducts = Utils\Utils::getBoysProducts();
         $girlsProducts = Utils\Utils::getGirlsProducts();
+        $brands = DB::table('brands')
+            ->leftJoin('products', 'brands.id', '=', 'products.brand_id')
+            ->select(DB::raw('brands.*, count(products.id) as product_count'))
+            ->groupBy('brands.id')
+            ->orderBy('product_count', 'desc')
+            ->get();
 
-        return view('index', compact('boysProducts', 'girlsProducts'));
+        return view('index', compact('boysProducts', 'girlsProducts', 'brands'));
     }
 
     public function shop($filter = "category", $id = -1)

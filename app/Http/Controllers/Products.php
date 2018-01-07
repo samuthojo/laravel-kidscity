@@ -14,12 +14,6 @@ class Products extends Controller
       return view('product_detail', compact('page', 'product'));
     }
 
-    public function cart()
-    {
-      $page = "cart";
-      return view('cart.index', compact('page'));
-    }
-
     public function cmsIndex()
     {
       $products = App\Product::all()->map(function ($prod) {

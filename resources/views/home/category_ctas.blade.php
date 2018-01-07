@@ -1,5 +1,5 @@
 <div class="section-wrapper">
-	<h3 id="featuredTitle">Clothing Categories</h3>
+	<h3 id="featuredTitle" style="margin-bottom: 10px;">Clothing Categories</h3>
 	<div class="home-grid">
 		<div class="row featured-row">
 			<div class="col-md-4">
@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="col-md-4">
-				<div class="feature-section-title layout vertical end-justified">
+				<div class="feature-section-title layout vertical end-justified" style="background-image: url({{asset('images/featured_baby.jpg')}});">
 					<div class="title-text">
 						<h3>FOR BABIES</h3>
 						<p>

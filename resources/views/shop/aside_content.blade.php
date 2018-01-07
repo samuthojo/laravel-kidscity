@@ -1,4 +1,4 @@
-<div class="filter-group">
+<div class="filter-group" style="display: none;">
 	<div class="filter-title">
 		<h3>Brands</h3>
 	</div>

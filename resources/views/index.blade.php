@@ -5,21 +5,14 @@
 @endsection
 
 @section('content')
-	{{-- ... SITE SUB SECTIONS --}}
-	@include('home.banner')
-	@include('home.card_ctas')
-	@include('home.category_ctas')
-	@include('home.featured')
+	<div class="page-wrapper">
+		{{-- ... SITE SUB SECTIONS --}}
+		@include('home.banner')
+		@include('home.card_ctas')
+		@include('home.category_ctas')
+		@include('home.brand_ctas')
+		@include('home.featured')
+	</div>
 
 	@include('scripts')
-
-	<script>
-		var controller = new ScrollMagic.Controller();
-	    new ScrollMagic.Scene({
-	        triggerElement: '#sectionBanner',
-	        triggerHook: -1
-	    })
-	    .setClassToggle("#mainNav", "thin")
-	    .addTo(controller);
-	</script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.shopping')
+@extends('layouts.app')
 
 @section('styles')
     <link href="{{asset('css/product_detail.css')}}" rel="stylesheet">

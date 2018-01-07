@@ -112,6 +112,7 @@
 
 .featured-row{
     margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 40px;
 }
 
@@ -148,14 +149,14 @@
 
 .feature-section-title h3{
     z-index: 1;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 4px;
 }
 
 .feature-section-title p{
     z-index: 1;
     font-family: FiraSans Light, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.1em;
     line-height: 1.3em;
 }
 

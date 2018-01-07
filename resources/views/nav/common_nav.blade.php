@@ -1,4 +1,4 @@
-<div id="topNav">
+<div id="topNav" class="{{(isset($page) && $page == "home") ? '' : 'mini'}}">
 	<div class="section-wrapper layout justified center">
 		<a id="mainLogo" href="{{url('/')}}">
 	        <img src="{{asset('images/logo.png')}}" alt="">
@@ -15,17 +15,58 @@
 <nav id="mainNav">
     <div class="section-wrapper layout center justified">
         <div id="navLinks" class="layout center justified">
-            <a href="{{url('/shop')}}">CLOTHING &nbsp;<i class="fa fa-angle-down"></i> {{--girls, boys, by age--}}</a>
-            <a href="{{url('/shop')}}">BABY PRODUCTS &nbsp;<i class="fa fa-angle-down"></i> {{--walker, car seats, high chairs, stroller, by age--}}</a>
-            <a href="{{url('/shop')}}">SCHOOL ITEMS &nbsp; <i class="fa fa-angle-down"></i> {{--uniforms, bags, socks--}}</a>
-            <a href="{{url('/shop')}}">SHOES &nbsp; <i class="fa fa-angle-down"></i> {{--running, sandals, slippers, fancy--}}</a>
-            <a href="{{url('/shop')}}">TOYS & DOLLS &nbsp; <i class="fa fa-angle-down"></i> {{--toys, dolls--}}</a>
+            <div class="dropdown-menu">
+                <a href="{{url('/shop')}}">CLOTHING &nbsp;<i class="fa fa-angle-down"></i></a>
+                <div class="dropdown">
+                    <a href="{{url('/shop')}}">Girls</a>
+                    <a href="{{url('/shop')}}">Boys</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{{url('/shop')}}">BABY PRODUCTS &nbsp;<i class="fa fa-angle-down"></i></a>
+                <div class="dropdown">
+                    <a href="{{url('/shop')}}">Walkers</a>
+                    <a href="{{url('/shop')}}">Car Seats</a>
+                    <a href="{{url('/shop')}}">High Chairs</a>
+                    <a href="{{url('/shop')}}">Strollers</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{{url('/shop')}}">SCHOOL ITEMS &nbsp; <i class="fa fa-angle-down"></i></a>
+                <div class="dropdown">
+                    <a href="{{url('/shop')}}">Uniforms</a>
+                    <a href="{{url('/shop')}}">Bags</a>
+                    <a href="{{url('/shop')}}">Socks</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{{url('/shop')}}">SHOES &nbsp; <i class="fa fa-angle-down"></i></a>
+                <div class="dropdown">
+                    <a href="{{url('/shop')}}">Running</a>
+                    <a href="{{url('/shop')}}">Sandals</a>
+                    <a href="{{url('/shop')}}">Slippers</a>
+                    <a href="{{url('/shop')}}">Fancy</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{{url('/shop')}}">TOYS & DOLLS &nbsp; <i class="fa fa-angle-down"></i></a>
+                <div class="dropdown">
+                    <a href="{{url('/shop')}}">Toys</a>
+                    <a href="{{url('/shop')}}">Dolls</a>
+                </div>
+            </div>
         </div>
 
-        <div id="searchBar" class="layout center">
+        <div id="searchBar" class="layout flex center">
         	<i class="fa fa-search"></i>
         	<input type="search" placeholder="Search KidCity">
         	<button>GO</button>
         </div>
     </div>
 </nav>
+
+<div id="mainNavPlaceHolder"></div>

@@ -15,8 +15,18 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/flex.css')}}" rel="stylesheet">
     <link href="{{asset('css/flexboxgrid.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/animate.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    <script src="{{asset('js/lib/jquery-3.1.0.min.js')}}"></script>
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 
     <style>
         #alertMessage{
@@ -50,9 +60,8 @@
     </style>
 
     @yield('styles')
-    <script src="{{asset('js/lib/jquery-3.1.0.min.js')}}"></script>
 </head>
-<body>
+<body style="padding-top: 0;">
     <div id="alertMessage" class="animated">
         <i class="fa fa-check-circle"></i>
         <span id="alertMessageText">
@@ -64,4 +73,32 @@
 
     @yield('content')
 
+    @include('scripts')
+
+    <script src="{{asset('js/scripts.js')}}"></script>
+    <script>
+        var alertMessage = document.getElementById("alertMessage");
+        var alertMessageText = document.getElementById("alertMessageText");
+
+        function showMessage(message){
+            alertMessageText.innerText = message;
+            alertMessage.classList.add("slideInDown");
+            setTimeout(function () {
+                alertMessage.classList.add("slideOutUp");
+
+                setTimeout(function (){
+                    alertMessage.classList.remove("slideInDown");
+                    alertMessage.classList.remove("slideOutUp");
+                }, 300);
+            }, 3200);
+        }
+
+        var controller = new ScrollMagic.Controller();
+        new ScrollMagic.Scene({
+            triggerElement: '.page-wrapper',
+            triggerHook: -1
+        })
+            .setClassToggle("#mainNav", "thin")
+            .addTo(controller);
+    </script>
 @include('footer')

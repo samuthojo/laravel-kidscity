@@ -1,5 +1,5 @@
 <div id="productDetailPage">
-	<div class="section-wrapper">
+	<div class="page-wrapper main-wrapper">
 		<div class="row">
 			<div id="productImage" class="col-md-4">
 				<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt=""

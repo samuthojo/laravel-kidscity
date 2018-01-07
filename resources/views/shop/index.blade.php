@@ -1,4 +1,4 @@
-@extends('layouts.shopping')
+@extends('layouts.app')
 
 @section('styles')
 	<link href="{{asset('css/shop.css')}}" rel="stylesheet">
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-	<div class="main-wrapper">
+	<div class="page-wrapper main-wrapper">
 		<div id="shopPage">
 			<div class="section-wrapper">
 				<div class="row">
@@ -22,29 +22,5 @@
 				</div>
 			</div>
 		</div>
-
-		@include('scripts')
 	</div>
-
-	<script>
-        var controller = new ScrollMagic.Controller();
-        new ScrollMagic.Scene({
-            triggerElement: '.main-wrapper',
-            triggerHook: -25
-        })
-            .setClassToggle("#mainNav", "shadowed")
-            .addTo(controller);
-
-        $("#brandInput input")
-            .keyup(function (e) {
-                if(e.keyCode === 27)
-                	$(this).trigger(focusout());
-            })
-			.focusin(function () {
-				$(this).parent("#brandInput").addClass("open");
-			})
-            .focusout(function () {
-                $(this).parent("#brandInput").removeClass("open");
-            })
-	</script>
 @endsection
