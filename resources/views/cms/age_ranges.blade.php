@@ -2,17 +2,18 @@
 
 @section('more')
 @include('cms.header')
-<link rel="stylesheet" href="{{asset('js/cms_age_ranges.js')}}">
+<script src="{{asset('js/cms_age_ranges.js')}}"></script>
 @endsection
 
 @section('content')
-@include('cms.modals.edit_category_modal')
+@include('cms.modals.add_age-range_modal')
+@include('cms.modals.edit_age-range_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete this category and its products!',
+  'text' =>  'Delete this age-range!',
   'action' => 'Confirm',
-  'function' => 'deleteCategory()',])
+  'function' => 'deleteAgeRange()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -24,14 +25,14 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
       Age Ranges: </h3>
-     <span onclick="showModal('add_category_modal')" class="pull-right"
-      title="add category">
+     <span onclick="showModal('add_age_range_modal')" class="pull-right"
+      title="add age-range">
        <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
      </span>
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div id="Age RangesTable" class="table-responsive">
+    <div id="ageRangesTable" class="table-responsive">
     <table id="myTable" class="table table-hover">
       <thead>
         <th>No.</th>
@@ -46,15 +47,15 @@
           <td>
             <div class="btn-group">
               <a class="btn btn-default" title="view products"
-               href="{{url('/age_ranges/' . $ageRange->id . '/products')}}">
+               href="{{ route('age_ranges.products', ['ageRange' => $ageRange->id]) }}">
                 <span class="glyphicon glyphicon-eye-open"></span>
               </a>
               <button class="btn btn-warning" title="edit age-range"
-                onclick="showEditCategoryModal()">
+                onclick="showEditAgeRangeModal({{$ageRange}})">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
               <button class="btn btn-danger" title="delete age-range"
-                onclick="showDeleteConfirmationModal()">
+                onclick="showDeleteConfirmationModal({{$ageRange}})">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>

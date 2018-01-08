@@ -12,48 +12,40 @@
 </div>
 @endif
 @include('cms.alerts.success-alert')
+  <p style="color: #000;">
+    <span class="itemTitle">Order No.: </span>{{$order->id}} <br>
+    <span class="itemTitle"># Items: </span>{{$order->num_items}} <br>
+    <span class="itemTitle">Customer: </span>{{$order->customer_name}} <br>
+    <span class="itemTitle">Contact: </span>{{$order->customer_contact}} <br>
+    <span class="itemTitle">Amount: </span>{{ number_format($order->amount) }} <br>
+    <span class="itemTitle">Delivery Location: </span>{{$order->delivery_location}} <br>
+    <span class="itemTitle">Delivery Price: </span>
+    {{ number_format($order->delivery_price) }}
+  </p>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
-        Orders:
+        Order Items:
       </h3>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-      <div id="ordersTable" class="table-responsive">
+      <div id="orderItemsTable" class="table-responsive">
         <table id="myTable" class="table table-hover">
           <thead>
-            <th>Date Ordered</th>
-            <th>Order No.</th>
-            <th>Customer</th>
-            <th>Contact</th>
-            <th>#items</th>
-            <th>Amount</th>
-            <th>DeliveryLocation</th>
-            <th>Action</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
           </thead>
           <tbody>
-            @foreach($orders as $order)
+            @foreach($items as $item)
               <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
-                <td>{{$order->created_at}}</td>
-                <td>{{$order->id}}</td>
-                <td>{{$order->customer_name}}</td>
-                <td>{{$order->customer_contact}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{ number_format($item->price) }}</td>
+                <td>{{$item->quantity}}</td>
                 <td>
-                  {{$order->num_items}}
-                </td>
-                <td>
-                  {{ number_format($order->amount) }}
-                </td>
-                <td>{{ $order->delivery_location }}</td>
-                <td>
-                  <a href="{{ route('orders.items', ['order' => $order->id]) }}"
-                    title="view items">
-                    <button type="button" name="button"
-                      class="btn btn-warning">
-                      <i class="glyphicon glyphicon-eye-open"></i>
-                    </button>
-                  </a>
+                  {{ number_format($item->totalPrice) }}
                 </td>
               </tr>
             @endforeach
@@ -72,24 +64,24 @@
                 exportOptions: {
                   columns: ":not(:last-child)"
                 },
-                title: "Product Orders",
-                messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
+                title: "Order No. {{$order->id}} Items",
+                messageTop: "The List Of Items"
               },
                {
                  extend: 'excel',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Product Orders",
-                 messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
+                 title: "Order No. {{$order->id}} Items",
+                 messageTop: "The List Of Items"
               },
                {
                  extend: 'pdf',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Product Orders",
-                 messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
+                 title: "Order No. {{$order->id}} Items",
+                 messageTop: "The List Of Items"
               }
           ],
           iDisplayLength: 8,

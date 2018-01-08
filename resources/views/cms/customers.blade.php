@@ -1,4 +1,5 @@
 @extends('cms.layouts.cms')
+
 @section('more')
 @include('cms.header')
 @endsection
@@ -11,22 +12,20 @@
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div class="table-responsive">
-      <table id="myTable" class="table table-striped">
+    <div id="customersTable" class="table-responsive">
+      <table id="myTable" class="table table-hover">
           <thead>
-            <tr>
-              <th>No.</th>
-              <th>Name</th>
-              <th>Phone-number</th>
-            </tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Phone-number</th>
           </thead>
           <tbody>
             @foreach($customers as $customer)
-                    <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $customer->name }}</td>
-                      <td>{{ $customer->phone_number }}</td>
-                    </tr>
+              <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $customer->name }}</td>
+                <td>{{ $customer->phone_number }}</td>
+              </tr>
            @endforeach
          </tbody>
        </table>

@@ -26,6 +26,7 @@ class Products extends Controller
       $products = App\Product::all()->map(function ($prod) {
         $product = $prod;
         $product->category_name = $prod->category()->first()->name;
+        $product->sub_category_name = $prod->subCategory()->first()->name;
         $product->age_range = $prod->productAgeRange()->first()->range;
         $product->price_category = $prod->priceCategory()->first()->range;
         $product->brand_name = $prod->brand()->first()->name;
@@ -34,10 +35,16 @@ class Products extends Controller
       });
 
       $categories = App\Category::all();
+      $subCategories = App\SubCategory::all();
       $brands = App\Brand::all();
       $priceCategories = App\PriceCategory::all();
       $ageRanges = App\ProductAgeRange::all();
-      return view('cms.products', compact('categories',
+      return view('cms.products', compact('categories', 'subCategories',
         'brands', 'priceCategories', 'ageRanges', 'products'));
+    }
+
+    public function cmsProduct(App\Product $product)
+    {
+      return $product;
     }
 }

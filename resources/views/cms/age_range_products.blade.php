@@ -2,7 +2,7 @@
 
 @section('more')
 @include('cms.header')
-  <script src="{{asset('js/cms_products.js')}}"></script>
+  <script src="{{asset('js/cms_age_range_products.js')}}"></script>
   <style>
     td.details-control {
       background: url('../images/details_open.png') no-repeat center;
@@ -34,13 +34,20 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
-        Products:
+        {{$ageRange->range}} Products:
       </h3>
-      <span class="pull-right text-primary"
-        title="add product" style="cursor: pointer;"
-        onclick="showModal('add_product_modal')">
-        <i class="fa fa-plus-circle fa-2x"></i>
-      </span>
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary" href="{{url('admin/age_ranges')}}"
+          title="back">
+          <i class="fa fa-arrow-left"
+            style="font-size: 16px;"></i>
+        </a>
+        <button class="btn btn-primary"
+          title="add product" style="cursor: pointer;"
+          onclick="showModal('add_product_modal')">
+          <i class="fa fa-plus-circle" style="font-size: 16px;"></i>
+        </button>
+      </div>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">
@@ -54,7 +61,6 @@
             <th>Category</th>
             <th>SubCategory</th>
             <th>PriceCategory</th>
-            <th>AgeRange</th>
             <th>Brand</th>
             <th>Price</th>
             <th>Action</th>
@@ -68,9 +74,8 @@
                 <td>{{$product->name}}</td>
                 <td>{{$product->category_name}}</td>
                 <td>{{$product->sub_category_name}}</td>
-                <td>{{$product->price_category}}</td>
                 <td>
-                  {{$product->age_range}}
+                  {{$product->price_category}}
                 </td>
                 <td>
                   {{$product->brand_name}}
@@ -80,12 +85,16 @@
                 </td>
                 <td>
                   <div class="btn-group">
+                    <!-- <a class="btn btn-default" title="view prices"
+                      href="{{url('/products/' . $product->id . '/prices')}}">
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                    </a> -->
                     <button class="btn btn-warning" title="edit product"
                       onclick="showEditProductModal({{$product}})">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                     <button class="btn btn-danger" title="delete product"
-                      onclick="showProductDeleteModal({{$product}})">
+                      onclick="showProductDeleteModal({{$product->id}})">
                       <span class="glyphicon glyphicon-trash"></span>
                     </button>
                   </div>
@@ -160,7 +169,7 @@
            tr.removeClass('shown');
        }
        else {
-         var link = "/admin/products/" + product_id + "/product";
+         var link = "/products/" + product_id + "/product_details";
               $.getJSON(link)
                .done( function (product) {
                  row.child.hide();

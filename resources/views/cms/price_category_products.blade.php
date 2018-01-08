@@ -36,11 +36,18 @@
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         {{$priceCategory->range}} Products:
       </h3>
-      <span class="pull-right text-primary"
-        title="add product" style="cursor: pointer;"
-        onclick="showModal('add_product_modal')">
-        <i class="fa fa-plus-circle fa-2x"></i>
-      </span>
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary" href="{{url('admin/price_categories')}}"
+          title="back">
+          <i class="fa fa-arrow-left"
+            style="font-size: 16px;"></i>
+        </a>
+        <button class="btn btn-primary"
+          title="add product" style="cursor: pointer;"
+          onclick="showModal('add_product_modal')">
+          <i class="fa fa-plus-circle" style="font-size: 16px;"></i>
+        </button>
+      </div>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">
@@ -52,6 +59,7 @@
             <th>No.</th>
             <th>Name</th>
             <th>Category</th>
+            <th>SubCategory</th>
             <th>AgeRange</th>
             <th>Brand</th>
             <th>Price</th>
@@ -65,6 +73,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category_name}}</td>
+                <td>{{$product->sub_category_name}}</td>
                 <td>
                   {{$product->age_range}}
                 </td>

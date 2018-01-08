@@ -2,17 +2,18 @@
 
 @section('more')
 @include('cms.header')
-<link rel="stylesheet" href="{{asset('js/cms_Delivery Locations.js')}}">
+<script src="{{asset('js/cms_delivery_locations.js')}}"></script>
 @endsection
 
 @section('content')
-@include('cms.modals.edit_category_modal')
+@include('cms.modals.add_location_modal')
+@include('cms.modals.edit_location_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
-  'text' =>  'Delete this category and its products!',
+  'text' =>  'Delete this location',
   'action' => 'Confirm',
-  'function' => 'deleteCategory()',])
+  'function' => 'deleteLocation()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -22,16 +23,16 @@
 @include('cms.alerts.success-alert')
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
+    <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
       Delivery Locations: </h3>
-     <span onclick="showModal('add_category_modal')" class="pull-right"
-      title="add category">
+     <span onclick="showModal('add_location_modal')" class="pull-right"
+      title="add location">
        <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i>
      </span>
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div id="LocationsTable" class="table-responsive">
+    <div id="locationsTable" class="table-responsive">
     <table id="myTable" class="table table-hover">
       <thead>
         <th>No.</th>
@@ -48,12 +49,12 @@
           <td>
             <div class="btn-group">
               <button class="btn btn-warning"
-                onclick="showEditLocationModal()"
+                onclick="showEditLocationModal({{$location}})"
                   title="edit location">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
               <button class="btn btn-danger" title="delete location"
-                onclick="showDeleteConfirmationModal()">
+                onclick="showDeleteConfirmationModal({{$location}})">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>

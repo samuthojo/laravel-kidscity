@@ -1,3 +1,7 @@
+.itemTitle {
+  color: #000;
+  font-weight: bold !important;
+}
 .form-control {
   width: 200px !important;
 }

@@ -37,6 +37,7 @@ Route::prefix('/admin')->group(function() {
   Route::delete('/brands/{brand}', 'Brands@destroy')->name('brands.destroy');
 
   Route::get('/age_ranges', 'AgeRanges@cmsIndex')->name('age_ranges.index');
+  Route::get('/age_ranges/{ageRange}/products', 'AgeRanges@products')->name('age_ranges.products');
 
   Route::get('/customers', 'Users@cmsIndex')->name('users.index');
 
@@ -49,7 +50,11 @@ Route::prefix('/admin')->group(function() {
   Route::get('/price_categories/{priceCategory}/products', 'PriceCategories@products')->name('price_categories.products');
 
   Route::get('/products', 'Products@cmsIndex')->name('products.index');
+  Route::get('/products/{product}/product', 'Products@cmsProduct')->name('products.product');
+
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
+  Route::get('/orders/{order}/items', 'Orders@items')->name('orders.items');
+
   Route::get('/locations', 'DeliveryLocations@cmsIndex')->name('locations.index');
   Route::view('/change_password', 'change_password')->name('change_password');
 });

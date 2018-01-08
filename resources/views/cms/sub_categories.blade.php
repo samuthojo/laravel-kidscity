@@ -36,7 +36,7 @@
     <table id="myTable" class="table table-hover">
       <thead>
         <th>No.</th>
-        <th>Name</th>
+        <th>SubCategory</th>
         <th>Category</th>
         <th>Action</th>
       </thead>

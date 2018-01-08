@@ -60,16 +60,16 @@
               <td class="details-control" title="view more"></td>
               <td style="display: none;">{{$product->id}}</td>
               <td>{{$loop->iteration}}</td>
-              <td id="">{{$product->name}}</td>
-              <td id="">{{$product->category_name}}</td>
-              <td id="">{{$product->price_category}}</td>
-              <td id="">
+              <td>{{$product->name}}</td>
+              <td>{{$product->category_name}}</td>
+              <td>{{$product->price_category}}</td>
+              <td>
                 {{$product->age_range}}
               </td>
-              <td id="">
+              <td>
                 {{$product->brand_name}}
               </td>
-              <td id="">
+              <td>
                 {{ number_format($product->price) }}
               </td>
               <td>

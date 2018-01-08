@@ -50,7 +50,15 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>KidCity CMS</p>
+                <li class="{{isActiveRoute('change_password')}}">
+                  <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-user">&nbsp;</i>Account
+                  </a>
+                  <ul class="collapse list-unstyled" id="accountSubmenu">
+                      <li><a href="#">Logout</a></li>
+                      <li><a href="{{ route('change_password') }}">Change Password</a></li>
+                  </ul>
+                </li>
                 <li class="{{areActiveRoutes(['main', 'brands.index', 'brands.products', 'brands.brand'])}}">
                     <a href="{{ route('brands.index') }}">Brands</a>
                 </li>
@@ -74,7 +82,7 @@
                 <li class="{{areActiveRoutes(['products.index', 'products.product'])}}">
                     <a href="{{ route('products.index') }}">Products</a>
                 </li>
-                <li class="{{isActiveRoute('orders.index')}}">
+                <li class="{{areActiveRoutes(['orders.index', 'orders.items'])}}">
                     <a href="{{ route('orders.index') }}">Orders</a>
                 </li>
                 <li class="{{isActiveRoute('locations.index')}}">
@@ -82,15 +90,6 @@
                 </li>
                 <li class="{{isActiveRoute('users.index')}}">
                     <a href="{{ route('users.index') }}">Customers</a>
-                </li>
-                <li class="{{isActiveRoute('change_password')}}">
-                  <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-user">&nbsp;Account</i>
-                  </a>
-                  <ul class="collapse list-unstyled" id="accountSubmenu">
-                      <li><a href="#">Logout</a></li>
-                      <li><a href="{{ route('change_password') }}">Change Password</a></li>
-                  </ul>
                 </li>
             </ul>
         </nav>

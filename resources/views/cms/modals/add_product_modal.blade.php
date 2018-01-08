@@ -14,6 +14,18 @@
           <form name="add_product_form"
             id="add_product_form">
             <div class="form-group">
+              <label for="brand_id">Brand:</label>
+              <select class="form-control" name="brand_id"
+                id="brand_id" style="width: 180px">
+                <option value="" selected disabled>choose brand</option>
+                @foreach($brands as $brand)
+                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+                @endforeach
+              </select>
+              <span id="brand_id_error"
+                class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
               <label for="category_id">Category:</label>
               <select class="form-control" name="category_id"
                 id="category_id" style="width: 180px">
@@ -26,15 +38,15 @@
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
-              <label for="brand_id">Brand:</label>
-              <select class="form-control" name="brand_id"
-                id="brand_id" style="width: 180px">
-                <option value="" selected disabled>choose brand</option>
-                @foreach($brands as $brand)
-                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+              <label for="sub_category_id">SubCategory:</label>
+              <select class="form-control" name="sub_category_id"
+                id="sub_category_id" style="width: 180px">
+                <option value="" selected disabled>choose sub-category</option>
+                @foreach($subCategories as $subCategory)
+                  <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
                 @endforeach
               </select>
-              <span id="brand_id_error"
+              <span id="sub_category_id_error"
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">

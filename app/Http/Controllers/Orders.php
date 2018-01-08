@@ -15,6 +15,8 @@ class Orders extends Controller
         $order->customer_contact = $order->user()->first()->phone_number;
         $order->num_items = $order->orderItems()->count();
         $order->amount = $this->getAmount($myOrder);
+        $order->delivery_location = $myOrder->deliveryLocation()->first()->location;
+        $order->delivery_price = $myOrder->deliveryLocation()->first()->delivery_price;
 
         return $order;
       });
@@ -30,5 +32,35 @@ class Orders extends Controller
         $amount += $price * $orderItem->quantity;
       }
       return $amount + $order->deliveryLocation()->first()->delivery_price;
+    }
+
+    public function items(App\Order $order)
+    {
+      $items = $order->orderItems()
+                     ->get()->map( function($it) {
+                       $item = $it;
+                       $product = $item->product()->first();
+
+                       $item->name = $product->name;
+                       $item->category = $product->category()->first()->name;
+                       $item->price = $product->price;
+                       $item->totalPrice = $product->price * $it->quantity;
+
+                       return $item;
+                     });
+       $order = $this->getMappedOrder($order);
+       return view('cms.order_items', compact('items', 'order'));
+    }
+
+    private function getMappedOrder($order)
+    {
+        $order->customer_name = $order->user()->first()->name;
+        $order->customer_contact = $order->user()->first()->phone_number;
+        $order->num_items = $order->orderItems()->count();
+        $order->amount = $this->getAmount($order);
+        $order->delivery_location = $order->deliveryLocation()->first()->location;
+        $order->delivery_price = $order->deliveryLocation()->first()->delivery_price;
+
+        return $order;
     }
 }
