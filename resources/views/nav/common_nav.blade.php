@@ -15,50 +15,29 @@
 <nav id="mainNav" class="for-lg">
     <div class="section-wrapper layout center justified">
         <div id="navLinks" class="layout center justified">
-            <div class="dropdown-menu">
-                <a href="{{url('/shop')}}">CLOTHING &nbsp;<i class="fa fa-angle-down"></i></a>
-                <div class="dropdown">
-                    <a href="{{url('/shop')}}">Girls</a>
-                    <a href="{{url('/shop')}}">Boys</a>
-                </div>
-            </div>
+            <?php
+                $category_items = App\Category::with('subCategories')->get();
+            ?>
 
-            <div class="dropdown-menu">
-                <a href="{{url('/shop')}}">BABY PRODUCTS &nbsp;<i class="fa fa-angle-down"></i></a>
-                <div class="dropdown">
-                    <a href="{{url('/shop')}}">Walkers</a>
-                    <a href="{{url('/shop')}}">Car Seats</a>
-                    <a href="{{url('/shop')}}">High Chairs</a>
-                    <a href="{{url('/shop')}}">Strollers</a>
-                </div>
-            </div>
+            @foreach($category_items as $item)
+                <div class="dropdown-menu">
+                    <a href="{{url('/shop/?category=' . $item->id)}}">{{$item->name}}
+                        @if(count($item->subCategories) > 0)
+                            &nbsp;<i class="fa fa-angle-down"></i>
+                        @endif
+                    </a>
 
-            <div class="dropdown-menu">
-                <a href="{{url('/shop')}}">SCHOOL ITEMS &nbsp; <i class="fa fa-angle-down"></i></a>
-                <div class="dropdown">
-                    <a href="{{url('/shop')}}">Uniforms</a>
-                    <a href="{{url('/shop')}}">Bags</a>
-                    <a href="{{url('/shop')}}">Socks</a>
+                    @if(count($item->subCategories) > 0)
+                        <div class="dropdown">
+                            @foreach($item->subCategories as $sub)
+                                <a href="{{url('/shop/?category=' . $item->id . "&sub_category=") . $sub->id}}">
+                                    {{$sub->name}}
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
-            </div>
-
-            <div class="dropdown-menu">
-                <a href="{{url('/shop')}}">SHOES &nbsp; <i class="fa fa-angle-down"></i></a>
-                <div class="dropdown">
-                    <a href="{{url('/shop')}}">Running</a>
-                    <a href="{{url('/shop')}}">Sandals</a>
-                    <a href="{{url('/shop')}}">Slippers</a>
-                    <a href="{{url('/shop')}}">Fancy</a>
-                </div>
-            </div>
-
-            <div class="dropdown-menu">
-                <a href="{{url('/shop')}}">TOYS & DOLLS &nbsp; <i class="fa fa-angle-down"></i></a>
-                <div class="dropdown">
-                    <a href="{{url('/shop')}}">Toys</a>
-                    <a href="{{url('/shop')}}">Dolls</a>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div id="searchBar" class="layout flex center">

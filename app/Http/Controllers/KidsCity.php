@@ -33,9 +33,12 @@ class KidsCity extends Controller
         $products = Utils\Utils::getAllProducts();
         $brands = Brand::all();
         $selectedCategory = -1;
+        $selectedSubCategory = -1;
         $selectedBrand = -1;
+        $sub_categories = null;
 
         $selectedCategoryName = "";
+        $selectedSubCategoryName = "";
         $selectedBrandName = "";
 
         if($id != -1){
@@ -49,10 +52,28 @@ class KidsCity extends Controller
                 $selectedCategory = $id;
                 $products = App\Product::where("category_id", $id)->get();
             }
+        }else{
+            if(isset($_GET['category'])){
+                $id = $_GET['category'];
+                $selectedCategoryName = App\Category::find($id)->name;
+                $selectedCategory = $id;
+                $products = App\Product::where("category_id", $id)->get();
+                $sub_categories = App\SubCategory::where("category_id", $id)->get();
+
+                if(isset($_GET['sub_category'])){
+                    $subid = $_GET['sub_category'];
+                    $selectedSubCategoryName = App\SubCategory::find($subid)->name;
+                    $selectedSubCategory = $subid;
+                    $products = App\Product::where('category_id', $id)
+                        ->where('sub_category_id', $subid)
+                        ->get();
+                }
+            }
         }
 
-        return view('shop.index', compact('selectedCategory', 'selectedCategoryName', 'selectedBrand',
-            'selectedBrandName', 'categories', 'brands', 'products', 'page'));
+        return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
+            'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
+            'selectedBrandName', 'categories', 'sub_categories', 'brands', 'products', 'page'));
     }
 
     public function brands()

@@ -3,6 +3,9 @@
 		<h3>
 			@if($selectedCategory != -1)
 				{{$selectedCategoryName}}
+				@if($selectedSubCategory != -1)
+					({{$selectedSubCategoryName}})
+				@endif
 			@endif
 
 			@if($selectedBrand != -1)
@@ -30,7 +33,14 @@
 </div>
 <div id="productsGrid">
 	<p style="display: {{count($products) > 0 ? 'none' : ''}};">
-		No products found for {{$selectedCategoryName}}{{$selectedBrandName}}.
+		No products found for
+		@if($selectedCategory != -1)
+			{{$selectedCategoryName}}
+			@if($selectedSubCategory != -1)
+				({{$selectedSubCategoryName}})
+			@endif
+		@endif
+		{{$selectedBrandName}}.
 	</p>
 	<div class="row">
 

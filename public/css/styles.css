@@ -244,6 +244,7 @@ body.locked{
 
 #navLinks > a,
 #navLinks .dropdown-menu > a{
+    text-transform: uppercase;
     position: relative;
     display: inline-block;
     padding: 16px 20px;
