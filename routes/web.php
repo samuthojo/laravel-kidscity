@@ -14,10 +14,10 @@
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'KidsCity@profile')->name('profile');
 
 Route::get('/', 'KidsCity@index');
 Route::get('/brands', 'KidsCity@brands');
-//Route::get('/shop/{category?}', 'KidsCity@shop');
 Route::get('/shop/{filterer?}/{category?}', 'KidsCity@shop');
 Route::get('/products/{product}', 'Products@product');
 Route::get('/register', 'KidsCity@register');
@@ -29,15 +29,19 @@ Route::post('/setQty', 'CartController@set_qty')->name('setQty');
 Route::post('/checkout', 'CartController@checkout')->name('checkout');
 
 Route::get('/cartItems', function(){
-//    Cart::add(['id' => 3, 'name' => 'Product 2', 'qty' => 3, 'price' => 8000])
-//        ->associate('App\Product');
     $id = 1;
-
     return Cart::search(function ($cartItem) use ($id) {
         return $cartItem->model->id == $id;
     })->first()->rowId;
 });
 
+
+Route::prefix('/mob')->group(function() {
+    Route::get('/', 'KidsCityMob@index');
+    Route::get('/shop/{filterer?}/{category?}', 'KidsCityMob@shop');
+    Route::get('/cart/', 'KidsCityMob@cart');
+    Route::get('/profile/', 'KidsCityMob@profile');
+});
 
 Auth::routes();
 
@@ -45,6 +49,7 @@ Auth::routes();
 Route::get('/admin/login', 'Auth\LoginController@showCmsLoginForm')->name('cms_login');
 Route::post('/admin/login', 'Auth\LoginController@cmsLogin')->name('cms_authenticate');
 Route::post('/admin/logout', 'Auth\LoginController@cmsLogout')->name('cms_logout');
+
 
 Route::prefix('/admin')->group(function() {
   Route::get('/', 'Brands@cmsIndex')->name('main');

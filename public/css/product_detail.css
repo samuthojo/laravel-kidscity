@@ -114,12 +114,15 @@ body{
 	width: 50px;
 }
 
-#addButton{
-	max-width: 300px;
+#addForm .add-btn{
 	margin-top: 32px;
 }
 
-.product-infos.added .add-btn,
+#addForm .add-btn, .remove-btn{
+	max-width: 300px;
+}
+
+.product-infos.added #addForm,
 .product-infos:not(.added) .remove-btn{
 	display: none;
 }

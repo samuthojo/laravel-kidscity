@@ -17,13 +17,7 @@
     <title>Kid City</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/reset.css')}}" rel="stylesheet">
-    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/flex.css')}}" rel="stylesheet">
-    <link href="{{asset('css/flexboxgrid.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/animate.css')}}" rel="stylesheet">
-
-    <link href="{{asset('css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('css/mobile/styles.css')}}" rel="stylesheet">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
@@ -68,7 +62,7 @@
 
     @yield('styles')
 </head>
-<body style="padding-top: 0;">
+<body>
     <div id="alertMessage" class="animated">
         <i class="fa fa-check-circle"></i>
         <span id="alertMessageText">
@@ -76,39 +70,16 @@
         </span>
     </div>
 
-    @include('nav.common_nav')
+    @include('mobile.layouts.app_bar')
 
     @yield('content')
 
-    <div id="bottomNav" class="for-mob layout center justified">
-        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
+    @include('mobile.layouts.bottom_nav')
 
-        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
-            <i class="fa fa-shopping-basket"></i>
-            Shop
-        </a>
 
-        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
-            <i class="fa fa fa-shopping-cart"></i>
-            Cart
-        </a>
-
-        <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
-            <i class="fa fa-user"></i>
-            Profile
-        </a>
-    </div>
-
-    @include('scripts')
-
-    <script src="{{asset('js/scripts.js')}}"></script>
     <script>
         var alertMessage = document.getElementById("alertMessage");
         var alertMessageText = document.getElementById("alertMessageText");
-
         function showMessage(message){
             alertMessageText.innerText = message;
             alertMessage.classList.add("slideInDown");
@@ -121,19 +92,6 @@
                 }, 300);
             }, 3200);
         }
-
-        function enableScrollLocker() {
-            var controller = new ScrollMagic.Controller();
-            new ScrollMagic.Scene({
-                triggerElement: '.page-wrapper',
-                triggerHook: -1
-            })
-                .setClassToggle("#mainNav", "thin")
-                .addTo(controller);
-        }
-
-//        if(window.innerWidth >= 680){
-//            enableScrollLocker();
-//        }
     </script>
-@include('footer')
+</body>
+</html>

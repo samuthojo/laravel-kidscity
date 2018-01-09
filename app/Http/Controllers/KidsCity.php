@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 use App;
 use App\Utils;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Agent\Agent;
 
 class KidsCity extends Controller
 {
     public function index()
     {
+        $agent = new Agent();
+        if($agent->isPhone())
+            return redirect('/mob/');
+
         $page = "home";
         $boysProducts = Utils\Utils::getBoysProducts();
         $girlsProducts = Utils\Utils::getGirlsProducts();
@@ -24,6 +29,12 @@ class KidsCity extends Controller
             ->get();
 
         return view('index', compact('boysProducts', 'girlsProducts', 'brands', 'page'));
+    }
+
+    public function profile()
+    {
+        $page = "profile";
+        return view('profile.index', compact('page'));
     }
 
     public function shop($filter = "category", $id = -1)

@@ -38,7 +38,7 @@ class CartController extends Controller
             $user = Auth::user();
         }else{
             $name = $request->input('name');
-            $phone = $request->input('name');
+            $phone = $request->input('phone');
 
             if(is_null($name) || is_null($phone) || is_null($delivery_location_id)){
                 return back()->with('error', 'Some fields are missing');
@@ -53,24 +53,18 @@ class CartController extends Controller
         }
 
         if($user == null){
-            return "error";
-
             return back()->with('success', 'User not found!');
         }
 
         $new_order = Order::create([
             'user_id' => $user->id,
-            'delivery_location_id' => $user->phone,
+            'delivery_location_id' => $delivery_location_id,
         ]);
 
         if($new_order){
             Cart::destroy();
-            return "success";
-
             return back()->with('success', 'Order placed!');
         }else{
-            return "error";
-
             return back()->with('success', 'Order wasn\'t placed!');
         }
     }
