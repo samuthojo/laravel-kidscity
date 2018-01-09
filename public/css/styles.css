@@ -496,7 +496,8 @@ body.locked{
     width: 100%;
 }
 
-.btn[disabled]{
+.btn[disabled],
+.btn.disabled{
     background: #ddd;
     color: #aaa;
     pointer-events: none;

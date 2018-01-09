@@ -13,11 +13,12 @@
 			</a>
 		</div>
 		<div class="item-qty-bar item-qty layout center-center">
-			<button>
+			<button onclick="changeCartItemQty('{{$item->model->id}}', false)" class="{{$item->qty < 2 ? 'disabled' : ''}}">
 				<i class="fa fa-minus"></i>
 			</button>
-			<input type="text" value="{{$item->qty}}" readonly>
-			<button>
+			<img src="{{asset('images/loader.gif')}}" alt="" class="loader" style="width: 30px; margin: 0 8px;">
+			<input class="qty-input-area" type="text" value="{{$item->qty}}" readonly>
+			<button onclick="changeCartItemQty('{{$item->model->id}}', true)">
 				<i class="fa fa-plus"></i>
 			</button>
 		</div>

@@ -29,10 +29,14 @@ Route::post('/setQty', 'CartController@set_qty')->name('setQty');
 Route::post('/checkout', 'CartController@checkout')->name('checkout');
 
 Route::get('/cartItems', function(){
+    return view('test');
+
     $id = 1;
-    return Cart::search(function ($cartItem) use ($id) {
+    $rowId = Cart::search(function ($cartItem) use ($id) {
         return $cartItem->model->id == $id;
     })->first()->rowId;
+
+    return Cart::update($rowId, 3);
 });
 
 

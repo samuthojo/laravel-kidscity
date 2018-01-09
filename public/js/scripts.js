@@ -59,7 +59,7 @@ function addItemToCart(id, qty, callback){
 }
 
 //SET QTY
-function setQty(id, qty){
+function setQty(id, qty, callback){
     var url= window.Laravel.base_url + '/setQty';
     var remarkJSONObj = {
         'id': id,
@@ -78,15 +78,15 @@ function setQty(id, qty){
         success     : function(res) {
             if(res.success){
                 showMessage("Item price updated!");
-                $("#miniCartToggle .count").text(res.count);
-                $("#cartSubTotal").text(res.subtotal);
+                callback(true, res);
             }
             else
-                showMessage(res.msg);
+                callback(true, res)
         },
         error: function (err) {
-            console.log(e);
+            console.log(err);
             showMessage("Couldn't change item price!");
+            callback(false);
         }
     });
 }

@@ -63,9 +63,9 @@ class CartController extends Controller
 
         if($new_order){
             Cart::destroy();
-            return back()->with('success', 'Order placed!');
+            return back()->with('success', 'Your Order has been successfully placed!');
         }else{
-            return back()->with('success', 'Order wasn\'t placed!');
+            return back()->with('error', 'Sorry, your order wasn\'t be placed. Plase try again.');
         }
     }
 

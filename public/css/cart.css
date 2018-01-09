@@ -70,11 +70,23 @@ body{
 }
 
 .item-qty-bar button{
-	padding: 0 4px;
 	font-size: 1em;
 	padding: 4px 8px;
 	background-color: transparent;
 	border: 1px solid #ddd;
+}
+
+.item-qty-bar button[disabled],
+.item-qty-bar button.disabled{
+	background: #ddd;
+	color: #aaa;
+	pointer-events: none;
+}
+
+.item-qty-bar.loading button{
+	background: #ddd;
+	color: #aaa;
+	pointer-events: none;
 }
 
 .item-qty-bar input{
@@ -83,7 +95,12 @@ body{
 	max-width: 48px;
 	text-align: center;
 	padding: 3px 0;
-	margin: 0 8px; 
+	margin: 0 8px;
+}
+
+.item-qty-bar.loading input,
+.item-qty-bar:not(.loading) .loader{
+	display: none;
 }
 
 #cartItemsSummary{
