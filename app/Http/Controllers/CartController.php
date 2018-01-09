@@ -38,7 +38,7 @@ class CartController extends Controller
             $user = Auth::user();
         }else{
             $name = $request->input('name');
-            $phone = $request->input('phone');
+            $phone = $request->input('phone_number');
 
             if(is_null($name) || is_null($phone) || is_null($delivery_location_id)){
                 return back()->with('error', 'Some fields are missing');
@@ -46,7 +46,7 @@ class CartController extends Controller
 
             $user = User::firstOrCreate([
                 'name' => $request->input('name'),
-                'phone_number' => $request->input('phone')
+                'phone_number' => $request->input('phone_number')
             ]);
 
             Auth::login($user);
