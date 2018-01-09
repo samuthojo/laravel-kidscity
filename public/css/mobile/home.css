@@ -1,0 +1,29 @@
+/*SECTION BANNER*/
+#sectionBanner{
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    max-height: 450px;
+    background: #000;
+    color: #fff;
+}
+
+#sectionBanner img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+#sectionBanner:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: -webkit-linear-gradient(top right, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+    background: -o-linear-gradient(top right, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+    background: linear-gradient(to bottom left, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+}

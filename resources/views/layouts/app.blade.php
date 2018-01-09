@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-    <!-- CSRF Token -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Buni,tanzania technology, innovation, girls in innovation">
+    <link rel="manifest" href="{{asset('manifest.json')}}">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="theme-color" content="#f38536">
+    <meta name="keywords" content="Tanzania ecommerce, ecommerce, tanzania, kid ecommerce, kids shop, kids city">
     <meta name="description" content="A platform that aims to bridge the gap in innovation for women.">
     <meta name="author" content="iPF Softwares ">
     <meta charset="UTF-8">
@@ -15,8 +21,19 @@
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/flex.css')}}" rel="stylesheet">
     <link href="{{asset('css/flexboxgrid.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/animate.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    <script src="{{asset('js/lib/jquery-3.1.0.min.js')}}"></script>
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'base_url' => url('/')
+        ]) !!};
+    </script>
 
     <style>
         #alertMessage{
@@ -50,9 +67,8 @@
     </style>
 
     @yield('styles')
-    <script src="{{asset('js/lib/jquery-3.1.0.min.js')}}"></script>
 </head>
-<body>
+<body style="padding-top: 0;">
     <div id="alertMessage" class="animated">
         <i class="fa fa-check-circle"></i>
         <span id="alertMessageText">
@@ -64,4 +80,60 @@
 
     @yield('content')
 
+    <div id="bottomNav" class="for-mob layout center justified">
+        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+
+        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
+            <i class="fa fa-shopping-basket"></i>
+            Shop
+        </a>
+
+        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
+            <i class="fa fa fa-shopping-cart"></i>
+            Cart
+        </a>
+
+        <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
+            <i class="fa fa-user"></i>
+            Profile
+        </a>
+    </div>
+
+    @include('scripts')
+
+    <script src="{{asset('js/scripts.js')}}"></script>
+    <script>
+        var alertMessage = document.getElementById("alertMessage");
+        var alertMessageText = document.getElementById("alertMessageText");
+
+        function showMessage(message){
+            alertMessageText.innerText = message;
+            alertMessage.classList.add("slideInDown");
+            setTimeout(function () {
+                alertMessage.classList.add("slideOutUp");
+
+                setTimeout(function (){
+                    alertMessage.classList.remove("slideInDown");
+                    alertMessage.classList.remove("slideOutUp");
+                }, 300);
+            }, 3200);
+        }
+
+        function enableScrollLocker() {
+            var controller = new ScrollMagic.Controller();
+            new ScrollMagic.Scene({
+                triggerElement: '.page-wrapper',
+                triggerHook: -1
+            })
+                .setClassToggle("#mainNav", "thin")
+                .addTo(controller);
+        }
+
+//        if(window.innerWidth >= 680){
+//            enableScrollLocker();
+//        }
+    </script>
 @include('footer')

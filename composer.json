@@ -7,6 +7,8 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
+        "gloudemans/shoppingcart": "^2.4",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelista/ekko": "^1.4"
@@ -18,6 +20,9 @@
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
+        "files" : [
+            "app/helpers.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

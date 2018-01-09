@@ -1,4 +1,4 @@
-@extends('layouts.shopping')
+@extends('layouts.app')
 
 @section('styles')
 	<link href="{{asset('css/brands.css')}}" rel="stylesheet">
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-	<div class="main-wrapper">
+	<div class="page-wrapper main-wrapper">
 		<div id="brandsPage">
 			<div class="section-wrapper">
 				<div class="row">

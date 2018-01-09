@@ -1,4 +1,4 @@
-<div id="checkoutArea">
+<div id="checkoutArea" class="{{Cart::count() < 1 ? 'disabled' : ''}}">
 	<div id="orderSummary">
 		<h3>
 			Order Summary
@@ -9,25 +9,30 @@
 		<p><b>Complete Total: </b> Tshs. 23,000/=</p>
 	</div>
 
-	<div id="checkoutForm">
+	<form id="checkoutForm" action="{{route('checkout')}}" method="POST">
+		{{csrf_field()}}
+
 		<h3>
 			Checkout Order
 		</h3>
 
-		<input type="text" class="input" placeholder="Full Name">
+		<input type="text" required class="input" placeholder="Your Full Name" name="name" {{Auth::user() ? 'readonly' : ''}}
+			value="{{Auth::user() ? Auth::user()->name : ''}}">
 
-		<input type="text" class="input" placeholder="Phone Number">
+		<input type="text" required class="input" placeholder="Your Phone Number" name="phone_number"
+			   {{Auth::user() ? 'readonly' : ''}}
+			   value="{{Auth::user() ? Auth::user()->phone_number : ''}}">
 
-		<select id="" class="input">
-			<option value="Kinondoni">Kinondoni</option>
-			<option value="Ilala">Ilala</option>
-			<option value="Tegeta">Tegeta</option>
-			<option value="Mbezi Beach">Mbezi Beach</option>
-			<option value="Mbagala Mwisho">Mbagala Mwisho</option>
+		<select id="" required class="input" name="delivery_location_id">
+			<option value="">Choose delivery Location</option>
+
+			@foreach($locations as $location)
+				<option value="{{$location->id}}">{{$location->location}}</option>
+			@endforeach
 		</select>
 
-		<button class="btn accent large block" style="text-transform: uppercase;">
+		<button type="submit" class="btn accent large block" style="text-transform: uppercase;">
 			SUBMIT ORDER
 		</button>
-	</div>
+	</form>
 </div>
