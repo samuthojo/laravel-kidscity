@@ -1,0 +1,87 @@
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Bold";
+    src: url("../fonts/firasans/FiraSans-Medium.ttf");
+}
+
+body{
+	background: #fdfdfd;
+	padding-top: 0;
+}
+
+#productImage{
+	background-color: #f0f0f0;
+	max-height: 240px;
+	overflow: hidden;
+}
+
+#productInfo{
+	padding: 12px 24px;
+}
+
+#productInfo h2{
+	font-family: PT Bold, sans-serif;
+	margin-top: 0.5em;
+	font-size: 2em;
+}
+
+#productInfo .price{
+	display: block;
+	padding: 8px 0;
+}
+
+#productInfo .price .currency{
+	text-transform: uppercase;
+	font-family: FiraSans Bold, sans-serif;
+	font-size: 1.2em;
+	padding-right: 4px;
+}
+
+#productInfo .price .number{
+	font-family: Futura, sans-serif;
+	font-size: 2.2em;
+}
+
+#productInfo .product-description{
+	margin-top: 20px;
+}
+
+#productInfo .product-description h5{
+	display: block;
+	margin-bottom: 8px;
+}
+
+#productInfo .product-description p{
+	display: block;
+	margin-bottom: 20px;
+	font-family: Futura, sans-serif;
+	font-size: 1.45em;
+	line-height: 1.45em;
+}
+
+#addProductBar{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 60px;
+	z-index: 99;
+	overflow: hidden;
+	background: #4351a2;
+	color: #fff;
+
+	transition: all 0.35s ease-out;
+}
+
+.product-infos.added #addProductBar{
+	background: #ff3a3c;
+}
+
+#addProductBar .btn{
+	height: 60px !important;
+	text-transform: uppercase;
+	background-color: transparent !important;
+}
+
+.product-infos.added .add-btn,
+.product-infos:not(.added) .remove-btn{
+	display: none;
+}

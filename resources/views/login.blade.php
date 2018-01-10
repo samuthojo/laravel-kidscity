@@ -73,7 +73,7 @@
 				</h3>
 
 				<form action="{{ route('login') }}" id="form" method="POST">
-          {{ csrf_field() }}
+          			{{ csrf_field() }}
 
 					<label>PHONE NUMBER</label>
 					<input type="text" class="input" placeholder="Enter phone number"

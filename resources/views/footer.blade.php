@@ -80,22 +80,3 @@
         </span>
     </div>
 </footer>
-
-<script>
-    var alertMessage = document.getElementById("alertMessage");
-    var alertMessageText = document.getElementById("alertMessageText");
-    function showMessage(message){
-        alertMessageText.innerText = message;
-        alertMessage.classList.add("slideInDown");
-        setTimeout(function () {
-            alertMessage.classList.add("slideOutUp");
-
-            setTimeout(function (){
-                alertMessage.classList.remove("slideInDown");
-                alertMessage.classList.remove("slideOutUp");
-            }, 300);
-        }, 3200);
-    }
-</script>
-</body>
-</html>

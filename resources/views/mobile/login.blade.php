@@ -30,6 +30,7 @@
 
 			#loginInfo #content{
 				position: relative;
+				height: 100%;
 				padding: 40px 30px;
 				color: #fff;
 			}
@@ -42,20 +43,6 @@
 				height: 100%;
 				width: 100%;
 				background: rgba(0,0,0,0.8);
-				transition: all 0.2s ease-out
-			}
-
-			#loginInfo:not(.loaded) #content h3,
-			#loginInfo:not(.loaded) #content p,
-			#loginInfo:not(.loaded) #content .btn{
-				transform: translateY(20%);
-				opacity: 0;
-				transition: all 0.35s ease-out 1s;
-			}
-
-			#loginInfo:not(.loaded) #content:before{
-				opacity: 0;
-				transform: translateY(20%);
 			}
 
 			#loginInfo #content h3{
@@ -69,36 +56,42 @@
 				font-size: 1.4em;
 				line-height: 1.2em;
 				margin-bottom: 28px;
+				text-align: center;
+			}
+
+			#loginInfo #content input{
+				width: 100%;
+				margin-bottom: 8px;
 			}
 
 			#loginInfo #content .btn{
 				text-transform: uppercase;
-				font-size: 20px;
+				font-size:18px;
 				height: 50px;
 				line-height: 50px;
 			}
 		</style>
 		
-		<div id="loginInfo" class="layout vertical end-justified">
-			<div id="content">
+		<div id="loginInfo">
+			<div id="content" class="layout vertical center-center">
 				<h3>Login Required</h3>
 				<p>
 					To see your profile info, order history and other information.
 				</p>
 
-				<a href="{{url('/login')}}" class="btn large block accent">
-					LOGIN
-				</a>
+				<form action="{{ route('login') }}" id="form" method="POST">
+					{{ csrf_field() }}
+
+					<input type="text" class="input" placeholder="Enter phone number"
+						   name="phone_number" value="{{old('phone_number')}}" autofocus>
+
+					<input type="password" class="input" placeholder="Your Password"
+						   name="password">
+					<button class="btn block large accent">
+						SUBMIT
+					</button>
+				</form>
 			</div>
 		</div>
 	@endif
-
-	<script>
-		window.onload = function () {
-            setTimeout(function () {
-                console.log("Done after 400ms");
-                document.querySelector("#loginInfo").classList.add("loaded");
-            }, 400);
-        }
-	</script>
 @endsection

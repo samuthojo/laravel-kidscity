@@ -17,13 +17,7 @@
     <title>Kid City</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/reset.css')}}" rel="stylesheet">
-    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/flex.css')}}" rel="stylesheet">
-    <link href="{{asset('css/flexboxgrid.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/animate.css')}}" rel="stylesheet">
-
-    <link href="{{asset('css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('css/mobile/styles.css')}}" rel="stylesheet">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
@@ -38,15 +32,14 @@
     <style>
         #alertMessage{
             position: fixed;
-            top: 60px;
-            right: 30px;
+            bottom: 60px;
+            left: 0;
+            right: 0;
             padding: 16px 20px;
-            border-radius: 3px;
-            box-shadow: -2px 2px 12px rgba(0,0,0,0.3);
-            background: #fefe03;
-            color: #451f75;
-            z-index: 99;
-            max-width: 250px;
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
+            background: #333;
+            color: #fff;
+            z-index: 98;
             line-height:23px;
             animation-duration: 0.35s;
         }
@@ -56,55 +49,33 @@
             margin-right: 5px;
         }
 
-        #alertMessage.slideOutUp{
-            animation-duration: 0.05s;
+        #alertMessage.slideOutDown{
+            /*animation-duration: 0.05s;*/
         }
 
-        #alertMessage:not(.slideInDown){
+        #alertMessage:not(.slideInUp):not(.slideOutDown){
             opacity: 0;
             pointer-events: none;
+        }
+
+        body{
+            padding-top: 0;
         }
     </style>
 
     @yield('styles')
 </head>
-<body style="padding-top: 0;">
+<body>
     <div id="alertMessage" class="animated">
-        <i class="fa fa-check-circle"></i>
+        {{--<i class="fa fa-check-circle"></i>--}}
         <span id="alertMessageText">
-            Thankyou, we have received your message.
+            Thankyou, we got yo message.
         </span>
     </div>
 
-    @include('nav.common_nav')
-
     @yield('content')
 
-    <div id="bottomNav" class="for-mob layout center justified">
-        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-
-        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
-            <i class="fa fa-shopping-basket"></i>
-            Shop
-        </a>
-
-        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
-            <i class="fa fa fa-shopping-cart"></i>
-            Cart
-        </a>
-
-        <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
-            <i class="fa fa-user"></i>
-            Profile
-        </a>
-    </div>
-
-    @include('scripts')
-
-    <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="{{asset('js/mob-scripts.js')}}"></script>
     <script>
         var alertMessage = document.getElementById("alertMessage");
         var alertMessageText = document.getElementById("alertMessageText");
@@ -118,13 +89,13 @@
             }
 
             alertMessageText.innerText = message;
-            alertMessage.classList.add("slideInDown");
+            alertMessage.classList.add("slideInUp");
             alert_timeout = setTimeout(function () {
-                alertMessage.classList.add("slideOutUp");
+                alertMessage.classList.add("slideOutDown");
 
                 setTimeout(function (){
-                    alertMessage.classList.remove("slideInDown");
-                    alertMessage.classList.remove("slideOutUp");
+                    alertMessage.classList.remove("slideInUp");
+                    alertMessage.classList.remove("slideOutDown");
                     alert_timeout = null;
                 }, 300);
             }, 3200);
@@ -132,37 +103,22 @@
 
         function closeMessage(message){
             clearTimeout(alert_timeout);
-            alertMessage.classList.remove("slideInDown");
-            alertMessage.classList.add("slideOutUp");
+            alertMessage.classList.remove("slideInUp");
+            alertMessage.classList.add("slideOutDown");
 
             if(message && message.length){
                 setTimeout(function (){
-                    alertMessage.classList.remove("slideOutUp");
+                    alertMessage.classList.remove("slideOutDown");
                     alert_timeout = null;
                     showMessage(message);
                 }, 100);
             }else{
                 setTimeout(function (){
-                    alertMessage.classList.remove("slideOutUp");
+                    alertMessage.classList.remove("slideOutDown");
                     alert_timeout = null;
                 }, 300);
             }
         }
-
-        function enableScrollLocker() {
-            var controller = new ScrollMagic.Controller();
-            new ScrollMagic.Scene({
-                triggerElement: '.page-wrapper',
-                triggerHook: -1
-            })
-                .setClassToggle("#mainNav", "thin")
-                .addTo(controller);
-        }
-
-//        if(window.innerWidth >= 680){
-//            enableScrollLocker();
-//        }
     </script>
-    @include('footer')
 </body>
 </html>

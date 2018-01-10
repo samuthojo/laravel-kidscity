@@ -38,71 +38,63 @@ body{
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+    /*-webkit-animation-fill-mode: both;*/
+    /*animation-fill-mode: both;*/
 }
 
-@-webkit-keyframes slideInDown {
-    from {
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-        visibility: visible;
+@keyframes slideInUp {
+    0% {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
     }
 
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@keyframes slideInDown {
-    from {
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-        visibility: visible;
-    }
-
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
     }
 }
 
-.slideInDown {
-    -webkit-animation-name: slideInDown;
-    animation-name: slideInDown;
+.slideInUp {
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
 }
 
-
-@-webkit-keyframes slideOutUp {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+@keyframes slideOutDown {
+    0% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
     }
 
-    to {
-        visibility: hidden;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-}
-
-@keyframes slideOutUp {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-    to {
-        visibility: hidden;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
+    100% {
+        -webkit-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        transform: translateY(100%);
     }
 }
 
-.slideOutUp {
-    -webkit-animation-name: slideOutUp;
-    animation-name: slideOutUp;
+.slideOutDown {
+    -webkit-animation-name: slideOutDown;
+    animation-name: slideOutDown;
+}
+
+.badge{
+    position:relative;
+}
+.badge[data-badge]:not([data-badge="0"]):after {
+    content:attr(data-badge);
+    position:absolute;
+    top:3px;
+    right:20px;
+    font-size:.7em;
+    background:var(--accent-color);
+    color:white;
+    width:18px;height:18px;
+    text-align:center;
+    line-height:18px;
+    border-radius:50%;
+    box-shadow:0 0 1px #333;
 }
 
 /*MOBILE ONLY STYLES*/
@@ -119,9 +111,14 @@ body{
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
+
+#appBar svg{
+    fill: #fff !important;
+}
 #mainActionBar{
     height: 58px;
     /*padding: 0 8px;*/
+    padding-right: 2px;
 }
 
 #mainActionBar #mainLogo{
@@ -188,6 +185,90 @@ body{
 
 #bottomNav a:nth-child(1) i{
     /*font-size: 24px;*/
+}
+
+.btn{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    transition: all .3s ease;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    text-transform: lowercase;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    height: 30px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 27px;
+    background: var(--main-color);
+    color: #fff;
+}
+
+.btn.accent{
+    background: var(--accent-color);
+}
+
+.btn.danger{
+    background: #ff3a3c;
+}
+
+.btn.large{
+    height: 40px;
+    padding: 0 40px;
+    font-size: 15px;
+    line-height: 37px;
+}
+
+.btn.block{
+    width: 100%;
+}
+
+.btn[disabled],
+.btn.disabled{
+    background: #ddd;
+    color: #aaa;
+    pointer-events: none;
+}
+
+.product.added .btn.add-btn,
+.product:not(.added) .btn.remove-btn{
+    display: none;
+}
+
+.input{
+    display: inline-block;
+    position: relative;
+    height: 40px;
+    min-width: 170px;
+    padding: 0 15px 0 15px;
+    border: 1px solid #999;
+    border-radius: 0;
+    outline: 0;
+    color: #414141;
+    font: 400 12px/40px Arial,sans-serif;
+    font-style: normal!important;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.input{
+    cursor: pointer;
+    padding: 0 28px 0 15px;
+    background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
 }
 
 @media screen and (min-width: 681px){

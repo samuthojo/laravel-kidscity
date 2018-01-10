@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class KidsCityMob extends Controller
@@ -17,18 +18,25 @@ class KidsCityMob extends Controller
     {
         $page = "shop";
         $categories = Category::with("subCategories")->get();
-        return view('mobile.shop', compact('page', 'categories'));
+        $products = Product::all();
+        return view('mobile.shop', compact('page', 'categories', 'products'));
     }
 
-    public function profile()
+    public function product(Product $product)
     {
-        $page = "profile";
-        return view('mobile.profile', compact('page'));
+        $page = "shop";
+        return view('mobile.product', compact('page', 'product'));
     }
 
     public function cart()
     {
         $page = "cart";
         return view('mobile.cart', compact('page'));
+    }
+
+    public function profile()
+    {
+        $page = "profile";
+        return view('mobile.profile', compact('page'));
     }
 }
