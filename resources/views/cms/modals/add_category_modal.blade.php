@@ -15,7 +15,7 @@
                 <label for="category_name">Name:</label>
                 <input type="text" class="form-control"
                   placeholder="category name"
-                  name="name" id="category_name">
+                  name="name" id="category_name" autofocus>
                 <span id="category_name_error" class="text-danger"
                  style="display: none;"></span>
               </div>

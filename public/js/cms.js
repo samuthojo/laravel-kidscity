@@ -6,6 +6,9 @@ $(function () {
     statusCode: {
         401: function() {
           window.location.href = "/login";
+      },
+        419: function() {
+          window.location.href = "/login";
       }
     }
   });
@@ -17,9 +20,10 @@ $(function () {
     $(".modal-body").find('span').each(function(){
        $(this).fadeOut(0);
     });
+    $(".modal-body").find(".radio").each(function(){
+      $(this).prop('checked', false);
+    });
   });
-
-  $('[data-toggle="tooltip"]').tooltip();
 
 });
 

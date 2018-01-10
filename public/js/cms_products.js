@@ -8,7 +8,7 @@ function format(product) {
             '<th>Picture:</th>'+
             '<td>'+
               "<img class='img-rounded' alt='product picture' " +
-                  "src=" + "/images/real_cloths/" + product.image_url + " height='30%' width='auto'>" +
+                  "src=" + "/images/products/" + product.image_url + " height='30%' width='auto'>" +
             '</td>'+
         '</tr>'+
         '<tr>'+
@@ -87,6 +87,10 @@ function showAddProductErrors(errors) {
     $("#product_price_error").text(errors.price);
     $("#product_price_error").fadeIn(0);
   }
+  if(errors.gender != null) {
+    $("#gender_error").text(errors.gender);
+    $("#gender_error").fadeIn(0);
+  }
   if(errors.image_url != null) {
     $("#product_image_error").text(errors.image_url);
     $("#product_image_error").fadeIn(0);
@@ -122,6 +126,10 @@ function showEditProductErrors(errors) {
     $("#edit_product_price_error").text(errors.price);
     $("#edit_product_price_error").fadeIn(0);
   }
+  if(errors.gender != null) {
+    $("#edit_gender_error").text(errors.gender);
+    $("#edit_gender_error").fadeIn(0);
+  }
   if(errors.image_url != null) {
     $("#edit_product_image_error").text(errors.image_url);
     $("#edit_product_image_error").fadeIn(0);
@@ -144,6 +152,8 @@ function showEditProductModal(product) {
   $("#edit_product_name").val(product.name);
 
   $("#edit_product_price").val(product.price);
+
+  $("#edit_gender").val(product.gender);
 
   $("#edit_product_description").val(product.description);
 

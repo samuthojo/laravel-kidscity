@@ -20,6 +20,11 @@ class Product extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function subCategory()
+    {
+      return $this->belongsTo('App\SubCategory');
+    }
+
     public function brand()
     {
         return $this->belongsTo('App\Brand');

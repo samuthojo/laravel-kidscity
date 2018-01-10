@@ -9,7 +9,8 @@ class Users extends Controller
 {
     public function cmsIndex()
     {
-      $customers = App\User::where('is_admin', false)->get();
+      $customers = App\User::where('is_admin', false)
+                           ->latest('updated_at')->get();
       return view('cms.customers', compact('customers'));
     }
 }

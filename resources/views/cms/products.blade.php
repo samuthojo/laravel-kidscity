@@ -56,6 +56,7 @@
             <th>PriceCategory</th>
             <th>AgeRange</th>
             <th>Brand</th>
+            <th>Gender</th>
             <th>Price</th>
             <th>Action</th>
           </thead>
@@ -75,6 +76,7 @@
                 <td>
                   {{$product->brand_name}}
                 </td>
+                <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
                 <td>
                   {{ number_format($product->price) }}
                 </td>
@@ -135,11 +137,50 @@
        bLengthChange: false
      });
 
+     $("#brand_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_brand_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
      $("#category_id").click(function() {
        $(this).next().fadeOut(0);
      });
 
      $("#edit_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#sub_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_sub_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+     $("#price_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_price_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#product_age_range_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_product_age_range_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#gender").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_gender").click(function() {
        $(this).next().fadeOut(0);
      });
 

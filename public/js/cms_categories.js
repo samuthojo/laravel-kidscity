@@ -11,10 +11,15 @@ function addCategory() {
          type: "post",
          url: "/admin/categories",
          data: $("#add_category_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/admin/categories';
+           closeModal("add_category_modal");
+           $("#categoriesTable").html(table);
+           $("#success-alert").text("Category created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -47,19 +52,25 @@ function attemptEditCategory() {
     url: "/admin/categories/" + category_id,
     data: $("#edit_category_form").serialize(),
     success: function(table) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       closeModal("edit_category_modal");
       $("#categoriesTable").html(table);
       $("#success-alert").text("Category updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditCategoryErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditCategoryErrors(errors) {

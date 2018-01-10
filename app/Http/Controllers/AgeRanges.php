@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
+use App\Http\Requests;
 
 class AgeRanges extends Controller
 {
     public function cmsIndex()
     {
-      $ageRanges = App\ProductAgeRange::all();
+      $ageRanges = App\ProductAgeRange::latest('updated_at')->get();
       return view('cms.age_ranges', compact('ageRanges'));
     }
 
@@ -27,11 +28,35 @@ class AgeRanges extends Controller
       });
 
       $categories = App\Category::all();
+      $subCategories = App\SubCategory::all();
       $brands = App\Brand::all();
       $priceCategories = App\PriceCategory::all();
       $ageRanges = App\ProductAgeRange::all();
 
       return view('cms.age_range_products', compact('ageRange',
-      'categories', 'brands', 'priceCategories', 'ageRanges', 'products'));
+        'subCategories', 'categories', 'brands', 'priceCategories',
+        'ageRanges', 'products'));
     }
+
+    public function store(Requests\CreateAgeRange $request)
+    {
+      $ageRange = App\ProductAgeRange::create($request->all());
+      $ageRanges = App\ProductAgeRange::latest('updated_at')->get();
+      return view('cms.tables.age_ranges_table', compact('ageRanges'));
+    }
+
+    public function update(Requests\UpdateAgeRange $request, $id)
+    {
+      App\ProductAgeRange::where(compact('id'))->update($request->all());
+      $ageRanges = App\ProductAgeRange::latest('updated_at')->get();
+      return view('cms.tables.age_ranges_table', compact('ageRanges'));
+    }
+
+    public function destroy(App\ProductAgeRange $ageRange)
+    {
+      $ageRange->delete();
+      $ageRanges = App\ProductAgeRange::latest('updated_at')->get();
+      return view('cms.tables.age_ranges_table', compact('ageRanges'));
+    }
+
 }

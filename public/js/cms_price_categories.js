@@ -11,10 +11,15 @@ function addPriceCategory() {
          type: "post",
          url: "/admin/price_categories",
          data: $("#add_price_category_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/admin/price_categories';
+           closeModal("add_price_category_modal");
+           $("#priceCategoriesTable").html(table);
+           $("#success-alert").text("PriceCategory created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -47,19 +52,25 @@ function attemptEditPriceCategory() {
     url: "/admin/price_categories/" + price_category_id,
     data: $("#edit_price_category_form").serialize(),
     success: function(table) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       closeModal("edit_price_category_modal");
       $("#priceCategoriesTable").html(table);
       $("#success-alert").text("PriceCategory updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditCategoryErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditPriceCategoryErrors(errors) {

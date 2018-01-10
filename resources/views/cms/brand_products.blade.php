@@ -62,6 +62,7 @@
             <th>SubCategory</th>
             <th>PriceCategory</th>
             <th>AgeRange</th>
+            <th>Gender</th>
             <th>Price</th>
             <th>Action</th>
           </thead>
@@ -78,6 +79,7 @@
                 <td>
                   {{$product->age_range}}
                 </td>
+                <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
                 <td>
                   {{ number_format($product->price) }}
                 </td>

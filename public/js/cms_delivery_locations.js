@@ -11,10 +11,15 @@ function addLocation() {
          type: "post",
          url: "/admin/locations",
          data: $("#add_location_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/admin/locations';
+           closeModal("add_location_modal");
+           $("#locationsTable").html(table);
+           $("#success-alert").text("Location added successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -52,19 +57,25 @@ function attemptEditLocation() {
     url: "/admin/locations/" + location_id,
     data: $("#edit_location_form").serialize(),
     success: function(table) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       closeModal("edit_location_modal");
       $("#locationsTable").html(table);
       $("#success-alert").text("Location updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditLocationErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditLocationErrors(errors) {

@@ -27,6 +27,11 @@
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         Order Items:
       </h3>
+      <a class="btn btn-primary pull-right" href="{{url('admin/orders')}}"
+        title="back">
+        <i class="fa fa-arrow-left"
+          style="font-size: 16px;"></i>
+      </a>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">

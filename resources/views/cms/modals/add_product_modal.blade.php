@@ -88,6 +88,17 @@
                 class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
+              <label for="gender">Gender:</label>
+              <select class="form-control" name="gender"
+                id="gender" style="width: 180px">
+                <option value="" selected disabled>choose gender</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+              </select>
+              <span id="gender_error"
+                class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
               <label for="product_description">Description:</label>
               <textarea name="description" id="product_description"
                 class="form-control" placeholder="product description"

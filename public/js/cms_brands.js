@@ -39,10 +39,15 @@ function addBrand() {
          contentType: false,
          processData: false,
          data: formData,
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = "/admin/brands";
+           closeModal("add_brand_modal");
+           $("#brandsTable").html(table);
+           $("#success-alert").text("Brand created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -86,19 +91,23 @@ function attemptEditBrand() {
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);
-      closeModal("edit_product_modal");
+      closeModal("edit_brand_modal");
       $("#brandsTable").html(table);
       $("#success-alert").text("Brand updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditBrandErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditBrandErrors(errors) {
@@ -127,7 +136,7 @@ function deleteBrand() {
       $(".btn-success").prop("disabled", false);
       closeModal("delete_confirmation_modal");
       $("#brandsTable").html(table);
-      $("#success-alert").text("Category deleted successfully");
+      $("#success-alert").text("Brand deleted successfully");
       $("#success-alert").fadeIn(0, function() {
         $("#success-alert").fadeOut(1500);
       });

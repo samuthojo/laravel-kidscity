@@ -11,10 +11,15 @@ function addAgeRange() {
          type: "post",
          url: "/admin/age_ranges",
          data: $("#add_age_range_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/admin/age_ranges';
+           closeModal("add_age_range_modal");
+           $("#ageRangesTable").html(table);
+           $("#success-alert").text("AgeRange created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -47,19 +52,25 @@ function attemptEditAgeRange() {
     url: "/admin/age_ranges/" + age_range_id,
     data: $("#edit_age_range_form").serialize(),
     success: function(table) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       closeModal("edit_age_range_modal");
       $("#ageRangesTable").html(table);
       $("#success-alert").text("AgeRange updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditAgeRangeErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditAgeRangeErrors(errors) {

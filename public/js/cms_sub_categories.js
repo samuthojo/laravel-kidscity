@@ -4,6 +4,14 @@ $(document).ready(function () {
   $(":text").keydown(function() {
     $(this).next().fadeOut(0);
   });
+
+  $("#category_id").click(function() {
+   $(this).next().fadeOut(0);
+  });
+
+  $("#edit_category_id").click(function() {
+   $(this).next().fadeOut(0);
+  });
 });
 
 function addSubCategory() {
@@ -11,10 +19,15 @@ function addSubCategory() {
          type: "post",
          url: "/admin/sub_categories",
          data: $("#add_sub_category_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/sub_categories';
+           closeModal("add_sub_category_modal");
+           $("#subCategoriesTable").html(table);
+           $("#success-alert").text("Sub-Category created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
            console.log(error);
@@ -52,19 +65,25 @@ function attemptEditSubCategory() {
     url: "/admin/sub_categories/" + sub_category_id,
     data: $("#edit_sub_category_form").serialize(),
     success: function(table) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       closeModal("edit_sub_category_modal");
       $("#subCategoriesTable").html(table);
       $("#success-alert").text("Sub-Category updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       console.log(error);
       data = JSON.parse(error.responseText);
       showEditSubCategoryErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
 function showEditSubCategoryErrors(errors) {

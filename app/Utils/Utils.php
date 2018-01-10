@@ -31,6 +31,6 @@ class Utils
     {
       $imageName = time() . "." . $image->getClientOriginalExtension();
       $image->move($destination, $imageName);
-      return $destination . $imageName;
+      return $imageName;
     }
 }

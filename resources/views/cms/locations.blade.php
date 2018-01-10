@@ -77,7 +77,7 @@
                 columns: ":not(:last-child)"
               },
               title: "Delivery Locations",
-              messageTop: "The List Of Delivery Delivery Locations As Of {{date('d-m-Y')}}"
+              messageTop: "The List Of Delivery Locations As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'excel',
@@ -85,7 +85,7 @@
                  columns: ":not(:last-child)"
                },
                title: "Delivery Locations",
-               messageTop: "The List Of Delivery Delivery Locations As Of {{date('d-m-Y')}}"
+               messageTop: "The List Of Delivery Locations As Of {{date('d-m-Y')}}"
             },
              {
                extend: 'pdf',
@@ -93,7 +93,7 @@
                  columns: ":not(:last-child)"
                },
                title: "Delivery Locations",
-               messageTop: "The List Of Delivery Delivery Locations As Of {{date('d-m-Y')}}"
+               messageTop: "The List Of Delivery Locations As Of {{date('d-m-Y')}}"
             }
         ],
         iDisplayLength: 8,
