@@ -61,7 +61,7 @@
 
     @yield('styles')
 </head>
-<body>
+<body class="searchin">
     <div id="alertMessage" class="animated">
         {{--<i class="fa fa-check-circle"></i>--}}
         <span id="alertMessageText">
@@ -69,9 +69,13 @@
         </span>
     </div>
 
+    @yield('above-appbar-content')
+
     @include('mobile.layouts.app_bar')
 
-    @yield('content')
+    <div id="mainSiteContent">
+        @yield('content')
+    </div>
 
     @include('mobile.layouts.bottom_nav')
 

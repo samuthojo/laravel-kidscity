@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-	<p>
-		Home page content......
-	</p>
+	<div id="cta">
+
+	</div>
 @endsection

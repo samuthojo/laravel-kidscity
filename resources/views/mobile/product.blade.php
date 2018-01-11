@@ -6,8 +6,8 @@
 
 @section('content')
 	<div id="appBar" class="for-mob" style="background-color: rgba(0,0,0,0.2); box-shadow: none">
-		<div id="mainActionBar" class="layout center justified" style="z-index: 1;">
-			<a id="mainLogo" href="{{ URL::previous() }}" class="layout center">
+		<div id="mainActionBar" class="an-action-bar layout center justified" style="z-index: 1;">
+			<a id="mainLogo" href="{{ URL::previous() }}" class="action-button">
 				<svg fill="#000000" height="28" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
 					<path d="M0 0h24v24H0z" fill="none"/>
 					<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>

@@ -27,3 +27,23 @@
     background: -o-linear-gradient(top right, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
     background: linear-gradient(to bottom left, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
 }
+
+#appBar{
+    box-shadow: none;
+}
+
+#cta{
+
+}
+
+#cta #title{
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+}
+
+#cta #banner{
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+}

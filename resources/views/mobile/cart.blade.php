@@ -18,16 +18,21 @@
 			@include('mobile.tpl.cart_item')
 		@endforeach
 
-		<div id="emptyMessage" class="layout fill center-center">
-			You have no items in your cart. <br>
-			<a href="{{url('/shop')}}" class="btn large">GO SHOPPING</a>
+		<div id="emptyMessage" class="layout vertical fill center-center">
+			<img src="{{asset('images/empty-state/cart_orange_faded.png')}}" alt="">
+			<h3>Your cart's empty</h3>
+			<p>
+				You have no items in your cart.
+			</p>
+			<a href="{{url('/mob/shop')}}" class="btn large">CONTINUE SHOPPING</a>
 		</div>
 
-		<div id="cartItemsSummary" class="layout center">
+		<div id="cartItemsSummary" class="layout center justified">
 			<div >
-				<h3>Total Price</h3>
+				<h3>Total Cost</h3>
 				<p id="cartSubTotal">
-					{{present_price(Cart::subtotal())}}
+					{{--{{present_price(Cart::subtotal())}}--}}
+					Tshs.<span class="amount">{{number_format(Cart::subtotal())}}</span>/=
 				</p>
 			</div>
 
@@ -36,4 +41,8 @@
 			</button>
 		</div>
 	</div>
+
+	<script>
+        $("body").addClass('has-cart-summary');
+	</script>
 @endsection

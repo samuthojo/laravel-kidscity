@@ -30,8 +30,13 @@ function addToCart(e, id, qty){
             $("#cartItems").removeClass('is-empty');
             $("#checkoutArea").removeClass('disabled');
 
-            if($("#cartCount").get(0))
+            if($("#cartCount").get(0)){
                 $("#cartCount").get(0).setAttribute("data-badge", res.count);
+                $("#cartCount").removeClass("tada");
+                setTimeout(function () {
+                    $("#cartCount").addClass("tada");
+                }, 1)
+            }
 
             $("#cartSubTotal").text(res.subtotal);
             showMessage("Item added to cart!");
@@ -127,8 +132,13 @@ function removeFromCart(e, id){
                 $("#checkoutArea").addClass('disabled');
             }
 
-            if($("#cartCount").get(0))
+            if($("#cartCount").get(0)){
                 $("#cartCount").get(0).setAttribute("data-badge", res.count);
+                $("#cartCount").removeClass("tada");
+                setTimeout(function () {
+                    $("#cartCount").addClass("tada");
+                }, 1)
+            }
             $("#cartSubTotal").text(res.subtotal);
         }
         else

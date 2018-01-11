@@ -1,5 +1,5 @@
 <div id="bottomNav" class="layout center justified">
-    <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
+    <a href="{{url('/')}}" class="has-ripple flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
@@ -7,7 +7,7 @@
         Home
     </a>
 
-    <a href="{{url('/mob/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
+    <a href="{{url('/mob/shop')}}" class="has-ripple flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none"/>
             <path d="M17.21 9l-4.38-6.56c-.19-.28-.51-.42-.83-.42-.32 0-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1h-4.79zM9 9l3-4.4L15 9H9zm3 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
@@ -23,7 +23,7 @@
         Cart
     </a>
 
-    <a href="{{url('/mob/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
+    <a href="{{url('/mob/profile')}}" class="has-ripple flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             <path d="M0 0h24v24H0z" fill="none"/>

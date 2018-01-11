@@ -9,12 +9,14 @@
 		</span>
 	</div>
 
-	<button class="actionBtn" onclick="addToCart(event, '{{$product->id}}', 1)">
-		<span>
-			@include('mobile.tpl.cart_icon')
-			ADD
-		</span>
-		<span>Loading...</span>
-		<span>IN CART</span>
-	</button>
+	<span class="actions">
+		<button class="actionBtn has-ripple" onclick="addToCart(event, '{{$product->id}}', 1)">
+			<span>
+				@include('mobile.tpl.cart_icon')
+				ADD
+			</span>
+			<span>LOADING</span>
+			<span>IN CART</span>
+		</button>
+	</span>
 </a>

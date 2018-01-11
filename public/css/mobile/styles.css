@@ -35,6 +35,10 @@ body{
     padding-top: 70px;
 }
 
+body.has-cart-summary{
+    padding-bottom: 126px;
+}
+
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
@@ -79,6 +83,65 @@ body{
     animation-name: slideOutDown;
 }
 
+@-webkit-keyframes tada {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    10%, 20% {
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        transform: scale(0.9) rotate(-3deg);
+    }
+
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    40%, 60%, 80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg);
+    }
+
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes tada {
+    0% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+
+    10%, 20% {
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        -ms-transform: scale(0.9) rotate(-3deg);
+        transform: scale(0.9) rotate(-3deg);
+    }
+
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        -ms-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    40%, 60%, 80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        -ms-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg);
+    }
+
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        -ms-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0);
+    }
+}
+
 .badge{
     position:relative;
 }
@@ -97,7 +160,13 @@ body{
     box-shadow:0 0 1px #333;
 }
 
-/*MOBILE ONLY STYLES*/
+.badge.tada:after{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+
+    -webkit-animation-name: tada;
+    animation-name: tada;
+}
 
 /*APP BAR*/
 #appBar{
@@ -105,7 +174,7 @@ body{
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 99;
+    z-index: 98;
     background-color: var(--main-color);
     color: #fff;
     overflow: hidden;
@@ -114,20 +183,27 @@ body{
 
 #appBar svg{
     fill: #fff !important;
-}
-#mainActionBar{
-    height: 58px;
-    /*padding: 0 8px;*/
-    padding-right: 2px;
+    width: 1.25em;
+    height: 1.25em;
 }
 
-#mainActionBar #mainLogo{
-    margin-left: 8px;
-    font-size: 20px;
+.an-action-bar{
+    height: 58px;
+    font-size: 1.3em;
     color: #fff;
 }
 
-#mainActionBar #mainLogo img{
+.an-action-bar .options-menu{
+    padding-right: 0.2em;
+}
+
+.an-action-bar .action-bar-title{
+    font-size: 1em;
+    color: inherit;
+    margin-left: 8px;
+}
+
+.an-action-bar .action-bar-title img{
     align-self: flex-start;
     width: 53px;
     height: auto;
@@ -135,20 +211,77 @@ body{
     margin-right: 12px;
 }
 
-#mainActionBar #optionsMenu button{
+.an-action-bar .action-button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: transparent;
-    padding: 4px;
     border: 0;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 0.9em;
     color: #fff;
+    margin: 0.1em;
 }
 
-#mainActionBar #optionsMenu button:active,
-#mainActionBar #optionsMenu button:focus{
-    background-color: rgba(0,0,0,0.04);
+.an-action-bar .action-button:active,
+.an-action-bar .action-button:focus{
+    /*background-color: rgba(0,0,0,0.04);*/
+}
+
+/*RIPPLE*/
+.has-ripple{
+    position: relative;
+    overflow: hidden;
+    outline: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+.has-ripple:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    background: #000;
+    border-radius: 50%;
+    transition: all 0.35s ease-out;
+    pointer-events: none;
+}
+
+.has-ripple.ripple-light:before{
+    background: #fff;
+}
+
+.has-ripple:active:before{
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+
+    -webkit-animation-name: ripple;
+    animation-name: ripple;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 0.1;
+        transform: scale(20);
+    }
+
+    100% {
+        opacity: 0;
+        transform: none;
+    }
 }
 
 /*BOTTOM NAV*/
@@ -157,7 +290,7 @@ body{
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 60px;
+    height: 3.8em;
     background-color: #fff;
     color: #000;
     box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
@@ -173,9 +306,10 @@ body{
     transition: transform 0.35s ease-out;
 }
 
-#bottomNav a i{
-    font-size: 1.1em;
-    margin-bottom: 6px;
+#bottomNav a svg{
+    width: 1.25em;
+    height: 1.25em;
+    margin-bottom: 0.1em;
 }
 
 #bottomNav a.active{

@@ -3,27 +3,37 @@ body{
 }
 #cateGoryTabs{
     margin-top: -6px;
+    transition: opacity 0.05s ease-out, transform 0.2s ease-out;
+    /*box-shadow: 0 1px 3px rgba(0,0,0,0.2);*/
 }
 
 #cateGoryTabs a{
+    font-size: 1.05em;
     position: relative;
-    min-width: 70px;
+    min-width: 5em;
     flex-shrink: 0;
-    padding: 16px 24px;
+    padding: 0.9em;
+    text-transform: uppercase;
+    opacity: 0.8;
 }
 
-#cateGoryTabs a:before{
+#cateGoryTabs a.active{
+    opacity: 1;
+    pointer-events: none;
+}
+
+#cateGoryTabs a:after{
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;
+    height: 0.15em;
     background: #fff;
     display: none;
 }
 
-#cateGoryTabs a.active:before{
+#cateGoryTabs a.active:after{
     display: block !important;
 }
 
@@ -66,27 +76,33 @@ body{
     font-size: 1em;
 }
 
-.product button{
+.product .actions{
     position: absolute;
     bottom: 20px;
     right: 12px;
     margin-left: auto;
+}
+
+.product button{
     padding: 4px;
     border: none;
     background-color: transparent;
     text-align: right;
+    transition: all 0.15s;
 }
 
-.product.added button{
+.product.added button,
+.product:not(.added) button:not(:active):not(:focus),
+.product button{
     outline: none;
 }
 
 .product button span{
-    position: relative;
     display: inline-block;
     padding: 8px;
     min-width: 70px;
     text-align: center;
+    transition: all 0.15s ease-out;
 }
 
 .product button span:first-child{
@@ -101,6 +117,14 @@ body{
     color: #4351a2;
     font-family: "PT Bold", sans-serif;
     font-weight: bold;
+}
+
+.product.added button:before{
+    /*background: #4351a2;*/
+}
+
+.product button:active span{
+    background-color: transparent !important;
 }
 
 .product button svg{
@@ -121,4 +145,222 @@ body{
 .product:not(.loading) button span:nth-child(2),
 .product.loading button span:not(:nth-child(2)){
     display: none;
+}
+
+
+/*SEARCH AREA*/
+#mobSearchArea{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: 99;
+    pointer-events: none;
+}
+
+#mobSearchArea .modal-bg{
+    position: absolute;
+    right: 40px;
+    top: 4px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #333;
+    opacity: 0;
+    transition: transform 0.25s ease-out, opacity 0.15s ease-out;
+}
+
+#mobSearchArea #content{
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    pointer-events: none !important;
+}
+
+#mobSearchBar{
+    position: relative;
+    background: #333;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+#mobSearchResults{
+    position: relative;
+    margin-top: -1px;
+    background: #333;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    transition: transform 0.25s ease-out;
+    z-index: 1;
+    color: #ddd;
+    pointer-events: auto;
+}
+
+body:not(.searching) #mobSearchResults{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#mobSearchResults #loader{
+    font-family: "Futura", sans-serif;
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    background: inherit;
+    font-size: 1.8em;
+}
+
+#mobSearchArea:not(.loading):not(.found-results) #mobSearchResults{
+    transform: translateY(-70px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#mobSearchArea:not(.found-results) #mobSearchResults{
+    height: 200px;
+    overflow-y: hidden;
+}
+
+#mobSearchArea:not(.loading) #mobSearchResults .loader{
+    display: none;
+}
+
+#mobSearchBar #backBtn{
+    position: relative;
+    z-index: 1;
+    margin-left: 0.4em;
+    background: #333;
+    outline: none;
+    opacity: 0;
+    transform: translateX(30%) rotate(90deg);
+    transition: transform 0.25s ease-out, opacity 0.15s ease-out;
+}
+
+#mobSearchBar #backBtn svg{
+    fill: #ddd !important;
+}
+
+#mobSearchBar input{
+    position: relative;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 1em;
+    padding-left: 0.15em;
+    padding-right: 0.7em;
+    color: #ddd;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    /* Remove default */
+    -webkit-appearance: none;
+}
+
+#searchClearer{
+    margin-right: 12px;
+}
+
+#searchClearer svg{
+    fill: #aaa;
+}
+
+#mobSearchBar input:not(:valid) + #searchClearer{
+    display: none;
+}
+
+#appBar{
+    transition: transform 0.15s ease-out;
+}
+
+#searchTrigger{
+    transition: all 0.15s ease-out;
+}
+
+#mainSiteContent{
+    background: #fff;
+    position: relative;
+    transition: transform 0.15s ease-out;
+}
+
+#mainSiteContent.animating{
+    z-index: 98;
+}
+
+#bottomNav{
+    transition: transform 0.15s ease-out;
+}
+
+/*SEARCH INTERACTION*/
+body.searching{
+    overflow: hidden;
+}
+
+body.searching #searchTrigger{
+    transition: all 0.35s ease-out;
+    transform: translate(-30%) rotate(-180deg);
+}
+
+body.searching #appBar:before{
+    transition: transform 0.35s ease-out;
+    transform: translateY(-60px);
+}
+
+body.searching #appBar{
+    transform: translateY(-10%);
+    transition: opacity 0.2s ease-out, transform 0.35s ease-out;
+}
+
+body.searching #appBar ~ #mainSiteContent{
+    transform: translateY(-50px);
+    transition: transform 0.25s ease-out;
+}
+
+body.searching #appBar #mainLogo{
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.searching #appBar #cateGoryTabs{
+    opacity: 0;
+    transition: opacity 0.2s ease-out, transform 0.35s ease-out;
+}
+
+body.searching #mainSiteContent{
+    background: #fff;
+    position: relative;
+}
+
+body.searching #bottomNav{
+    transition: transform 0.25s ease-out;
+    transform: translateY(102%);
+}
+
+body.searching #mobSearchArea .modal-bg{
+    transform: scale(80);
+    opacity: 0.7;
+    pointer-events: auto;
+    transition: transform 0.25s ease-out, opacity 0.15s ease-out;
+}
+
+body.searching #mobSearchArea #content{
+    pointer-events: auto;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.25s ease-out 0.1s;
+}
+
+body:not(.searching) #mobSearchArea #content > *{
+    pointer-events: none !important;
+}
+
+body.searching #mobSearchBar #backBtn{
+    opacity: 1;
+    transform: none;
+    transition: all 0.25s ease-out 0.01s;
 }
