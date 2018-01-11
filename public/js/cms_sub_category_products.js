@@ -2,7 +2,7 @@ var table = null;
 
 var product_id = "";
 
-var age_range_id = "";
+var sub_category_id = "";
 
 function format(product) {
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -37,7 +37,7 @@ function showAddModal(id) {
     show: true
   });
 
-  age_range_id = id;
+  sub_category_id = id;
 }
 
 function addProduct() {
@@ -45,7 +45,7 @@ function addProduct() {
   var formData = new FormData(form);
   $.ajax({
          type: "post",
-         url: "/admin/age_ranges/" + age_range_id + "/store_product",
+         url: "/admin/sub_categories/" + sub_category_id + "/store_product",
          data: formData,
          contentType: false,
          processData: false,
@@ -148,7 +148,7 @@ function showEditProductErrors(errors) {
   }
 }
 
-function showEditProductModal(product, ageRange) {
+function showEditProductModal(product, subCategory) {
   showModal("edit_product_modal");
 
   $("#edit_brand_id").val(product.brand_id);
@@ -171,7 +171,7 @@ function showEditProductModal(product, ageRange) {
 
   product_id = product.id;
 
-  age_range_id = ageRange.id;
+  sub_category_id = subCategory.id;
 }
 
 function attemptEditProduct() {
@@ -179,7 +179,7 @@ function attemptEditProduct() {
   var formData = new FormData(form);
   $.ajax({
     type: "post",
-    url: "/admin/age_ranges/" + age_range_id + "/update_product/" + product_id,
+    url: "/admin/sub_categories/" + sub_category_id + "/update_product/" + product_id,
     data: formData,
     contentType: false,
     processData: false,
@@ -214,7 +214,7 @@ function showProductDeleteModal(prod) {
 function deleteProduct() {
   $.ajax({
     type: 'delete',
-    url: '/admin/age_ranges/' + product_id + "/delete_product",
+    url: '/admin/sub_categories/' + product_id + "/delete_product",
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

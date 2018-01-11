@@ -8,7 +8,6 @@
     <th>SubCategory</th>
     <th>PriceCategory</th>
     <th>AgeRange</th>
-    <th>Brand</th>
     <th>Gender</th>
     <th>Price</th>
     <th>Action</th>
@@ -25,9 +24,6 @@
         <td>{{$product->price_category}}</td>
         <td>
           {{$product->age_range}}
-        </td>
-        <td>
-          {{$product->brand_name}}
         </td>
         <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
         <td>

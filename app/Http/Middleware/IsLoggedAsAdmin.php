@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class IsLoggedAsAdmin
 {
@@ -11,16 +12,20 @@ class IsLoggedAsAdmin
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param  string|null  $guard
      * @return mixed
      */
-     public function handle($request, Closure $next)
+     public function handle($request, Closure $next, $guard = null)
      {
-         $user = $request->user();
-         if(!is_null($user)) {
-           if($user->is_admin)
-             return redirect('/admin');
+
+         if (Auth::guard($guard)->check()) {
+           if($request->user()->is_admin) {
+             //User is an admin
+             return $next($request);
+           }
          }
 
-         return $next($request);
+        return redirect()->route('cms_login');
+
      }
 }

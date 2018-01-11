@@ -56,8 +56,14 @@
                     <i class="glyphicon glyphicon-user">&nbsp;</i>Account
                   </a>
                   <ul class="collapse list-unstyled" id="accountSubmenu">
-                      <li><a href="#">Logout</a></li>
-                      <li><a href="{{ route('change_password') }}">Change Password</a></li>
+                      <li>
+                        <a href="{{ route('cms_logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                          </a>
+                          <form id="logout-form" action="{{ route('cms_logout') }}"
+                            method="POST" style="display: none;">{{ csrf_field() }}</form>
+                      </li>
+                      <!-- <li><a href="{{ route('change_password') }}">Change Password</a></li> -->
                   </ul>
                 </li>
                 <li class="{{areActiveRoutes(['main', 'brands.index', 'brands.products', 'brands.brand'])}}">

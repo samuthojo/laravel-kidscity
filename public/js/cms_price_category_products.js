@@ -2,13 +2,15 @@ var table = null;
 
 var product_id = "";
 
+var price_category_id = "";
+
 function format(product) {
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<th>Picture:</th>'+
             '<td>'+
               "<img class='img-rounded' alt='product picture' " +
-                  "src=" + product.image + " height='30%' width='auto'>" +
+                  "src=" + "/images/products/" + product.image_url + " height='30%' width='auto'>" +
             '</td>'+
         '</tr>'+
         '<tr>'+
@@ -28,12 +30,22 @@ function format2() {
   '</table>';
 }
 
+function showAddModal(id) {
+  $('#add_product_modal').modal({
+    backdrop: 'static',
+    keyboard: false,
+    show: true
+  });
+
+  price_category_id = id;
+}
+
 function addProduct() {
   var form = document.getElementById("add_product_form");
   var formData = new FormData(form);
   $.ajax({
          type: "post",
-         url: "/products",
+         url: "/admin/price_categories/" + price_category_id + "/store_product",
          data: formData,
          contentType: false,
          processData: false,
@@ -59,65 +71,107 @@ function addProduct() {
 }
 
 function showAddProductErrors(errors) {
+  if(errors.brand_id != null) {
+    $("#brand_id_error").text(errors.brand_id);
+    $("#brand_id_error").fadeIn(0);
+  }
   if(errors.category_id != null) {
     $("#category_id_error").text(errors.category_id);
     $("#category_id_error").fadeIn(0);
+  }
+  if(errors.sub_category_id != null) {
+    $("#sub_category_id_error").text(errors.sub_category_id);
+    $("#sub_category_id_error").fadeIn(0);
+  }
+  if(errors.price_category_id != null) {
+    $("#price_category_id_error").text(errors.price_category_id);
+    $("#price_category_id_error").fadeIn(0);
+  }
+  if(errors.product_age_range_id != null) {
+    $("#product_age_range_id_error").text(errors.product_age_range_id);
+    $("#product_age_range_id_error").fadeIn(0);
   }
   if(errors.name != null) {
     $("#product_name_error").text(errors.name);
     $("#product_name_error").fadeIn(0);
   }
-  if(errors.code != null) {
-    $("#product_code_error").text(errors.code);
-    $("#product_code_error").fadeIn(0);
+  if(errors.price != null) {
+    $("#product_price_error").text(errors.price);
+    $("#product_price_error").fadeIn(0);
   }
-  if(errors.cc != null) {
-    $("#product_cc_error").text(errors.cc);
-    $("#product_cc_error").fadeIn(0);
+  if(errors.gender != null) {
+    $("#gender_error").text(errors.gender);
+    $("#gender_error").fadeIn(0);
   }
-  if(errors.image != null) {
-    $("#product_image_error").text(errors.image);
+  if(errors.image_url != null) {
+    $("#product_image_error").text(errors.image_url);
     $("#product_image_error").fadeIn(0);
   }
 }
 
 function showEditProductErrors(errors) {
+  if(errors.brand_id != null) {
+    $("#edit_brand_id_error").text(errors.brand_id);
+    $("#edit_brand_id_error").fadeIn(0);
+  }
   if(errors.category_id != null) {
     $("#edit_category_id_error").text(errors.category_id);
     $("#edit_category_id_error").fadeIn(0);
+  }
+  if(errors.sub_category_id != null) {
+    $("#edit_sub_category_id_error").text(errors.sub_category_id);
+    $("#edit_sub_category_id_error").fadeIn(0);
+  }
+  if(errors.price_category_id != null) {
+    $("#edit_price_category_id_error").text(errors.price_category_id);
+    $("#edit_price_category_id_error").fadeIn(0);
+  }
+  if(errors.product_age_range_id != null) {
+    $("#edit_product_age_range_id_error").text(errors.product_age_range_id);
+    $("#edit_product_age_range_id_error").fadeIn(0);
   }
   if(errors.name != null) {
     $("#edit_product_name_error").text(errors.name);
     $("#edit_product_name_error").fadeIn(0);
   }
-  if(errors.code != null) {
-    $("#edit_product_code_error").text(errors.code);
-    $("#edit_product_code_error").fadeIn(0);
+  if(errors.price != null) {
+    $("#edit_product_price_error").text(errors.price);
+    $("#edit_product_price_error").fadeIn(0);
   }
-  if(errors.cc != null) {
-    $("#edit_product_cc_error").text(errors.cc);
-    $("#edit_product_cc_error").fadeIn(0);
+  if(errors.gender != null) {
+    $("#edit_gender_error").text(errors.gender);
+    $("#edit_gender_error").fadeIn(0);
   }
-  if(errors.image != null) {
-    $("#edit_product_image_error").text(errors.image);
+  if(errors.image_url != null) {
+    $("#edit_product_image_error").text(errors.image_url);
     $("#edit_product_image_error").fadeIn(0);
   }
 }
 
-function showEditProductModal(product) {
+function showEditProductModal(product, priceCategory) {
   showModal("edit_product_modal");
+
+  $("#edit_brand_id").val(product.brand_id);
 
   $("#edit_category_id").val(product.category_id);
 
+  $("#edit_sub_category_id").val(product.sub_category_id);
+
+  $("#edit_price_category_id").val(product.price_category_id);
+
+  $("#edit_product_age_range_id").val(product.product_age_range_id);
+
   $("#edit_product_name").val(product.name);
 
-  $("#edit_product_code").val(product.code);
+  $("#edit_product_price").val(product.price);
 
-  $("#edit_product_cc").val(product.cc);
+  $("#edit_gender").val(product.gender);
 
   $("#edit_product_description").val(product.description);
 
   product_id = product.id;
+
+  price_category_id = priceCategory.id;
 }
 
 function attemptEditProduct() {
@@ -125,7 +179,7 @@ function attemptEditProduct() {
   var formData = new FormData(form);
   $.ajax({
     type: "post",
-    url: "/products/" + product_id,
+    url: "/admin/price_categories/" + price_category_id + "/update_product/" + product_id,
     data: formData,
     contentType: false,
     processData: false,
@@ -140,6 +194,7 @@ function attemptEditProduct() {
       });
     },
     error: function(error) {
+      console.log(error);
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);
       data = JSON.parse(error.responseText);
@@ -150,22 +205,16 @@ function attemptEditProduct() {
   $(".btn-success").prop("disabled", true);
 }
 
-function applyTheUpdates(product) {
-  $("#product_name_" + product.id).text(product.name);
-  $("#category_name_" + product.id).text(product.category_name);
-  $("#product_code_" + product.id).text(product.code);
-  $("#product_cc_" + product.id).text(product.cc);
-}
-
-function showProductDeleteModal(prod_id) {
+function showProductDeleteModal(prod) {
   showModal("delete_confirmation_modal");
-  product_id = prod_id;
+  $("#confirmation_text").text("Delete " + prod.name);
+  product_id = prod.id;
 }
 
 function deleteProduct() {
   $.ajax({
     type: 'delete',
-    url: '/products/' + product_id,
+    url: '/admin/price_categories/' + product_id + "/delete_product",
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

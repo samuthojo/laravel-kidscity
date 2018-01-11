@@ -5,7 +5,6 @@
     <th>No.</th>
     <th>Name</th>
     <th>Category</th>
-    <th>SubCategory</th>
     <th>PriceCategory</th>
     <th>AgeRange</th>
     <th>Brand</th>
@@ -21,7 +20,6 @@
         <td>{{$loop->iteration}}</td>
         <td>{{$product->name}}</td>
         <td>{{$product->category_name}}</td>
-        <td>{{$product->sub_category_name}}</td>
         <td>{{$product->price_category}}</td>
         <td>
           {{$product->age_range}}
