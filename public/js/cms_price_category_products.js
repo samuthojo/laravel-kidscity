@@ -205,16 +205,18 @@ function attemptEditProduct() {
   $(".btn-success").prop("disabled", true);
 }
 
-function showProductDeleteModal(prod) {
+function showProductDeleteModal(prod, priceCategory) {
   showModal("delete_confirmation_modal");
   $("#confirmation_text").text("Delete " + prod.name);
   product_id = prod.id;
+
+  price_category_id = priceCategory.id;
 }
 
 function deleteProduct() {
   $.ajax({
     type: 'delete',
-    url: '/admin/price_categories/' + product_id + "/delete_product",
+    url: '/admin/price_categories/' + price_category_id + "/delete_product/" + product_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

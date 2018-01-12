@@ -205,16 +205,18 @@ function attemptEditProduct() {
   $(".btn-success").prop("disabled", true);
 }
 
-function showProductDeleteModal(prod) {
+function showProductDeleteModal(prod, brand) {
   showModal("delete_confirmation_modal");
   $("#confirmation_text").text("Delete " + prod.name);
   product_id = prod.id;
+
+  brand_id = brand.id;
 }
 
 function deleteProduct() {
   $.ajax({
     type: 'delete',
-    url: '/admin/brands/' + product_id + "/delete_product",
+    url: '/admin/brands/' + brand_id + "/delete_product/" + product_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

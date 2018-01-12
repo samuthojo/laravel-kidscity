@@ -71,7 +71,7 @@ class PriceCategories extends Controller
         $newProduct = array_add($request->all(), 'price_category_id', $priceCategoryId);
         $product = App\Product::create($newProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($priceCategoryId);
     }
 
     public function updateProduct(Requests\UpdatePriceCategoryProduct $request,
@@ -85,13 +85,13 @@ class PriceCategories extends Controller
         $editedProduct = array_add($request->all(), 'price_category_id', $priceCategoryId);
         App\Product::where(compact('id'))->update($editedProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($priceCategoryId);
     }
 
-    public function deleteProduct(App\Product $product)
+    public function deleteProduct($priceCategoryId, $productId)
     {
-      $product->delete();
-      return $this->productsTable();
+      App\Product::find($productId)->delete();
+      return $this->productsTable($priceCategoryId);
     }
 
     private function saveProductWithImage($request, $priceCategoryId)
@@ -113,9 +113,9 @@ class PriceCategories extends Controller
       App\Product::where(compact('id'))->update($editedProduct);
     }
 
-    private function productsTable()
+    private function productsTable($priceCategoryId)
     {
-      $products = $this->getMappedProducts();
+      $products = $this->getMappedProducts($priceCategoryId);
       $categories = App\Category::all();
       $subCategories = App\SubCategory::all();
       $brands = App\Brand::all();
@@ -125,9 +125,10 @@ class PriceCategories extends Controller
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
-    private function getMappedProducts()
+    private function getMappedProducts($priceCategoryId)
     {
-      return App\Product::latest('updated_at')
+      return App\Product::where('price_category_id', $priceCategoryId)
+                        ->latest('updated_at')
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;

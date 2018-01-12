@@ -71,7 +71,7 @@ class AgeRanges extends Controller
         $newProduct = array_add($request->all(), 'product_age_range_id', $ageRangeId);
         $product = App\Product::create($newProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($ageRangeId);
     }
 
     public function updateProduct(Requests\UpdateAgeRangeProduct $request,
@@ -85,13 +85,13 @@ class AgeRanges extends Controller
         $editedProduct = array_add($request->all(), 'product_age_range_id', $ageRangeId);
         App\Product::where(compact('id'))->update($editedProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($ageRangeId);
     }
 
-    public function deleteProduct(App\Product $product)
+    public function deleteProduct($ageRangeId, $productId)
     {
-      $product->delete();
-      return $this->productsTable();
+      App\Product::find($productId)->delete();
+      return $this->productsTable($ageRangeId);
     }
 
     private function saveProductWithImage($request, $ageRangeId)
@@ -113,9 +113,9 @@ class AgeRanges extends Controller
       App\Product::where(compact('id'))->update($editedProduct);
     }
 
-    private function productsTable()
+    private function productsTable($ageRangeId)
     {
-      $products = $this->getMappedProducts();
+      $products = $this->getMappedProducts($ageRangeId);
       $categories = App\Category::all();
       $subCategories = App\SubCategory::all();
       $brands = App\Brand::all();
@@ -125,9 +125,10 @@ class AgeRanges extends Controller
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
-    private function getMappedProducts()
+    private function getMappedProducts($ageRangeId)
     {
-      return App\Product::latest('updated_at')
+      return App\Product::where('product_age_range_id', $ageRangeId)
+                        ->latest('updated_at')
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;

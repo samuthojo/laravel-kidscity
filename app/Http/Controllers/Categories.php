@@ -69,7 +69,7 @@ class Categories extends Controller
         $newProduct = array_add($request->all(), 'category_id', $categoryId);
         $product = App\Product::create($newProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($categoryId);
     }
 
     public function updateProduct(Requests\UpdateCategoryProduct $request,
@@ -83,13 +83,13 @@ class Categories extends Controller
         $editedProduct = array_add($request->all(), 'category_id', $categoryId);
         App\Product::where(compact('id'))->update($editedProduct);
       }
-      return $this->productsTable();
+      return $this->productsTable($categoryId);
     }
 
-    public function deleteProduct(App\Product $product)
+    public function deleteProduct($categoryId, $productId)
     {
-      $product->delete();
-      return $this->productsTable();
+      App\Product::find($productId)->delete();
+      return $this->productsTable($categoryId);
     }
 
     private function saveProductWithImage($request, $categoryId)
@@ -111,9 +111,9 @@ class Categories extends Controller
       App\Product::where(compact('id'))->update($editedProduct);
     }
 
-    private function productsTable()
+    private function productsTable($categoryId)
     {
-      $products = $this->getMappedProducts();
+      $products = $this->getMappedProducts($categoryId);
       $categories = App\Category::all();
       $subCategories = App\SubCategory::all();
       $brands = App\Brand::all();
@@ -123,9 +123,10 @@ class Categories extends Controller
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
-    private function getMappedProducts()
+    private function getMappedProducts($categoryId)
     {
-      return App\Product::latest('updated_at')
+      return App\Product::where('category_id', $categoryId)
+                        ->latest('updated_at')
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;

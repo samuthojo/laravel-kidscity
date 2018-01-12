@@ -205,16 +205,18 @@ function attemptEditProduct() {
   $(".btn-success").prop("disabled", true);
 }
 
-function showProductDeleteModal(prod) {
+function showProductDeleteModal(prod, ageRange) {
   showModal("delete_confirmation_modal");
   $("#confirmation_text").text("Delete " + prod.name);
   product_id = prod.id;
+
+  age_range_id = ageRange.id;
 }
 
 function deleteProduct() {
   $.ajax({
     type: 'delete',
-    url: '/admin/age_ranges/' + product_id + "/delete_product",
+    url: '/admin/age_ranges/' + age_range_id + "/delete_product/" + product_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);

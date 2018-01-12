@@ -96,7 +96,7 @@
                       <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                     <button class="btn btn-danger" title="delete product"
-                      onclick="showProductDeleteModal({{$product}})">
+                      onclick="showProductDeleteModal({{$product}}, {{$ageRange}})">
                       <span class="glyphicon glyphicon-trash"></span>
                     </button>
                   </div>

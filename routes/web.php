@@ -58,7 +58,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/brands', 'Brands@store')->name('brands.store');
   Route::post('/brands/{brand}/store_product', 'Brands@storeProduct')->name('brands.store_product');
   Route::post('/brands/{brand}/update_product/{product}', 'Brands@updateProduct')->name('brands.update_product');
-  Route::post('/brands/{brand}/delete_product', 'Brands@deleteProduct')->name('brands.delete_product');
+  Route::delete('/brands/{brand}/delete_product/{product}', 'Brands@deleteProduct')->name('brands.delete_product');
   Route::post('/brands/{brand}', 'Brands@update')->name('brands.update');
   Route::delete('/brands/{brand}', 'Brands@destroy')->name('brands.destroy');
 
@@ -67,7 +67,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/age_ranges', 'AgeRanges@store')->name('age_ranges.store');
   Route::post('/age_ranges/{ageRange}/store_product', 'AgeRanges@storeProduct')->name('age_ranges.store_product');
   Route::post('/age_ranges/{ageRange}/update_product/{product}', 'AgeRanges@updateProduct')->name('age_ranges.update_product');
-  Route::post('/age_ranges/{ageRange}/delete_product', 'AgeRanges@deleteProduct')->name('age_ranges.delete_product');
+  Route::delete('/age_ranges/{ageRange}/delete_product/{product}', 'AgeRanges@deleteProduct')->name('age_ranges.delete_product');
   Route::post('/age_ranges/{ageRange}', 'AgeRanges@update')->name('age_ranges.update');
   Route::delete('/age_ranges/{ageRange}', 'AgeRanges@destroy')->name('age_ranges.destroy');
 
@@ -79,7 +79,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/categories', 'Categories@store')->name('categories.store');
   Route::post('/categories/{category}/store_product', 'Categories@storeProduct')->name('categories.store_product');
   Route::post('/categories/{category}/update_product/{product}', 'Categories@updateProduct')->name('categories.update_product');
-  Route::post('/categories/{category}/delete_product', 'Categories@deleteProduct')->name('categories.delete_product');
+  Route::delete('/categories/{category}/delete_product/{product}', 'Categories@deleteProduct')->name('categories.delete_product');
   Route::post('/categories/{category}', 'Categories@update')->name('categories.update');
   Route::delete('/categories/{category}', 'Categories@destroy')->name('categories.destroy');
 
@@ -88,7 +88,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/sub_categories', 'SubCategories@store')->name('sub_categories.store');
   Route::post('/sub_categories/{subCategory}/store_product', 'SubCategories@storeProduct')->name('sub_categories.store_product');
   Route::post('/sub_categories/{subCategory}/update_product/{product}', 'SubCategories@updateProduct')->name('sub_categories.update_product');
-  Route::post('/sub_categories/{subCategory}/delete_product', 'SubCategories@deleteProduct')->name('sub_categories.delete_product');
+  Route::delete('/sub_categories/{subCategory}/delete_product/{product}', 'SubCategories@deleteProduct')->name('sub_categories.delete_product');
   Route::post('/sub_categories/{subCategory}', 'SubCategories@update')->name('sub_categories.update');
   Route::delete('/sub_categories/{subCategory}', 'SubCategories@destroy')->name('sub_categories.destroy');
 
@@ -97,7 +97,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/price_categories', 'PriceCategories@store')->name('price_categories.store');
   Route::post('/price_categories/{priceCategory}/store_product', 'PriceCategories@storeProduct')->name('price_categories.store_product');
   Route::post('/price_categories/{priceCategory}/update_product/{product}', 'PriceCategories@updateProduct')->name('price_categories.update_product');
-  Route::post('/price_categories/{priceCategory}/delete_product', 'PriceCategories@deleteProduct')->name('price_categories.delete_product');
+  Route::delete('/price_categories/{priceCategory}/delete_product/{product}', 'PriceCategories@deleteProduct')->name('price_categories.delete_product');
   Route::post('/price_categories/{priceCategory}', 'PriceCategories@update')->name('price_categories.update');
   Route::delete('/price_categories/{priceCategory}', 'PriceCategories@destroy')->name('price_categories.destroy');
 
