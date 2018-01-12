@@ -5,22 +5,25 @@
 @endsection
 
 @section('content')
-	<div id="appBar" class="for-mob" style="background-color: rgba(0,0,0,0.2); box-shadow: none">
-		<div id="mainActionBar" class="an-action-bar layout center justified" style="z-index: 1;">
-			<a id="mainLogo" href="{{ URL::previous() }}" class="action-button">
-				<svg fill="#000000" height="28" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
+	<div id="appBar" class="for-mob product-bar">
+		<div id="mainActionBar" class="an-action-bar layout center" style="z-index: 1;">
+			<a id="mainLogo" href="{{ URL::previous() }}" class="action-button has-ripple" style="margin-left: 12px;">
+				<svg style="fill: #000 !important;" fill="#000000" height="28" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
+					<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
 					<path d="M0 0h24v24H0z" fill="none"/>
-					<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
 				</svg>
-
 			</a>
+
+			<span class="action-bar-title">
+				Product Details
+			</span>
 		</div>
 	</div>
 
 	<div id="product-{{$product->id}}" class="product-infos {{in_cart($product->id) ? 'added' : ''}}">
 		<div id="productImage">
 			<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt=""
-				 width="100%">
+				 height="300px">
 		</div>
 
 		<div id="productInfo" class="col-md col-md-offset-1" style="max-width: 600px;">

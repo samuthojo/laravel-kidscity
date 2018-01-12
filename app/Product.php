@@ -44,4 +44,8 @@ class Product extends Model
         return present_price($this->price);
     }
 
+    public function image(){
+        return asset('images/real_cloths/' . $this->image_url);
+    }
+
 }

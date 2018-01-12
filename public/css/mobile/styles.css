@@ -332,7 +332,7 @@ body.has-cart-summary{
     text-align: center;
     text-decoration: none;
     text-overflow: ellipsis;
-    text-transform: lowercase;
+    text-transform: none;
     white-space: nowrap;
     overflow: hidden;
     -webkit-user-select: none;
@@ -341,11 +341,17 @@ body.has-cart-summary{
     user-select: none;
 
     height: 30px;
-    padding: 0 20px;
+    padding: 0 12px;
     font-size: 15px;
-    line-height: 27px;
+    line-height: 29px;
     background: var(--main-color);
     color: #fff;
+}
+
+.btn.med{
+    border-radius: 4px;
+    height: 38px;
+    padding: 4px 12px;
 }
 
 .btn.accent{
@@ -374,6 +380,21 @@ body.has-cart-summary{
     pointer-events: none;
 }
 
+.btn.link{
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: transparent;
+    color: var(--main-color);
+}
+
+.btn.link.accent{
+    color: var(--accent-color);
+}
+
+.btn.link.danger{
+    color: #ff3a3c;
+}
+
 .product.added .btn.add-btn,
 .product:not(.added) .btn.remove-btn{
     display: none;
@@ -398,6 +419,189 @@ body.has-cart-summary{
     -moz-appearance: none;
     appearance: none;
 }
+
+
+/*PRODUCT STYLES*/
+.product{
+    position: relative;
+    padding: 12px;
+    margin: 8px 0;
+    padding-bottom: 25px;
+}
+
+#productsList .product:not(:last-child){
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#productsList .product:last-child{
+    margin-bottom: -14px;
+}
+
+.product .image{
+    padding: 8px;
+    width: 65px;
+    height: 60px;
+    margin-right:16px;
+    background: #f0f0f0;
+    text-align: center;
+}
+
+.product .image img{
+    display: inline-block;
+    height: 45px;
+}
+
+.product .name{
+    font-size: 1.3em;
+    margin-bottom: 0.2em;
+}
+
+.product .price{
+    font-family: Futura, sans-serif;
+    font-size: 1em;
+}
+
+.product .actions{
+    position: absolute;
+    bottom: 20px;
+    right: 12px;
+    margin-left: auto;
+}
+
+.a-product button{
+    padding: 4px;
+    border: none;
+    background-color: transparent;
+    text-align: right;
+    transition: all 0.15s;
+}
+
+.a-product.added button,
+.a-product:not(.added) button:not(:active):not(:focus),
+.a-product button{
+    outline: none;
+}
+
+.a-product button span{
+    display: inline-block;
+    padding: 8px;
+    min-width: 70px;
+    text-align: center;
+    transition: all 0.15s ease-out;
+}
+
+.a-product button span:first-child{
+    padding-right: 10px;
+    background: #f8f8f8;
+    padding-left: 35px;
+}
+
+.a-product button span:last-child{
+    padding: 4px;
+    font-size: 1.1em;
+    color: #4351a2;
+    font-family: "PT Bold", sans-serif;
+    font-weight: bold;
+}
+
+.a-product.added button:before{
+    /*background: #4351a2;*/
+}
+
+.a-product button:active span{
+    background-color: transparent !important;
+}
+
+.a-product button svg{
+    position: absolute;
+    left: 12px;
+    top: 7px;
+    bottom: 3px;
+    width: 16px;
+    height: 16px;
+    margin-right:4px;
+}
+
+.a-product.added button span:first-child,
+.a-product:not(.added) button span:last-child{
+    display: none;
+}
+
+.a-product:not(.loading) button span:nth-child(2),
+.a-product.loading button span:not(:nth-child(2)){
+    display: none;
+}
+/*END PRODUCT STYLES*/
+
+
+/*PRODUCT CELL STYLES*/
+.product-cell{
+    position: relative;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.product-cell:nth-child(-n+2){
+    border-top: 1px solid #eee;
+}
+
+.product-cell:nth-child(odd){
+    border-right: 1px solid #eee;
+}
+
+.product-cell .product-image{
+    position: relative;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.product-cell .product-image img{
+    max-width: 100%;
+    height: 100%;
+}
+
+.product-cell .name{
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.product-cell .price{
+    font-family: Futura, sans-serif;
+    font-size: 1em;
+}
+
+.product-cell.added .price span:first-child,
+.product-cell:not(.added) .price span:last-child{
+    display: none;
+}
+
+.product-cell button{
+    align-self: flex-start;
+    margin: 0.5rem auto;
+    margin-bottom: 1rem;
+}
+
+.product-cell .btn svg{
+    width: 14px;
+    height: 14px;
+    margin-right: 2px;
+    fill: #fff;
+}
+
+
+#productsList .product-cell:not(:last-child){
+    border-bottom: 1px solid #f5f5f5;
+}
+/*PRODUCT CELL STYLES*/
 
 select.input{
     cursor: pointer;

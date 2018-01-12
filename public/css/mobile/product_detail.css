@@ -3,14 +3,31 @@
     src: url("../fonts/firasans/FiraSans-Medium.ttf");
 }
 
+.product-bar{
+	background-color: rgba(0,0,0,0.2);
+	box-shadow: none;
+	background-color: #fff !important;
+}
+
+.product-bar .an-action-bar svg{
+	fill: #000 !important;
+}
+
+.product-bar .action-bar-title{
+	color: #000;
+	margin-top: 2px;
+}
+
 body{
 	background: #fdfdfd;
-	padding-top: 0;
+	padding-top: 50px;
 }
 
 #productImage{
+	position: relative;
+	text-align: center;
 	background-color: #f0f0f0;
-	max-height: 240px;
+	max-height: 300px;
 	overflow: hidden;
 }
 
@@ -21,7 +38,7 @@ body{
 #productInfo h2{
 	font-family: PT Bold, sans-serif;
 	margin-top: 0.5em;
-	font-size: 2em;
+	font-size: 1.6rem;
 }
 
 #productInfo .price{
@@ -32,13 +49,13 @@ body{
 #productInfo .price .currency{
 	text-transform: uppercase;
 	font-family: FiraSans Bold, sans-serif;
-	font-size: 1.2em;
+	font-size: 1rem;
 	padding-right: 4px;
 }
 
 #productInfo .price .number{
 	font-family: Futura, sans-serif;
-	font-size: 2.2em;
+	font-size: 1.6rem;
 }
 
 #productInfo .product-description{
@@ -48,6 +65,7 @@ body{
 #productInfo .product-description h5{
 	display: block;
 	margin-bottom: 8px;
+	font-size: 1.3rem;
 }
 
 #productInfo .product-description p{

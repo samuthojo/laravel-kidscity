@@ -86,7 +86,6 @@
         var alert_timeout = null;
 
         function showMessage(message){
-            console.log(alert_timeout);
             if(alert_timeout !== null){
                 closeMessage(message);
                 return;

@@ -12,7 +12,12 @@ class KidsCityMob extends Controller
     public function index()
     {
         $page = "home";
-        return view('mobile.index', compact('page'));
+        $popular = Product::where("id", ">", 6)->limit(4)->get();
+        $clothes = Product::where("category_id", 1)->limit(4)->get();
+        $baby_products = Product::where("category_id", 2)->limit(4)->get();
+        $school_items = Product::where("category_id", 5)->limit(4)->get();
+
+        return view('mobile.index', compact('page', 'popular', 'clothes', 'baby_products', 'school_items'));
     }
 
     public function shop($filter = "category", $id = -1)

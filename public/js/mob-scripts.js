@@ -1,8 +1,7 @@
 var cart_count = parseInt($("#miniCartToggle .count").text());
 
-$(document).on("click", ".product", function(event) {
-
-    return !(event.target.nodeName === "button" || $(event.target).parents("button").length > 0);
+$(document).on("click", ".product, .product-cell", function(event) {
+    return !(event.target.nodeName.toLowerCase() === "button" || $(event.target).parents("button").length > 0);
 });
 
 function addToCart(e, id, qty){
