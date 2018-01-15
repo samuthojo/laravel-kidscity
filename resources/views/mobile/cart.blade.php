@@ -24,7 +24,7 @@
 			<p>
 				You have no items in your cart.
 			</p>
-			<a href="{{url('/mob/shop')}}" class="btn large">CONTINUE SHOPPING</a>
+			<a href="{{url('/mob/shop')}}" class="btn large has-ripple ripple-light">CONTINUE SHOPPING</a>
 		</div>
 
 		<div id="cartItemsSummary" class="layout center justified">
@@ -36,13 +36,58 @@
 				</p>
 			</div>
 
-			<button class="btn large">
+			<a href="{{url('/mob/checkout')}}" class="btn large has-ripple ripple-light">
 				CHECKOUT
-			</button>
+			</a>
 		</div>
 	</div>
 
 	<script>
         $("body").addClass('has-cart-summary');
+
+        function changeCartItemQty(id, add){
+            var parent = $("#product-"+id);
+            var input = parent.find(".qty-input-area");
+            var init_qty = parseInt(input.val());
+            var inputBar = parent.find(".item-qty-bar");
+            inputBar.addClass("loading");
+
+            if(add)
+                qty = init_qty + 1;
+            else{
+                if(init_qty === 1){
+                    return;
+                }
+
+                qty = init_qty - 1;
+            }
+
+            setQty(id, qty, function (success, res) {
+                if(!success)
+                    return;
+
+                console.log((init_qty === 1), res.success);
+
+                if(res.success){
+                    $("#cartSubTotal .amount").text(res.subtotal_num);
+                    input.val(qty);
+                    inputBar.removeClass("loading");
+
+                    if(qty === 1){
+                        $(inputBar).find("button:first").addClass("disabled");
+                    }else{
+                        $(inputBar).find("button:first").removeClass("disabled");
+                    }
+
+                    if($("#cartCount").get(0)){
+                        $("#cartCount").get(0).setAttribute("data-badge", res.count);
+                        $("#cartCount").removeClass("tada");
+                        setTimeout(function () {
+                            $("#cartCount").addClass("tada");
+                        }, 1)
+                    }
+                }
+            })
+        }
 	</script>
 @endsection

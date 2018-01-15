@@ -1,14 +1,4 @@
 <div id="checkoutArea" class="{{Cart::count() < 1 ? 'disabled' : ''}}">
-	<div id="orderSummary">
-		<h3>
-			Order Summary
-		</h3>
-		<p><b>Sub Total: </b> Tshs. 23,000/=</p>
-		<p><b>Estimated Tax: </b> Tshs. 3,200/=</p>
-		<p><b>Delivery Cost: </b> Tshs. 6,000/=</p>
-		<p><b>Complete Total: </b> Tshs. 23,000/=</p>
-	</div>
-
 	<form id="checkoutForm" action="{{route('checkout')}}" method="POST">
 		{{csrf_field()}}
 

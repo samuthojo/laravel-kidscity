@@ -92,7 +92,7 @@
 	@endif
 
 	@if(Cart::count() > 0)
-		<div class="featured-cta orange">
+		<div class="featured-cta orange" style="margin-bottom: 0.3em;">
 			<div class="content">
 				<div class="featured-title layout center justified">
 					<h3>In your cart</h3>

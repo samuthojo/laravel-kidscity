@@ -1,5 +1,6 @@
 body{
     padding-top: 50px;
+    padding-bottom: 70px;
 }
 #appBar{
     /*box-shadow: none;*/
@@ -20,6 +21,7 @@ body{
 }
 
 .featured-cta.orange{
+    color: #f5d8bf;
     background-image: none;
     background-image: -webkit-linear-gradient(top left, #f38536, #ffe0c6 50%, #f1995a);
     background-image: -o-linear-gradient(top left, #f38536, #ffe0c6 50%, #f1995a);
@@ -70,8 +72,17 @@ body{
     color: #f8f8f8;
 }
 
+.featured-cta .product-cell .price,
+.featured-cta .product-cell button{
+    display: none;
+}
+
 .featured-cta .product-cell .name{
     font-size: 0.9rem;
+}
+
+.featured-cta.orange .product-cell{
+    color: #fff5ec;
 }
 
 #banner .title{
@@ -93,7 +104,7 @@ body{
 }
 
 #banner .title h1{
-    font-size: 1.4em;
+    font-size: 1.6em;
     line-height: 1.3em;
     margin-bottom: 6px;
 }

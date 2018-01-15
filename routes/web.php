@@ -45,6 +45,7 @@ Route::prefix('/mob')->group(function() {
     Route::get('/shop/{filterer?}/{category?}', 'KidsCityMob@shop');
     Route::get('/products/{product}', 'KidsCityMob@product');
     Route::get('/cart/', 'KidsCityMob@cart');
+    Route::get('/checkout/', 'KidsCityMob@checkout');
     Route::get('/profile/', 'KidsCityMob@profile');
 });
 

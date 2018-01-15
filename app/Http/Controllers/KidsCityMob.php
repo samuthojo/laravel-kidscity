@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\DeliveryLocation;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
@@ -50,6 +51,13 @@ class KidsCityMob extends Controller
     {
         $page = "cart";
         return view('mobile.cart', compact('page'));
+    }
+
+    public function checkout()
+    {
+        $page = "checkout";
+        $locations = DeliveryLocation::all();
+        return view('mobile.checkout', compact('page', 'locations'));
     }
 
     public function profile()

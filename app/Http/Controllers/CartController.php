@@ -86,6 +86,7 @@ class CartController extends Controller
 
             return response()->json([
                 "subtotal" => present_price(Cart::subtotal()),
+                "subtotal_num" => number_format(Cart::subtotal()),
                 "count" => Cart::count(),
                 "success" => true
             ]);
@@ -117,6 +118,7 @@ class CartController extends Controller
             return response()->json([
                 "success" => true,
                 "count" => Cart::count(),
+                "subtotal_num" => number_format(Cart::subtotal()),
                 "subtotal" => present_price(Cart::subtotal()),
             ]);
         }
@@ -145,6 +147,7 @@ class CartController extends Controller
             return response()->json([
                 "success" => true,
                 "count" => Cart::count(),
+                "subtotal_num" => number_format(Cart::subtotal()),
                 "subtotal" => present_price(Cart::subtotal()),
                 "msg" => "Item removed."
             ]);

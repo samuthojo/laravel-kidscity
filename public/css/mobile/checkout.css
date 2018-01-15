@@ -1,0 +1,34 @@
+body{
+	background: #fdfdfd;
+	padding-top: 65px;
+}
+
+@font-face { /*REGULAR FONT*/
+    font-family: "FiraSans Bold";
+    src: url("../fonts/firasans/FiraSans-Medium.ttf");
+}
+
+.product-bar{
+	background-color: rgba(0,0,0,0.2);
+	box-shadow: none;
+	background-color: #fff !important;
+}
+
+.product-bar .an-action-bar svg{
+	fill: #000 !important;
+}
+
+.product-bar .action-bar-title{
+	color: #000;
+	margin-top: 2px;
+}
+
+#checkoutForm{
+	padding: 0.8em 1.2em;
+}
+
+.input{
+	display: block;
+	width: 100%;
+	margin-bottom: 1.1em;
+}

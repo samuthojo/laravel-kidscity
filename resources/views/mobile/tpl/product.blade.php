@@ -1,4 +1,5 @@
-<a id="product-{{$product->id}}" href="{{url('/mob/products/' . $product->id)}}" class="layout a-product product {{ in_cart($product->id) ? 'added' : ''}}">
+<a id="product-{{$product->id}}" href="{{url('/mob/products/' . $product->id)}}"
+   class="layout a-product product product-{{$product->id}} {{in_cart($product->id) ? 'added' : ''}}">
 	<div class="image">
 		<img src="{{$product->image()}}" alt="">
 	</div>

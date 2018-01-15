@@ -5,11 +5,11 @@ $(document).on("click", ".product, .product-cell", function(event) {
 });
 
 function addToCart(e, id, qty){
-    if($("#product-" + id).hasClass('added')){
+    if($(".product-" + id).hasClass('added')){
         return removeFromCart(e, id);
     }
 
-    $("#product-" + id).addClass('loading');
+    $(".product-" + id).addClass('loading');
 
     $.ajaxSetup({
         headers: {
@@ -17,7 +17,7 @@ function addToCart(e, id, qty){
         }
     });
     addItemToCart(id, qty, function (success, res) {
-        $("#product-" + id).removeClass('loading');
+        $(".product-" + id).removeClass('loading');
 
         if(!success){
             showMessage("Couldn't add item to cart!");
@@ -25,7 +25,7 @@ function addToCart(e, id, qty){
         }
 
         if(res.success){
-            $("#product-" + id).addClass('added');
+            $(".product-" + id).addClass('added');
             $("#cartItems").removeClass('is-empty');
             $("#checkoutArea").removeClass('disabled');
 
@@ -37,7 +37,7 @@ function addToCart(e, id, qty){
                 }, 1)
             }
 
-            $("#cartSubTotal").text(res.subtotal);
+            $("#cartSubTotal .amount").text(res.subtotal_num);
             showMessage("Item added to cart!");
         }
         else
@@ -107,7 +107,7 @@ function setQty(id, qty, callback){
 
 
 function removeFromCart(e, id){
-    $("#product-" + id).addClass('loading');
+    $(".product-" + id).addClass('loading');
 
     $.ajaxSetup({
         headers: {
@@ -115,7 +115,7 @@ function removeFromCart(e, id){
         }
     });
     removeItemFromCart(id, function (success, res) {
-        $("#product-" + id).removeClass('loading');
+        $(".product-" + id).removeClass('loading');
 
         if(!success){
             showMessage("Couldn't remove item from cart!");
@@ -123,8 +123,8 @@ function removeFromCart(e, id){
         }
 
         if(res.success){
-            $("#product-" + id).removeClass('added');
-            $("#product-" + id).addClass('removed');
+            $(".product-" + id).removeClass('added');
+            $(".product-" + id).addClass('removed');
             showMessage("Item removed from cart!");
             if(!res.count){
                 $("#cartItems").addClass('is-empty');
@@ -138,7 +138,7 @@ function removeFromCart(e, id){
                     $("#cartCount").addClass("tada");
                 }, 1)
             }
-            $("#cartSubTotal").text(res.subtotal);
+            $("#cartSubTotal .amount").text(res.subtotal_num);
         }
         else
             showMessage(res.msg);

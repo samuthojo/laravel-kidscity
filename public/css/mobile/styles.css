@@ -29,8 +29,7 @@ body{
   --light-color: #f3f3f3;
 
   --main-color-darker: #744d8f;
-
-    font-family: "FiraSans", sans-serif;
+    font-family: "FiraSans", Arial, sans-serif;
     padding-bottom: 64px;
     padding-top: 70px;
 }
@@ -346,6 +345,7 @@ body.has-cart-summary{
     line-height: 29px;
     background: var(--main-color);
     color: #fff;
+    font-family: "FiraSans", Arial, sans-serif;
 }
 
 .btn.med{
@@ -606,7 +606,7 @@ body.has-cart-summary{
 select.input{
     cursor: pointer;
     padding: 0 28px 0 15px;
-    background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
+    background: url(../../images/arrow_down.svg) right center/43px 7px no-repeat;
 }
 
 @media screen and (min-width: 681px){

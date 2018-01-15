@@ -9,7 +9,7 @@ body{
 
   --main-color-darker: #744d8f;
 
-  font-family: "FiraSans", sans-serif;
+  font-family: "FiraSans", Arial, sans-serif;
 }
 
 body.locked{

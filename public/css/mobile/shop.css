@@ -160,7 +160,8 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 #mobSearchBar input:not(:valid) + #searchClearer{
-    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 #appBar{
@@ -231,7 +232,7 @@ body.searching #bottomNav{
 }
 
 body.searching #mobSearchArea .modal-bg{
-    transform: scale(80);
+    transform: scale(40);
     opacity: 0.7;
     pointer-events: auto;
     transition: transform 0.25s ease-out, opacity 0.15s ease-out;

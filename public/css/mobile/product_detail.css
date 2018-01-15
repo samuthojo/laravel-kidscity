@@ -43,7 +43,8 @@ body{
 
 #productInfo .price{
 	display: block;
-	padding: 8px 0;
+	padding-top: 4px;
+	padding-bottom: 8px;
 }
 
 #productInfo .price .currency{

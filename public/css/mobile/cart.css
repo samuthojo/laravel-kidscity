@@ -59,8 +59,11 @@ body{
 }
 
 #cartItemsSummary .btn{
+    height: 35px;
+    line-height: 35px;
     text-transform: uppercase;
-    padding: 0 18px;
+    padding: 0 8px;
+    font-size: 0.9em;
 }
 
 #cartItems:not(.is-empty) #emptyMessage,
@@ -70,7 +73,15 @@ body{
 
 .cart-item{
     position: relative;
-    padding: 8px;
+    padding: 18px 8px;
+}
+
+.cart-item.removed{
+    display: none;
+}
+
+.cart-item:first-child{
+    padding-top: 10px;
 }
 
 .cart-item.removed{
@@ -79,24 +90,35 @@ body{
 
 .cart-item + .cart-item{
     border-top: 1px solid #f5f5f5;
-    padding: 24px 0;
 }
 
 .cart-item .item-image{
-
+    width: 80px;
+    text-align: center;
 }
 
 .cart-item .item-image img{
-    width: 100%;
+    width: 80%;
 }
 
-.cart-item .btn{
-    padding: 0 4px;
-    padding-top: 1px;
+.cart-item .remove-btn{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 50%;
+    padding: 0;
+    padding-top: 1.2px;
     font-size: 14px;
     position: absolute;
     right: 12px;
     top: 22px;
+}
+
+.cart-item .remove-btn svg{
+    width: 15px;
+    height: 15px;
+    fill: #888;
 }
 
 .cart-item:first-child .btn{
@@ -104,44 +126,55 @@ body{
 }
 
 .cart-item h3{
-    margin-left: 16px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     margin-bottom: 4px;
 }
 
 .cart-item .price{
     font-family: "Futura", sans-serif;
-    margin-left: 16px;
     font-size: 1em;
+    padding-bottom:0.3em;
 }
 
+.item-qty-bar{
+    align-self: flex-start;
+    height: 30px;
+    overflow: hidden;
+}
 .item-qty-bar button{
-    font-size: 1em;
-    padding: 4px 8px;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: none;
+}
+
+.item-qty-bar button svg{
+    width: 1.5em;
+    height: 1.5em;
+    fill: var(--accent-color);
 }
 
 .item-qty-bar button[disabled],
-.item-qty-bar button.disabled{
-    background: #ddd;
-    color: #aaa;
+.item-qty-bar button.disabled,
+.item-qty-bar.loading button{
     pointer-events: none;
 }
 
-.item-qty-bar.loading button{
-    background: #ddd;
-    color: #aaa;
-    pointer-events: none;
+.item-qty-bar button.disabled svg,
+.item-qty-bar.loading button svg{
+    fill: #aaa;
 }
 
 .item-qty-bar input{
-    font-size: 1.11em;
+    font-size: 0.9em;
     box-sizing: border-box;
-    max-width: 48px;
+    max-width: 38px;
     text-align: center;
     padding: 3px 0;
+    border: none;
     margin: 0 8px;
+    background: #f8f8f8;
 }
 
 .item-qty-bar.loading input,
