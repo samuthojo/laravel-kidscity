@@ -3,13 +3,14 @@
 @section('more')
 @include('cms.header')
   <script src="{{asset('js/cms_age_range_products.js')}}"></script>
+  <link rel="stylesheet" href="{{asset('css/product_modal_styles.css')}}">
   <style>
     td.details-control {
       background: url('../../../images/details_open.png') no-repeat center;
       cursor: pointer;
     }
     tr.shown td.details-control {
-      background: url('../../../mages/details_close.png') no-repeat center;
+      background: url('../../../images/details_close.png') no-repeat center;
     }
   </style>
 @endsection

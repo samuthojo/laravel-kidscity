@@ -8,7 +8,7 @@ function format(product) {
             '<th>Picture:</th>'+
             '<td>'+
               "<img class='img-rounded' alt='product picture' " +
-                  "src=" + "/images/products/" + product.image_url + " height='30%' width='auto'>" +
+                  "src=" + "/images/real_cloths/" + product.image_url + " height='30%' width='auto'>" +
             '</td>'+
         '</tr>'+
         '<tr>'+

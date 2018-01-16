@@ -43,6 +43,8 @@ Route::prefix('/mob')->group(function() {
     Route::get('/profile/', 'KidsCityMob@profile');
 });
 
+Route::get('/search', 'Search@search')->name('search');
+
 Auth::routes();
 
 
@@ -76,6 +78,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 
   Route::get('/categories', 'Categories@cmsIndex')->name('categories.index');
   Route::get('/categories/{category}/products', 'Categories@products')->name('categories.products');
+  Route::get('/categories/{category}/sub_categories', 'Categories@subCategories')->name('categories.sub_categories');
   Route::post('/categories', 'Categories@store')->name('categories.store');
   Route::post('/categories/{category}/store_product', 'Categories@storeProduct')->name('categories.store_product');
   Route::post('/categories/{category}/update_product/{product}', 'Categories@updateProduct')->name('categories.update_product');

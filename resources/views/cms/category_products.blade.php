@@ -3,6 +3,7 @@
 @section('more')
 @include('cms.header')
 <script src="{{asset('js/cms_category_products.js')}}"></script>
+<link rel="stylesheet" href="{{asset('css/product_modal_styles.css')}}">
 <style>
   td.details-control {
     background: url('../../../images/details_open.png') no-repeat center;

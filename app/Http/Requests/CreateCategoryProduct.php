@@ -25,7 +25,7 @@ class CreateCategoryProduct extends FormRequest
      {
          return [
              'brand_id' => 'required|integer',
-             'sub_category_id' => 'required|integer',
+             'sub_category_id' => 'nullable|integer',
              'price_category_id' => 'required|integer',
              'product_age_range_id' => 'required|integer',
              'name' => 'required|string|unique:products',
@@ -39,7 +39,7 @@ class CreateCategoryProduct extends FormRequest
      {
        return [
          'brand_id.required' => 'Please select a brand',
-         'sub_category_id.required' => 'Please select a SubCategory',
+        //  'sub_category_id.required' => 'Please select a SubCategory',
          'price_category_id.required' => 'Please select a PriceCategory',
          'product_age_range_id.required' => 'Please select an AgeRange',
          'name.unique' => 'A product with same name exists',

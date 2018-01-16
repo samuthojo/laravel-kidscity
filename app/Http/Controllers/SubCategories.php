@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 class SubCategories extends Controller
 {
-  private $productImages = 'images/products/';
+  private $productImages = 'images/real_cloths/';
 
   public function cmsIndex()
   {
@@ -26,20 +26,20 @@ class SubCategories extends Controller
                           ->map( function($subCat) {
                             $subCategory = $subCat;
                             $subCategory->category =
-                              $subCat->category()->first()->name;
+                              $subCat->category()->withTrashed()->first()->name;
                             return $subCategory;
                           });
   }
 
   public function products(App\SubCategory $subCategory)
   {
-    $products = $subCategory->products()->get()->map(function ($prod) {
+    $products = $subCategory->products()->latest('updated_at')->get()->map(function ($prod) {
       $product = $prod;
-      $product->category_name = $prod->category()->first()->name;
-      $product->sub_category_name = $prod->subCategory()->first()->name;
-      $product->age_range = $prod->productAgeRange()->first()->range;
-      $product->price_category = $prod->priceCategory()->first()->range;
-      $product->brand_name = $prod->brand()->first()->name;
+      $product->category_name = $prod->category()->withTrashed()->first()->name;
+      $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+      $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+      $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+      $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
       return $product;
     });
@@ -97,6 +97,7 @@ class SubCategories extends Controller
       $id = $productId;
       $editedProduct = array_add($request->all(), 'sub_category_id', $subCategoryId);
       App\Product::where(compact('id'))->update($editedProduct);
+      App\Product::where(compact('id'))->searchable();
     }
     return $this->productsTable($subCategoryId);
   }
@@ -124,6 +125,7 @@ class SubCategories extends Controller
     $editedProduct = array_add($editedProduct, 'sub_category_id', $subCategoryId);
     $id = $productId;
     App\Product::where(compact('id'))->update($editedProduct);
+    App\Product::where(compact('id'))->searchable();
   }
 
   private function productsTable($subCategoryId)
@@ -145,11 +147,11 @@ class SubCategories extends Controller
                       ->get()
                       ->map(function ($prod) {
                         $product = $prod;
-                        $product->category_name = $prod->category()->first()->name;
-                        $product->sub_category_name = $prod->subCategory()->first()->name;
-                        $product->age_range = $prod->productAgeRange()->first()->range;
-                        $product->price_category = $prod->priceCategory()->first()->range;
-                        $product->brand_name = $prod->brand()->first()->name;
+                        $product->category_name = $prod->category()->withTrashed()->first()->name;
+                        $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                        $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+                        $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+                        $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
                         return $product;
                       });

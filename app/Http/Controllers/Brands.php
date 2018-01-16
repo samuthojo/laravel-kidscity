@@ -11,7 +11,7 @@ class Brands extends Controller
 {
     private $brandImages = 'images/brands/';
 
-    private $productImages = 'images/products/';
+    private $productImages = 'images/real_cloths/';
 
     public function cmsIndex()
     {
@@ -30,11 +30,11 @@ class Brands extends Controller
                          ->latest('updated_at')->get()
                          ->map(function ($prod) {
                             $product = $prod;
-                            $product->category_name = $prod->category()->first()->name;
-                            $product->sub_category_name = $prod->subCategory()->first()->name;
-                            $product->age_range = $prod->productAgeRange()->first()->range;
-                            $product->price_category = $prod->priceCategory()->first()->range;
-                            $product->brand_name = $prod->brand()->first()->name;
+                            $product->category_name = $prod->category()->withTrashed()->first()->name;
+                            $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                            $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+                            $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+                            $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
                             return $product;
                           });
@@ -116,6 +116,7 @@ class Brands extends Controller
         $id = $productId;
         $editedProduct = array_add($request->all(), 'brand_id', $brandId);
         App\Product::where(compact('id'))->update($editedProduct);
+        App\Product::where(compact('id'))->searchable();
       }
       return $this->productsTable($brandId);
     }
@@ -143,6 +144,7 @@ class Brands extends Controller
       $editedProduct = array_add($editedProduct, 'brand_id', $brandId);
       $id = $productId;
       App\Product::where(compact('id'))->update($editedProduct);
+      App\Product::where(compact('id'))->searchable();
     }
 
     private function productsTable($brandId)
@@ -164,11 +166,11 @@ class Brands extends Controller
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;
-                          $product->category_name = $prod->category()->first()->name;
-                          $product->sub_category_name = $prod->subCategory()->first()->name;
-                          $product->age_range = $prod->productAgeRange()->first()->range;
-                          $product->price_category = $prod->priceCategory()->first()->range;
-                          $product->brand_name = $prod->brand()->first()->name;
+                          $product->category_name = $prod->category()->withTrashed()->first()->name;
+                          $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                          $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+                          $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+                          $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
                           return $product;
                         });

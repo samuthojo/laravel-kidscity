@@ -8,23 +8,23 @@ use App\Http\Requests;
 
 class Categories extends Controller
 {
-    private $productImages = 'images/products/';
+    private $productImages = 'images/real_cloths/';
 
     public function cmsIndex()
     {
-      $categories = App\Category::all();
+      $categories = App\Category::latest('updated_at')->get();
       return view('cms.categories', compact('categories'));
     }
 
     public function products(App\Category $category)
     {
-      $products = $category->products()->get()->map(function ($prod) {
+      $products = $category->products()->latest('updated_at')->get()->map(function ($prod) {
         $product = $prod;
-        $product->category_name = $prod->category()->first()->name;
-        $product->sub_category_name = $prod->subCategory()->first()->name;
-        $product->age_range = $prod->productAgeRange()->first()->range;
-        $product->price_category = $prod->priceCategory()->first()->range;
-        $product->brand_name = $prod->brand()->first()->name;
+        $product->category_name = $prod->category()->withTrashed()->first()->name;
+        $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+        $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+        $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+        $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
         return $product;
       });
@@ -36,6 +36,14 @@ class Categories extends Controller
       $ageRanges = App\ProductAgeRange::all();
       return view('cms.category_products', compact('category', 'categories',
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
+    }
+
+    public function subCategories($id)
+    {
+      if($id != -1) {
+        return App\Category::find($id)->subCategories()->get();
+      }
+      return App\SubCategory::all();
     }
 
     public function store(Requests\CreateCategory $request)
@@ -82,6 +90,7 @@ class Categories extends Controller
         $id = $productId;
         $editedProduct = array_add($request->all(), 'category_id', $categoryId);
         App\Product::where(compact('id'))->update($editedProduct);
+        App\Product::where(compact('id'))->searchable();
       }
       return $this->productsTable($categoryId);
     }
@@ -109,6 +118,7 @@ class Categories extends Controller
       $editedProduct = array_add($editedProduct, 'category_id', $categoryId);
       $id = $productId;
       App\Product::where(compact('id'))->update($editedProduct);
+      App\Product::where(compact('id'))->searchable();
     }
 
     private function productsTable($categoryId)
@@ -130,11 +140,11 @@ class Categories extends Controller
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;
-                          $product->category_name = $prod->category()->first()->name;
-                          $product->sub_category_name = $prod->subCategory()->first()->name;
-                          $product->age_range = $prod->productAgeRange()->first()->range;
-                          $product->price_category = $prod->priceCategory()->first()->range;
-                          $product->brand_name = $prod->brand()->first()->name;
+                          $product->category_name = $prod->category()->withTrashed()->first()->name;
+                          $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                          $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
+                          $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
+                          $product->brand_name = $prod->brand()->withTrashed()->first()->name;
 
                           return $product;
                         });

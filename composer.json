@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "algolia/algoliasearch-client-php": "^1.25",
         "fideloper/proxy": "~3.3",
         "gloudemans/shoppingcart": "^2.4",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "5.5.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelista/ekko": "^1.4"
     },

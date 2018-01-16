@@ -12,7 +12,9 @@
 				{{$selectedBrandName}}
 			@endif
 
-			@if($selectedCategory == -1 && $selectedBrand == -1)
+			@if(request('search'))
+				Showing results for "{{request('search')}}"		
+			@elseif($selectedCategory == -1 && $selectedBrand == -1)
 				All products
 			@endif
 		</h3>

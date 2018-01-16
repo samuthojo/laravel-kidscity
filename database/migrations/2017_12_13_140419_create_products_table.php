@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('sub_category_id')->unsigned();
+            $table->integer('sub_category_id')->unsigned()->nullable();
             $table->integer('price_category_id')->unsigned();
             $table->integer('product_age_range_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');

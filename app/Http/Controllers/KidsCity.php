@@ -51,6 +51,7 @@ class KidsCity extends Controller
         $selectedCategoryName = "";
         $selectedSubCategoryName = "";
         $selectedBrandName = "";
+        $searchKey = "";
 
         if($id != -1){
             if ($filter == "brand") {
@@ -84,7 +85,8 @@ class KidsCity extends Controller
 
         return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
             'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
-            'selectedBrandName', 'categories', 'sub_categories', 'brands', 'products', 'page'));
+            'selectedBrandName', 'categories', 'sub_categories',
+            'brands', 'products', 'page', 'searchKey'));
     }
 
     public function brands()
