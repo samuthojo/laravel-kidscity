@@ -56,7 +56,7 @@
                       <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
                     @endforeach--}}
                   </select>
-                  @include('cms.inline_loader')
+                  @include('cms.select_loader')
                   <span id="sub_category_id_error"
                     class="text-danger" style="display: none;"></span>
                 </div>

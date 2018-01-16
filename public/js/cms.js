@@ -61,22 +61,22 @@ function showHideAlert(id) {
 }
 
 function fetchSubCategories() {
-  $(".my_loader").fadeIn(0);
+  $(".select_loader").fadeIn(0);
   var category_id = $("#category_id").val();
   if(category_id != "") {
     var link = '/admin/categories/' + category_id + '/sub_categories';
     $.getJSON(link)
      .done(function (data) {
-       $(".my_loader").fadeOut(0);
+       $(".select_loader").fadeOut(0);
        setUpSubCategories(data);
      })
      .fail(function (error) {
-       $(".my_loader").fadeOut(0);
+       $(".select_loader").fadeOut(0);
        console.log(error);
      });
   }
   else {
-    $(".my_loader").fadeOut(0);
+    $(".select_loader").fadeOut(0);
     //Leave the first option, delete the rest
     $("#sub_category_id").find('option').not(':first').remove();
   }
@@ -99,22 +99,22 @@ function setUpSubCategories(data) {
 }
 
 function fetchEditSubCategories() {
-  $(".my_loader").fadeIn(0);
+  $(".select_loader").fadeIn(0);
   var category_id = $("#edit_category_id").val();
   if(category_id != "") {
     var link = '/admin/categories/' + category_id + '/sub_categories';
     $.getJSON(link)
      .done(function (data) {
-       $(".my_loader").fadeOut(0);
+       $(".select_loader").fadeOut(0);
        setUpEditSubCategories(data);
      })
      .fail(function (error) {
-       $(".my_loader").fadeOut(0);
+       $(".select_loader").fadeOut(0);
        console.log(error);
      });
   }
   else {
-    $(".my_loader").fadeOut(0);
+    $(".select_loader").fadeOut(0);
     //Leave the first option, delete the rest
     $("#edit_sub_category_id").find('option').not(':first').remove();
     $("#edit_sub_category_id").val("");//select the first option
@@ -139,15 +139,15 @@ function setUpEditSubCategories(data) {
 }
 
 function restoreSubCategories() {
-  $(".my_loader").fadeIn(0);
+  $(".select_loader").fadeIn(0);
   var link = '/admin/categories/-1/sub_categories';
   $.getJSON(link)
    .done(function (data) {
-     $(".my_loader").fadeOut(0);
+     $(".select_loader").fadeOut(0);
      resetSubCategories(data);
    })
    .fail(function (error) {
-     $(".my_loader").fadeOut(0);
+     $(".select_loader").fadeOut(0);
      console.log(error);
    });
 }

@@ -151,7 +151,7 @@
                 data-dismiss="modal">Cancel</button>
               <button class="btn btn-success"
                 type="button" onclick="addProduct()">Add</button>
-              @include('cms.inline_loader')
+              @include('cms.select_loader')
             </div>
           </form>
         </div>
