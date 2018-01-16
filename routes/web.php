@@ -118,5 +118,6 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/locations/{location}', 'DeliveryLocations@update')->name('locations.update');
   Route::delete('/locations/{location}', 'DeliveryLocations@destroy')->name('locations.destroy');
 
-  Route::view('/change_password', 'change_password')->name('change_password');
+  Route::view('/change_password', 'cms.change_password')->name('change_password');
+  Route::post('/change_password', 'Auth\AdminResetPasswordController@reset')->name("reset_admin_password");
 });

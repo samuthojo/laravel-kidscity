@@ -63,7 +63,7 @@
                           <form id="logout-form" action="{{ route('cms_logout') }}"
                             method="POST" style="display: none;">{{ csrf_field() }}</form>
                       </li>
-                      <!-- <li><a href="{{ route('change_password') }}">Change Password</a></li> -->
+                      <li><a href="{{ route('change_password') }}">Change Password</a></li>
                   </ul>
                 </li>
                 <li class="{{areActiveRoutes(['main', 'brands.index', 'brands.products', 'brands.brand'])}}">
