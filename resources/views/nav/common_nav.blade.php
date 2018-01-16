@@ -40,11 +40,17 @@
             @endforeach
         </div>
 
-        <div id="searchBar" class="layout flex center">
+        <form id="searchBar" class="layout flex center"
+					action="{{ route('search') }}">
         	<i class="fa fa-search"></i>
-        	<input type="search" placeholder="Search KidCity">
-        	<button>GO</button>
-        </div>
+					@if(request('search'))
+	        	<input name="search" type="search" placeholder="Search KidCity"
+							value=" {{ request('search') }} ">
+	        	<button>GO</button>
+					@else
+						<input name="search" type="search" placeholder="Search KidCity">
+					@endif
+        </form>
     </div>
 </nav>
 

@@ -2,10 +2,11 @@
 
 @section('more')
 @include('cms.header')
-<link rel="stylesheet" href="{{asset('js/cms_categories.js')}}">
+<script src="{{asset('js/cms_categories.js')}}"></script>
 @endsection
 
 @section('content')
+@include('cms.modals.add_category_modal')
 @include('cms.modals.edit_category_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
@@ -46,15 +47,15 @@
           <td>
             <div class="btn-group" title="edit category">
               <a class="btn btn-default" title="view products"
-               href="{{url('/categories/' . $category->id . '/products')}}">
+               href="{{route('categories.products', ['category' => $category->id])}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
               </a>
               <button class="btn btn-warning"
-                onclick="showEditCategoryModal({{$category->id}})">
+                onclick="showEditCategoryModal({{$category}})">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
               <button class="btn btn-danger" title="delete category"
-                onclick="showDeleteConfirmationModal({{$category->id}})">
+                onclick="showDeleteConfirmationModal({{$category}})">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>

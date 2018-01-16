@@ -15,9 +15,14 @@
                 <label for="brand_name">Name:</label>
                 <input type="text" class="form-control"
                   placeholder="brand name"
-                  name="name" id="brand_name">
+                  name="name" id="brand_name" autofocus>
                 <span id="brand_name_error" class="text-danger"
                  style="display: none;"></span>
+              </div>
+              <div class="form-group">
+                <label for="brand_description">Description:</label>
+                <textarea name="description" class="form-control"
+                 rows="8" cols="80" placeholder="Description (optional)"></textarea>
               </div>
               <div class="form-group">
                 <label for="brand_image">Picture:</label>

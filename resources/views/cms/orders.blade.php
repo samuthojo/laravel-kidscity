@@ -29,21 +29,32 @@
             <th>Contact</th>
             <th>#items</th>
             <th>Amount</th>
+            <th>DeliveryLocation</th>
+            <th>Action</th>
           </thead>
           <tbody>
             @foreach($orders as $order)
               <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
                 <td>{{$order->created_at}}</td>
-                <td id="">{{$order->id}}</td>
-                <td id="">{{$order->customer_name}}</td>
-                <td id="">{{$order->customer_contact}}</td>
-                <td id="">
+                <td>{{$order->id}}</td>
+                <td>{{$order->customer_name}}</td>
+                <td>{{$order->customer_contact}}</td>
+                <td>
                   {{$order->num_items}}
                 </td>
-                <td id="">
+                <td>
                   {{ number_format($order->amount) }}
                 </td>
-
+                <td>{{ $order->delivery_location }}</td>
+                <td>
+                  <a href="{{ route('orders.items', ['order' => $order->id]) }}"
+                    title="view items">
+                    <button type="button" name="button"
+                      class="btn btn-warning">
+                      <i class="glyphicon glyphicon-eye-open"></i>
+                    </button>
+                  </a>
+                </td>
               </tr>
             @endforeach
           </tbody>
@@ -61,7 +72,7 @@
                 exportOptions: {
                   columns: ":not(:last-child)"
                 },
-                title: "Orders",
+                title: "Product Orders",
                 messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
               },
                {
@@ -69,7 +80,7 @@
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Categories",
+                 title: "Product Orders",
                  messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
               },
                {
@@ -77,7 +88,7 @@
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Categories",
+                 title: "Product Orders",
                  messageTop: "The List Of Orders As Of {{date('d-m-Y')}}"
               }
           ],

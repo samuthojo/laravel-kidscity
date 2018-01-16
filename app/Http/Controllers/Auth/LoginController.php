@@ -38,7 +38,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout', 'cmsLogout',
                                            'showCmsLoginForm', 'cmsLogin');
-        $this->middleware('admin')->only('showCmsLoginForm');
+        $this->middleware('cms_guest')->only('showCmsLoginForm');
     }
 
     public function showLoginForm()

@@ -1,4 +1,4 @@
-var category_id = "";
+var price_category_id = "";
 
 $(document).ready(function () {
   $(":text").keydown(function() {
@@ -6,71 +6,96 @@ $(document).ready(function () {
   });
 });
 
-function addCategory() {
+function addPriceCategory() {
   $.ajax({
          type: "post",
-         url: "/categories",
-         data: $("#add_category_form").serialize(), // serializes the form's elements.
-         success: function() {
+         url: "/admin/price_categories",
+         data: $("#add_price_category_form").serialize(), // serializes the form's elements.
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/categories';
+           closeModal("add_price_category_modal");
+           $("#priceCategoriesTable").html(table);
+           $("#success-alert").text("PriceCategory created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
+           console.log(error);
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
            data = JSON.parse(error.responseText);
-           $("#category_name_error").text(data.errors.name);
-           $("#category_name_error").fadeIn(0);
+           showAddPriceCategoryErrors(data.errors);
          }
        });
        $(".btn-success").prop("disabled", true);
        $(".my_loader").fadeIn(0);
 }
 
-function showEditCategoryModal(cat_id) {
-  showModal("edit_category_modal");
-  var txt = $("#category_" + cat_id).text();
-  $("#edit_category_name").val(txt);
-  category_id = cat_id;
+function showAddPriceCategoryErrors(errors) {
+  if(errors.range != null) {
+    $("#price_category_range_error").text(errors.range);
+    $("#price_category_range_error").fadeIn(0);
+  }
 }
 
-function attemptEditCategory() {
+function showEditPriceCategoryModal(priceCat) {
+  showModal("edit_price_category_modal");
+  $("#edit_price_category_range").val(priceCat.range);
+  price_category_id = priceCat.id;
+}
+
+function attemptEditPriceCategory() {
   $.ajax({
     type: "post",
-    url: "/categories/" + category_id,
-    data: $("#edit_category_form").serialize(),
-    success: function(cat) {
-      closeModal("edit_category_modal");
-      $("#category_" + category_id).text(cat.name);
-      $("#success-alert").text("Category updated successfully");
+    url: "/admin/price_categories/" + price_category_id,
+    data: $("#edit_price_category_form").serialize(),
+    success: function(table) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
+      closeModal("edit_price_category_modal");
+      $("#priceCategoriesTable").html(table);
+      $("#success-alert").text("PriceCategory updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".btn-success").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
+      console.log(error);
       data = JSON.parse(error.responseText);
-      $("#edit_category_name_error").text(data.errors.name);
-      $("#edit_category_name_error").fadeIn(0);
+      showEditCategoryErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
-function showDeleteConfirmationModal(cat_id) {
+function showEditPriceCategoryErrors(errors) {
+  if(errors.range != null) {
+    $("#edit_price_category_range_error").text(errors.range);
+    $("#edit_price_category_range_error").fadeIn(0);
+  }
+}
+
+function showDeleteConfirmationModal(priceCat) {
   showModal("delete_confirmation_modal");
-  category_id = cat_id;
+  $("#confirmation_text").text("Delete " + priceCat.range + " price-category");
+  price_category_id = priceCat.id;
 }
 
-function deleteCategory() {
+function deletePriceCategory() {
   $.ajax({
     type: 'delete',
-    url: '/categories/' + category_id,
+    url: '/admin/price_categories/' + price_category_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);
       closeModal("delete_confirmation_modal");
-      $("#categoriesTable").html(table);
-      $("#success-alert").text("Category deleted successfully");
+      $("#priceCategoriesTable").html(table);
+      $("#success-alert").text("PriceCategory deleted successfully");
       $("#success-alert").fadeIn(0, function() {
         $("#success-alert").fadeOut(1500);
       });

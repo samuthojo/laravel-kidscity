@@ -3,6 +3,7 @@
 @section('more')
 @include('cms.header')
   <script src="{{asset('js/cms_products.js')}}"></script>
+  <link rel="stylesheet" href="{{asset('css/product_modal_styles.css')}}">
   <style>
     td.details-control {
       background: url('../images/details_open.png') no-repeat center;
@@ -52,9 +53,11 @@
             <th>No.</th>
             <th>Name</th>
             <th>Category</th>
+            <th>SubCategory</th>
             <th>PriceCategory</th>
             <th>AgeRange</th>
             <th>Brand</th>
+            <th>Gender</th>
             <th>Price</th>
             <th>Action</th>
           </thead>
@@ -64,30 +67,28 @@
                 <td class="details-control" title="view more"></td>
                 <td style="display: none;">{{$product->id}}</td>
                 <td>{{$loop->iteration}}</td>
-                <td id="">{{$product->name}}</td>
-                <td id="">{{$product->category_name}}</td>
-                <td id="">{{$product->price_category}}</td>
-                <td id="">
+                <td>{{$product->name}}</td>
+                <td>{{$product->category_name}}</td>
+                <td>{{$product->sub_category_name}}</td>
+                <td>{{$product->price_category}}</td>
+                <td>
                   {{$product->age_range}}
                 </td>
-                <td id="">
+                <td>
                   {{$product->brand_name}}
                 </td>
-                <td id="">
+                <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
+                <td>
                   {{ number_format($product->price) }}
                 </td>
                 <td>
                   <div class="btn-group">
-                    <a class="btn btn-default" title="view prices"
-                      href="{{url('/products/' . $product->id . '/prices')}}">
-                      <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
                     <button class="btn btn-warning" title="edit product"
                       onclick="showEditProductModal({{$product}})">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                     <button class="btn btn-danger" title="delete product"
-                      onclick="showProductDeleteModal({{$product->id}})">
+                      onclick="showProductDeleteModal({{$product}})">
                       <span class="glyphicon glyphicon-trash"></span>
                     </button>
                   </div>
@@ -137,11 +138,50 @@
        bLengthChange: false
      });
 
+     $("#brand_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_brand_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
      $("#category_id").click(function() {
        $(this).next().fadeOut(0);
      });
 
      $("#edit_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#sub_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_sub_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+     $("#price_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_price_category_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#product_age_range_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_product_age_range_id").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#gender").click(function() {
+       $(this).next().fadeOut(0);
+     });
+
+     $("#edit_gender").click(function() {
        $(this).next().fadeOut(0);
      });
 
@@ -162,7 +202,7 @@
            tr.removeClass('shown');
        }
        else {
-         var link = "/products/" + product_id + "/product_details";
+         var link = "/admin/products/" + product_id + "/product";
               $.getJSON(link)
                .done( function (product) {
                  row.child.hide();

@@ -9,62 +9,87 @@ $(document).ready(function () {
 function addCategory() {
   $.ajax({
          type: "post",
-         url: "/categories",
+         url: "/admin/categories",
          data: $("#add_category_form").serialize(), // serializes the form's elements.
-         success: function() {
+         success: function(table) {
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
-           window.location.href = '/categories';
+           closeModal("add_category_modal");
+           $("#categoriesTable").html(table);
+           $("#success-alert").text("Category created successfully");
+           $("#success-alert").fadeIn(0, function() {
+             $("#success-alert").fadeOut(1500);
+           });
          },
          error: function(error) {
+           console.log(error);
            $(".btn-success").prop("disabled", false);
            $(".my_loader").fadeOut(0);
            data = JSON.parse(error.responseText);
-           $("#category_name_error").text(data.errors.name);
-           $("#category_name_error").fadeIn(0);
+           showAddCategoryErrors(data.errors);
          }
        });
        $(".btn-success").prop("disabled", true);
        $(".my_loader").fadeIn(0);
 }
 
-function showEditCategoryModal(cat_id) {
+function showAddCategoryErrors(errors) {
+  if(errors.name != null) {
+    $("#category_name_error").text(errors.name);
+    $("#category_name_error").fadeIn(0);
+  }
+}
+
+function showEditCategoryModal(cat) {
   showModal("edit_category_modal");
-  var txt = $("#category_" + cat_id).text();
-  $("#edit_category_name").val(txt);
-  category_id = cat_id;
+  $("#edit_category_name").val(cat.name);
+  category_id = cat.id;
 }
 
 function attemptEditCategory() {
   $.ajax({
     type: "post",
-    url: "/categories/" + category_id,
+    url: "/admin/categories/" + category_id,
     data: $("#edit_category_form").serialize(),
-    success: function(cat) {
+    success: function(table) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
       closeModal("edit_category_modal");
-      $("#category_" + category_id).text(cat.name);
+      $("#categoriesTable").html(table);
       $("#success-alert").text("Category updated successfully");
       $("#success-alert").fadeIn(0, function() {
-        $("#success-alert").fadeOut(1000);
+        $("#success-alert").fadeOut(1500);
       });
     },
     error: function(error) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
+      console.log(error);
       data = JSON.parse(error.responseText);
-      $("#edit_category_name_error").text(data.errors.name);
-      $("#edit_category_name_error").fadeIn(0);
+      showEditCategoryErrors(data.errors);
     }
   });
+  $(".btn-success").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
 }
 
-function showDeleteConfirmationModal(cat_id) {
+function showEditCategoryErrors(errors) {
+  if(errors.name != null) {
+    $("#edit_category_name_error").text(errors.name);
+    $("#edit_category_name_error").fadeIn(0);
+  }
+}
+
+function showDeleteConfirmationModal(cat) {
   showModal("delete_confirmation_modal");
-  category_id = cat_id;
+  $("#confirmation_text").text("Delete " + cat.name);
+  category_id = cat.id;
 }
 
 function deleteCategory() {
   $.ajax({
     type: 'delete',
-    url: '/categories/' + category_id,
+    url: '/admin/categories/' + category_id,
     success: function(table) {
       $(".my_loader").fadeOut(0);
       $(".btn-success").prop("disabled", false);
