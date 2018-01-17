@@ -25,6 +25,7 @@ class Search extends Controller
       $categories = Utils\Utils::getAllCategories();
       // $products = Utils\Utils::getAllProducts();
       $brands = App\Brand::all();
+      $age_ranges = App\ProductAgeRange::all();
       $selectedCategory = -1;
       $selectedSubCategory = -1;
       $selectedBrand = -1;
@@ -36,7 +37,7 @@ class Search extends Controller
 
       return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
           'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
-          'selectedBrandName', 'categories', 'sub_categories',
+          'selectedBrandName', 'categories', 'sub_categories', 'age_ranges',
           'brands', 'products', 'page'));
     }
 }
