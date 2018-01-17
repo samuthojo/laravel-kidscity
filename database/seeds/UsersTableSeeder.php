@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
       $faker = Faker\Factory::create();
 
         App\User::create([
+          'name' => 'Admin',
           'phone_number' => env('ADMIN_PHONENUMBER'),
           'password' => Hash::make(env('ADMIN_PASSWORD')),
           'is_admin' => env('IS_ADMIN'),
