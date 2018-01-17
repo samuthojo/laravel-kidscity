@@ -9,7 +9,7 @@ class Orders extends Controller
 {
     public function cmsIndex()
     {
-      $orders = App\Order::latest('updated_at')->get()->map(function ($myOrder) {
+      $orders = App\Order::latest('created_at')->get()->map(function ($myOrder) {
         $order = $myOrder;
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
