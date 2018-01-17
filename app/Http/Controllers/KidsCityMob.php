@@ -31,13 +31,15 @@ class KidsCityMob extends Controller
             $id = $_GET['category'];
             $selectedCategory = $id;
             $sub_categories = SubCategory::where("category_id", $id)->get();
-            $products = Product::where("category_id", $id)->get();
+            $products = Product::where("category_id", $id)->orderBy('created_at', 'asc')
+                ->get();
 
             return view('mobile.shop', compact('page', 'categories', 'selectedCategory', 'sub_categories', 'products'));
         }
 
         $sub_categories = SubCategory::all();
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'asc')
+            ->get();
         return view('mobile.shop', compact('page', 'categories', 'selectedCategory', 'sub_categories', 'products'));
     }
 

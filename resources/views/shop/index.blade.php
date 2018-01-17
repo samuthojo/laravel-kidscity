@@ -35,3 +35,7 @@
 		</div>
 	</div>
 @endsection
+
+@section('scripts')
+	<script src="{{asset('js/shop.js')}}"></script>
+@endsection

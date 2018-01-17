@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Product;
+use App\ProductAgeRange;
 use Illuminate\Http\Request;
 use App;
 use App\Utils;
@@ -43,6 +44,7 @@ class KidsCity extends Controller
         $categories = Utils\Utils::getAllCategories();
         $products = Utils\Utils::getAllProducts();
         $brands = Brand::all();
+        $age_ranges = ProductAgeRange::all();
         $selectedCategory = -1;
         $selectedSubCategory = -1;
         $selectedBrand = -1;
@@ -57,19 +59,22 @@ class KidsCity extends Controller
             if ($filter == "brand") {
                 $selectedBrand = $id;
                 $selectedBrandName = Brand::find($id)->name;
-                $products = App\Product::where("brand_id", $id)->get();
+                $products = App\Product::where("brand_id", $id)->orderBy('created_at', 'asc')
+                    ->get();
             }
             else if ($filter == "category") {
                 $selectedCategoryName = App\Category::find($id)->name;
                 $selectedCategory = $id;
-                $products = App\Product::where("category_id", $id)->get();
+                $products = App\Product::where("category_id", $id)->orderBy('created_at', 'asc')
+                    ->get();
             }
         }else{
             if(isset($_GET['category'])){
                 $id = $_GET['category'];
                 $selectedCategoryName = App\Category::find($id)->name;
                 $selectedCategory = $id;
-                $products = App\Product::where("category_id", $id)->get();
+                $products = App\Product::where("category_id", $id)->orderBy('created_at', 'asc')
+                    ->get();
                 $sub_categories = App\SubCategory::where("category_id", $id)->get();
 
                 if(isset($_GET['sub_category'])){
@@ -78,6 +83,7 @@ class KidsCity extends Controller
                     $selectedSubCategory = $subid;
                     $products = App\Product::where('category_id', $id)
                         ->where('sub_category_id', $subid)
+                        ->orderBy('created_at', 'asc')
                         ->get();
                 }
             }
@@ -86,7 +92,7 @@ class KidsCity extends Controller
         return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
             'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
             'selectedBrandName', 'categories', 'sub_categories',
-            'brands', 'products', 'page', 'searchKey'));
+            'brands', 'products', 'page', 'age_ranges', 'searchKey'));
     }
 
     public function brands()
