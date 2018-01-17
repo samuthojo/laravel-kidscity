@@ -1,4 +1,5 @@
-<div id="product-{{$product->id}}" class="product {{ in_cart($product->id) ? 'added' : ''}}">
+<div id="product-{{$product->id}}"
+	 class="product {{ in_cart($product->id) ? 'added' : ''}}">
 	<a href="{{url('products/' . $product->id)}}">
 		<div class="image">
 			<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt="">

@@ -26,15 +26,24 @@
 	<div id="sorter" class="layout center">
 		<span>sort by: </span>
 		&emsp;
-		<select id="sorterInput">
+		<select id="sorterInput" onchange="sortProducts(this.value)">
 			<option value="new">New Arrivals</option>
-			<option value="popular">Most Popular</option>
+			{{--<option value="popular">Most Popular</option>--}}
 			<option value="price">Price</option>
 		</select>
 	</div>
 </div>
+<style>
+	#productsGrid.is-empty #filterEmpty{
+		display: block !important;
+	}
+
+	#productsGrid.is-empty #filterEmptyMain ~ #filterEmpty{
+		display: none !important;
+	}
+</style>
 <div id="productsGrid">
-	<p style="display: {{count($products) > 0 ? 'none' : ''}};">
+	<p id="filterEmptyMain" style="display: {{count($products) > 0 ? 'none' : ''}};">
 		No products found for
 		@if($selectedCategory != -1)
 			{{$selectedCategoryName}}
@@ -47,10 +56,16 @@
 	<div class="row">
 
 		@foreach ($products as $product)
-				<div class="col-md-4">
+				<div class="col-md-4 product-item"
+					 data-age="{{$product->product_age_range_id}}" data-gender="{{$product->gender}}"
+					 data-date="{{$product->id}}" data-price="{{$product->price}}">
 					@include('shop.product')
 				</div>
 		@endforeach
 
 	</div>
+
+	<p id="filterEmpty" style="display: none;">
+		No products found, please change filter options.
+	</p>
 </div>

@@ -102,9 +102,12 @@
         </a>
     </div>
 
+    @yield('scripts')
+
     @include('scripts')
 
     <script src="{{asset('js/scripts.js')}}"></script>
+
     <script>
         var alertMessage = document.getElementById("alertMessage");
         var alertMessageText = document.getElementById("alertMessageText");
@@ -163,6 +166,7 @@
 //            enableScrollLocker();
 //        }
     </script>
+
     @include('footer')
 </body>
 </html>
