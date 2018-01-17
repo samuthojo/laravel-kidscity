@@ -60,11 +60,11 @@ class Product extends Model
         $array = $this->toArray();
 
         // Customize array...
-        $array['category'] = $this->category()->first()->name;
-        $array['sub_category'] = $this->subCategory()->first()->name;
-        $array['brand'] = $this->brand()->first()->name;
-        $array['age_range'] = $this->productAgeRange()->first()->range;
-        $array['price_category'] = $this->priceCategory()->first()->range;
+        $array['category'] = $this->category()->withTrashed()->first()->name;
+        $array['sub_category'] = $this->subCategory()->withTrashed()->first()->name;
+        $array['brand'] = $this->brand()->withTrashed()->first()->name;
+        $array['age_range'] = $this->productAgeRange()->withTrashed()->first()->range;
+        $array['price_category'] = $this->priceCategory()->withTrashed()->first()->range;
         $array['gender_string'] = ($this->gender) ? 'Female' : 'Male';
 
         return $array;
