@@ -34,7 +34,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold; color: #337ab7;"class="panel-title pull-left">
-     {{$subCategory->name}}: </h3>
+     SubCategory: {{$subCategory->name}} | Category: {{$category->name}} </h3>
      <div class="btn-group pull-right">
        <a class="btn btn-primary" href="{{url('admin/sub_categories')}}"
          title="back">

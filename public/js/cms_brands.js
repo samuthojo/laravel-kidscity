@@ -123,7 +123,7 @@ function showEditBrandErrors(errors) {
 
 function showDeleteConfirmationModal(brand) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + brand.name);
+  $("#confirmation_text").text("Delete " + brand.name + " and its products");
   brand_id = brand.id;
 }
 

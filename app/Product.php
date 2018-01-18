@@ -61,7 +61,9 @@ class Product extends Model
 
         // Customize array...
         $array['category'] = $this->category()->withTrashed()->first()->name;
-        $array['sub_category'] = $this->subCategory()->withTrashed()->first()->name;
+        $subCategory = $this->subCategory()->withTrashed()->first();
+        $array['sub_category'] = ($subCategory != null) ?
+                                                  $subCategory->name : "null";
         $array['brand'] = $this->brand()->withTrashed()->first()->name;
         $array['age_range'] = $this->productAgeRange()->withTrashed()->first()->range;
         $array['price_category'] = $this->priceCategory()->withTrashed()->first()->range;

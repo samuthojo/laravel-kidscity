@@ -5,33 +5,68 @@ $(function () {
     },
     statusCode: {
         401: function() {
-          window.location.href = "/login";
+          window.location.href = "/admin/login";
       },
         419: function() {
-          window.location.href = "/login";
+          window.location.href = "/admin/login";
       }
     }
   });
 
+  $("body").on('shown.bs.modal', '.modal', function (e) {
+    if(document.getElementById("category_id") != null) {
+      $("#sub_category_id").prop("disabled", true);
+    }
+    if(document.getElementById("edit_category_id") != null) {
+      $("#edit_sub_category_id").prop("disabled", true);
+    }
+  });
+
   $("body").on('hidden.bs.modal', '.modal', function (e) {
+
     $(".modal-body").find('input, textarea, select').each(function(){
        $(this).val("");
     });
+
     $(".modal-body").find('span').each(function(){
        $(this).fadeOut(0);
     });
+
     $(".modal-body").find(".radio").each(function(){
       $(this).prop('checked', false);
     });
-    restoreSubCategories();
+
+    if(document.getElementById("category_id") != null) {
+      $("#sub_category_id").prop("disabled", true);
+    }
+    
+    if(document.getElementById("edit_category_id") != null) {
+      $("#edit_sub_category_id").prop("disabled", true);
+    }
+
+    if(document.getElementById("edit_sub_category_id") != null) {
+      restoreSubCategories();
+    }
+
   });
 
-  document.getElementById("category_id").onchange = function() {
-    fetchSubCategories()
-  };
-  document.getElementById("edit_category_id").onchange = function() {
-    fetchEditSubCategories()
-  };
+  var categoryObject = document.getElementById("category_id");
+
+  var editCategoryObject = document.getElementById("edit_category_id");
+
+  if(categoryObject != null) {
+    categoryObject.onchange = function() {
+      $("#sub_category_id").prop("disabled", false);
+      fetchSubCategories()
+    };
+  }
+
+  if(editCategoryObject != null) {
+    editCategoryObject.onchange = function() {
+      $("#edit_sub_category_id").prop("disabled", false);
+      fetchEditSubCategories()
+    };
+  }
 
 });
 

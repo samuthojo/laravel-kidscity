@@ -82,7 +82,7 @@ function showEditAgeRangeErrors(errors) {
 
 function showDeleteConfirmationModal(ageRange) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + ageRange.range + " age-range");
+  $("#confirmation_text").text("Delete " + ageRange.range + " age-range and its products");
   age_range_id = ageRange.id;
 }
 

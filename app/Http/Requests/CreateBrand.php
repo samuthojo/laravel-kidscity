@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateBrand extends FormRequest
 {
@@ -24,7 +25,11 @@ class CreateBrand extends FormRequest
      public function rules()
      {
          return [
-             'name' => 'required|unique:brands',
+             'name' => ['required',
+                         Rule::unique('brands')->where(function ($query) {
+                              return $query->where('deleted_at', null);
+                          }),
+                        ],
              'image_url' =>  'nullable|file|image|max:2048',
          ];
      }

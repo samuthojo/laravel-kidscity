@@ -36,7 +36,9 @@ class SubCategories extends Controller
     $products = $subCategory->products()->latest('updated_at')->get()->map(function ($prod) {
       $product = $prod;
       $product->category_name = $prod->category()->withTrashed()->first()->name;
-      $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+      $subCategory = $prod->subCategory()->withTrashed()->first();
+      $product->sub_category_name = ($subCategory != null) ?
+                                                $subCategory->name : "null";
       $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
       $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
       $product->brand_name = $prod->brand()->withTrashed()->first()->name;
@@ -44,13 +46,13 @@ class SubCategories extends Controller
       return $product;
     });
 
-    $categories = App\Category::all();
+    $category = $subCategory->category()->first();
     $subCategories = App\SubCategory::all();
     $brands = App\Brand::all();
     $priceCategories = App\PriceCategory::all();
     $ageRanges = App\ProductAgeRange::all();
     return view('cms.sub_category_products', compact('subCategory', 'subCategories',
-      'categories', 'brands', 'priceCategories', 'ageRanges', 'products'));
+      'category', 'brands', 'priceCategories', 'ageRanges', 'products'));
   }
 
   public function store(Requests\CreateSubCategory $request)
@@ -62,7 +64,7 @@ class SubCategories extends Controller
 
   public function update(Requests\UpdateSubCategory $request, $id)
   {
-    App\SubCategory::where(compact('id'))->update($request->all());
+    App\SubCategory::where(compact('id'))->update($request->only('name'));
     $subCategories = $this->getMappedSubCategories();
     return view('cms.tables.sub_categories_table', compact('subCategories'));
   }
@@ -81,7 +83,10 @@ class SubCategories extends Controller
       $product = $this->saveProductWithImage($request, $subCategoryId);
     }
     else {
-      $newProduct = array_add($request->all(), 'sub_category_id', $subCategoryId);
+      $categoryId = App\SubCategory::find($subCategoryId)
+                                   ->category()->first()->id;
+      $newProduct = array_add($request->all(), 'category_id', $categoryId);
+      $newProduct = array_add($newProduct, 'sub_category_id', $subCategoryId);
       $product = App\Product::create($newProduct);
     }
     return $this->productsTable($subCategoryId);
@@ -94,8 +99,11 @@ class SubCategories extends Controller
       $this->updateProductWithImage($request, $subCategoryId, $productId);
     }
     else {
+      $categoryId = App\SubCategory::find($subCategoryId)
+                                   ->category()->first()->id;
       $id = $productId;
       $editedProduct = array_add($request->all(), 'sub_category_id', $subCategoryId);
+      $editedProduct = array_add($editedProduct, 'category_id', $categoryId);
       App\Product::where(compact('id'))->update($editedProduct);
       App\Product::where(compact('id'))->searchable();
     }
@@ -113,6 +121,9 @@ class SubCategories extends Controller
     $imageName = Utils\Utils::saveImage($request->file('image_url'),
                                                         $this->productImages);
     $newProduct = array_add($request->except('image_url'), 'image_url', $imageName);
+    $categoryId = App\SubCategory::find($subCategoryId)
+                                 ->category()->first()->id;
+    $newProduct = array_add($newProduct, 'category_id', $categoryId);
     $newProduct = array_add($newProduct, 'sub_category_id', $subCategoryId);
     return App\Product::create($newProduct);
   }
@@ -122,6 +133,9 @@ class SubCategories extends Controller
     $imageName = Utils\Utils::saveImage($request->file('image_url'),
                                                         $this->productImages);
     $editedProduct = array_add($request->except('image_url'), 'image_url', $imageName);
+    $categoryId = App\SubCategory::find($subCategoryId)
+                                 ->category()->first()->id;
+    $editedProduct = array_add($editedProduct, 'category_id', $categoryId);
     $editedProduct = array_add($editedProduct, 'sub_category_id', $subCategoryId);
     $id = $productId;
     App\Product::where(compact('id'))->update($editedProduct);

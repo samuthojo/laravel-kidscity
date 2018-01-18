@@ -21,7 +21,9 @@ class Categories extends Controller
       $products = $category->products()->latest('updated_at')->get()->map(function ($prod) {
         $product = $prod;
         $product->category_name = $prod->category()->withTrashed()->first()->name;
-        $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+        $subCategory = $prod->subCategory()->withTrashed()->first();
+        $product->sub_category_name = ($subCategory != null) ?
+                                                  $subCategory->name : "null";
         $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
         $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
         $product->brand_name = $prod->brand()->withTrashed()->first()->name;
@@ -30,7 +32,7 @@ class Categories extends Controller
       });
 
       $categories = App\Category::all();
-      $subCategories = App\SubCategory::all();
+      $subCategories = $category->subCategories()->get();
       $brands = App\Brand::all();
       $priceCategories = App\PriceCategory::all();
       $ageRanges = App\ProductAgeRange::all();
@@ -141,7 +143,9 @@ class Categories extends Controller
                         ->map(function ($prod) {
                           $product = $prod;
                           $product->category_name = $prod->category()->withTrashed()->first()->name;
-                          $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                          $subCategory = $prod->subCategory()->withTrashed()->first();
+                          $product->sub_category_name = ($subCategory != null) ?
+                                                                    $subCategory->name : "null";
                           $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
                           $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
                           $product->brand_name = $prod->brand()->withTrashed()->first()->name;

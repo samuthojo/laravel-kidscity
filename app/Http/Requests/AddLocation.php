@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AddLocation extends FormRequest
 {
@@ -24,7 +25,12 @@ class AddLocation extends FormRequest
     public function rules()
     {
         return [
-            'location' => 'required|string|unique:delivery_locations',
+            'location' => ['required',
+                           'string',
+                            Rule::unique('delivery_locations')->where(function ($query) {
+                                 return $query->where('deleted_at', null);
+                             }),
+                           ],
             'delivery_price' => 'required|integer',
         ];
     }

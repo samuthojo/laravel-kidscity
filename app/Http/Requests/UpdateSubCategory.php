@@ -24,15 +24,8 @@ class UpdateSubCategory extends FormRequest
      public function rules()
      {
          return [
-             'category_id' => 'required|integer',
              'name' => 'required',
          ];
      }
 
-     public function messages()
-     {
-       return [
-         'category_id.required' => 'Please choose a category',
-       ];
-     }
 }

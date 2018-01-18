@@ -54,7 +54,7 @@ function showAddSubCategoryErrors(errors) {
 
 function showEditSubCategoryModal(subCat) {
   showModal("edit_sub_category_modal");
-  $("#edit_category_id").val(subCat.category_id);
+  $("#edit_category_id").val(subCat.category);
   $("#edit_sub_category_name").val(subCat.name);
   sub_category_id = subCat.id;
 }
@@ -99,7 +99,7 @@ function showEditSubCategoryErrors(errors) {
 
 function showDeleteConfirmationModal(subCat) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + subCat.name);
+  $("#confirmation_text").text("Delete " + subCat.name + " and its products");
   sub_category_id = subCat.id;
 }
 

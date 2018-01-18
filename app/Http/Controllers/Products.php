@@ -41,9 +41,9 @@ class Products extends Controller
                           $product->category_name = $prod->category()
                                                          ->withTrashed()
                                                          ->first()->name;
-                          $product->sub_category_name = $prod->subCategory()
-                                                            ->withTrashed()
-                                                            ->first()->name;
+                          $subCategory = $prod->subCategory()->withTrashed()->first();
+                          $product->sub_category_name = ($subCategory != null) ?
+                                                                   $subCategory->name : "null";
                           $product->age_range = $prod->productAgeRange()
                                                      ->withTrashed()
                                                      ->first()->range;

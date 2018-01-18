@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateSubCategoryProduct extends FormRequest
 {
@@ -25,10 +26,14 @@ class CreateSubCategoryProduct extends FormRequest
      {
          return [
              'brand_id' => 'required|integer',
-             'category_id' => 'required|integer',
              'price_category_id' => 'required|integer',
              'product_age_range_id' => 'required|integer',
-             'name' => 'required|string|unique:products',
+             'name' => ['required',
+                        'string',
+                         Rule::unique('products')->where(function ($query) {
+                              return $query->where('deleted_at', null);
+                          }),
+                        ],
              'price' => 'required|integer',
              'gender' => 'required|boolean',
              'image_url' => 'nullable|file|image|max:2048',
@@ -39,7 +44,6 @@ class CreateSubCategoryProduct extends FormRequest
      {
        return [
          'brand_id.required' => 'Please select a brand',
-         'category_id.required' => 'Please select a category',
          'price_category_id.required' => 'Please select a PriceCategory',
          'product_age_range_id.required' => 'Please select an AgeRange',
          'name.unique' => 'A product with same name exists',

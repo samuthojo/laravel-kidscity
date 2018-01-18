@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreatePriceCategory extends FormRequest
 {
@@ -24,14 +25,18 @@ class CreatePriceCategory extends FormRequest
     public function rules()
     {
         return [
-            'range' => 'required|unique:price_categories',
+          'range' => ['required',
+                      Rule::unique('price_categories')->where(function ($query) {
+                           return $query->where('deleted_at', null);
+                       }),
+                     ],
         ];
     }
 
     public function messages()
     {
       return [
-        'range.unique' => 'The entered price range exists', 
+        'range.unique' => 'The entered price range exists',
       ];
     }
 }

@@ -33,21 +33,6 @@
 
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="edit_category_id">Category:</label>
-                  <select class="form-control" name="category_id"
-                    id="edit_category_id" style="width: 180px">
-                    <option value="" selected disabled>choose category</option>
-                    @foreach($categories as $category)
-                      <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endforeach
-                  </select>
-                  <span id="edit_category_id_error"
-                    class="text-danger" style="display: none;"></span>
-                </div>
-              </div>
-
-              <div class="col-sm-4">
-                <div class="form-group">
                   <label for="edit_price_category_id">PriceCategory:</label>
                   <select class="form-control" name="price_category_id"
                     id="edit_price_category_id" style="width: 180px">

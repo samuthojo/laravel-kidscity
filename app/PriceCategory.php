@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PriceCategory extends Model
 {
-  use SoftDeletes;
+  use SoftDeletes, CascadeSoftDeletes;
+
+  protected $cascadeDeletes = ['products'];
 
   protected $fillable = ['range',];
 

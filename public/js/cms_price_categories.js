@@ -82,7 +82,7 @@ function showEditPriceCategoryErrors(errors) {
 
 function showDeleteConfirmationModal(priceCat) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + priceCat.range + " price-category");
+  $("#confirmation_text").text("Delete " + priceCat.range + " price-category and its products");
   price_category_id = priceCat.id;
 }
 

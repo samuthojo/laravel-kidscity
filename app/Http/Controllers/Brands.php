@@ -31,7 +31,9 @@ class Brands extends Controller
                          ->map(function ($prod) {
                             $product = $prod;
                             $product->category_name = $prod->category()->withTrashed()->first()->name;
-                            $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                            $subCategory = $prod->subCategory()->withTrashed()->first();
+                            $product->sub_category_name = ($subCategory != null) ?
+                                                                      $subCategory->name : "null";
                             $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
                             $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
                             $product->brand_name = $prod->brand()->withTrashed()->first()->name;
@@ -167,7 +169,9 @@ class Brands extends Controller
                         ->map(function ($prod) {
                           $product = $prod;
                           $product->category_name = $prod->category()->withTrashed()->first()->name;
-                          $product->sub_category_name = $prod->subCategory()->withTrashed()->first()->name;
+                          $subCategory = $prod->subCategory()->withTrashed()->first();
+                          $product->sub_category_name = ($subCategory != null) ?
+                                                                    $subCategory->name : "null";
                           $product->age_range = $prod->productAgeRange()->withTrashed()->first()->range;
                           $product->price_category = $prod->priceCategory()->withTrashed()->first()->range;
                           $product->brand_name = $prod->brand()->withTrashed()->first()->name;

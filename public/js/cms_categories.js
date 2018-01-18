@@ -82,7 +82,7 @@ function showEditCategoryErrors(errors) {
 
 function showDeleteConfirmationModal(cat) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + cat.name);
+  $("#confirmation_text").text("Delete " + cat.name + " and its products");
   category_id = cat.id;
 }
 

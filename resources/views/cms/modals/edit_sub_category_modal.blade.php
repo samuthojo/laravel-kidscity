@@ -13,13 +13,8 @@
             <form name="edit_sub_category_form" id="edit_sub_category_form">
               <div class="form-group">
                 <label for="edit_category_id">Category:</label>
-                <select class="form-control"
-                  name="category_id" id="edit_category_id" style="width: 180px">
-                  <option value="" selected disabled>choose category</option>
-                  @foreach($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                  @endforeach
-                </select>
+                <input type="text" name="category_id" id="edit_category_id"
+                  class="form-control" readonly>
                 <span id="edit_category_id_error" class="text-danger"
                  style="display: none;"></span>
               </div>

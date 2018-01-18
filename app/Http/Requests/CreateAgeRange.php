@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateAgeRange extends FormRequest
 {
@@ -24,7 +25,11 @@ class CreateAgeRange extends FormRequest
      public function rules()
      {
          return [
-             'range' => 'required|unique:product_age_ranges',
+           'range' => ['required',
+                       Rule::unique('product_age_ranges')->where(function ($query) {
+                            return $query->where('deleted_at', null);
+                        }),
+                      ],
          ];
      }
 
