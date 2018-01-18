@@ -99,6 +99,11 @@ function deletePriceCategory() {
       $("#success-alert").fadeIn(0, function() {
         $("#success-alert").fadeOut(1500);
       });
+    },
+    error: function(error) {
+      $(".my_loader").fadeOut(0);
+      $(".btn-success").prop("disabled", false);
+      console.log(error);
     }
   });
   $(".btn-success").prop("disabled", true);
