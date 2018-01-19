@@ -35,4 +35,9 @@ class Order extends Model
     {
       return \Carbon\Carbon::parse($value)->format('d-m-Y');
     }
+
+    public function getUpdatedAtAttribute($value)
+    {
+      return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
 }

@@ -2,36 +2,81 @@
 
 @section('more')
   @include('cms.header')
+  <script src="{{asset('js/cms_order_items.js')}}"></script>
 @endsection
 
 @section('content')
 
-@if(request()->session()->has('message'))
-<div id="alert-success" class="alert alert-success">
-  {{request()->session()->pull('message')}}
-</div>
-@endif
+@include('cms.modals.confirmation_modal',
+  ['id' => 'delete_confirmation_modal',
+  'title' => 'Confirm',
+  'text' =>  'You are about to delete this order!',
+  'action' => 'Confirm',
+  'function' => 'deleteOrder()',])
+
+@include('cms.modals.processed_confirm_modal',
+  ['id' => 'processed_confirmation_modal',
+  'title' => 'Confirm',
+  'text' =>  'Mark Order as processed!',
+  'action' => 'Confirm',
+  'function' => 'markProcessed()',])
+
 @include('cms.alerts.success-alert')
-  <p style="color: #000;">
-    <span class="itemTitle">Order No.: </span>{{$order->id}} <br>
-    <span class="itemTitle"># Items: </span>{{$order->num_items}} <br>
-    <span class="itemTitle">Customer: </span>{{$order->customer_name}} <br>
-    <span class="itemTitle">Contact: </span>{{$order->customer_contact}} <br>
-    <span class="itemTitle">Amount: </span>{{ number_format($order->amount) }} <br>
+<div class="summary-title">
+  <h3 style="display: inline">Order Summary</h3>
+  <div class="btn-group pull-right">
+    <a class="btn btn-primary" href="{{'../'}}"
+      title="back">
+      <i class="fa fa-arrow-left"
+        style="font-size: 16px;"></i>
+    </a>
+    @if(!$order->processed)
+      <button type="button" name="button"
+        class="btn btn-warning" title="processed"
+        onclick="showProcessedConfirmModal({{$order}})">
+        <i class="glyphicon glyphicon-check"></i>
+      </button>
+    @endif
+    @if($order->processed)
+      <button class="btn btn-danger" title="delete order"
+        onclick="showOrderDeleteModal({{$order}})">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    @endif
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+
+<div class="order-summary">
+    <span class="itemTitle">Order Number: </span>{{$order->id}} <br>
+    <span class="itemTitle">Number Of Items: </span>{{$order->num_items}} <br>
+    <span class="itemTitle">Customer Name: </span>{{$order->customer_name}} <br>
+    <span class="itemTitle">Phone Number: </span>{{$order->customer_contact}} <br>
     <span class="itemTitle">Delivery Location: </span>{{$order->delivery_location}} <br>
     <span class="itemTitle">Delivery Price: </span>
-    {{ number_format($order->delivery_price) }}
-  </p>
+    {{ number_format($order->delivery_price) }} <br>
+    <span class="itemTitle">Total Amount: </span>
+    {{ number_format($order->amount) }} <br>
+    <span class="itemTitle">Order Status: </span>
+    @php
+      if($order->processed) {
+        $class = "text-success";
+        $text = "Processed";
+      }
+      else {
+        $class = "text-warning";
+        $text = "Pending";
+      }
+    @endphp
+    <span id="status" class="{{$class}}">
+      {{$text}}</span>
+</div>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         Order Items:
       </h3>
-      <a class="btn btn-primary pull-right" href="{{'../'}}"
-        title="back">
-        <i class="fa fa-arrow-left"
-          style="font-size: 16px;"></i>
-      </a>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">

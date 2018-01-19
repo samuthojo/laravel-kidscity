@@ -118,6 +118,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
   Route::get('/processed', 'Orders@processed')->name('orders.processed');
+  Route::delete('/processed/{order}', 'Orders@deleteProcessed')->name('orders.delete_processed');
   Route::get('/processed/{order}/items', 'Orders@items')->name('processed.items');
   Route::get('/orders/{order}/items', 'Orders@items')->name('orders.items');
   Route::post('/orders/{order}', 'Orders@process')->name('orders.process');

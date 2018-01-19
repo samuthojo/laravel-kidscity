@@ -30,6 +30,7 @@
     <table id="myTable" class="table table-hover">
       <thead>
         <th>Date Ordered</th>
+        <th>Date Processed</th>
         <th>Order No.</th>
         <th>Customer</th>
         <th>Contact</th>
@@ -42,6 +43,7 @@
         @foreach($orders as $order)
           <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
             <td>{{$order->created_at}}</td>
+            <td>{{$order->updated_at}}</td>
             <td>{{$order->id}}</td>
             <td>{{$order->customer_name}}</td>
             <td>{{$order->customer_contact}}</td>

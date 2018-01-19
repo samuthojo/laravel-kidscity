@@ -71,10 +71,6 @@
                   onclick="showProcessedConfirmModal({{$order}})">
                   <i class="glyphicon glyphicon-check"></i>
                 </button>
-                <button class="btn btn-danger" title="delete order"
-                  onclick="showOrderDeleteModal({{$order}})">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
               </div>
             </td>
           </tr>

@@ -106,16 +106,19 @@ class Orders extends Controller
 
     public function destroy(App\Order $order)
     {
-      $isProcessed = $order->processed;
 
       $order->delete();
 
-      if($isProcessed) {
-        $orders = $this->getAllProcessedOrders();
-        return view('cms.tables.processed_orders_table', compact('orders'));
-      }
+      $orders = $this->getAllProcessedOrders();
+      return view('cms.tables.processed_orders_table', compact('orders'));
 
-      $orders = $this->getAllPendingOrders();
-      return view('cms.tables.orders_table', compact('orders'));
+      // $orders = $this->getAllPendingOrders();
+      // return view('cms.tables.orders_table', compact('orders'));
+    }
+
+    public function deleteProcessed(App\Order $order)
+    {
+      $order->delete();
+      return 1;
     }
 }
