@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
         for($i = 0; $i < 5; $i++) {
           App\User::create([
             'phone_number' => $faker->phoneNumber,
-            'name' => $faker->name
+            'name' => $faker->name,
+            'password' => Hash::make(str_random(32)),
           ]);
         }
     }
