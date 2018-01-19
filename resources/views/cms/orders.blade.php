@@ -13,6 +13,12 @@
   'text' =>  'You are about to delete this order!',
   'action' => 'Confirm',
   'function' => 'deleteOrder()',])
+@include('cms.modals.confirmation_modal',
+  ['id' => 'processed_confirmation_modal',
+  'title' => 'Confirm',
+  'text' =>  'Mark Order as processed!',
+  'action' => 'Confirm',
+  'function' => 'markProcessed()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -60,6 +66,11 @@
                       title="view items" class="btn btn-default">
                       <i class="glyphicon glyphicon-eye-open"></i>
                     </a>
+                    <button type="button" name="button"
+                      class="btn btn-warning" title="processed"
+                      onclick="showProcessedConfirmModal({{$order}})">
+                      <i class="glyphicon glyphicon-check"></i>
+                    </button>
                     <button class="btn btn-danger" title="delete order"
                       onclick="showOrderDeleteModal({{$order}})">
                       <span class="glyphicon glyphicon-trash"></span>

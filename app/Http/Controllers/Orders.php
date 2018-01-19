@@ -69,6 +69,13 @@ class Orders extends Controller
         return $order;
     }
 
+    public function process($id)
+    {
+      App\Order::where(compact('id'))->update(['processed' => true, ]);
+      $orders = $this->getAllOrders();
+      return view('cms.tables.orders_table', compact('orders'));
+    }
+
     public function destroy(App\Order $order)
     {
       $order->delete();

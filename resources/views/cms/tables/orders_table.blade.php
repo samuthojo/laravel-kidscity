@@ -29,6 +29,11 @@
               title="view items" class="btn btn-default">
               <i class="glyphicon glyphicon-eye-open"></i>
             </a>
+            <button type="button" name="button"
+              class="btn btn-warning" title="processed"
+              onclick="showProcessedConfirmModal({{$order}})">
+              <i class="glyphicon glyphicon-check"></i>
+            </button>
             <button class="btn btn-danger" title="delete order"
               onclick="showOrderDeleteModal({{$order}})">
               <span class="glyphicon glyphicon-trash"></span>
