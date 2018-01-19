@@ -14,13 +14,6 @@
   'action' => 'Confirm',
   'function' => 'deleteOrder()',])
 
-@include('cms.modals.processed_confirm_modal',
-  ['id' => 'processed_confirmation_modal',
-  'title' => 'Confirm',
-  'text' =>  'Mark Order as processed!',
-  'action' => 'Confirm',
-  'function' => 'markProcessed()',])
-
 @include('cms.alerts.success-alert')
 <ul class="nav nav-tabs">
   <li class="{{isActiveRoute('orders.index')}}">
@@ -32,7 +25,6 @@
 </ul>
 
 <div class="tab-content">
-
   <div id="ordersTable" class="tab-pane fade in active">
 
     <table id="myTable" class="table table-hover">
@@ -62,15 +54,10 @@
             <td>{{ $order->delivery_location }}</td>
             <td>
               <div class="btn-group">
-                <a href="{{ route('orders.items', ['order' => $order->id]) }}"
+                <a href="{{ route('processed.items', ['order' => $order->id]) }}"
                   title="view items" class="btn btn-default">
                   <i class="glyphicon glyphicon-eye-open"></i>
                 </a>
-                <button type="button" name="button"
-                  class="btn btn-warning" title="processed"
-                  onclick="showProcessedConfirmModal({{$order}})">
-                  <i class="glyphicon glyphicon-check"></i>
-                </button>
                 <button class="btn btn-danger" title="delete order"
                   onclick="showOrderDeleteModal({{$order}})">
                   <span class="glyphicon glyphicon-trash"></span>
@@ -96,24 +83,24 @@
                 exportOptions: {
                   columns: ":not(:last-child)"
                 },
-                title: "Pending Orders",
-                messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                title: "Processed Orders",
+                messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               },
                {
                  extend: 'excel',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Pending Orders",
-                 messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                 title: "Processed Orders",
+                 messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               },
                {
                  extend: 'pdf',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Pending Orders",
-                 messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                 title: "Processed Orders",
+                 messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               }
           ],
           iDisplayLength: 8,

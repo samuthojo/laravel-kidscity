@@ -117,6 +117,8 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::delete('/products/{product}', 'Products@destroy')->name('products.destroy');
 
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
+  Route::get('/processed', 'Orders@processed')->name('orders.processed');
+  Route::get('/processed/{order}/items', 'Orders@items')->name('processed.items');
   Route::get('/orders/{order}/items', 'Orders@items')->name('orders.items');
   Route::post('/orders/{order}', 'Orders@process')->name('orders.process');
   Route::delete('/orders/{order}', 'Orders@destroy')->name('orders.destroy');

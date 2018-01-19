@@ -29,11 +29,6 @@
               title="view items" class="btn btn-default">
               <i class="glyphicon glyphicon-eye-open"></i>
             </a>
-            <button type="button" name="button"
-              class="btn btn-warning" title="processed"
-              onclick="showProcessedConfirmModal({{$order}})">
-              <i class="glyphicon glyphicon-check"></i>
-            </button>
             <button class="btn btn-danger" title="delete order"
               onclick="showOrderDeleteModal({{$order}})">
               <span class="glyphicon glyphicon-trash"></span>
@@ -54,24 +49,24 @@
                 exportOptions: {
                   columns: ":not(:last-child)"
                 },
-                title: "Pending Orders",
-                messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                title: "Processed Orders",
+                messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               },
                {
                  extend: 'excel',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Pending Orders",
-                 messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                 title: "Processed Orders",
+                 messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               },
                {
                  extend: 'pdf',
                  exportOptions: {
                    columns: ":not(:last-child)"
                  },
-                 title: "Pending Orders",
-                 messageTop: "The List Of Pending Orders As Of {{date('d-m-Y')}}"
+                 title: "Processed Orders",
+                 messageTop: "The List Of Processed Orders As Of {{date('d-m-Y')}}"
               }
           ],
           iDisplayLength: 8,

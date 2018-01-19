@@ -9,14 +9,42 @@ class Orders extends Controller
 {
     public function cmsIndex()
     {
-      $orders = $this->getAllOrders();
+      $orders = $this->getAllPendingOrders();
 
       return view('cms.orders', compact('orders'));
     }
 
-    private function getAllOrders()
+    public function processed()
     {
-      return $orders = App\Order::latest('created_at')->get()->map(function ($myOrder) {
+      $orders = $this->getAllProcessedOrders();
+
+      return view('cms.processed_orders', compact('orders'));
+    }
+
+    private function getAllPendingOrders()
+    {
+      return $orders =
+        App\Order::latest('created_at')
+                 ->where('processed', false)
+                 ->get()->map(function ($myOrder) {
+        $order = $myOrder;
+        $order->customer_name = $order->user()->first()->name;
+        $order->customer_contact = $order->user()->first()->phone_number;
+        $order->num_items = $order->orderItems()->count();
+        $order->amount = $this->getAmount($myOrder);
+        $order->delivery_location = $myOrder->deliveryLocation()->withTrashed()->first()->location;
+        $order->delivery_price = $myOrder->deliveryLocation()->withTrashed()->first()->delivery_price;
+
+        return $order;
+      });
+    }
+
+    private function getAllProcessedOrders()
+    {
+      return $orders =
+        App\Order::latest('created_at')
+                 ->where('processed', true)
+                 ->get()->map(function ($myOrder) {
         $order = $myOrder;
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
@@ -72,16 +100,22 @@ class Orders extends Controller
     public function process($id)
     {
       App\Order::where(compact('id'))->update(['processed' => true, ]);
-      $orders = $this->getAllOrders();
+      $orders = $this->getAllPendingOrders();
       return view('cms.tables.orders_table', compact('orders'));
     }
 
     public function destroy(App\Order $order)
     {
+      $isProcessed = $order->processed;
+
       $order->delete();
 
-      $orders = $this->getAllOrders();
+      if($isProcessed) {
+        $orders = $this->getAllProcessedOrders();
+        return view('cms.tables.processed_orders_table', compact('orders'));
+      }
 
+      $orders = $this->getAllPendingOrders();
       return view('cms.tables.orders_table', compact('orders'));
     }
 }

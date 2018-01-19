@@ -2,7 +2,7 @@ var order_id = "";
 
 function showProcessedConfirmModal(order) {
   showModal("processed_confirmation_modal");
-  $("#confirmation_text").text("Mark Order #" + order.id + " as processed");
+  $("#confirm_text").text("Mark Order #" + order.id + " as processed");
   order_id = order.id;
 }
 

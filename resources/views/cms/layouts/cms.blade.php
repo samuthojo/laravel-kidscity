@@ -89,7 +89,7 @@
                 <li class="{{areActiveRoutes(['products.index', 'products.product'])}}">
                     <a href="{{ route('products.index') }}">Products</a>
                 </li>
-                <li class="{{areActiveRoutes(['orders.index', 'orders.items'])}}">
+                <li class="{{areActiveRoutes(['orders.index', 'orders.items', 'orders.processed', 'processed.items'])}}">
                     <a href="{{ route('orders.index') }}">Orders</a>
                 </li>
                 <li class="{{isActiveRoute('locations.index')}}">
