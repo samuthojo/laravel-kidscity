@@ -26,11 +26,8 @@
         <td>
           <div class="btn-group">
             <a href="{{ route('orders.items', ['order' => $order->id]) }}"
-              title="view items">
-              <button type="button" name="button"
-                class="btn btn-default">
-                <i class="glyphicon glyphicon-eye-open"></i>
-              </button>
+              title="view items" class="btn btn-default">
+              <i class="glyphicon glyphicon-eye-open"></i>
             </a>
             <button class="btn btn-danger" title="delete order"
               onclick="showOrderDeleteModal({{$order}})">
