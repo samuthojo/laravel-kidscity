@@ -2,9 +2,17 @@
 
 @section('more')
   @include('cms.header')
+  <script src="{{asset('js/cms_orders.js')}}"></script>
 @endsection
 
 @section('content')
+
+@include('cms.modals.confirmation_modal',
+  ['id' => 'delete_confirmation_modal',
+  'title' => 'Confirm',
+  'text' =>  'You are about to delete this order!',
+  'action' => 'Confirm',
+  'function' => 'deleteOrder()',])
 
 @if(request()->session()->has('message'))
 <div id="alert-success" class="alert alert-success">
@@ -47,13 +55,16 @@
                 </td>
                 <td>{{ $order->delivery_location }}</td>
                 <td>
-                  <a href="{{ route('orders.items', ['order' => $order->id]) }}"
-                    title="view items">
-                    <button type="button" name="button"
-                      class="btn btn-warning">
+                  <div class="btn-group">
+                    <a href="{{ route('orders.items', ['order' => $order->id]) }}"
+                      title="view items" class="btn btn-default">
                       <i class="glyphicon glyphicon-eye-open"></i>
+                    </a>
+                    <button class="btn btn-danger" title="delete order"
+                      onclick="showOrderDeleteModal({{$order}})">
+                      <span class="glyphicon glyphicon-trash"></span>
                     </button>
-                  </a>
+                  </div>
                 </td>
               </tr>
             @endforeach

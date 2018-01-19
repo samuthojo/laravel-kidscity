@@ -9,7 +9,14 @@ class Orders extends Controller
 {
     public function cmsIndex()
     {
-      $orders = App\Order::latest('created_at')->get()->map(function ($myOrder) {
+      $orders = $this->getAllOrders();
+
+      return view('cms.orders', compact('orders'));
+    }
+
+    private function getAllOrders()
+    {
+      return $orders = App\Order::latest('created_at')->get()->map(function ($myOrder) {
         $order = $myOrder;
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
@@ -20,8 +27,6 @@ class Orders extends Controller
 
         return $order;
       });
-
-      return view('cms.orders', compact('orders'));
     }
 
     private function getAmount($order)
@@ -62,5 +67,14 @@ class Orders extends Controller
         $order->delivery_price = $order->deliveryLocation()->withTrashed()->first()->delivery_price;
 
         return $order;
+    }
+
+    public function destroy(App\Order $order)
+    {
+      $order->delete();
+
+      $orders = $this->getAllOrders();
+
+      return view('cms.tables.orders_table', compact('orders'));
     }
 }

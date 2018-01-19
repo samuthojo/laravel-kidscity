@@ -118,6 +118,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
   Route::get('/orders/{order}/items', 'Orders@items')->name('orders.items');
+  Route::delete('/orders/{order}', 'Orders@destroy')->name('orders.destroy');
 
   Route::get('/locations', 'DeliveryLocations@cmsIndex')->name('locations.index');
   Route::post('/locations', 'DeliveryLocations@store')->name('locations.store');
