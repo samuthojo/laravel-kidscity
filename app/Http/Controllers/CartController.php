@@ -73,7 +73,7 @@ class CartController extends Controller
             Cart::destroy();
             return back()->with('success', 'Your Order has been successfully placed!');
         }else{
-            return back()->with('error', 'Sorry, your order wasn\'t be placed. Plase try again.');
+            return back()->with('error', 'Sorry, your order wasn\'t be placed. Please try again.');
         }
     }
 
