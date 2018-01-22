@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DeliveryLocation;
 use App\Order;
+use App\OrderItem;
 use App\Product;
 use App\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -62,6 +63,13 @@ class CartController extends Controller
         ]);
 
         if($new_order){
+            foreach(Cart::content() as $item){
+                $new_order_item = OrderItem::create([
+                    'order_id' => $new_order->id,
+                    'product_id' => $item->model->id,
+                    'quantity' => $item->qty
+                ]);
+            }
             Cart::destroy();
             return back()->with('success', 'Your Order has been successfully placed!');
         }else{

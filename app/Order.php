@@ -40,4 +40,13 @@ class Order extends Model
     {
       return \Carbon\Carbon::parse($value)->format('d-m-Y');
     }
+
+    public function getOrderAmount()
+    {
+      $totalPrice = 0;
+      foreach ($this->orderItems()->get() as $item) {
+        $totalPrice += $item->totalPrice();
+      }
+      return $totalPrice;
+    }
 }

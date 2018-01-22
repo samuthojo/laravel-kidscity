@@ -56,6 +56,8 @@
     <span class="itemTitle">Delivery Location: </span>{{$order->delivery_location}} <br>
     <span class="itemTitle">Delivery Price: </span>
     {{ number_format($order->delivery_price) }} <br>
+    <span class="itemTitle">Order Amount: </span>
+    {{ number_format($order->order_amount) }} <br>
     <span class="itemTitle">Total Amount: </span>
     {{ number_format($order->amount) }} <br>
     <span class="itemTitle">Order Status: </span>

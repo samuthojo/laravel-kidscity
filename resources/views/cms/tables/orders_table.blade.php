@@ -5,7 +5,7 @@
     <th>Customer</th>
     <th>Contact</th>
     <th>#items</th>
-    <th>Amount</th>
+    <th>Total Amount</th>
     <th>DeliveryLocation</th>
     <th>Action</th>
   </thead>

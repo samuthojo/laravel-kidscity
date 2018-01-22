@@ -30,13 +30,18 @@ class Orders extends Controller
         $order = $myOrder;
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
-        $order->num_items = $order->orderItems()->count();
+        $order->num_items = $this->getNumItems($myOrder->id);
         $order->amount = $this->getAmount($myOrder);
         $order->delivery_location = $myOrder->deliveryLocation()->withTrashed()->first()->location;
         $order->delivery_price = $myOrder->deliveryLocation()->withTrashed()->first()->delivery_price;
 
         return $order;
       });
+    }
+
+    private function getNumItems($order_id)
+    {
+      return App\OrderItem::where(compact('order_id'))->sum('quantity');
     }
 
     private function getAllProcessedOrders()
@@ -48,7 +53,7 @@ class Orders extends Controller
         $order = $myOrder;
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
-        $order->num_items = $order->orderItems()->count();
+        $order->num_items = $this->getNumItems($myOrder->id);
         $order->amount = $this->getAmount($myOrder);
         $order->delivery_location = $myOrder->deliveryLocation()->withTrashed()->first()->location;
         $order->delivery_price = $myOrder->deliveryLocation()->withTrashed()->first()->delivery_price;
@@ -89,11 +94,11 @@ class Orders extends Controller
     {
         $order->customer_name = $order->user()->first()->name;
         $order->customer_contact = $order->user()->first()->phone_number;
-        $order->num_items = $order->orderItems()->count();
-        $order->amount = $this->getAmount($order);
+        $order->num_items = $this->getNumItems($order->id);
         $order->delivery_location = $order->deliveryLocation()->withTrashed()->first()->location;
+        $order->order_amount = $order->getOrderAmount();
         $order->delivery_price = $order->deliveryLocation()->withTrashed()->first()->delivery_price;
-
+        $order->amount = $this->getAmount($order); //The total amount
         return $order;
     }
 

@@ -22,4 +22,9 @@ class OrderItem extends Model
     {
       return $this->belongsTo('App\Product');
     }
+
+    public function totalPrice()
+    {
+      return $this->product()->first()->price * $this->quantity;
+    }
 }
