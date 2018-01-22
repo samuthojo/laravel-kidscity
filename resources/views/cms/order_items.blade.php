@@ -23,29 +23,14 @@
 
 @include('cms.alerts.success-alert')
 <div class="summary-title">
-  <h3 style="display: inline">Order Summary</h3>
-  <div class="btn-group pull-right">
+  <div style="margin-bottom: 10px;">
     <a class="btn btn-primary" href="{{'../'}}"
       title="back">
       <i class="fa fa-arrow-left"
-        style="font-size: 16px;"></i>
+        style="font-size: 18px;"></i>
     </a>
-    @if(!$order->processed)
-      <button type="button" name="button"
-        class="btn btn-warning" title="processed"
-        onclick="showProcessedConfirmModal({{$order}})">
-        <i class="glyphicon glyphicon-check"></i>
-      </button>
-    @endif
-    @if($order->processed)
-      <button class="btn btn-danger" title="delete order"
-        onclick="showOrderDeleteModal({{$order}})">
-        <span class="glyphicon glyphicon-trash"></span>
-      </button>
-    @endif
   </div>
-
-  <div class="clearfix"></div>
+  <h3 style="display: inline; color: #337ab7;">Order Summary</h3>
 </div>
 
 <div class="order-summary">
@@ -73,6 +58,19 @@
     @endphp
     <span id="status" class="{{$class}}">
       {{$text}}</span>
+    @if(!$order->processed)
+      <button type="button" name="button"
+        class="btn btn-warning pull-right" title="mark as processed"
+        onclick="showProcessedConfirmModal({{$order}})">
+        Processed <i class="glyphicon glyphicon-check"></i>
+      </button>
+    @endif
+    @if($order->processed)
+      <button class="btn btn-danger pull-right" title="delete this order"
+        onclick="showOrderDeleteModal({{$order}})">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    @endif
 </div>
   <div class="panel panel-default">
     <div class="panel-heading">

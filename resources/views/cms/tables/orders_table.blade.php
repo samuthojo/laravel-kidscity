@@ -30,7 +30,7 @@
               <i class="glyphicon glyphicon-eye-open"></i>
             </a>
             <button type="button" name="button"
-              class="btn btn-warning" title="processed"
+              class="btn btn-warning" title="mark as processed"
               onclick="showProcessedConfirmModal({{$order}})">
               <i class="glyphicon glyphicon-check"></i>
             </button>
