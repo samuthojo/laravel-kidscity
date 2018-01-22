@@ -34,10 +34,6 @@
               onclick="showProcessedConfirmModal({{$order}})">
               <i class="glyphicon glyphicon-check"></i>
             </button>
-            <button class="btn btn-danger" title="delete order"
-              onclick="showOrderDeleteModal({{$order}})">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
           </div>
         </td>
       </tr>
@@ -48,6 +44,7 @@
     $(document).ready(function () {
       $("#myTable").dataTable({
           dom: 'Bfrtip',
+          "order": [[ 1, "desc" ]] ,
           buttons: [
               {
                 extend: 'print',

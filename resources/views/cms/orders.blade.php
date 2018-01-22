@@ -2,6 +2,16 @@
 
 @section('more')
   @include('cms.header')
+  <!-- DataTable Date Sorting functionality-->
+  <script type="text/javascript" charset="utf8"
+    src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js">
+  </script>
+
+  <!-- DataTable Date Sorting functionality-->
+  <script type="text/javascript" charset="utf8"
+    src="//cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js">
+  </script>
+
   <script src="{{asset('js/cms_orders.js')}}"></script>
 @endsection
 
@@ -86,6 +96,7 @@
     $(document).ready(function () {
       $("#myTable").dataTable({
           dom: 'Bfrtip',
+          "order": [[ 1, "desc" ]] ,
           buttons: [
               {
                 extend: 'print',

@@ -45,6 +45,7 @@
     $(document).ready(function () {
       $("#myTable").dataTable({
           dom: 'Bfrtip',
+          "order": [[ 1, "desc" ]] ,
           buttons: [
               {
                 extend: 'print',
