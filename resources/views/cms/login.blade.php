@@ -67,7 +67,7 @@
       <div class="form-group">
         <!-- <label for="username">Phone Number:</label> -->
         <input type="text" id="username" class="form-control"
-          placeholder="Phone Number" name="phone_number"
+          placeholder="Username" name="phone_number"
           value="{{ old('phone_number') }}" autofocus>
       </div>
 

@@ -74,7 +74,7 @@ class LoginController extends Controller
     protected function attemptCmsLogin(Request $request)
     {
         $user = App\User::where($request->only('phone_number'))->first();
-        if($user->is_admin) {
+        if(!(is_null($user)) && $user->is_admin) {
           return $this->guard()->attempt(
               $this->credentials($request)
           );
