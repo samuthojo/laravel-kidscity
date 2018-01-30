@@ -97,7 +97,7 @@
       $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
       $("#myTable").dataTable({
           dom: 'Bfrtip',
-          "order": [[ 1, "desc" ]] ,
+          "order": [[ 0, "desc" ]] ,
           buttons: [
               {
                 extend: 'print',
