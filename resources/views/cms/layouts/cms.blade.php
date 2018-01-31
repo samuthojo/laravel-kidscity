@@ -98,6 +98,14 @@
                 <li class="{{isActiveRoute('users.index')}}">
                     <a href="{{ route('users.index') }}">Customers</a>
                 </li>
+                <li class="{{areActiveRoutes(['banners.index'])}}">
+                  <a href="#moreSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-list">&nbsp;</i>More
+                  </a>
+                  <ul class="collapse list-unstyled" id="moreSubmenu">
+                    <li><a href="{{ route('banners.index') }}">Banners</a></li>
+                  </ul>
+                </li>
             </ul>
         </nav>
 

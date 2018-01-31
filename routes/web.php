@@ -129,6 +129,12 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/locations/{location}', 'DeliveryLocations@update')->name('locations.update');
   Route::delete('/locations/{location}', 'DeliveryLocations@destroy')->name('locations.destroy');
 
+  Route::get('/banners', 'Banners@cmsIndex')->name('banners.index');
+  Route::post('/advert/{advert}', 'Banners@updateAdvert')->name('banners.updateAdvert');
+  Route::post('/main_banner/{main}', 'Banners@updateMainBanner')->name('banners.updateMainBanner');
+  Route::post('/featured_banner/{featured}', 'Banners@updateFeaturedBanner')->name('banners.updateFeaturedBanner');
+  Route::post('/category_banner/{category}', 'Banners@updateCategoryBanner')->name('banners.updateCategoryBanner');
+
   Route::view('/change_password', 'cms.change_password')->name('change_password');
   Route::post('/change_password', 'Auth\AdminResetPasswordController@reset')->name("reset_admin_password");
 });
