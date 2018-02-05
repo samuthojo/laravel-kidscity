@@ -12,7 +12,7 @@
 				<span class="price">
 					<span class="currency">Tshs.</span>
 					<span class="number">
-						{{number_format(round(rand(12000, 30000), -3))}}/-
+						{{present_price($product->price)}}
 					</span>
 				</span>
 				<div class="product-description">

@@ -612,6 +612,15 @@ select.input{
     background: url(../../images/arrow_down.svg) right center/43px 7px no-repeat;
 }
 
+.brand{
+    padding: 20px 0 !important;
+}
+
+.brand img{
+    height: auto !important;
+    max-width: 50% !important;
+}
+
 @media screen and (min-width: 681px){
     .for-mob{
         display: none !important;

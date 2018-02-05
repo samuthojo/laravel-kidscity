@@ -29,7 +29,11 @@
 }
 
 #sectionBanner .section-title{
-    z-index: 1
+    padding: 0 !important;
+    width: 100vw;
+    max-width: 1150px;
+    margin: auto;
+    z-index: 1;
 }
 
 #sectionBanner .section-title h1{

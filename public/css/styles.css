@@ -6,6 +6,7 @@ body{
   --accent-color: #4351a2;
   --accent-color-light: #98a1c8;
   --light-color: #f3f3f3;
+  --accent-green: #33b35d;
 
   --main-color-darker: #744d8f;
 
@@ -93,6 +94,12 @@ body.locked{
     padding: 0 2em;
 }
 
+#contactStrip{
+    padding: 4px 0;
+    background: #f5f5f5;
+    color: #000;
+    font-size: 0.9em;
+}
 #topNav{
     padding: 8px 0;
 }
@@ -534,15 +541,78 @@ select.input{
     background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
 }
 
+#floatingShoppingCart{
+    width: 330px;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    background: #000;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+#cartHeader{
+    padding: 1em 1.2em;
+    border-bottom: 1px solid #333;
+}
+
+#cartCount{
+    line-height: 33px;
+    font-size: 0.9em;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 30px;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    padding: 0 0.5em;
+    letter-spacing: 1px;
+}
+
+#cartHeader button{
+    background-color: transparent;
+    border: none;
+    font-size: 1.6em;
+    color: #fff;
+}
+#cartBody{
+    padding: 1.2em;
+    border-bottom: 1px solid #333;
+}
+
+#cartButtons{
+    padding: 1em 1.2em;
+}
+
+#cartButtons button{
+    border-radius: 2px;
+    background-color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    line-height: 1;
+    height: auto;
+    padding: 0.4em 1em;
+    padding-top: 0.65em;
+
+}
+
+#cartButtons button:first-child{
+    margin-right: 0.4em;
+}
+
+
 /*FOOTER*/
 footer{
-    /*height: 260px;*/
+    background-color: #f8f8f8;
 }
 
 .footer-wrapper{
-    background-color: #f8f8f8;
     padding: 4em;
     padding-bottom: 2.5em;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 footer #copyright{

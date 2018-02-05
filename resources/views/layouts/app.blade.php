@@ -132,6 +132,27 @@
         </a>
     </div>
 
+    <div id="floatingShoppingCart">
+        <div id="cartHeader" class="layout center justified">
+            Shopping Cart
+
+            <div class="layout center">
+                <div id="cartCount" class="layou inline center-center">1</div>
+                &nbsp;&nbsp;
+                <button>
+                    <i class="fa fa-angle-up"></i>
+                </button>
+            </div>
+        </div>
+        <div id="cartBody">
+
+        </div>
+        <div id="cartButtons" class="layout center end-justified">
+            <button class="btn">VIEW CART</button>
+            <button class="btn">CHECKOUT</button>
+        </div>
+    </div>
+
     @yield('scripts')
 
     @include('scripts')

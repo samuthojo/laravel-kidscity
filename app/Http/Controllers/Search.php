@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductAgeRange;
 use Illuminate\Http\Request;
 use App;
 use App\Utils;
@@ -16,12 +17,13 @@ class Search extends Controller
         //Is ajax request
         return $products; //Laravel automatically converts to Json
       }
-      return $this->shop($products);
+      return $this->shop($products, $searchKey);
     }
 
-    private function shop($products)
+    private function shop($products, $searchKey)
     {
       $page = "shop";
+      $age_ranges = ProductAgeRange::all();
       $categories = Utils\Utils::getAllCategories();
       // $products = Utils\Utils::getAllProducts();
       $brands = App\Brand::all();
@@ -30,13 +32,13 @@ class Search extends Controller
       $selectedBrand = -1;
       $sub_categories = null;
 
-      $selectedCategoryName = "";
-      $selectedSubCategoryName = "";
-      $selectedBrandName = "";
+      $selectedCategoryName = $searchKey;
+      $selectedSubCategoryName = $searchKey;
+      $selectedBrandName = $searchKey;
 
       return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
           'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
           'selectedBrandName', 'categories', 'sub_categories',
-          'brands', 'products', 'page'));
+          'brands', 'products', 'age_ranges', 'page'));
     }
 }
