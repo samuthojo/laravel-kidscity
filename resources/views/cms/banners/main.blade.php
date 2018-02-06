@@ -3,55 +3,65 @@
 <div class="panel panel-default">
 
   <div class="panel-body">
-    <div>
+    <div class="bannerContainer">
+      <div class="bannerDiv">
         <a href=
-           "{{ asset('images/kidstar.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/kidstar.jpg') }}"
-                 alt="advert">
-        </a><br/>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="previewFile('{{}}')">
+           "{{ asset('images/' . $mainBanners->first()->image_url ) }}"
+           target="_blank">
+            <img src="{{ asset('images/' . $mainBanners->first()->image_url ) }}"
+                 alt="Main Banner" class="img-rounded" id="mainImage">
+        </a>
+        <div class="bannerSpinner">
+          <i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"
+            style="display: none;"></i>
+        </div>
+      </div>
+      <span style="font-weight: bold;">Change picture: </span><br/>
+      <input type='file'
+        onchange="previewMainBanner('{{$mainBanners->first()->id}}')"
+        id="mainFile">
     </div>
-  </div>
-
+ </div>
 </div>
+
 <script>
-  function previewFile(id){
-      var preview = document.querySelector('.img' + id); //selects the query named img
-      var file    = document.querySelector('#file' + id).files[0]; //sames as here
-      var reader  = new FileReader();
-
-      var formData =  new FormData();
-      formData.append('slideshow', file);
-      link = 'cms/slideshows/updateSlide/' + id;
-
-      reader.onloadend = function () {
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-          $.ajax({
-            type: 'post',
-            dataType: 'html',
-            url:  link,
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result){
-              $(".ipf-preloader").fadeOut(1000);
-              preview.src = reader.result;
-            }
-          });
-      }
+  function previewMainBanner(id){
+      $(".fa-spinner").fadeIn(0);
+      var preview = document.querySelector('#mainImage');
+      preview.style.opacity = "0.3";
+      var file = document.getElementById('mainFile').files[0];
 
       if (file) {
-          reader.readAsDataURL(file); //reads the data as a URL
-      } else {
-          preview.src = "";
+        var reader  = new FileReader();
+        reader.onload = function () {
+          preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
       }
+
+      var formData =  new FormData();
+      formData.append('image_url', file);
+      var link = '/admin/main_banner/' + id;
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+        type: 'post',
+        url:  link,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (){
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        },
+        error: function(error) {
+          console.log(error);
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        }
+      });
  }
 </script>

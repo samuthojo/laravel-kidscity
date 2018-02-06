@@ -3,78 +3,69 @@
 <div class="panel panel-default">
 
   <div class="panel-body">
-    <div style="display: inline-block;" class="featured">
-        <a href=
-           "{{ asset('images/pram.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/pram.jpg') }}"
-                 alt="Best Seller">
-        </a><br/>
-        <h3>BEST SELLER</h3>
+    @foreach($featuredBanners as $banner)
+      <div class="bannerContainer">
+        <div class="bannerDiv">
+          <a href=
+             "{{ asset('images/' . $banner->image_url ) }}"
+             target="_blank">
+              <img src="{{ asset('images/' . $banner->image_url ) }}"
+                   alt="{{$banner->name}}" class="img-rounded"
+                   id="img{{$banner->id}}">
+          </a>
+          <div class="bannerSpinner">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"
+              style="display: none;"></i>
+          </div>
+        </div>
+        <h3>{{$banner->name}}</h3>
         <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
-    </div>
-    <div style="display: inline-block;" class="featured">
-        <a href=
-           "{{ asset('images/pram2.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/pram2.jpg') }}"
-                 alt="Toys">
-        </a><br/>
-        <h3>ACCESSORIES</h3>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
-    </div>
-    <div style="display: inline-block;" class="featured">
-        <a href=
-           "{{ asset('images/toy2.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/toy2.jpg') }}"
-                 alt="Kids Fun">
-        </a><br/>
-        <h3>KIDS FUN</h3>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
-    </div>
+        <input type='file' id="featured{{$banner->id}}"
+          onchange="previewFeaturedBanner('{{$banner->id}}')">
+      </div>
+    @endforeach
   </div>
 
 </div>
+
 <script>
-  function previewFile(id){
-      var preview = document.querySelector('.img' + id); //selects the query named img
-      var file    = document.querySelector('#file' + id).files[0]; //sames as here
-      var reader  = new FileReader();
-
-      var formData =  new FormData();
-      formData.append('slideshow', file);
-      link = 'cms/slideshows/updateSlide/' + id;
-
-      reader.onloadend = function () {
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-          $.ajax({
-            type: 'post',
-            dataType: 'html',
-            url:  link,
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result){
-              $(".ipf-preloader").fadeOut(1000);
-              preview.src = reader.result;
-            }
-          });
-      }
+  function previewFeaturedBanner(id){
+      $(".fa-spinner").fadeIn(0);
+      var preview = document.querySelector('#img' + id);
+      preview.style.opacity = "0.3";
+      var file = document.getElementById('featured'+id).files[0];
 
       if (file) {
-          reader.readAsDataURL(file); //reads the data as a URL
-      } else {
-          preview.src = "";
+        var reader  = new FileReader();
+        reader.onload = function () {
+          preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
       }
+
+      var formData =  new FormData();
+      formData.append('image_url', file);
+      var link = '/admin/featured_banner/' + id;
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+        type: 'post',
+        url:  link,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (){
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        },
+        error: function(error) {
+          console.log(error);
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        }
+      });
  }
 </script>

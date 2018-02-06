@@ -3,78 +3,69 @@
 <div class="panel panel-default">
 
   <div class="panel-body">
-    <div style="display: inline-block;" class="featured">
+    @foreach($categoryBanners as $banner)
+    <div class="bannerContainer">
+      <div class="bannerDiv">
         <a href=
-           "{{ asset('images/featured-boys.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/featured-boys.jpg') }}"
-                 alt="Best Seller" style="width: 200px;">
-        </a><br/>
-        <h3>FOR BOYS</h3>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
+           "{{ asset('images/' . $banner->image_url ) }}"
+           target="_blank">
+            <img src="{{ asset('images/' . $banner->image_url ) }}"
+                 alt="{{$banner->name}}" class="img-rounded"
+                 id="catImg{{$banner->id}}">
+        </a>
+        <div class="bannerSpinner">
+          <i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"
+            style="display: none;"></i>
+        </div>
+      </div>
+      <h3>{{$banner->name}}</h3>
+      <span style="font-weight: bold;">Change picture: </span><br/>
+      <input type='file' id="category{{$banner->id}}"
+        onchange="previewCategoryBanner('{{$banner->id}}')">
     </div>
-    <div style="display: inline-block;" class="featured">
-        <a href=
-           "{{ asset('images/featured-girls.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/featured-girls.jpg') }}"
-                 alt="Toys" style="width: 200px;">
-        </a><br/>
-        <h3>FOR GIRLS</h3>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
-    </div>
-    <div style="display: inline-block;" class="featured">
-        <a href=
-           "{{ asset('images/featured_baby.jpg') }}"
-           target="_blank" class="img-rounded">
-            <img src="{{ asset('images/featured_baby.jpg') }}"
-                 alt="Kids Fun" style="width: 310px; height: 200px;">
-        </a><br/>
-        <h3>FOR BABIES</h3>
-        <span style="font-weight: bold;">Change picture: </span><br/>
-        <input type='file' name='slideshow' onchange="">
-    </div>
+    @endforeach
   </div>
 
 </div>
+
 <script>
-  function previewFile(id){
-      var preview = document.querySelector('#img' + id); //selects the query named img
-      var file    = document.querySelector('#file' + id).files[0]; //sames as here
-      var reader  = new FileReader();
+  function previewCategoryBanner(id){
+      $(".fa-spinner").fadeIn(0);
+      var preview = document.querySelector('#catImg' + id);
+      preview.style.opacity = "0.3";
+      var file = document.getElementById('category'+id).files[0];
+
+      if (file) {
+        var reader  = new FileReader();
+        reader.onload = function () {
+          preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+      }
 
       var formData =  new FormData();
       formData.append('image_url', file);
-      link = 'cms/slideshows/updateSlide/' + id;
-
-      reader.onloadend = function () {
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-          $.ajax({
-            type: 'post',
-            dataType: 'html',
-            url:  link,
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result){
-              $(".ipf-preloader").fadeOut(1000);
-              preview.src = reader.result;
-            }
-          });
-      }
-
-      if (file) {
-          reader.readAsDataURL(file); //reads the data as a URL
-      } else {
-          preview.src = "";
-      }
+      var link = '/admin/category_banner/' + id;
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+        type: 'post',
+        url:  link,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (){
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        },
+        error: function(error) {
+          console.log(error);
+          $(".fa-spinner").fadeOut(0);
+          preview.style.opacity = "1";
+        }
+      });
  }
 </script>

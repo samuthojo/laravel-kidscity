@@ -7,28 +7,51 @@ use App;
 
 class Banners extends Controller
 {
+    private $images = 'images';
+
     public function cmsIndex()
     {
-      return view('cms.banners.banners');
+      $adverts = App\Advert::all();
+      $mainBanners = App\MainBanner::all();
+      $featuredBanners = App\FeaturedBanner::all();
+      $categoryBanners = App\CategoryBanner::all();
+      return view('cms.banners.banners', compact('adverts', 'mainBanners',
+                                                 'featuredBanners', 'categoryBanners'));
     }
 
-    public function updateAdvert(Request $request, $advert)
+    public function updateAdvert(Request $request, $id)
     {
-      App\Advert::where('id', $advert)->update($request->all());
+      if($request->hasFile('image_url')) {
+        $image_url =
+        \App\Utils\Utils::saveImage($request->file('image_url'), $this->images);
+        App\Advert::where(compact('id'))->update(compact('image_url'));
+      }
     }
 
-    public function updateMainBanner(Request $request, $main)
+    public function updateMainBanner(Request $request, $id)
     {
-      App\MainBanner::where('id', $main)->update($request->all());
+      if($request->hasFile('image_url')) {
+        $image_url =
+        \App\Utils\Utils::saveImage($request->file('image_url'), $this->images);
+        App\MainBanner::where(compact('id'))->update(compact('image_url'));
+      }
     }
 
-    public function updateFeaturedBanner(Request $request, $featured)
+    public function updateFeaturedBanner(Request $request, $id)
     {
-      App\FeaturedBanner::where('id', $featured)->update($request->all());
+      if($request->hasFile('image_url')) {
+        $image_url =
+        \App\Utils\Utils::saveImage($request->file('image_url'), $this->images);
+        App\FeaturedBanner::where(compact('id'))->update(compact('image_url'));
+      }
     }
 
-    public function updateCategoryBanner(Request $request, $category)
+    public function updateCategoryBanner(Request $request, $id)
     {
-      App\CategoryBanner::where('id', $category)->update($request->all());
+      if($request->hasFile('image_url')) {
+        $image_url =
+        \App\Utils\Utils::saveImage($request->file('image_url'), $this->images);
+        App\CategoryBanner::where(compact('id'))->update(compact('image_url'));
+      }
     }
 }
