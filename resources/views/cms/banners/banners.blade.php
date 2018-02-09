@@ -6,6 +6,7 @@
   .bannerContainer {
     display: inline-block;
     max-width: 430px;
+    margin-bottom: 10px;
   }
   .bannerDiv {
     position: relative;
