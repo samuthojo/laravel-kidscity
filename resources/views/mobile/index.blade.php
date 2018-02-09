@@ -13,8 +13,8 @@
 		<div class="title scrim" style="background-image: url({{url('images/kidstar.jpg')}});">
 			<div class="layout vertical center-center fill">
 				<h1>
-					WE HAVE PRODUCTS <br>
-					FOR YOUR KIDS
+					YOUR VERY OWN <br>
+					SUPERSTAR
 				</h1>
 				<a class="btn med accent" href="{{url('/mob/shop')}}">
 					START SHOPPING
@@ -22,6 +22,21 @@
 			</div>
 		</div>
 	</div>
+
+	@if(count($brands) > 0)
+		<div class="featured-section">
+			<div class="featured-title layout center justified">
+				<h3>Top Brands</h3>
+				<a href="{{url('/mob/brands/')}}" class="btn link accent">VIEW ALL</a>
+			</div>
+
+			<div class="row">
+				@foreach($brands as $brand)
+					@include('mobile.tpl.brand')
+				@endforeach
+			</div>
+		</div>
+	@endif
 
 	@if(count($clothes) > 0)
 		<div class="featured-section">

@@ -1,3 +1,15 @@
+<div id="contactStrip">
+    <div class="section-wrapper layout center center-justified">
+        <a href="#">
+            <i class="fa fa-phone"></i>&nbsp;&nbsp;
+            +255 718 728 778
+        </a>&nbsp;&emsp;
+        <a href="#">
+            <i class="fa fa-envelope"></i>&nbsp;&nbsp;
+            info@kidcity.com
+        </a>
+    </div>
+</div>
 <div id="topNav" class="for-lg {{(isset($page) && $page == "home") ? '' : 'mini'}}">
 	<div class="section-wrapper layout justified center">
 		<a id="mainLogo" href="{{url('/')}}">
