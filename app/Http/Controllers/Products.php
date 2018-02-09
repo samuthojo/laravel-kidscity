@@ -32,6 +32,21 @@ class Products extends Controller
         'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
+    public function create()
+    {
+      $categories = \App\Category::pluck('name', 'id');
+      $subCategories = \App\SubCategory::pluck('name', 'id');
+      $brands = \App\Brand::pluck('name', 'id');
+      $priceCategories = \App\PriceCategory::pluck('range', 'id');
+      $ageRanges = \App\ProductAgeRange::pluck('range', 'id');
+      $autofocus = true;
+      $selectedSubCategory = null;
+      return view('cms.products.add_product',
+        compact('categories', 'subCategories', 'brands',
+                'priceCategories', 'ageRanges', 'autofocus',
+                'selectedSubCategory'));
+    }
+
     private function getMappedProducts()
     {
       return App\Product::latest('updated_at')

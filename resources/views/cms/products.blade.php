@@ -37,11 +37,10 @@
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         Products:
       </h3>
-      <span class="pull-right text-primary"
-        title="add product" style="cursor: pointer;"
-        onclick="showModal('add_product_modal')">
+      <a class="pull-right text-primary"
+        title="add product" href="{{ route('products.create') }}">
         <i class="fa fa-plus-circle fa-2x"></i>
-      </span>
+      </a>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">

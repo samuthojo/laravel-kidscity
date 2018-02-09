@@ -5,15 +5,19 @@ namespace App;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 
 class Product extends Model
 {
-    use SoftDeletes, Searchable;
+    use Searchable, SoftDeletes, CascadeSoftDeletes;
+
+    protected $cascadeDeletes = ['pictures'];
 
     protected $fillable = [
-        'name', 'price', 'description', 'image_url',
+        'name', 'price', 'description', 'sale_price',
         'gender', 'brand_id', 'category_id', 'sub_category_id',
         'price_category_id', 'product_age_range_id',
+        'stock', 'weight', 'dimensions', 'video_url', 'code', 'barcode',
     ];
 
     public function category()
@@ -39,6 +43,16 @@ class Product extends Model
     public function productAgeRange()
     {
         return $this->belongsTo('App\ProductAgeRange');
+    }
+
+    public function pictures()
+    {
+      return $this->hasMany('App\ProductPicture');
+    }
+
+    public function sizes()
+    {
+      return $this->hasMany('App\ProductHasSize');
     }
 
     public function orderItems()

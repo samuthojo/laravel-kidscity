@@ -111,6 +111,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::delete('/price_categories/{priceCategory}', 'PriceCategories@destroy')->name('price_categories.destroy');
 
   Route::get('/products', 'Products@cmsIndex')->name('products.index');
+  Route::get('/products/create', 'Products@create')->name('products.create');
   Route::get('/products/{product}/product', 'Products@cmsProduct')->name('products.product');
   Route::post('/products', 'Products@store')->name('products.store');
   Route::post('/products/{product}', 'Products@update')->name('products.update');
