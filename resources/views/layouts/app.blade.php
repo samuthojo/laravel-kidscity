@@ -145,7 +145,9 @@
             </div>
         </div>
         <div id="cartBody">
-
+            @foreach(Cart::content() as $item)
+                @include('cart.mini_cart_item')
+            @endforeach
         </div>
         <div id="cartButtons" class="layout center end-justified">
             <button class="btn">VIEW CART</button>

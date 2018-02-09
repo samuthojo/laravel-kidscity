@@ -602,6 +602,13 @@ select.input{
     margin-right: 0.4em;
 }
 
+.mini-cart-item{
+    /*display: none !important;*/
+}
+
+.mini-cart-item .image img{
+    width: 100%;
+}
 
 /*FOOTER*/
 footer{
