@@ -37,7 +37,9 @@ class Search extends Controller
       $selectedSubCategoryName = $searchKey;
       $selectedBrandName = $searchKey;
 
-      return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
+      $pageTitle = $searchKey;
+
+      return view('shop.index', compact('pageTitle', 'selectedCategory', 'selectedCategoryName',
           'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
           'selectedBrandName', 'categories', 'sub_categories', 'age_ranges',
           'brands', 'products', 'page'));

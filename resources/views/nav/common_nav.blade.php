@@ -1,4 +1,4 @@
-<div id="contactStrip">
+<div id="contactStrip" style="display: none;">
     <div class="section-wrapper layout center center-justified">
         <a href="#">
             <i class="fa fa-phone"></i>&nbsp;&nbsp;

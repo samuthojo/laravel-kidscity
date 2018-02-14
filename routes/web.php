@@ -62,6 +62,8 @@ Route::prefix('/mob')->group(function() {
 
 Route::get('/search', 'Search@search')->name('search');
 
+Route::get('api/cart/list', 'CartController@items');
+
 Auth::routes();
 
 

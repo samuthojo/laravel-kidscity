@@ -99,75 +99,68 @@
     @yield('styles')
 </head>
 <body style="padding-top: 0;">
-    <div id="alertMessage" class="animated">
-        <i class="fa fa-check-circle"></i>
-        <span id="alertMessageText">
-            Thankyou, we have received your message.
-        </span>
-    </div>
-
-    @include('nav.common_nav')
-
-    @yield('content')
-
-    <div id="bottomNav" class="for-mob layout center justified">
-        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-
-        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
-            <i class="fa fa-shopping-basket"></i>
-            Shop
-        </a>
-
-        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
-            <i class="fa fa fa-shopping-cart"></i>
-            Cart
-        </a>
-
-        <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
-            <i class="fa fa-user"></i>
-            Profile
-        </a>
-    </div>
-
-    <div id="floatingShoppingCart">
-        <div id="cartHeader" class="layout center justified">
-            Shopping Cart
-
-            <div class="layout center">
-                <div id="cartCount" class="layou inline center-center">1</div>
-                &nbsp;&nbsp;
-                <button>
-                    <i class="fa fa-angle-up"></i>
-                </button>
-            </div>
+    <div id="kidCityApp">
+        <div id="alertMessage" class="animated">
+            <i class="fa fa-check-circle"></i>
+            <span id="alertMessageText">
+                Thankyou, we have received your message.
+            </span>
         </div>
-        <div id="cartBody">
-            @foreach(Cart::content() as $item)
-                @include('cart.mini_cart_item')
-            @endforeach
-        </div>
-        <div id="cartButtons" class="layout center end-justified">
-            <button class="btn">VIEW CART</button>
-            <button class="btn">CHECKOUT</button>
-        </div>
-    </div>
 
-    @yield('scripts')
+        @include('nav.common_nav')
+
+        @yield('content')
+
+        <div id="bottomNav" class="for-mob layout center justified">
+            <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+
+            <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
+                <i class="fa fa-shopping-basket"></i>
+                Shop
+            </a>
+
+            <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
+                <i class="fa fa fa-shopping-cart"></i>
+                Cart
+            </a>
+
+            <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
+                <i class="fa fa-user"></i>
+                Profile
+            </a>
+        </div>
+
+        @if($page != "cart")
+            <floating-cart ref="floater"
+                           href="http://localhost:8000/cart"
+                           :items="cart_items"
+                           :item-count="cart_count"
+                           :total-price="total_price"></floating-cart>
+        @endif
+
+        @include('footer')
+    </div>
 
     @include('scripts')
 
     <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+
+    @yield('scripts')
 
     <script>
         var alertMessage = document.getElementById("alertMessage");
         var alertMessageText = document.getElementById("alertMessageText");
         var alert_timeout = null;
 
+        vue_app.setCount({{Cart::count()}});
+        vue_app.setPrice("{{present_price(Cart::subtotal())}}");
+        vue_app.setItems({!! format_cart(Cart::content()) !!});
+
         function showMessage(message){
-            console.log(alert_timeout);
             if(alert_timeout !== null){
                 closeMessage(message);
                 return;
@@ -215,11 +208,9 @@
                 .addTo(controller);
         }
 
-//        if(window.innerWidth >= 680){
-//            enableScrollLocker();
-//        }
+        //        if(window.innerWidth >= 680){
+        //            enableScrollLocker();
+        //        }
     </script>
-
-    @include('footer')
 </body>
 </html>

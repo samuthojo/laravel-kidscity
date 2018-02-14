@@ -93,8 +93,6 @@
                 if(!success)
                     return;
 
-                console.log((init_qty === 1), res.success);
-
                 if(res.success){
                     $("#miniCartToggle .count").text(res.count);
                     $("#cartSubTotal").text(res.subtotal);

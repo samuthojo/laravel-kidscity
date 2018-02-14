@@ -31,7 +31,7 @@
 	</div>
 </div>
 
-<div class="filter-group" style="display: {{isset($category) ? 'none' : ''}}">
+<div class="filter-group" style="display: {{$selectedCategory != -1 ? 'none' : ''}}">
 	<div class="filter-title">
 		<h3>Category</h3>
 	</div>
@@ -50,7 +50,7 @@
 				$category_class =
 					($category->id == $selectedCategory) ? 'active' : '';
 			@endphp
-			<a href="{{url('shop/category/' . $category->id)}}"
+			<a href="{{url('shop/?category=' . $category->id)}}"
 				class='{{"option " . $category_class}}'>
 				{{$category->name}}
 			</a>

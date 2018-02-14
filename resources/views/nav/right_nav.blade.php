@@ -1,8 +1,7 @@
 
 <div id="navRightThings" class="layout center">
     <a href="{{url('/cart')}}" id="miniCartToggle" class="layout center">
-        <i class="fa fa-shopping-basket"></i>
-        <span class="count">{{Cart::count()}}</span>&nbsp; ITEM(S)
+        <span v-html="cartLinkHtml"></span>
     </a>
 
     @guest()

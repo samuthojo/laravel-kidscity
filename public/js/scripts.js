@@ -50,6 +50,9 @@ function addItemToCart(id, qty, callback){
         dataType    : 'json',
         success     : function(res) {
             callback(true, res);
+            vue_app.addItem(res.added_item, res.subtotal);
+            vue_app.setCount(res.count);
+            vue_app.setPrice(res.subtotal);
         },
         error: function (err) {
             console.log(err);
@@ -79,6 +82,9 @@ function setQty(id, qty, callback){
             if(res.success){
                 showMessage("Item price updated!");
                 callback(true, res);
+                vue_app.changeQty(res.changed_item_id, res.new_value);
+                vue_app.setCount(res.count);
+                vue_app.setPrice(res.subtotal);
             }
             else
                 callback(true, res)
@@ -103,7 +109,7 @@ function removeFromCart(e, id){
     });
     removeItemFromCart(id, function (success, res) {
         e.target.removeAttribute("disabled");
-        e.target.innerText = "remove from cart";
+        e.target.innerText = "remove";
 
         if(!success){
             showMessage("Couldn't remove item from cart!");
@@ -139,6 +145,9 @@ function removeItemFromCart(id, callback){
         dataType    : 'json',
         success     : function(res) {
             callback(true, res);
+            vue_app.removeItem(res.removed_item_id, res.subtotal);
+            vue_app.setCount(res.count);
+            vue_app.setPrice(res.subtotal);
         },
         error: function (err) {
             console.log(err);
