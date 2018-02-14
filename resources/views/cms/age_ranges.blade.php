@@ -46,10 +46,10 @@
           <td>{{$ageRange->range}}</td>
           <td>
             <div class="btn-group">
-              <a class="btn btn-default" title="view products"
+              {{--<a class="btn btn-default" title="view products"
                href="{{ route('age_ranges.products', ['ageRange' => $ageRange->id]) }}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning" title="edit age-range"
                 onclick="showEditAgeRangeModal({{$ageRange}})">
                 <span class="glyphicon glyphicon-pencil"></span>

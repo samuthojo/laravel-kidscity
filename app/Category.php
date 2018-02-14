@@ -14,11 +14,6 @@ class Category extends Model
 
   protected $fillable = ['name', 'image_url',];
 
-  // public function products()
-  // {
-  //   return $this->hasMany('App\Product');
-  // }
-
   public function subCategories()
   {
     return $this->hasMany('App\SubCategory');
@@ -26,6 +21,7 @@ class Category extends Model
 
   public function products()
   {
-    return $this->belongsToMany('App\Product', 'product_categories')->using('App\ProductCategories');
+    return $this->belongsToMany('App\Product', 'product_categories')
+                ->using('App\ProductCategories');
   }
 }

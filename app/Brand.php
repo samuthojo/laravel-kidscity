@@ -18,6 +18,7 @@ class Brand extends Model
 
     public function products()
     {
-      return $this->hasMany('App\ProductBrand');
+      return $this->belongsToMany('App\Product', 'product_brands')
+                  ->using('App\ProductBrand');
     }
 }

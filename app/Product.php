@@ -21,60 +21,45 @@ class Product extends Model
         'video_url', 'code', 'barcode',
     ];
 
-    // public function category()
-    // {
-    //     return $this->belongsTo('App\Category');
-    // }
-    //
-    // public function subCategory()
-    // {
-    //   return $this->belongsTo('App\SubCategory');
-    // }
-
-    public function brands()
-    {
-        return $this->hasMany('App\ProductBrand');
-    }
-
-    // public function priceCategory()
-    // {
-    //     return $this->belongsTo('App\PriceCategory');
-    // }
-
-    // public function productAgeRange()
-    // {
-    //     return $this->belongsTo('App\ProductAgeRange');
-    // }
-
     public function pictures()
     {
       return $this->hasMany('App\ProductPicture');
     }
 
+    public function brands()
+    {
+        return $this->belongsToMany('App\Brand', 'product_brands')
+                    ->using('App\ProductBrand');
+    }
+
     public function sizes()
     {
-      return $this->hasMany('App\ProductHasSize');
+      return $this->belongsToMany('App\ProductSize', 'product_has_sizes')
+                  ->using('App\ProductHasSize');
     }
 
     public function ages()
     {
-      return $this->hasMany('App\ProductAges');
+      return $this->belongsToMany('App\ProductAgeRange', 'product_ages')
+                  ->using('App\ProductAges');
     }
 
     public function subCategories()
     {
-      return $this->hasMany('App\ProductSubCategories');
+      return $this->belongsToMany('App\SubCategory', 'product_sub_categories')
+                  ->using('App\ProductSubCategories');
     }
 
     public function categories()
     {
-//      return $this->hasMany('App\ProductCategories');
-      return $this->belongsToMany('App\Category', 'product_categories')->using('App\ProductCategories');
+      return $this->belongsToMany('App\Category', 'product_categories')
+                  ->using('App\ProductCategories');
     }
 
     public function priceCategories()
     {
-      return $this->hasMany('App\ProductPriceCategories');
+      return $this->belongsToMany('App\PriceCategory', 'product_price_categories')
+                  ->using('App\ProductPriceCategories');
     }
 
     public function orderItems()

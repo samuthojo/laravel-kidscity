@@ -46,10 +46,10 @@
           <td id="{{'category_' . $category->id}}">{{$category->name}}</td>
           <td>
             <div class="btn-group" title="edit category">
-              <a class="btn btn-default" title="view products"
+              {{--<a class="btn btn-default" title="view products"
                href="{{route('categories.products', ['category' => $category->id])}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning"
                 onclick="showEditCategoryModal({{$category}})">
                 <span class="glyphicon glyphicon-pencil"></span>

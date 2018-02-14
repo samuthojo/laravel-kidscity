@@ -25,6 +25,6 @@ class OrderItem extends Model
 
     public function totalPrice()
     {
-      return $this->product()->first()->price * $this->quantity;
+      return $this->product()->withTrashed()->first()->price * $this->quantity;
     }
 }
