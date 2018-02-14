@@ -80,7 +80,7 @@ class Orders extends Controller
                        $product = $item->product()->withTrashed()->first();
 
                        $item->name = $product->name;
-                       $item->category = $product->category()->withTrashed()->first()->name;
+                      //  $item->category = $product->category()->withTrashed()->first()->name;
                        $item->price = $product->price;
                        $item->totalPrice = $product->price * $it->quantity;
 

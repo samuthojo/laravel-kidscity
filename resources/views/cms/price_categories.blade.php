@@ -47,10 +47,10 @@
           <td>{{$priceCategory->range}}</td>
           <td>
             <div class="btn-group" title="edit price-category">
-              <a class="btn btn-default" title="view products"
+              {{--<a class="btn btn-default" title="view products"
                href="{{route('price_categories.products', ['priceCategory' => $priceCategory->id])}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning"
                 onclick="showEditPriceCategoryModal({{$priceCategory}})">
                 <span class="glyphicon glyphicon-pencil"></span>

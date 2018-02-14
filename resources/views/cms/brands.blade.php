@@ -58,10 +58,10 @@
           <td>{{$brand->name}}</td>
           <td>
             <div class="btn-group" title="edit brand">
-              <a class="btn btn-default" title="view products"
+              {{--<a class="btn btn-default" title="view products"
                href="{{route('brands.products', ['brand' => $brand->id])}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning"
                 onclick="showEditBrandModal({{$brand}})">
                 <span class="glyphicon glyphicon-pencil"></span>
