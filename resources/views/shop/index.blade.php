@@ -28,7 +28,11 @@
 						@include('shop.aside_content')
 					</div>
 					<div id="shopContent" class="col-sm-9">
-						@include('shop.main_content')
+						<shop-app :page-title="'{{$pageTitle}}'"
+								  :initial-count={{(int) count($products)}}
+								  :from-search="{{request('search') ? 'true' : 'false'}}"
+								  :products="products"></shop-app>
+{{--						@include('shop.main_content')--}}
 					</div>
 				</div>
 			</div>
@@ -38,4 +42,9 @@
 
 @section('scripts')
 	<script src="{{asset('js/shop.js')}}"></script>
+	<script>
+		vue_app.setProducts({!! format_products($products) !!});
+
+//        vue_app.$refs.floater.addItem(res.added_item, res.count, res.subtotal);
+	</script>
 @endsection

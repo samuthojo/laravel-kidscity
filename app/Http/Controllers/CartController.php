@@ -14,6 +14,41 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     /**
+     * Get cart items
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function items()
+    {
+        $items = [];
+        foreach(Cart::content() as $item){
+            $cart_item = new \stdClass();
+//            $cart_item->product = $item->model;
+            $cart_item->name = $item->model->name;
+            $cart_item->image = $item->model->image();
+
+            $cart_item->price = $item->model->present_price();
+            $cart_item->qty = $item->qty;
+            $cart_item->id = $item->rowId;
+
+            $items[] = $cart_item;
+        }
+
+        return $items;
+
+//        return Cart::content()->map(function ($item){
+//            $cart_item = new \stdClass();
+//            $cart_item->item = $item->model;
+//            $cart_item->qty = $item->model->id;
+//            $cart_item->id = $item->rowId;
+//
+//            return $cart_item;
+//        })->map(function ($item, $key){
+//            return $item;
+//        });
+    }
+
+    /**
      * Show cart page
      *
      * @return \Illuminate\Http\Response
@@ -92,11 +127,21 @@ class CartController extends Controller
             Cart::add(['id' => $id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->price])
                 ->associate('App\Product');
 
+            $item = Cart::content()->last();
+            $cart_item = new \stdClass();
+            $cart_item->name = $item->model->name;
+            $cart_item->image = $item->model->image();
+
+            $cart_item->price = $item->model->present_price();
+            $cart_item->qty = $item->qty;
+            $cart_item->id = $item->rowId;
+
             return response()->json([
                 "subtotal" => present_price(Cart::subtotal()),
                 "subtotal_num" => number_format(Cart::subtotal()),
                 "count" => Cart::count(),
-                "success" => true
+                "success" => true,
+                "added_item" => $cart_item
             ]);
         }
 
@@ -128,6 +173,8 @@ class CartController extends Controller
                 "count" => Cart::count(),
                 "subtotal_num" => number_format(Cart::subtotal()),
                 "subtotal" => present_price(Cart::subtotal()),
+                "changed_item_id" => $item->rowId,
+                "new_value" => $qty
             ]);
         }
 
@@ -157,7 +204,8 @@ class CartController extends Controller
                 "count" => Cart::count(),
                 "subtotal_num" => number_format(Cart::subtotal()),
                 "subtotal" => present_price(Cart::subtotal()),
-                "msg" => "Item removed."
+                "msg" => "Item removed.",
+                "removed_item_id" => $item->rowId
             ]);
         }
 

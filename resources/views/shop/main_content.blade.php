@@ -1,25 +1,10 @@
 <div id="actionBar" class="layout justified center">
 	<div id="productsTitle">
 		<h3>
-			@if($selectedCategory != -1)
-				{{$selectedCategoryName}}
-				@if($selectedSubCategory != -1)
-					({{$selectedSubCategoryName}})
-				@endif
-			@endif
-
-			@if($selectedBrand != -1)
-				{{$selectedBrandName}}
-			@endif
-
-			@if(request('search'))
-				Showing results for "{{request('search')}}"		
-			@elseif($selectedCategory == -1 && $selectedBrand == -1)
-				All products
-			@endif
+			@if(request('search')) Showing results for "{{$pageTitle}}" @else {{$pageTitle}} @endif
 		</h3>
 		@if(count($products) > 0)
-			<span>Showing products 1 - 9 of {{count($products)}}</span>
+			<span>Showing products 1 - @if(count($products) > 9) 9 @else {{count($products)}} @endif of {{count($products)}}</span>
 		@endif
 	</div>
 

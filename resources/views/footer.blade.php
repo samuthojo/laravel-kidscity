@@ -24,46 +24,54 @@
             </div>
             <div class="flex layout vertical">
                 <div id="footerNav" class="layout justified">
-                    <div>
-                        <h5>Important Links</h5>
-                        <ul>
-                            <li>
-                                <a href="login.php">Join Kid City</a>
-                            </li>
-                            <li><a href="#">Become a partner</a></li>
-                        </ul>
+                    <div class="layout flex center-justified">
+                        <div class="" style="display: inline-block;">
+                            <h5>Important Links</h5>
+                            <ul>
+                                <li>
+                                    <a href="login.php">Join Kid City</a>
+                                </li>
+                                <li><a href="#">Become a partner</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div>
-                        <h5>Contact Us</h5>
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-phone"></i>&nbsp;&nbsp;
-                                    +255 718 728 778
-                                </a>
-                            </li>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;
-                                    info@kidcity.com
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="layout flex center-justified">
+                        <div class="" style="display: inline-block;">
+                            <h5>Contact Us</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-phone"></i>&nbsp;&nbsp;
+                                        +255 718 728 778
+                                    </a>
+                                </li>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;
+                                        info@kidcity.com
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div id="socialMediaLinks">
-                        <h5>Social Media</h5>
-                        <a href="#">
-                            <i class="fa fa-facebook-square"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-twitter-square"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-instagram"></i>
-                        </a>
+                    <div id="socialMediaLinks" class="layout flex center-justified">
+                        <div style="display: inline-block;">
+                            <h5>Social Media</h5>
+                            <div>
+                                <a href="#">
+                                    <i class="fa fa-facebook-square"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-twitter-square"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

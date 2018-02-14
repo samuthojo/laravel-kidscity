@@ -10,3 +10,40 @@
             return $cartItem->model->id === $id;
         })->first() != null;
     }
+
+    function format_cart($cart_items){
+        $items = [];
+        foreach($cart_items as $item){
+            $cart_item = new \stdClass();
+            $cart_item->name = $item->model->name;
+            $cart_item->image = $item->model->image();
+
+            $cart_item->price = $item->model->present_price();
+            $cart_item->qty = $item->qty;
+            $cart_item->id = $item->rowId;
+
+            $items[] = $cart_item;
+        }
+
+        $obj = new \stdClass();
+        $obj->items = $items;
+
+        return json_encode($obj);
+    }
+
+
+    function format_products($products){
+        $data = new stdClass();
+        $formated_products = $products->map(function($p){
+            $product = $p;
+            $product->in_cart = in_cart($p->id);
+            $product->image = $p->image();
+            $product->price = $p->present_price();
+            $product->url = url('products/' . $product->id);
+
+            return $product;
+        });
+
+        $data->products = $formated_products;
+        return json_encode($data);
+    }

@@ -55,18 +55,24 @@ class KidsCity extends Controller
         $selectedBrandName = "";
         $searchKey = "";
 
+        $pageTitle = "All Products";
+
         if($id != -1){
             if ($filter == "brand") {
                 $selectedBrand = $id;
                 $selectedBrandName = Brand::find($id)->name;
                 $products = App\Product::where("brand_id", $id)->orderBy('created_at', 'asc')
                     ->get();
+
+                $pageTitle = $selectedBrandName;
             }
             else if ($filter == "category") {
                 $selectedCategoryName = App\Category::find($id)->name;
                 $selectedCategory = $id;
                 $products = App\Product::where("category_id", $id)->orderBy('created_at', 'asc')
                     ->get();
+
+                $pageTitle = $selectedCategoryName;
             }
         }else{
             if(isset($_GET['category'])){
@@ -86,10 +92,12 @@ class KidsCity extends Controller
                         ->orderBy('created_at', 'asc')
                         ->get();
                 }
+
+                $pageTitle = $selectedCategoryName;
             }
         }
 
-        return view('shop.index', compact('selectedCategory', 'selectedCategoryName',
+        return view('shop.index', compact('pageTitle', 'selectedCategory', 'selectedCategoryName',
             'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
             'selectedBrandName', 'categories', 'sub_categories',
             'brands', 'products', 'page', 'age_ranges', 'searchKey'));

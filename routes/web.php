@@ -41,6 +41,17 @@ Route::get('/cartItems', function(){
     return Cart::update($rowId, 3);
 });
 
+Route::get('/cart/empty', function(){
+//    return view('test');
+//
+//    $id = 1;
+//    $rowId = Cart::search(function ($cartItem) use ($id) {
+//        return $cartItem->model->id == $id;
+//    })->first()->rowId;
+
+    return Cart::destroy();
+});
+
 
 Route::prefix('/mob')->group(function() {
     Route::get('/', 'KidsCityMob@index');
@@ -52,6 +63,8 @@ Route::prefix('/mob')->group(function() {
 });
 
 Route::get('/search', 'Search@search')->name('search');
+
+Route::get('api/cart/list', 'CartController@items');
 
 Auth::routes();
 

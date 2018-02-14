@@ -6,6 +6,7 @@ body{
   --accent-color: #4351a2;
   --accent-color-light: #98a1c8;
   --light-color: #f3f3f3;
+  --accent-green: #33b35d;
 
   --main-color-darker: #744d8f;
 
@@ -93,6 +94,12 @@ body.locked{
     padding: 0 2em;
 }
 
+#contactStrip{
+    padding: 4px 0;
+    background: #f5f5f5;
+    color: #000;
+    font-size: 0.9em;
+}
 #topNav{
     padding: 8px 0;
 }
@@ -534,15 +541,69 @@ select.input{
     background: url(../images/arrow_down.svg) right center/43px 7px no-repeat;
 }
 
+.has-ripple{
+    position: relative;
+    overflow: hidden;
+    outline: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+.has-ripple:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    background: #000;
+    border-radius: 50%;
+    transition: all 0.35s ease-out;
+    pointer-events: none;
+}
+
+.has-ripple.ripple-light:before{
+    background: #fff;
+}
+
+.has-ripple:active:before{
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+
+    -webkit-animation-name: ripple;
+    animation-name: ripple;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 0.1;
+        transform: scale(20);
+    }
+
+    100% {
+        opacity: 0;
+        transform: none;
+    }
+}
+
 /*FOOTER*/
 footer{
-    /*height: 260px;*/
+    background-color: #f8f8f8;
 }
 
 .footer-wrapper{
-    background-color: #f8f8f8;
     padding: 4em;
     padding-bottom: 2.5em;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 footer #copyright{

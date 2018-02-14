@@ -10,11 +10,11 @@
 
     <meta name="theme-color" content="#f38536">
     <meta name="keywords" content="Tanzania ecommerce, ecommerce, tanzania, kid ecommerce, kids shop, kids city">
-    <meta name="description" content="A platform that aims to bridge the gap in innovation for women.">
+    <meta name="description" content="Kids Ecommerce platform.">
     <meta name="author" content="iPF Softwares ">
     <meta charset="UTF-8">
     <link href="{{asset('images/fav.png')}}" rel="shortcut icon" type="image">
-    <title>Kid City</title>
+    <title>Kid City | {{isset($page) ? $page : "Home"}}</title>
 
     <!-- Styles -->
     <link href="{{asset('css/reset.css')}}" rel="stylesheet">
@@ -34,6 +34,36 @@
             'base_url' => url('/')
         ]) !!};
     </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async defer="defer" src="https://www.googletagmanager.com/gtag/js?id=UA-70765388-8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-70765388-8');
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '260341067715329');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=260341067715329&ev=PageView
+        &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
 
     <style>
         #alertMessage{
@@ -69,52 +99,68 @@
     @yield('styles')
 </head>
 <body style="padding-top: 0;">
-    <div id="alertMessage" class="animated">
-        <i class="fa fa-check-circle"></i>
-        <span id="alertMessageText">
-            Thankyou, we have received your message.
-        </span>
+    <div id="kidCityApp">
+        <div id="alertMessage" class="animated">
+            <i class="fa fa-check-circle"></i>
+            <span id="alertMessageText">
+                Thankyou, we have received your message.
+            </span>
+        </div>
+
+        @include('nav.common_nav')
+
+        @yield('content')
+
+        <div id="bottomNav" class="for-mob layout center justified">
+            <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+
+            <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
+                <i class="fa fa-shopping-basket"></i>
+                Shop
+            </a>
+
+            <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
+                <i class="fa fa fa-shopping-cart"></i>
+                Cart
+            </a>
+
+            <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
+                <i class="fa fa-user"></i>
+                Profile
+            </a>
+        </div>
+
+        @if($page != "cart")
+            <floating-cart ref="floater"
+                           href="http://localhost:8000/cart"
+                           :items="cart_items"
+                           :item-count="cart_count"
+                           :total-price="total_price"></floating-cart>
+        @endif
+
+        @include('footer')
     </div>
-
-    @include('nav.common_nav')
-
-    @yield('content')
-
-    <div id="bottomNav" class="for-mob layout center justified">
-        <a href="{{url('/')}}" class="flex layout center-center vertical {{$page == 'home' ? 'active' : ''}}">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-
-        <a href="{{url('/shop')}}" class="flex layout center-center vertical {{$page == 'shop' ? 'active' : ''}}">
-            <i class="fa fa-shopping-basket"></i>
-            Shop
-        </a>
-
-        <a href="{{url('/cart')}}" class="flex layout center-center vertical {{$page == 'cart' ? 'active' : ''}}">
-            <i class="fa fa fa-shopping-cart"></i>
-            Cart
-        </a>
-
-        <a href="{{url('/profile')}}" class="flex layout center-center vertical {{$page == 'profile' ? 'active' : ''}}">
-            <i class="fa fa-user"></i>
-            Profile
-        </a>
-    </div>
-
-    @yield('scripts')
 
     @include('scripts')
 
     <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+
+    @yield('scripts')
 
     <script>
         var alertMessage = document.getElementById("alertMessage");
         var alertMessageText = document.getElementById("alertMessageText");
         var alert_timeout = null;
 
+        vue_app.setCount({{Cart::count()}});
+        vue_app.setPrice("{{present_price(Cart::subtotal())}}");
+        vue_app.setItems({!! format_cart(Cart::content()) !!});
+
         function showMessage(message){
-            console.log(alert_timeout);
             if(alert_timeout !== null){
                 closeMessage(message);
                 return;
@@ -162,11 +208,9 @@
                 .addTo(controller);
         }
 
-//        if(window.innerWidth >= 680){
-//            enableScrollLocker();
-//        }
+        //        if(window.innerWidth >= 680){
+        //            enableScrollLocker();
+        //        }
     </script>
-
-    @include('footer')
 </body>
 </html>
