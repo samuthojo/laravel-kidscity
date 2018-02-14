@@ -48,10 +48,10 @@
           <td>{{$subCategory->category}}</td>
           <td>
             <div class="btn-group">
-              <a class="btn btn-default" title="view products"
+              {{--<a class="btn btn-default" title="view products"
                href="{{ route('sub_categories.products', ['subCategory' => $subCategory->id]) }}">
                 <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
+              </a>--}}
               <button class="btn btn-warning" title="Edit SubCategory"
                 onclick="showEditSubCategoryModal({{$subCategory}})">
                 <span class="glyphicon glyphicon-pencil"></span>
