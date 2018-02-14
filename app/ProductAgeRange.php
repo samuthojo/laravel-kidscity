@@ -10,7 +10,7 @@ class ProductAgeRange extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['products'];
+    // protected $cascadeDeletes = ['products'];
 
     protected $fillable = [
       'range',

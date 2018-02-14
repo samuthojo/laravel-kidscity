@@ -10,7 +10,7 @@ class Category extends Model
 {
   use SoftDeletes, CascadeSoftDeletes;
 
-  protected $cascadeDeletes = ['subCategories', 'products'];
+  protected $cascadeDeletes = ['subCategories'];
 
   protected $fillable = ['name', 'image_url',];
 

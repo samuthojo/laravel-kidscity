@@ -11,9 +11,7 @@ class Product extends Model
 {
     use Searchable, SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['pictures', 'sizes', 'subCategories',
-                                 'ages', 'categories', 'brands',
-                                 'priceCategories'];
+    protected $cascadeDeletes = ['pictures'];
 
     protected $fillable = [
         'name', 'price', 'description', 'sale_price',
