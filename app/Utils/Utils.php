@@ -9,12 +9,12 @@ class Utils
 
     public static function getBoysProducts()
     {
-      return App\Product::where('gender', false)->get();
+      return App\Product::with('pictures')->where('gender', false)->get();
     }
 
     public static function getGirlsProducts()
     {
-      return App\Product::where('gender', true)->get();
+      return App\Product::with('pictures')->where('gender', true)->get();
     }
 
     public static function getAllCategories()

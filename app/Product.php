@@ -68,7 +68,8 @@ class Product extends Model
 
     public function categories()
     {
-      return $this->hasMany('App\ProductCategories');
+//      return $this->hasMany('App\ProductCategories');
+      return $this->belongsToMany('App\Category', 'product_categories')->using('App\ProductCategories');
     }
 
     public function priceCategories()
@@ -87,7 +88,7 @@ class Product extends Model
 
     public function image()
     {
-        return asset('images/real_cloths/' . $this->image_url);
+        return asset('images/real_cloths/' . $this->pictures()->first()->image_url);
     }
 
     public function toSearchableArray()

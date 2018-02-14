@@ -2,7 +2,7 @@
 	 class="product {{ in_cart($product->id) ? 'added' : ''}}">
 	<a href="{{url('products/' . $product->id)}}">
 		<div class="image">
-			<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt="">
+			<img src="{{asset($product->image())}}" alt="">
 		</div>
 		<h5 class="name">{{$product->name}}</h5>
 		<span class="price">
