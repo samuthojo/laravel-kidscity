@@ -24,12 +24,6 @@ class EditProductsTable1 extends Migration
             $table->bigInteger('sale_price')->after('price')->nullable();
             $table->string('video_url')->nullable();
             $table->integer('gender')->nullable(true)->change();
-            $table->integer('product_size_id')
-                  ->unsigned()
-                  ->nullable();
-            $table->foreign('product_size_id')
-                  ->references('id')
-                  ->on('product_sizes');
         });
     }
 

@@ -22,6 +22,8 @@ Route::get('/shop/{filterer?}/{category?}', 'KidsCity@shop');
 Route::get('/products/{product}', 'Products@product');
 Route::get('/register', 'KidsCity@register');
 
+Route::get('/new_shop/{filterer?}/{category?}', 'KidsCity@new_shop');
+
 Route::get('/cart', 'CartController@index');
 Route::post('/addToCart', 'CartController@add')->name('addToCart');
 Route::post('/removeFromCart', 'CartController@remove')->name('removeFromCart');
@@ -85,6 +87,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::get('/categories', 'Categories@cmsIndex')->name('categories.index');
   Route::get('/categories/{category}/products', 'Categories@products')->name('categories.products');
   Route::get('/categories/{category}/sub_categories', 'Categories@subCategories')->name('categories.sub_categories');
+  Route::get('/categories/find', 'Categories@categoriesFind')->name('categories.categories_find');
   Route::post('/categories', 'Categories@store')->name('categories.store');
   Route::post('/categories/{category}/store_product', 'Categories@storeProduct')->name('categories.store_product');
   Route::post('/categories/{category}/update_product/{product}', 'Categories@updateProduct')->name('categories.update_product');
@@ -114,7 +117,8 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::get('/products/create', 'Products@create')->name('products.create');
   Route::get('/products/{product}/product', 'Products@cmsProduct')->name('products.product');
   Route::post('/products', 'Products@store')->name('products.store');
-  Route::post('/products/{product}', 'Products@update')->name('products.update');
+  Route::get('/products/{product}', 'Products@edit')->name('products.edit');
+  Route::patch('/products/{product}', 'Products@update')->name('products.update');
   Route::delete('/products/{product}', 'Products@destroy')->name('products.destroy');
 
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');
@@ -129,6 +133,8 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::post('/locations', 'DeliveryLocations@store')->name('locations.store');
   Route::post('/locations/{location}', 'DeliveryLocations@update')->name('locations.update');
   Route::delete('/locations/{location}', 'DeliveryLocations@destroy')->name('locations.destroy');
+
+  Route::resource('sizes', 'ProductSizesController');
 
   Route::get('/banners', 'Banners@cmsIndex')->name('banners.index');
   Route::post('/advert/{advert}', 'Banners@updateAdvert')->name('banners.updateAdvert');

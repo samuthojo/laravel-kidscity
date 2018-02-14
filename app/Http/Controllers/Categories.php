@@ -40,6 +40,16 @@ class Categories extends Controller
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
+    public function categoriesFind(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        // Log::info($keyword);
+        $categories = \DB::table('categories')
+                        ->select('id','name')
+                        ->get();
+        return json_encode($categories);
+    }
+
     public function subCategories($id)
     {
       if($id != -1) {

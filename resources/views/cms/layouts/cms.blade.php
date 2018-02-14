@@ -88,6 +88,11 @@
                       AgeRanges
                     </a>
                 </li>
+                <li class="{{areActiveRoutes(['sizes.index'])}}">
+                    <a href="{{ route('sizes.index') }}">
+                      Product Sizes
+                    </a>
+                </li>
                 <li class="{{areActiveRoutes([
                   'products.index',
                   'products.product',

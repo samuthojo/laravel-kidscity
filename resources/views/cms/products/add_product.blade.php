@@ -2,7 +2,7 @@
 
 @section('content')
 
-<script type="text/javascript">
+{{--<script type="text/javascript">
 
 function fetchSubCategories() {
   $("#subCategorySelector").prop("disabled", false);
@@ -45,7 +45,7 @@ function setUpSubCategories(data) {
     }
 }
 
-</script>
+</script>--}}
 
 {!!
     Form::open([

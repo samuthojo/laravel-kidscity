@@ -16,8 +16,13 @@ class ProductAgeRange extends Model
       'range',
     ];
 
+    // public function products()
+    // {
+    //   return $this->hasMany('App\Product');
+    // }
+
     public function products()
     {
-      return $this->hasMany('App\Product');
+      return $this->hasMany('App\ProductAges');
     }
 }

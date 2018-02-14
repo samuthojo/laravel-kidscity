@@ -21,8 +21,13 @@ class SubCategory extends Model
       return $this->belongsTo('App\Category');
     }
 
+    // public function products()
+    // {
+    //   return $this->hasMany('App\Product');
+    // }
+
     public function products()
     {
-      return $this->hasMany('App\Product');
+      return $this->hasMany('App\ProductSubCategories');
     }
 }

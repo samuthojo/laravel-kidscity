@@ -95,6 +95,12 @@ class KidsCity extends Controller
             'brands', 'products', 'page', 'age_ranges', 'searchKey'));
     }
 
+    public function new_shop($filter = "category", $id = -1)
+    {
+        $products = \App\Product::with('categories')->limit(2)->get();
+        return $products;
+    }
+
     public function brands()
     {
         $page = "brands";

@@ -29,7 +29,7 @@ class Utils
 
     public static function saveImage($image, $destination)
     {
-      $imageName = time() . "." . $image->getClientOriginalExtension();
+      $imageName = uniqid() . "." . $image->getClientOriginalExtension();
       $image->move($destination, $imageName);
       return $imageName;
     }

@@ -5,26 +5,43 @@
   .fa-2x {
     font-size: 2.5em;
   }
+  .bootstrap-tagsinput {
+    width: 100%;
+  }
 </style>
+<link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+{{-- tinymce (rich textarea) --}}
 <script src="{{asset('js/tinymce/js/tinymce/jquery.tinymce.min.js')}}"></script>
 <script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>
-<script>tinymce.init({
+<script>
+tinymce.init({
   selector: 'textarea',
-  height: 200,
+  height: 250,
   theme: 'modern',
+  menubar: 'edit insert view format table tools', //skip file
   plugins: [
     'advlist autolink lists link charmap print preview anchor textcolor',
-    'searchreplace visualblocks code fullscreen',
+    'searchreplace visualblocks code fullscreen placeholder',
     'insertdatetime table contextmenu paste code help wordcount'
   ],
 toolbar: 'formatselect | bold italic forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
 content_css: [
     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
     '//www.tinymce.com/css/codepen.min.css']
-});</script>
+});
+</script>
+
 <div class="form-group {{ $errors->has('code') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+        {!!
+            Form::label('code', 'Product Code:', [
+
+                'class' => 'control-label',
+
+            ])
+        !!}
+
         {!!
             Form::text('code', null, [
 
@@ -34,7 +51,6 @@ content_css: [
 
                 'placeholder' => 'Product Code',
 
-                'autofocus' => $autofocus,
             ])
         !!}
 
@@ -58,7 +74,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('barcode') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('barcode', 'Product Bar-Code:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
        {!!
             Form::text('barcode', null, [
 
@@ -91,7 +115,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('name', 'Product Name:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::text('name', null, [
 
@@ -126,7 +158,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('description', 'Product Description:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::textarea(
                 'description',
@@ -137,7 +177,7 @@ content_css: [
 
                     'rows' => 2,
 
-                    'class' => 'form-control',
+                    'class' => 'form-control tinymce',
 
                     'aria-describedby'=> 'descriptionHelpBlock',
 
@@ -159,14 +199,6 @@ content_css: [
 
           !!}
 
-        @else
-
-            <p id="descriptionHelpBlock" class="help-block">
-
-                Include Product Description
-
-            </p>
-
         @endif
 
     </div>
@@ -175,7 +207,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('price', 'Product Price:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::text('price', null, [
 
@@ -210,7 +250,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('sale_price') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('sale_price', 'Product Sale-Price:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::text('sale_price', null, [
 
@@ -243,7 +291,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('stock') ? 'has-error' : ''}}">
 
-  <div class="col-md-offset-3 col-md-6">
+  <div class="col-md-offset-2 col-md-8">
+    {!!
+        Form::label('stock', 'Product Stock:', [
+
+            'class' => 'control-label',
+
+        ])
+    !!}
+
     {!!
         Form::text('stock', null, [
 
@@ -274,11 +330,19 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('category_id') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('category_id*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('category_id', 'Product Categories:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
-            Form::select('category_id', $categories, null, [
+            Form::select('category_id[]', $categories, $selectedCategories, [
 
                 'id' => 'categorySelector',
 
@@ -288,19 +352,21 @@ content_css: [
 
                 'aria-describedby'=> 'categoryHelpBlock',
 
-                'onchange' => 'fetchSubCategories()',
+                'onchange' => 'categoryTags()',
 
                 'placeholder' => 'Choose Category',
+
+                'multiple' => true,
 
             ])
         !!}
 
-        @if($errors->any() && $errors->has('category_id'))
+        @if($errors->any() && $errors->has('category_id*'))
 
             {!!
 
                 $errors->first(
-                    'category_id',
+                    'category_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -313,19 +379,19 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('sub_category_id*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6" style="display:inline-block;">
+    <div class="col-md-offset-2 col-md-8" style="display:inline-block;">
+      {!!
+          Form::label('sub_category_id', 'Product SubCategories:', [
 
-        @if(!is_null($selectedSubCategory))
+              'class' => 'control-label',
 
-          <input type="hidden" name="sub_category_id"
-            value="{{$selectedSubCategory->id}}"/>
-
-        @endif
+          ])
+      !!}
 
         {!!
-            Form::select('sub_category_id', $subCategories, null, [
+            Form::select('sub_category_id[]', $subCategories, $selectedSubCategories, [
 
                 'id' => 'subCategorySelector',
 
@@ -335,17 +401,17 @@ content_css: [
 
                 'placeholder' => 'Choose Sub-Category',
 
-                'disabled' => 'true',
+                'multiple' => true,
 
             ])
         !!}
 
-        @if($errors->any() && $errors->has('sub_category_id'))
+        @if($errors->any() && $errors->has('sub_category_id*'))
 
             {!!
 
                 $errors->first(
-                    'sub_category_id',
+                    'sub_category_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -356,18 +422,26 @@ content_css: [
 
     </div>
 
-    <div class="col-md-3"
+    <div class="col-md-2"
       style="display:inline-block;">
       @include('cms.select_loader')
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('brand_id*') ? 'has-error' : ''}}">
 
+    <div class="col-md-offset-2 col-md-8">
 
-<div class="form-group {{ $errors->has('brand_id') ? 'has-error' : ''}}">
+      {!!
+          Form::label('brand_id', 'Product Brand:', [
 
-    <div class="col-md-offset-3 col-md-6">        {!!
-            Form::select('brand_id', $brands, null, [
+              'class' => 'control-label',
+
+          ])
+      !!}
+
+        {!!
+            Form::select('brand_id[]', $brands, $selectedBrands, [
 
                 'id' => 'brandSelector',
 
@@ -377,17 +451,19 @@ content_css: [
 
                 'aria-describedby'=> 'brandHelpBlock',
 
+                'multiple' => true,
+
                 'placeholder' => 'Choose Brand',
 
             ])
         !!}
 
-        @if($errors->any() && $errors->has('brand_id'))
+        @if($errors->any() && $errors->has('brand_id*'))
 
             {!!
 
                 $errors->first(
-                    'brand_id',
+                    'brand_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -400,10 +476,22 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('price_category_id') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('price_category_id*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">        {!!
-            Form::select('price_category_id', $priceCategories, null, [
+    <div class="col-md-offset-2 col-md-8">
+
+      {!!
+          Form::label('price_category_id', 'Product Price-Categories:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
+         {!!
+            Form::select('price_category_id[]', $priceCategories,
+
+                $selectedPriceCategories, [
 
                 'id' => 'priceCategorySelector',
 
@@ -415,15 +503,17 @@ content_css: [
 
                 'placeholder' => 'Choose Price-Category',
 
+                'multiple' => true,
+
             ])
         !!}
 
-        @if($errors->any() && $errors->has('price_category_id'))
+        @if($errors->any() && $errors->has('price_category_id*'))
 
             {!!
 
                 $errors->first(
-                    'price_category_id',
+                    'price_category_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -436,10 +526,21 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('product_age_range_id') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('product_age_range_id*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">        {!!
-            Form::select('product_age_range_id', $ageRanges, null, [
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('product_age_range_id', 'Product Age-Ranges:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
+        {!!
+            Form::select('product_age_range_id[]', $ageRanges,
+
+                $selectedAgeRanges, [
 
                 'id' => 'ageRangeSelector',
 
@@ -451,15 +552,17 @@ content_css: [
 
                 'placeholder' => 'Choose Age-Range',
 
+                'multiple' => true,
+
             ])
         !!}
 
-        @if($errors->any() && $errors->has('product_age_range_id'))
+        @if($errors->any() && $errors->has('product_age_range_id*'))
 
             {!!
 
                 $errors->first(
-                    'product_age_range_id',
+                    'product_age_range_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -472,11 +575,21 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('product_size_id') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('product_size_id*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('product_size_id', 'Product Sizes:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
-            Form::select('product_size_id', [], null, [
+            Form::select('product_size_id[]', $productSizes,
+
+                $selectedProductSizes, [
 
                 'id' => 'sizeSelector',
 
@@ -486,17 +599,17 @@ content_css: [
 
                 'placeholder' => 'Choose Product-Size',
 
-                'disabled' => true,
+                'multiple' => true,
 
             ])
         !!}
 
-        @if($errors->any() && $errors->has('product_size_id'))
+        @if($errors->any() && $errors->has('product_size_id*'))
 
             {!!
 
                 $errors->first(
-                    'product_size_id',
+                    'product_size_id*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -511,7 +624,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('gender') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('gender', 'Product Gender:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::select('gender',
                 [
@@ -531,12 +652,12 @@ content_css: [
             ])
         !!}
 
-        @if($errors->any() && $errors->has('gender_id'))
+        @if($errors->any() && $errors->has('gender'))
 
             {!!
 
                 $errors->first(
-                    'gender_id',
+                    'gender',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -551,7 +672,16 @@ content_css: [
 
 <div class="form-group {{ $errors->has('video_url') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">        {!!
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('video_url', 'Product Video:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
+        {!!
             Form::text('video_url', null, [
 
                 'class' => 'form-control',
@@ -583,7 +713,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('dimensions') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('dimensions', 'Product Dimensions:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::text('dimensions', null, [
 
@@ -616,7 +754,15 @@ content_css: [
 
 <div class="form-group {{ $errors->has('weight') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('weight', 'Product Weight:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
         {!!
             Form::text('weight', null, [
 
@@ -647,10 +793,19 @@ content_css: [
 
 </div>
 
-<div class="form-group {{ $errors->has('image_url') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('image_url*') ? 'has-error' : ''}}">
 
-    <div class="col-md-offset-3 col-md-6">        {!!
-            Form::file('image_url', [
+    <div class="col-md-offset-2 col-md-8">
+      {!!
+          Form::label('picture', 'Product Pictures:', [
+
+              'class' => 'control-label',
+
+          ])
+      !!}
+
+        {!!
+            Form::file('image_url[]', [
 
                 'aria-describedby'=> 'imageHelpBlock',
 
@@ -659,12 +814,12 @@ content_css: [
             ])
         !!}
 
-        @if($errors->any() && $errors->has('image_url'))
+        @if($errors->any() && $errors->has('image_url*'))
 
             {!!
 
                 $errors->first(
-                    'image_url',
+                    'image_url*',
 
                     '<p class="help-block">:message</p>'
                 )
@@ -675,7 +830,11 @@ content_css: [
 
             <p id="imageHelpBlock" class="help-block">
 
+              @if($editForm)
+                Replace Existing Pictures
+              @else
                 Attach Product Pictures
+              @endif
 
             </p>
 

@@ -99,7 +99,7 @@ function showEditSubCategoryErrors(errors) {
 
 function showDeleteConfirmationModal(subCat) {
   showModal("delete_confirmation_modal");
-  $("#confirmation_text").text("Delete " + subCat.name + " and its products");
+  $("#confirmation_text").text("Delete " + subCat.name + "");
   sub_category_id = subCat.id;
 }
 
