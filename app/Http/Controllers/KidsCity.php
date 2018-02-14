@@ -56,7 +56,7 @@ class KidsCity extends Controller
 
         if($id != -1){
             if ($filter == "brand") {
-                $brand = Brand::find($id)->first();
+                $brand = Brand::find($id);
                 $selectedBrand = $id;
                 $selectedBrandName = $brand->name;
                 $products = $brand->products()->orderBy('created_at', 'asc')->get();
@@ -83,9 +83,10 @@ class KidsCity extends Controller
 
                 if(isset($_GET['sub_category'])){
                     $subid = $_GET['sub_category'];
-                    $sub_category = App\SubCategory::find($subid)->first();
-                    $selectedSubCategoryName = $sub_category->name;
+                    $sub_category = App\SubCategory::find($subid);
                     $selectedSubCategory = $subid;
+
+                    return $sub_category->products()->get();
                     $products = $sub_category->products()->orderBy('created_at', 'asc')->get();
                 }
 
