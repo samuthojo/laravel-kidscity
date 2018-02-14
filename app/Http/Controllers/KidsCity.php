@@ -50,9 +50,6 @@ class KidsCity extends Controller
         $selectedBrand = -1;
         $sub_categories = null;
 
-        $selectedCategoryName = "";
-        $selectedSubCategoryName = "";
-        $selectedBrandName = "";
         $searchKey = "";
 
         $pageTitle = "All Products";
@@ -62,9 +59,7 @@ class KidsCity extends Controller
                 $brand = Brand::find($id)->first();
                 $selectedBrand = $id;
                 $selectedBrandName = $brand->name;
-                $products = $brand->products();
-//                App\Product::where("brand_id", $id)->orderBy('created_at', 'asc')
-//                    ->get();
+                $products = $brand->products()->orderBy('created_at', 'asc')->get();
 
                 $pageTitle = $selectedBrandName;
             }
@@ -72,9 +67,7 @@ class KidsCity extends Controller
                 $category = App\Category::find($id)->first();
                 $selectedCategoryName = $category->name;
                 $selectedCategory = $id;
-                $products = $category->products();
-//                    App\Product::where("category_id", $id)->orderBy('created_at', 'asc')
-//                    ->get();
+                $products = $category->products()->orderBy('created_at', 'asc')->get();;
 
                 $pageTitle = $selectedCategoryName;
             }
@@ -83,35 +76,25 @@ class KidsCity extends Controller
                 $id = $_GET['category'];
                 $category = App\Category::find($id);
 
-                return $category->products()->get();
-
                 $selectedCategoryName = $category->name;
                 $selectedCategory = $id;
-                $products = $category->products();
-//                    App\Product::where("category_id", $id)->orderBy('created_at', 'asc')
-//                    ->get();
-                $sub_categories = $category->subCategories();
-//                    App\SubCategory::where("category_id", $id)->get();
+                $products = $category->products()->orderBy('created_at', 'asc')->get();
+                $sub_categories = $category->subCategories()->get();
 
                 if(isset($_GET['sub_category'])){
                     $subid = $_GET['sub_category'];
                     $sub_category = App\SubCategory::find($subid)->first();
                     $selectedSubCategoryName = $sub_category->name;
                     $selectedSubCategory = $subid;
-                    $products = $sub_category->products();
-//                        App\Product::where('category_id', $id)
-//                        ->where('sub_category_id', $subid)
-//                        ->orderBy('created_at', 'asc')
-//                        ->get();
+                    $products = $sub_category->products()->orderBy('created_at', 'asc')->get();
                 }
 
                 $pageTitle = $selectedCategoryName;
             }
         }
 
-        return view('shop.index', compact('pageTitle', 'selectedCategory', 'selectedCategoryName',
-            'selectedSubCategory', 'selectedSubCategoryName', 'selectedBrand',
-            'selectedBrandName', 'categories', 'sub_categories',
+        return view('shop.index', compact('pageTitle', 'selectedCategory',
+            'selectedSubCategory', 'selectedBrand', 'categories', 'sub_categories',
             'brands', 'products', 'page', 'age_ranges', 'searchKey'));
     }
 
