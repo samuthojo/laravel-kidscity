@@ -14,13 +14,18 @@ class Category extends Model
 
   protected $fillable = ['name', 'image_url',];
 
-  public function products()
-  {
-    return $this->hasMany('App\Product');
-  }
+  // public function products()
+  // {
+  //   return $this->hasMany('App\Product');
+  // }
 
   public function subCategories()
   {
     return $this->hasMany('App\SubCategory');
+  }
+
+  public function products()
+  {
+    return $this->hasMany('App\ProductCategories');
   }
 }

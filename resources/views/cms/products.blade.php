@@ -37,11 +37,10 @@
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
         Products:
       </h3>
-      <span class="pull-right text-primary"
-        title="add product" style="cursor: pointer;"
-        onclick="showModal('add_product_modal')">
+      <a class="pull-right text-primary"
+        title="add product" href="{{ route('products.create') }}">
         <i class="fa fa-plus-circle fa-2x"></i>
-      </span>
+      </a>
       <div class="clearfix"></div>
     </div>
     <div class="panel-body">
@@ -77,16 +76,33 @@
                 <td>
                   {{$product->brand_name}}
                 </td>
-                <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
+                <td>
+                  @php
+                   $gender = '';
+                   if ($product->gender === 0) {
+                     $gender = 'Male';
+                   }
+                   else if ($product->gender === 1) {
+                     $gender =  'Female';
+                   }
+                   else if ($product->gender === 2) {
+                     $gender =  'Unisex';
+                   }
+                   else {
+                     $gender =  'null';
+                   }
+                  @endphp
+                  {{$gender}}
+                </td>
                 <td>
                   {{ number_format($product->price) }}
                 </td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-warning" title="edit product"
-                      onclick="showEditProductModal({{$product}})">
+                    <a class="btn btn-warning" title="edit product"
+                      href="{{route('products.edit', ['product' => $product->id])}}">
                       <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
+                    </a>
                     <button class="btn btn-danger" title="delete product"
                       onclick="showProductDeleteModal({{$product}})">
                       <span class="glyphicon glyphicon-trash"></span>

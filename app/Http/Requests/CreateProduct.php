@@ -24,12 +24,7 @@ class CreateProduct extends FormRequest
      */
     public function rules()
     {
-        return [
-            'brand_id' => 'required|integer',
-            'category_id' => 'required|integer',
-            'sub_category_id' => 'nullable|integer',
-            'price_category_id' => 'required|integer',
-            'product_age_range_id' => 'required|integer',
+        $rules = [
             'name' => ['required',
                        'string',
                         Rule::unique('products')->where(function ($query) {
@@ -37,9 +32,48 @@ class CreateProduct extends FormRequest
                          }),
                        ],
             'price' => 'required|integer',
-            'gender' => 'required|boolean',
-            'image_url' => 'nullable|file|image|max:2048',
+            'sale_price' => 'nullable|integer',
+            'code' => 'nullable|string',
+            'barcode' => 'nullable|string',
+            'weight' => 'nullable|string',
+            'dimensions' => 'nullable|string',
+            'stock' => 'required|integer',
+            'gender' => 'nullable|integer',
+            'video_url' => 'nullable|url',
         ];
+        $brand_id = count($this->input('brand_id')) - 1;
+        foreach(range(0, $brand_id) as $index) {
+            $rules['brand_id.' . $index] =
+              ($index) ? 'required|integer' : 'nullable|integer';
+        }
+        $category_id = count($this->input('category_id')) - 1;
+        foreach(range(0, $category_id) as $index) {
+            $rules['category_id.' . $index] =
+              ($index) ? 'required|integer' : 'nullable|integer';
+        }
+        $sub_category_id = count($this->input('sub_category_id')) - 1;
+        foreach(range(0, $sub_category_id) as $index) {
+            $rules['sub_category_id.' . $index] = 'nullable|integer';
+        }
+        $product_age_range_id = count($this->input('product_age_range_id')) - 1;
+        foreach(range(0, $product_age_range_id) as $index) {
+            $rules['product_age_range_id.' . $index] =
+              ($index) ? 'required|integer' : 'nullable|integer';
+        }
+        $product_size_id = count($this->input('product_size_id')) - 1;
+        foreach(range(0, $product_size_id) as $index) {
+            $rules['product_size_id.' . $index] = 'nullable|integer';
+        }
+        $price_category_id = count($this->input('price_category_id')) - 1;
+        foreach(range(0, $price_category_id) as $index) {
+            $rules['price_category_id.' . $index] =
+              ($index) ? 'required|integer' : 'nullable|integer';
+        }
+        $image_url = count($this->input('image_url')) - 1;
+        foreach(range(0, $image_url) as $index) {
+            $rules['image_url.' . $index] = 'nullable|file|image|max:2048';
+        }
+        return $rules;
     }
 
     public function messages()
