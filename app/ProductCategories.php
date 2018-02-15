@@ -9,6 +9,10 @@ class ProductCategories extends Pivot
 {
   use SoftDeletes;
 
+  protected $table = 'product_categories';
+
+  // protected $touches = ['category', 'product'];
+
   protected $fillable = [
     'product_id', 'category_id',
   ];
@@ -22,5 +26,5 @@ class ProductCategories extends Pivot
   {
     return $this->belongsTo('App\Product');
   }
-  
+
 }

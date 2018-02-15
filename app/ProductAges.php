@@ -10,6 +10,8 @@ class ProductAges extends Pivot
 {
   use SoftDeletes, CascadeSoftDeletes;
 
+  protected $table = 'product_ages';
+
   protected $fillable = [
     'product_id', 'product_age_range_id',
   ];

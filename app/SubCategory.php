@@ -10,7 +10,7 @@ class SubCategory extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['products'];
+    // protected $cascadeDeletes = ['products'];
 
     protected $fillable = [
       'category_id', 'name', 'image_url',
@@ -24,6 +24,7 @@ class SubCategory extends Model
     public function products()
     {
       return $this->belongsToMany('App\Product', 'product_sub_categories')
+                  ->withTimestamps()
                   ->using('App\ProductSubCategories');
     }
 }

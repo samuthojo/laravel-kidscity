@@ -9,7 +9,18 @@
     width: 100%;
   }
 </style>
+
 <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+
+{{-- Make the first option in all selects disabled --}}
+<script>
+  $(function () {
+    $("select").find('option:first').each(function(){
+       $(this).prop("disabled", true);
+    });
+  });
+</script>
+
 {{-- tinymce (rich textarea) --}}
 <script src="{{asset('js/tinymce/js/tinymce/jquery.tinymce.min.js')}}"></script>
 <script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>

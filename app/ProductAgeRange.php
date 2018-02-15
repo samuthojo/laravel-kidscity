@@ -10,7 +10,7 @@ class ProductAgeRange extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['products'];
+    // protected $cascadeDeletes = ['products'];
 
     protected $fillable = [
       'range',
@@ -19,6 +19,7 @@ class ProductAgeRange extends Model
     public function products()
     {
       return $this->belongsToMany('App\Product', 'product_ages')
+                  ->withTimestamps()
                   ->using('App\ProductAges');
     }
 }

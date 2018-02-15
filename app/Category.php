@@ -10,7 +10,7 @@ class Category extends Model
 {
   use SoftDeletes, CascadeSoftDeletes;
 
-  protected $cascadeDeletes = ['subCategories', 'products'];
+  protected $cascadeDeletes = ['subCategories'];
 
   protected $fillable = ['name', 'image_url',];
 
@@ -22,6 +22,7 @@ class Category extends Model
   public function products()
   {
     return $this->belongsToMany('App\Product', 'product_categories')
+                ->withTimestamps()
                 ->using('App\ProductCategories');
   }
 }

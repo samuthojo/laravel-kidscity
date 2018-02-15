@@ -70,22 +70,6 @@ class Products extends Controller
                         ->get()
                         ->map(function ($prod) {
                           $product = $prod;
-                          // $product->category_name = $prod->category()
-                          //                                ->withTrashed()
-                          //                                ->first()->name;
-                          // $subCategory = $prod->subCategory()->withTrashed()->first();
-                          // $product->sub_category_name = ($subCategory != null) ?
-                          //                                          $subCategory->name : "null";
-                          // $product->age_range = $prod->productAgeRange()
-                          //                            ->withTrashed()
-                          //                            ->first()->range;
-                          // $product->price_category = $prod->priceCategory()
-                          //                                 ->withTrashed()
-                          //                                 ->first()->range;
-                          // $product->brand_name = $prod->brand()
-                          //                             ->withTrashed()
-                          //                             ->first()->name;
-
                           return $product;
                         });
     }
@@ -121,132 +105,94 @@ class Products extends Controller
           'weight' => $request->weight,
         ]);
 
-        $this->saveProductExtras($request, $product->id);
+        $this->saveProductExtras($request, $product);
 
       });
     }
 
-    private function saveProductExtras($request, $product_id)
+    private function saveProductExtras($request, $product)
     {
       //To save all the brands
-      $this->saveBrands($request, $product_id);
+      $this->saveBrands($request, $product);
 
       //To save all the categories
-      $this->saveCategories($request, $product_id);
+      $this->saveCategories($request, $product);
 
       //To save all the subCategories
       if($request->has('sub_category_id'))
       {
-        if(count($request->sub_category_id) > 1 || $request->sub_category_id[0]) {
-          $this->saveSubCategories($request, $product_id);
-        }
+        $this->saveSubCategories($request, $product);
       }
 
       //To save all the priceCategories
-      $this->savePriceCategories($request, $product_id);
+      $this->savePriceCategories($request, $product);
 
       //To save all the productAgeRanges
-      $this->saveAllAges($request, $product_id);
+      $this->saveAllAges($request, $product);
 
       //To save all the productSizes
       if($request->has('product_size_id'))
       {
-        if(count($request->product_size_id) > 1 || $request->product_size_id[0]) {
-          $this->saveAllSizes($request, $product_id);
-        }
+        $this->saveAllSizes($request, $product);
       }
 
       //To save all the productPictures
       if($request->hasFile('image_url')) {
-        $this->saveAllPictures($request, $product_id);
+        $this->saveAllPictures($request, $product);
       }
 
     }
 
-    private function saveBrands($request, $product_id)
+    private function saveBrands($request, $product)
     {
-      foreach ($request->brand_id as $brand_id) {
-        if($brand_id) {
-          App\ProductBrand::create([
-            'product_id' => $product_id,
-            'brand_id' => $brand_id,
-          ]);
-        }
-      }
+      $product->brands()->sync($request->brand_id);
     }
 
-    private function saveCategories($request, $product_id)
+    private function saveCategories($request, $product)
     {
-      foreach ($request->category_id as $category_id) {
-        if($category_id) {
-          App\ProductCategories::create([
-            'product_id' => $product_id,
-            'category_id' => $category_id,
-          ]);
-        }
-      }
+      $product->categories()->sync($request->category_id);
     }
 
-    private function saveSubCategories($request, $product_id)
+    private function saveSubCategories($request, $product)
     {
-      foreach ($request->sub_category_id as $sub_category_id) {
-        if($sub_category_id) {
-          App\ProductSubCategories::create([
-            'product_id' => $product_id,
-            'sub_category_id' => $sub_category_id,
-          ]);
-        }
-      }
+      $product->subCategories()->sync($request->sub_category_id);
     }
 
-    private function savePriceCategories($request, $product_id)
+    private function savePriceCategories($request, $product)
     {
-      foreach ($request->price_category_id as $price_category_id) {
-        if($price_category_id) {
-          App\ProductPriceCategories::create([
-            'product_id' => $product_id,
-            'price_category_id' => $price_category_id,
-          ]);
-        }
-      }
+      $product->priceCategories()->sync($request->price_category_id);
     }
 
-    private function saveAllAges($request, $product_id)
+    private function saveAllAges($request, $product)
     {
-      foreach ($request->product_age_range_id as $product_age_range_id) {
-        if($product_age_range_id) {
-          App\ProductAges::create([
-            'product_id' => $product_id,
-            'product_age_range_id' => $product_age_range_id,
-          ]);
-        }
-      }
+      $product->ages()->sync($request->product_age_range_id);
     }
 
     private function saveAllSizes($request, $product_id)
     {
-      foreach ($request->product_size_id as $product_size_id) {
-          if($product_size_id) {
-            App\ProductHasSize::create([
-              'product_id' => $product_id,
-              'product_size_id' => $product_size_id,
-            ]);
-          }
-      }
+      $product->sizes()->sync($request->product_size_id);
     }
 
-    private function saveAllPictures($request, $product_id)
+    private function saveAllPictures($request, $product)
     {
-      foreach ($request->file('image_url') as $image_url) {
-          if($image_url) {
-            $image_url = Utils\Utils::saveImage($image_url,
-                                                          $this->productImages);
-            App\ProductPicture::create([
-              'product_id' => $product_id,
-              'image_url' => $image_url,
-            ]);
-          }
-      }
+      $destination = $this->productImages;
+
+      $image_urls = collect($request->file('image_url'))
+                             ->map( function($image_url)
+                             use ($destination, $product)
+                             {
+                               if($image_url)
+                               {
+                                 return [
+                                         'image_url' =>
+                                            Utils\Utils::saveImage($image_url,
+                                                                  $destination)
+                                        ];
+                               }
+                             });
+
+      $product->pictures()->createMany($image_urls->toArray());
+
     }
 
     public function edit(App\Product $product)
@@ -286,46 +232,32 @@ class Products extends Controller
 
     private function getSelectedBrands($product)
     {
-      $selectedBrands = $product->brands()->pluck('brand_id');
-
-      return $selectedBrands;
+      return $product->brands()->pluck('brand_id');
     }
 
     private function getSelectedCategories($product)
     {
-      $selectedCategories = $product->categories()->pluck('category_id');
-
-      return $selectedCategories;
+      return $product->categories()->pluck('category_id');
     }
 
     private function getSelectedSubCategories($product)
     {
-      $selectedSubCategories = $product->subCategories()
-                                       ->pluck('sub_category_id');
-
-      return $selectedSubCategories;
+      return $product->subCategories()->pluck('sub_category_id');
     }
 
     private function getSelectedPriceCategories($product)
     {
-      $selectedPriceCategories = $product->priceCategories()
-                                       ->pluck('price_category_id');
-
-      return $selectedPriceCategories;
+      return $product->priceCategories()->pluck('price_category_id');
     }
 
     private function getSelectedAgeRanges($product)
     {
-      $selectedAgeRanges = $product->ages()->pluck('product_age_range_id');
-
-      return $selectedAgeRanges;
+      return $product->ages()->pluck('product_age_range_id');
     }
 
     private function getSelectedProductSizes($product)
     {
-      $selectedProductSizes = $product->sizes()->pluck('product_size_id');
-
-      return $selectedProductSizes;
+      return $product->sizes()->pluck('product_size_id');
     }
 
     public function update(Requests\UpdateProduct $request, $product_id)
@@ -368,33 +300,27 @@ class Products extends Controller
         $product = App\Product::find($product_id);
 
         //To update all the brands
-        $this->updateBrands($request, $product);
+        $this->saveBrands($request, $product);
 
         //To update all the categories
-        $this->updateCategories($request, $product);
+        $this->saveCategories($request, $product);
 
         //To update all the subCategories
         if($request->has('sub_category_id'))
         {
-          if(count($request->sub_category_id > 1) || $request->sub_category_id[0])
-          {
-            $this->updateSubCategories($request, $product);
-          }
+          $this->saveSubCategories($request, $product);
         }
 
         //To update all the priceCategories
-        $this->updatePriceCategories($request, $product);
+        $this->savePriceCategories($request, $product);
 
         //To update all the productAgeRanges
-        $this->updateAllAges($request, $product);
+        $this->saveAllAges($request, $product);
 
         //To update all the productSizes
         if($request->has('product_size_id'))
         {
-          if(count($request->product_size_id > 1) || $request->product_size_id[0])
-          {
-            $this->updateAllSizes($request, $product);
-          }
+          $this->saveAllSizes($request, $product);
         }
 
         //To update all the productPictures
@@ -404,62 +330,82 @@ class Products extends Controller
 
       }
 
-        private function updateBrands($request, $product)
-        {
-          $product->brands()->delete();
-          $this->saveBrands($request, $product->id);
-        }
-
-        private function updateCategories($request, $product)
-        {
-          $product->categories()->delete();
-          $this->saveCategories($request, $product->id);
-        }
-
-        private function updateSubCategories($request, $product)
-        {
-          if(count($product->subCategories()->get()) > 0) {
-            $product->subCategories()->delete();
-          }
-          $this->saveSubCategories($request, $product->id);
-        }
-
-        private function updatePriceCategories($request, $product)
-        {
-          $product->priceCategories()->delete();
-          $this->savePriceCategories($request, $product->id);
-        }
-
-        private function updateAllAges($request, $product)
-        {
-          $product->ages()->delete();
-          $this->saveAllAges($request, $product->id);
-        }
-
-        private function updateAllSizes($request, $product)
-        {
-          if(count($product->sizes()->get()) > 0) {
-            $product->sizes()->delete();
-          }
-          $this->saveAllSizes($request, $product->id);
-        }
-
-      private function updateAllPictures($request, $product)
-      {
-        if(count($product->pictures()->get()) > 0) {
-          $this->deleteProductPictures($product);
-          $product->pictures()->delete();
-        }
-        $this->saveAllPictures($request, $product->id);
+    private function updateAllPictures($request, $product)
+    {
+      if(count($product->pictures()->get()) > 0) {
+        //delete the pictures from the file-system
+        $this->deleteProductPictures($product);
+        //remove the database references
+        $product->pictures()->delete();
       }
+      $this->saveAllPictures($request, $product);
+    }
 
     public function destroy(App\Product $product)
     {
+      //Delete its pictures from file system
       $this->deleteProductPictures($product);
+      //Detach this product from all its relationships
+      $this->detachProduct($product);
+      //Now delete the product
       $product->delete();
+      //return the view
       return $this->productsTable();
     }
 
+    //Detaches this product from all its relationships
+    private function detachProduct($product)
+    {
+      //Detach from brands
+      $this->detachFromBrands($product);
+
+      //Detach from categories
+      $this->detachFromCategories($product);
+
+      //Detach from sub_categories
+      $this->detachFromSubCategories($product);
+
+      //Detach from price_categories
+      $this->detachFromPriceCategories($product);
+
+      //Detach from ages
+      $this->detachFromAges($product);
+
+      //Detach from sizes
+      $this->detachFromSizes($product);
+    }
+
+    private function detachFromBrands($product)
+    {
+      $product->brands()->detach();
+    }
+
+    private function detachFromCategories($product)
+    {
+      $product->categories()->detach();
+    }
+
+    private function detachFromSubCategories($product)
+    {
+      $product->subCategories()->detach();
+    }
+
+    private function detachFromPriceCategories($product)
+    {
+      $product->priceCategories()->detach();
+    }
+
+    private function detachFromAges($product)
+    {
+      $product->ages()->detach();
+    }
+
+    private function detachFromSizes($product)
+    {
+      $product->sizes()->detach();
+    }
+
+    //deletes pictures from the file-system
     private function deleteProductPictures($product)
     {
       $base_path = public_path($this->productImages);

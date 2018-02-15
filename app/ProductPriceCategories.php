@@ -9,6 +9,8 @@ class ProductPriceCategories extends Pivot
 {
     use SoftDeletes;
 
+    protected $table = 'product_price_categories';
+
     protected $fillable = ['product_id', 'price_category_id'];
 
     public function product()

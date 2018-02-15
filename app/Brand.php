@@ -10,7 +10,7 @@ class Brand extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['products'];
+    // protected $cascadeDeletes = ['products'];
 
     protected $fillable = [
       'name', 'description', 'image_url',
@@ -18,7 +18,9 @@ class Brand extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product', 'product_brands')
+===
+      return $this->belongsToMany('App\Product', 'product_brands')
+                  ->withTimestamps()
                   ->using('App\ProductBrand');
     }
 }
