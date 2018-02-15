@@ -67,11 +67,11 @@ class Products extends Controller
     private function getMappedProducts()
     {
       return App\Product::latest('updated_at')
-                        ->get()
-                        ->map(function ($prod) {
-                          $product = $prod;
-                          return $product;
-                        });
+                        ->with([
+                          'brands:name', 'categories:name', 'ages:range',
+                          'sizes:size', 'subCategories:name',
+                          'priceCategories:range',
+                          ])->get();
     }
 
     public function cmsProduct(App\Product $product)

@@ -67,14 +67,22 @@
                 <td style="display: none;">{{$product->id}}</td>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$product->name}}</td>
-                <td>{{$product->category_name}}</td>
-                <td>{{$product->sub_category_name}}</td>
-                <td>{{$product->price_category}}</td>
                 <td>
-                  {{$product->age_range}}
+                  {{$product->categories->first()->name}}
                 </td>
                 <td>
-                  {{$product->brand_name}}
+                  @if($product->subCategories->first())
+                    {{$product->subCategories->first()->name}}
+                  @endif
+                </td>
+                <td>
+                  {{--$product->priceCategories->first()->range--}}
+                </td>
+                <td>
+                  {{$product->ages->first()->range}}
+                </td>
+                <td>
+                  {{$product->brands->first()->name}}
                 </td>
                 <td>
                   @php
