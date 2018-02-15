@@ -86,7 +86,6 @@ class KidsCity extends Controller
                     $sub_category = App\SubCategory::find($subid);
                     $selectedSubCategory = $subid;
 
-                    return $sub_category->products()->get();
                     $products = $sub_category->products()->orderBy('created_at', 'asc')->get();
                 }
 

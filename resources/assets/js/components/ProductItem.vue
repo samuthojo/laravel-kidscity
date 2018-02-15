@@ -15,12 +15,14 @@
                 </span>
             </a>
 
-            <button class="btn accent add-btn" v-on:click="addToCart(event, product.id, 1)">
-                Add to cart
+            <button :disabled="product.loading" class="btn accent add-btn" v-on:click="addToCart()">
+                <span v-if="product.loading">Adding</span>
+                <span v-if="!product.loading">Add to cart</span>
             </button>
 
-            <button class="btn danger remove-btn" v-on:click="removeFromCart(event, product.id)">
-                remove
+            <button :disabled="product.loading" class="btn danger remove-btn" v-on:click="removeFromCart()">
+                <span v-if="product.loading">removing</span>
+                <span v-if="!product.loading">remove</span>
             </button>
         </div>
 </template>
@@ -33,11 +35,35 @@
 
         methods: {
             addToCart() {
-                this.product.in_cart = true;
+                this.product.loading = true;
+                this.$root.$emit('add', {'id': this.product.id, 'qty' : 1});
+                this.$root.$on('added', () => {
+                    this.product.loading = false;
+                    this.product.in_cart = true;
+                    this.$root.$off('added');
+                });
             },
 
             removeFromCart() {
-                this.product.in_cart = false;
+                var url= window.Laravel.base_url + '/removeFromCart';
+                this.product.loading = true;
+                this.$root.$emit('remove', {'id': this.product.id});
+
+
+                this.$root.$on('removed', () => {
+                    this.product.loading = false;
+                    this.product.in_cart = true;
+                    this.$root.$off('removed');
+                });
+
+                axios.post(url,  {'id': this.product.id})
+                    .then((response)=>{
+                        console.log(response);
+                        this.product.loading = false;
+                        this.product.in_cart = false;
+                    }).catch((error)=>{
+                        console.log(error.response.data)
+                    });
             }
         }
     }

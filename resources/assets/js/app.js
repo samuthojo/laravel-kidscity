@@ -34,6 +34,33 @@ window.vue_app = new Vue({
             return html;    
         }
     },
+    created(){
+        this.$on('add', function(data) {
+            var url= window.Laravel.base_url + '/addToCart';
+            axios.post(url,  data).then((response)=>{
+                var res = response.data;
+                this.addItem(res.added_item, res.subtotal);
+                this.setCount(res.count);
+                this.setPrice(res.subtotal);
+            this.$emit('added');
+            }).catch((error)=>{
+                    console.log(error.response.data)
+            });
+        });
+
+        this.$on('remove', function(data) {
+            var url= window.Laravel.base_url + '/removeFromCart';
+            axios.post(url,  data).then((response)=>{
+                var res = response.data;
+                this.removeItem(res.removed_item_id, res.subtotal);
+                this.setCount(res.count);
+                this.setPrice(res.subtotal);
+            this.$emit('removed');
+            }).catch((error)=>{
+                console.log(error.response.data)
+            });
+        });
+    },
     methods: {
         setCount: function(count){
             this.$data.cart_count = count;

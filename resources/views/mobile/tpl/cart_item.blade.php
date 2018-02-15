@@ -2,7 +2,7 @@
 	<div class="layout">
 		<div class="item-image">
 			<a href="{{url('/mob/products/' . $item->id)}}">
-				<img src="{{asset('images/real_cloths/' . $item->model->image_url)}}" alt="" width="100%">
+				<img src="{{$item->model->image()}}" alt="" width="100%">
 			</a>
 		</div>
 		<div class="col layout vertical flex" style="margin-left: 16px;">

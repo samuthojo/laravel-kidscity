@@ -1,7 +1,7 @@
 <div id="product-{{$item->model->id}}" class="cart-item row">
 	<div class="item-image col-md-1">
 		<a href="{{url('products/' . $item->id)}}">
-			<img src="{{asset('images/real_cloths/' . $item->model->image_url)}}" alt="">
+			<img src="{{asset($item->model->image())}}" alt="">
 		</a>
 	</div>
 	<div class="layout flex center">

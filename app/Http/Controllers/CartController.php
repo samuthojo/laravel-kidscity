@@ -197,16 +197,18 @@ class CartController extends Controller
             $item = Cart::search(function ($cartItem) use ($id) {
                 return $cartItem->model->id === $id;
             })->first();
-            Cart::remove($item->rowId);
 
-            return response()->json([
-                "success" => true,
-                "count" => Cart::count(),
-                "subtotal_num" => number_format(Cart::subtotal()),
-                "subtotal" => present_price(Cart::subtotal()),
-                "msg" => "Item removed.",
-                "removed_item_id" => $item->rowId
-            ]);
+            if(!is_null($item)){
+                Cart::remove($item->rowId);
+                return response()->json([
+                    "success" => true,
+                    "count" => Cart::count(),
+                    "subtotal_num" => number_format(Cart::subtotal()),
+                    "subtotal" => present_price(Cart::subtotal()),
+                    "msg" => "Item removed.",
+                    "removed_item_id" => $item->rowId
+                ]);
+            }
         }
 
         return response()->json([

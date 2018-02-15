@@ -1457,6 +1457,38 @@ window.vue_app = new Vue({
             return html;
         }
     },
+    created: function created() {
+        this.$on('add', function (data) {
+            var _this = this;
+
+            var url = window.Laravel.base_url + '/addToCart';
+            axios.post(url, data).then(function (response) {
+                var res = response.data;
+                _this.addItem(res.added_item, res.subtotal);
+                _this.setCount(res.count);
+                _this.setPrice(res.subtotal);
+                _this.$emit('added');
+            }).catch(function (error) {
+                console.log(error.response.data);
+            });
+        });
+
+        this.$on('remove', function (data) {
+            var _this2 = this;
+
+            var url = window.Laravel.base_url + '/removeFromCart';
+            axios.post(url, data).then(function (response) {
+                var res = response.data;
+                _this2.removeItem(res.removed_item_id, res.subtotal);
+                _this2.setCount(res.count);
+                _this2.setPrice(res.subtotal);
+                _this2.$emit('removed');
+            }).catch(function (error) {
+                console.log(error.response.data);
+            });
+        });
+    },
+
     methods: {
         setCount: function setCount(count) {
             this.$data.cart_count = count;
@@ -44182,6 +44214,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -44190,10 +44224,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addToCart: function addToCart() {
-            this.product.in_cart = true;
+            var _this = this;
+
+            this.product.loading = true;
+            this.$root.$emit('add', { 'id': this.product.id, 'qty': 1 });
+            this.$root.$on('added', function () {
+                _this.product.loading = false;
+                _this.product.in_cart = true;
+                _this.$root.$off('added');
+            });
         },
         removeFromCart: function removeFromCart() {
-            this.product.in_cart = false;
+            var _this2 = this;
+
+            var url = window.Laravel.base_url + '/removeFromCart';
+            this.product.loading = true;
+            this.$root.$emit('remove', { 'id': this.product.id });
+
+            this.$root.$on('removed', function () {
+                _this2.product.loading = false;
+                _this2.product.in_cart = true;
+                _this2.$root.$off('removed');
+            });
+
+            axios.post(url, { 'id': this.product.id }).then(function (response) {
+                console.log(response);
+                _this2.product.loading = false;
+                _this2.product.in_cart = false;
+            }).catch(function (error) {
+                console.log(error.response.data);
+            });
         }
     }
 });
@@ -44228,26 +44288,36 @@ var render = function() {
         "button",
         {
           staticClass: "btn accent add-btn",
+          attrs: { disabled: _vm.product.loading },
           on: {
             click: function($event) {
-              _vm.addToCart(_vm.event, _vm.product.id, 1)
+              _vm.addToCart()
             }
           }
         },
-        [_vm._v("\n        Add to cart\n    ")]
+        [
+          _vm.product.loading ? _c("span", [_vm._v("Adding")]) : _vm._e(),
+          _vm._v(" "),
+          !_vm.product.loading ? _c("span", [_vm._v("Add to cart")]) : _vm._e()
+        ]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
           staticClass: "btn danger remove-btn",
+          attrs: { disabled: _vm.product.loading },
           on: {
             click: function($event) {
-              _vm.removeFromCart(_vm.event, _vm.product.id)
+              _vm.removeFromCart()
             }
           }
         },
-        [_vm._v("\n        remove\n    ")]
+        [
+          _vm.product.loading ? _c("span", [_vm._v("removing")]) : _vm._e(),
+          _vm._v(" "),
+          !_vm.product.loading ? _c("span", [_vm._v("remove")]) : _vm._e()
+        ]
       )
     ]
   )
