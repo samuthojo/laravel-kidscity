@@ -26,6 +26,20 @@ class Product extends Model
       return $this->hasMany('App\ProductPicture');
     }
 
+    public function real_pictures()
+    {
+        $images = $this->pictures()->get()->map(function($p){
+            return asset('images/real_cloths/' . $p->image_url);
+        });
+
+        return $images;
+    }
+
+    public function image()
+    {
+        return asset('images/real_cloths/' . $this->pictures()->first()->image_url);
+    }
+
     public function brands()
     {
         return $this->belongsToMany('App\Brand', 'product_brands')
@@ -69,11 +83,6 @@ class Product extends Model
 
     public function present_price(){
         return present_price($this->price);
-    }
-
-    public function image()
-    {
-        return asset('images/real_cloths/' . $this->pictures()->first()->image_url);
     }
 
     public function toSearchableArray()

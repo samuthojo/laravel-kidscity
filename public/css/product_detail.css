@@ -14,8 +14,96 @@ body{
 	padding: 60px;
 }
 
-#productImage{
-	padding-right: 30px;
+#productMedia{
+	width: 50%;
+	position: relative;
+	overflow: hidden;
+}
+
+#mediaTabs{
+	margin-top: 1.8em;
+	position: relative;
+}
+
+#mediaTabs:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0.5px;
+	width: 100%;
+	height: 1px;
+	background: #eee;
+	z-index: -1;
+}
+
+#mediaTabs button{
+	font-size: 0.88em;
+	padding: 1.3em;
+	background-color: transparent;
+	border:none;
+	border-bottom: 2px solid transparent;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+#productMedia:not(.show-video) #mediaTabs button:first-child,
+#productMedia.show-video #mediaTabs button:last-child{
+	border-bottom-color: #000;
+	pointer-events: none;
+	opacity: 1;
+}
+
+#productVideo{
+	/*background: #000;*/
+}
+
+#mediaScroller{
+	width: 200%;
+	transition: transform 0.35s ease-out;
+}
+
+#productMedia.show-video #mediaScroller{
+	transform: translateX(-50%);
+}
+
+#mediaScroller > div{
+	position: relative;
+	width: 50%;
+}
+
+#imageOptions{
+	flex-shrink: 0;
+	width: 110px;
+}
+
+#imageOptions .image-option{
+	width: 90px;
+	height: 90px;
+	overflow: hidden;
+	background: #fff;
+	border: 1px solid #aaa;
+	margin-bottom: 0.5em;
+}
+
+#imageOptions .image-option:not(.active){
+	opacity: 0.7;
+	border-color: #ddd;
+}
+
+#imageOptions img{
+	height: 70px;
+}
+
+#image{
+	flex: 1;
+	padding: 2% 5%;
+	height: 430px;
+	border: 1px solid #eee;
+	align-self: flex-start;
+}
+
+#productInfo{
+	padding: 0 3.5em;
 }
 
 #productInfo h2{
@@ -39,23 +127,6 @@ body{
 #productInfo .price .number{
 	font-family: Futura, sans-serif;
 	font-size: 2.2em;
-}
-
-#productInfo .product-description{
-	margin-top: 20px;
-}
-
-#productInfo .product-description h5{
-	display: block;
-	margin-bottom: 8px;
-}
-
-#productInfo .product-description p{
-	display: block;
-	margin-bottom: 20px;
-	font-family: Futura, sans-serif;
-	font-size: 1.45em;
-	line-height: 1.45em;
 }
 
 #productInfo .tags-list{
@@ -125,4 +196,37 @@ body{
 .product-infos.added #addForm,
 .product-infos:not(.added) .remove-btn{
 	display: none;
+}
+
+#productDescription{
+	margin-top: 3em;
+}
+
+#productDescription h3{
+	font-size: 2em;
+}
+
+#description{
+
+}
+
+#productDescription h5,
+#productDescription b{
+	font-size: 1.2em;
+	display: block;
+	margin-bottom: 8px;
+}
+
+#productDescription p{
+	display: block;
+	margin-bottom: 20px;
+	font-family: FiraSans Light, sans-serif;
+	font-weight: 100 !important;
+	font-size: 1.25em;
+	line-height: 1.85em;
+}
+
+#productDescription .info-line p{
+	margin-bottom: 7px !important;
+	font-size: 1.2em;
 }

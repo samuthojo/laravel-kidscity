@@ -18,7 +18,9 @@ class Products extends Controller
     {
       $page = 'shop';
       $back = true;
+      $images = [];
 
+//      print_r($product->real_pictures());
       return view('product_detail', compact('page', 'back', 'product'));
     }
 
@@ -90,7 +92,8 @@ class Products extends Controller
 
     public function cmsProduct(App\Product $product)
     {
-      return $product;
+        $product->image_url = $product->pictures()->first()->image_url;
+        return $product;
     }
 
     public function store(Requests\CreateProduct $request)

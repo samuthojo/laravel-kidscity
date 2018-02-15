@@ -1,13 +1,41 @@
 <div id="productDetailPage">
-	<div class="page-wrapper main-wrapper">
+	<div class="section-wrapper">
 		<div id="product-{{$product->id}}" class="row product-infos {{in_cart($product->id) ? 'added' : ''}}">
-			<div id="productImage">
-				<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt=""
-				 width="250px">
+			<div id="productMedia">
+				<div id="mediaScroller" class="layout">
+					<div id="productImage" class="layout">
+						@if(count($product->real_pictures()) > 1)
+							<div id="imageOptions">
+								@foreach($product->real_pictures() as $picture)
+									<div class="{{$loop->index == 0 ? 'active' : ''}} image-option layout center-center" data-image="{{$picture}}">
+										<img src="{{$picture}}" alt="">
+									</div>
+								@endforeach
+							</div>
+						@endif
+						<div id="image" class="layout center-center">
+							<img id="bigPicture" src="{{$product->image()}}" alt=""
+								 style="min-width: 40%; max-width: 80%; max-height: 95%">
+						</div>
+					</div>
+
+					@if(!is_null($product->video_url))
+						<div id="productVideo" class="layout center-justified start">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/{{$product->video_url}}?rel=0&amp;controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+						</div>
+					@endif
+				</div>
+
+				@if(!is_null($product->video_url))
+					<div id="mediaTabs">
+						<button class="has-ripple" onclick="switchMediaTab(0)">PRODUCT IMAGE</button>
+						<button class="has-ripple" onclick="switchMediaTab(1)">PRODUCT VIDEO</button>
+					</div>
+				@endif
 			</div>
-			<div id="productInfo" class="col-md col-md-offset-1" style="max-width: 600px;">
+			<div id="productInfo" class="col-md" style="max-width: 600px;">
 				<h2>
-					{{$product->name}}
+					{{$product->name}} {{count($product->pictures())}}
 				</h2>
 				<span class="price">
 					<span class="currency">Tshs.</span>
@@ -15,12 +43,6 @@
 						{{present_price($product->price)}}
 					</span>
 				</span>
-				<div class="product-description">
-					<h5>Description</h5>
-					<p>
-						{{$product->description}}
-					</p>
-				</div>
 
 				<div class="tags-list" style="display: none;">
 					<p>Product tags</p>
@@ -54,6 +76,37 @@
 						onclick="removeFromCart(event, '{{$product->id}}')">
 					REMOVE FROM CART
 				</button>
+			</div>
+		</div>
+
+		<div id="productDescription">
+			<div class="row">
+				<div id="description" class="col-md-7">
+					<h5>Description</h5>
+					<p>
+						{!! $product->description !!}
+					</p>
+				</div>
+
+				<div class="col-md-3 col-md-offset-1">
+					<div class="info-line layout center">
+						<h5>Dimensions : </h5>&nbsp;
+						@if(!is_null($product->dimensions))
+							<p>{{$product->dimensions}}</p>
+						@else
+							<p>Not available</p>
+						@endif
+					</div>
+
+					<div class="info-line layout center">
+						<h5>Weight : </h5>&nbsp;
+						@if(!is_null($product->weight))
+							<p>{{$product->weight}}</p>
+						@else
+							<p>Not available</p>
+						@endif
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

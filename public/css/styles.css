@@ -547,6 +547,10 @@ select.input{
     outline: none !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
     -webkit-tap-highlight-color: transparent !important;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .has-ripple:before{
     content: '';
@@ -570,8 +574,8 @@ select.input{
 }
 
 .has-ripple:active:before{
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.35s;
+    animation-duration: 0.35s;
 
     -webkit-animation-name: ripple;
     animation-name: ripple;

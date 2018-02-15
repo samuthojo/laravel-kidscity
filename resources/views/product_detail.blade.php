@@ -11,6 +11,28 @@
 @section('content')
     <div class="main-wrapper for-lg">
         @include('product_detail.index')
-        @include('scripts')
     </div>
+@endsection
+
+@section('scripts')
+    @include('scripts')
+
+    <script>
+        var medias = document.getElementById("productMedia");
+
+        $(".image-option").on("click", function(){
+            var src = $(this).data('image');
+            $(".image-option.active").removeClass('active');
+            $(this).addClass('active');
+            $("#bigPicture").attr('src', src);
+        });
+
+        function switchMediaTab(state){
+            if(state){
+                medias.classList.add("show-video");
+            }else{
+                medias.classList.remove("show-video");
+            }
+        }
+    </script>
 @endsection
