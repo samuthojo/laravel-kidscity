@@ -27,36 +27,42 @@ class Product extends Model
     public function brands()
     {
         return $this->belongsToMany('App\Brand', 'product_brands')
+                    ->withTimestamps()
                     ->using('App\ProductBrand');
     }
 
     public function sizes()
     {
       return $this->belongsToMany('App\ProductSize', 'product_has_sizes')
+                  ->withTimestamps()
                   ->using('App\ProductHasSize');
     }
 
     public function ages()
     {
       return $this->belongsToMany('App\ProductAgeRange', 'product_ages')
+                  ->withTimestamps()
                   ->using('App\ProductAges');
     }
 
     public function subCategories()
     {
       return $this->belongsToMany('App\SubCategory', 'product_sub_categories')
+                  ->withTimestamps()
                   ->using('App\ProductSubCategories');
     }
 
     public function categories()
     {
       return $this->belongsToMany('App\Category', 'product_categories')
+                  ->withTimestamps()
                   ->using('App\ProductCategories');
     }
 
     public function priceCategories()
     {
       return $this->belongsToMany('App\PriceCategory', 'product_price_categories')
+                  ->withTimestamps()
                   ->using('App\ProductPriceCategories');
     }
 

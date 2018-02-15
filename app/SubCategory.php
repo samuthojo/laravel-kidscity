@@ -24,6 +24,7 @@ class SubCategory extends Model
     public function products()
     {
       return $this->belongsToMany('App\Product', 'product_sub_categories')
+                  ->withTimestamps()
                   ->using('App\ProductSubCategories');
     }
 }

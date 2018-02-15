@@ -17,6 +17,7 @@ class PriceCategory extends Model
   public function products()
   {
     return $this->belongsToMany('App\Product', 'product_price_categories')
+                ->withTimestamps()
                 ->using('App\ProductPriceCategories');
   }
 }

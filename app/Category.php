@@ -22,6 +22,7 @@ class Category extends Model
   public function products()
   {
     return $this->belongsToMany('App\Product', 'product_categories')
+                ->withTimestamps()
                 ->using('App\ProductCategories');
   }
 }

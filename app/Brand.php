@@ -19,6 +19,7 @@ class Brand extends Model
     public function products()
     {
       return $this->belongsToMany('App\Product', 'product_brands')
+                  ->withTimestamps()
                   ->using('App\ProductBrand');
     }
 }

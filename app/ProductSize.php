@@ -19,6 +19,7 @@ class ProductSize extends Model
     public function products()
     {
       return $this->belongsToMany('App\Product', 'product_has_sizes')
+                  ->withTimestamps()
                   ->using('App\ProductHasSize');
     }
 

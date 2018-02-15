@@ -9,6 +9,10 @@ class ProductSubCategories extends Pivot
 {
   use SoftDeletes;
 
+  protected $table = 'product_sub_categories';
+
+  // protected $touches = ['subCategory', 'product'];
+
   protected $fillable = [
     'product_id', 'sub_category_id',
   ];

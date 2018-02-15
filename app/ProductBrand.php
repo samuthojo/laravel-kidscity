@@ -9,6 +9,10 @@ class ProductBrand extends Pivot
 {
     use SoftDeletes;
 
+    protected $table = 'product_brands';
+
+    // protected $touches = ['brand', 'product'];
+
     protected $fillable = ['product_id', 'brand_id'];
 
     public function product()
