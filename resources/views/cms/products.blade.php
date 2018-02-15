@@ -76,7 +76,7 @@
                   @endif
                 </td>
                 <td>
-                  {{--$product->priceCategories->first()->range--}}
+                  {{$product->priceCategories->first()->range}}
                 </td>
                 <td>
                   {{$product->ages->first()->range}}
