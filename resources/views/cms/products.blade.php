@@ -87,13 +87,13 @@
                 <td>
                   @php
                    $gender = '';
-                   if ($product->gender === 0) {
+                   if ($product->gender == 0) {
                      $gender = 'Male';
                    }
-                   else if ($product->gender === 1) {
+                   else if ($product->gender == 1) {
                      $gender =  'Female';
                    }
-                   else if ($product->gender === 2) {
+                   else if ($product->gender == 2) {
                      $gender =  'Unisex';
                    }
                    else {
