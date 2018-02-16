@@ -20,25 +20,52 @@
         <td style="display: none;">{{$product->id}}</td>
         <td>{{$loop->iteration}}</td>
         <td>{{$product->name}}</td>
-        <td>{{$product->category_name}}</td>
-        <td>{{$product->sub_category_name}}</td>
-        <td>{{$product->price_category}}</td>
         <td>
-          {{$product->age_range}}
+          {{$product->categories->first()->name}}
         </td>
         <td>
-          {{$product->brand_name}}
+          @if($product->subCategories->first())
+            {{$product->subCategories->first()->name}}
+          @else
+            null
+          @endif
         </td>
-        <td>{{($product->gender) ? 'Female' : 'Male'}}</td>
+        <td>
+          {{$product->priceCategories->first()->range}}
+        </td>
+        <td>
+          {{$product->ages->first()->range}}
+        </td>
+        <td>
+          {{$product->brands->first()->name}}
+        </td>
+        <td>
+          @php
+           $gender = '';
+           if ($product->gender == 0) {
+             $gender = 'Male';
+           }
+           else if ($product->gender == 1) {
+             $gender =  'Female';
+           }
+           else if ($product->gender == 2) {
+             $gender =  'Unisex';
+           }
+           else {
+             $gender =  'null';
+           }
+          @endphp
+          {{$gender}}
+        </td>
         <td>
           {{ number_format($product->price) }}
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-warning" title="edit product"
-              onclick="showEditProductModal({{$product}})">
+            <a class="btn btn-warning" title="edit product"
+              href="{{route('products.edit', ['product' => $product->id])}}">
               <span class="glyphicon glyphicon-pencil"></span>
-            </button>
+            </a>
             <button class="btn btn-danger" title="delete product"
               onclick="showProductDeleteModal({{$product}})">
               <span class="glyphicon glyphicon-trash"></span>

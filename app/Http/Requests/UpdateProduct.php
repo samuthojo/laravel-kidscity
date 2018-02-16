@@ -45,28 +45,22 @@ class UpdateProduct extends FormRequest
             $rules['category_id.' . $index] =
               ($index) ? 'required|integer' : 'nullable|integer';
         }
-        $sub_category_id = count($this->input('sub_category_id')) - 1;
-        foreach(range(0, $sub_category_id) as $index) {
-            $rules['sub_category_id.' . $index] = 'nullable|integer';
-        }
         $product_age_range_id = count($this->input('product_age_range_id')) - 1;
         foreach(range(0, $product_age_range_id) as $index) {
             $rules['product_age_range_id.' . $index] =
               ($index) ? 'required|integer' : 'nullable|integer';
-        }
-        $product_size_id = count($this->input('product_size_id')) - 1;
-        foreach(range(0, $product_size_id) as $index) {
-            $rules['product_size_id.' . $index] = 'nullable|integer';
         }
         $price_category_id = count($this->input('price_category_id')) - 1;
         foreach(range(0, $price_category_id) as $index) {
             $rules['price_category_id.' . $index] =
               ($index) ? 'required|integer' : 'nullable|integer';
         }
-        $image_url = count($this->input('image_url')) - 1;
-        foreach(range(0, $image_url) as $index) {
-            $rules['image_url.' . $index] = 'nullable|file|image|max:2048';
-        }
+        if($this->input('image_url')) {
+	        $image_url = count($this->input('image_url')) - 1;
+	        foreach(range(0, $image_url) as $index) {
+	            $rules['image_url.' . $index] = 'nullable|file|image|max:2048';
+	        }
+	      }
         return $rules;
     }
 

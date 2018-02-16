@@ -95,7 +95,7 @@
                 </li>
                 <li class="{{areActiveRoutes([
                   'products.index',
-                  'products.product',
+                  'products.edit',
                   'products.create',
                   ])}}">
                     <a href="{{ route('products.index') }}">Products</a>

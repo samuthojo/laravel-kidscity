@@ -76,7 +76,10 @@ class Products extends Controller
 
     public function cmsProduct(App\Product $product)
     {
-        $product->image_url = $product->pictures()->first()->image_url;
+        $picture = $product->pictures()->first();
+
+        $product->image_url = ($picture) ? $picture->image_url : null;
+
         return $product;
     }
 

@@ -73,6 +73,8 @@
                 <td>
                   @if($product->subCategories->first())
                     {{$product->subCategories->first()->name}}
+                  @else
+                    null
                   @endif
                 </td>
                 <td>
