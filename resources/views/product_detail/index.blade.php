@@ -35,7 +35,7 @@
 			</div>
 			<div id="productInfo" class="col-md" style="max-width: 600px;">
 				<h2>
-					{{$product->name}} {{count($product->pictures())}}
+					{{$product->name}} 
 				</h2>
 				<span class="price">
 					<span class="currency">Tshs.</span>
