@@ -135,7 +135,7 @@
 
         @if($page != "cart")
             <floating-cart ref="floater"
-                           href="http://localhost:8000/cart"
+                           href="{{url('/cart')}}"
                            :items="cart_items"
                            :item-count="cart_count"
                            :total-price="total_price"></floating-cart>
