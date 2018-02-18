@@ -171,7 +171,7 @@ class Products extends Controller
       $product->ages()->sync($request->product_age_range_id);
     }
 
-    private function saveAllSizes($request, $product_id)
+    private function saveAllSizes($request, $product)
     {
       $product->sizes()->sync($request->product_size_id);
     }
