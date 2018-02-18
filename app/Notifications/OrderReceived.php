@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Order;
 
 class OrderReceived extends Notification
 {
     use Queueable;
+
+    public $order;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -40,10 +43,13 @@ class OrderReceived extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+      $url = url('/admin/orders/' . $this->order->id . '/items');
+
+      return (new MailMessage)
+              ->subject('Kid City - New Order')
+              ->greeting('Hello!')
+              ->line('A new order has been placed!')
+              ->action('View Order', $url);
     }
 
     /**

@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
 
         App\User::create([
           'name' => 'Admin',
+          'email' => env('ADMIN_EMAIL'),
           'phone_number' => env('ADMIN_PHONENUMBER'),
           'password' => Hash::make(env('ADMIN_PASSWORD')),
           'is_admin' => env('IS_ADMIN'),
