@@ -10,6 +10,8 @@ use App\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\NewOrderPlaced;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -92,24 +94,44 @@ class CartController extends Controller
             return back()->with('success', 'User not found!');
         }
 
-        $new_order = Order::create([
-            'user_id' => $user->id,
-            'delivery_location_id' => $delivery_location_id,
-        ]);
+        DB::beginTransaction();
 
-        if($new_order){
-            foreach(Cart::content() as $item){
-                $new_order_item = OrderItem::create([
-                    'order_id' => $new_order->id,
-                    'product_id' => $item->model->id,
-                    'quantity' => $item->qty
-                ]);
-            }
-            Cart::destroy();
-            return back()->with('success', 'Your Order has been successfully placed!');
-        }else{
-            return back()->with('error', 'Sorry, your order wasn\'t be placed. Please try again.');
+        $new_order = null;
+
+        try {
+          $new_order = Order::create([
+              'user_id' => $user->id,
+              'delivery_location_id' => $delivery_location_id,
+          ]);
+
+          if($new_order){
+              foreach(Cart::content() as $item){
+                  $new_order_item = OrderItem::create([
+                      'order_id' => $new_order->id,
+                      'product_id' => $item->model->id,
+                      'quantity' => $item->qty
+                  ]);
+              }
+          }
+
+          DB::commit();
+
+        } catch (Throwable $e) {
+
+          DB::rollBack();
+          
+          return back()->with('error', 'Sorry, your order wasn\'t placed. Please try again.');
         }
+
+        if($new_order) {
+          Cart::destroy();
+
+          //To dispatch the NewOrderPlaced event
+          event(new NewOrderPlaced($new_order));
+
+          return back()->with('success', 'Your Order has been successfully placed!');
+        }
+
     }
 
     /**

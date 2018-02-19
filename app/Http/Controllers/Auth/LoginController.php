@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -36,60 +37,12 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout', 'cmsLogout',
-                                           'showCmsLoginForm', 'cmsLogin');
-        $this->middleware('cms_guest')->only('showCmsLoginForm');
+        $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
     {
         return view('login');
-    }
-
-    public function showCmsLoginForm()
-    {
-        return view('cms.login');
-    }
-
-    public function cmsLogin(Request $request)
-    {
-        $this->validateLogin($request);
-
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-
-            return $this->sendLockoutResponse($request);
-        }
-
-        if ($this->attemptCmsLogin($request)) {
-            return $this->sendCmsLoginResponse($request);
-        }
-
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
-    }
-
-
-    protected function attemptCmsLogin(Request $request)
-    {
-        $user = App\User::where($request->only('phone_number'))->first();
-        if(!(is_null($user)) && $user->is_admin) {
-          return $this->guard()->attempt(
-              $this->credentials($request)
-          );
-        }
-        return false;
-    }
-
-    protected function sendCmsLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended('/admin');
     }
 
     public function username()
@@ -104,14 +57,5 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         return redirect('/login');
-    }
-
-    public function cmsLogout(Request $request)
-    {
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
-
-        return redirect()->route('cms_login');
     }
 }

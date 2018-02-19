@@ -13,19 +13,12 @@ class UsersTableSeeder extends Seeder
     {
       $faker = Faker\Factory::create();
 
+      for($i = 0; $i < 5; $i++) {
         App\User::create([
-          'name' => 'Admin',
-          'phone_number' => env('ADMIN_PHONENUMBER'),
-          'password' => Hash::make(env('ADMIN_PASSWORD')),
-          'is_admin' => env('IS_ADMIN'),
+          'phone_number' => $faker->phoneNumber,
+          'name' => $faker->name,
+          'password' => Hash::make(str_random(32)),
         ]);
-
-        for($i = 0; $i < 5; $i++) {
-          App\User::create([
-            'phone_number' => $faker->phoneNumber,
-            'name' => $faker->name,
-            'password' => Hash::make(str_random(32)),
-          ]);
-        }
+      }
     }
 }
