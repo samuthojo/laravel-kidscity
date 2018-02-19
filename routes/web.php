@@ -68,12 +68,10 @@ Route::get('api/cart/list', 'CartController@items');
 
 Auth::routes();
 
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('cms_login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('cms_authenticate');
 
-Route::get('/admin/login', 'Auth\LoginController@showCmsLoginForm')->name('cms_login');
-Route::post('/admin/login', 'Auth\LoginController@cmsLogin')->name('cms_authenticate');
-Route::post('/admin/logout', 'Auth\LoginController@cmsLogout')->name('cms_logout');
-
-Route::middleware('admin')->prefix('/admin')->group(function() {
+Route::middleware('auth:admin')->prefix('/admin')->group(function() {
   Route::get('/', 'Brands@cmsIndex')->name('main');
   Route::get('/brands', 'Brands@cmsIndex')->name('brands.index');
   Route::get('/brands/{brand}/brand', 'Brands@brand')->name('brands.brand');
@@ -93,7 +91,6 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
   Route::delete('/age_ranges/{ageRange}/delete_product/{product}', 'AgeRanges@deleteProduct')->name('age_ranges.delete_product');
   Route::post('/age_ranges/{ageRange}', 'AgeRanges@update')->name('age_ranges.update');
   Route::delete('/age_ranges/{ageRange}', 'AgeRanges@destroy')->name('age_ranges.destroy');
-
 
   Route::get('/customers', 'Users@cmsIndex')->name('users.index');
 
@@ -157,4 +154,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 
   Route::view('/change_password', 'cms.change_password')->name('change_password');
   Route::post('/change_password', 'Auth\AdminResetPasswordController@reset')->name("reset_admin_password");
+
+  Route::post('/admin/logout', 'Auth\AdminLoginController@logout')->name('cms_logout');
+
 });

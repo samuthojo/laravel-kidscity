@@ -22,7 +22,8 @@
               <div class="form-group">
                 <label for="edit_brand_description">Description:</label>
                 <textarea name="description" class="form-control"
-                 rows="8" cols="80" placeholder="Description (optional)"></textarea>
+                 rows="8" cols="80" placeholder="Description (optional)"
+                 id="edit_brand_description"></textarea>
               </div>
               <div class="form-group">
                 <label for="edit_brand_image">Replace Picture:</label>
