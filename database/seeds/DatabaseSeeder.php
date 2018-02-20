@@ -22,17 +22,17 @@ class DatabaseSeeder extends Seeder
         //$this->call(ProductColorsTableSeeder::class);
         //$this->call(OrdersTableSeeder::class);
         //$this->call(OrderItemsTableSeeder::class);
-        //$this->call(AdvertsTableSeeder::class);
-        //$this->call(MainBannersTableSeeder::class);
-        //$this->call(FeaturedBannersTableSeeder::class);
-        //$this->call(CategoryBannersTableSeeder::class);
+        $this->call(AdvertsTableSeeder::class);
+        $this->call(MainBannersTableSeeder::class);
+        $this->call(FeaturedBannersTableSeeder::class);
+        $this->call(CategoryBannersTableSeeder::class);
 
-        $this->call(ProductCategoriesSeeder::class);
-        $this->call(ProductPicturesSeeder::class);
-        $this->call(ProductPriceCategoriesSeeder::class);
-        $this->call(ProductSubCategoriesSeeder::class);
-        $this->call(ProductPriceCategoriesSeeder::class);
-        $this->call(BrandsTableSeeder::class);
-        $this->call(ProductAgesSeeder::class);
+//        $this->call(ProductCategoriesSeeder::class);
+//        $this->call(ProductPicturesSeeder::class);
+//        $this->call(ProductPriceCategoriesSeeder::class);
+//        $this->call(ProductSubCategoriesSeeder::class);
+//        $this->call(ProductPriceCategoriesSeeder::class);
+//        $this->call(BrandsTableSeeder::class);
+//        $this->call(ProductAgesSeeder::class);
     }
 }

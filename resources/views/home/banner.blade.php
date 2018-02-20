@@ -1,5 +1,5 @@
 <section id="sectionBanner" class="site-section layout center" style="position: relative;">
-    <img src="images/kidstar.jpg" alt="">
+    <img src="{{App\MainBanner::current()->image()}}" alt="">
 
     <div class="section-title" style="padding-left: 80px;">
         <h1>

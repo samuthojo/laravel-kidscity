@@ -28,7 +28,9 @@
 						@include('shop.aside_content')
 					</div>
 					<div id="shopContent" class="col-sm-9">
-						<shop-app :page-title="'{{$pageTitle}}'"
+						<shop-app :cur-page="1"
+								  :per-page="12"
+								  :page-title="'{{$pageTitle}}'"
 								  :initial-count={{(int) count($products)}}
 								  :from-search="{{request('search') ? 'true' : 'false'}}"
 								  :products="products"></shop-app>

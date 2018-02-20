@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <shop-actions :page-title="pageTitle" :from-search="fromSearch" :product-count="products.length"></shop-actions>
+        <shop-actions :per-page="perPage" :cur-page="curPage" :page-title="pageTitle" :from-search="fromSearch" :product-count="products.length"></shop-actions>
         <product-list :page-title="pageTitle" :products="products" :initial-count=initialCount></product-list>
     </div>
 </template>
@@ -15,7 +15,9 @@
             pageTitle: String,
             fromSearch: Boolean,
             initialCount: Number,
-            products: Array
+            products: Array,
+            perPage: Number,
+            curPage: Number
         },
 
         data() {

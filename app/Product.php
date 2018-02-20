@@ -35,7 +35,8 @@ class Product extends Model
 
     public function image()
     {
-        return asset('images/real_cloths/' . $this->pictures()->first()->image_url);
+        $url = !is_null($this->pictures()) && !is_null($this->pictures()->first()) ? $this->pictures()->first()->image_url : 'def.png' ;
+        return asset('images/real_cloths/' . $url);
     }
 
     public function brands()

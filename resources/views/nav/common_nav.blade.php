@@ -17,7 +17,7 @@
 	    </a>
 
 		<div id="navAd" class="flex">
-			<img src="{{asset('images/wide-ad.png')}}" alt="">
+			<img src="{{\App\Advert::first()->image()}}" alt="">
 		</div>
 
 		@include('nav.right_nav')
@@ -28,7 +28,7 @@
     <div class="section-wrapper layout center justified">
         <div id="navLinks" class="layout center justified">
             <?php
-                $category_items = App\Category::with('subCategories')->get();
+                $category_items = get_valid_cats();
             ?>
 
             @foreach($category_items as $item)
