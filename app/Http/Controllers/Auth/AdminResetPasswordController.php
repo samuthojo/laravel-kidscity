@@ -37,8 +37,7 @@ class AdminResetPasswordController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('guest');
-        $this->middleware('admin');
+        $this->middleware('guest:admin');
     }
 
     public function showResetForm(Request $request, $token = null)
@@ -98,4 +97,9 @@ class AdminResetPasswordController extends Controller
                     ->withErrors(['errors' => 'Incorrect current password', ]);
     }
 
+    //Get the guard to be used during authentication.
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 }

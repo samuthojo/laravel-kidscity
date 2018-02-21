@@ -42,13 +42,6 @@ Route::get('/cartItems', function(){
 });
 
 Route::get('/cart/empty', function(){
-//    return view('test');
-//
-//    $id = 1;
-//    $rowId = Cart::search(function ($cartItem) use ($id) {
-//        return $cartItem->model->id == $id;
-//    })->first()->rowId;
-
     return Cart::destroy();
 });
 
@@ -69,6 +62,7 @@ Route::get('api/cart/list', 'CartController@items');
 Auth::routes();
 
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('cms_login');
+
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('cms_authenticate');
 
 Route::middleware('auth:admin')->prefix('/admin')->group(function() {

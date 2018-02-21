@@ -38,7 +38,7 @@ class AdminLoginController extends Controller
 
         return redirect('/admin/login');
     }
-
+    
     //Get the guard to be used during authentication.
     protected function guard()
     {

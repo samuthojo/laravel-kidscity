@@ -20,7 +20,6 @@ class Products extends Controller
       $back = true;
       $images = [];
 
-//      print_r($product->real_pictures());
       return view('product_detail', compact('page', 'back', 'product'));
     }
 

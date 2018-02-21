@@ -18,14 +18,12 @@ class CartController extends Controller
     /**
      * Get cart items
      *
-     * @return \Illuminate\Http\Response
      */
     public function items()
     {
         $items = [];
         foreach(Cart::content() as $item){
             $cart_item = new \stdClass();
-//            $cart_item->product = $item->model;
             $cart_item->name = $item->model->name;
             $cart_item->image = $item->model->image();
 
@@ -37,17 +35,6 @@ class CartController extends Controller
         }
 
         return $items;
-
-//        return Cart::content()->map(function ($item){
-//            $cart_item = new \stdClass();
-//            $cart_item->item = $item->model;
-//            $cart_item->qty = $item->model->id;
-//            $cart_item->id = $item->rowId;
-//
-//            return $cart_item;
-//        })->map(function ($item, $key){
-//            return $item;
-//        });
     }
 
     /**
@@ -104,14 +91,12 @@ class CartController extends Controller
               'delivery_location_id' => $delivery_location_id,
           ]);
 
-          if($new_order){
-              foreach(Cart::content() as $item){
-                  $new_order_item = OrderItem::create([
-                      'order_id' => $new_order->id,
-                      'product_id' => $item->model->id,
-                      'quantity' => $item->qty
-                  ]);
-              }
+          foreach(Cart::content() as $item){
+              OrderItem::create([
+                  'order_id' => $new_order->id,
+                  'product_id' => $item->model->id,
+                  'quantity' => $item->qty
+            ]);
           }
 
           DB::commit();
@@ -119,7 +104,7 @@ class CartController extends Controller
         } catch (Throwable $e) {
 
           DB::rollBack();
-          
+
           return back()->with('error', 'Sorry, your order wasn\'t placed. Please try again.');
         }
 
