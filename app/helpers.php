@@ -55,8 +55,10 @@
             $product = $p;
             $product->in_cart = in_cart($p->id);
             $product->image = $p->image();
-            $product->price = $p->present_price();
+            $product->price_str = $p->present_price();
             $product->url = url('products/' . $product->id);
+            $product->time = strtotime($p->created_at);
+            $product->day = date('d, m', strtotime($p->created_at));
 
             return $product;
         });

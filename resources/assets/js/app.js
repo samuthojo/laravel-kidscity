@@ -15,6 +15,7 @@ Vue.component('shop-app', require('./components/ShopApp.vue'));
 Vue.component('shop-actions', require('./components/ShopActions.vue'));
 Vue.component('product-list', require('./components/ProductList.vue'));
 Vue.component('product-item', require('./components/ProductItem.vue'));
+Vue.component('shop-footer', require('./components/ShopFooter.vue'));
 
 window.vue_app = new Vue({
     el: '#kidCityApp',

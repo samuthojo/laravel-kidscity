@@ -15,7 +15,7 @@
     #floatingShoppingCart:not(.visible){
         transform: translateY(5%);
         opacity: 0;
-        pointer-event: none;
+        pointer-events: none;
     }
 
     #floatingShoppingCart .image{

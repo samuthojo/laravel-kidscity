@@ -266,6 +266,10 @@ body.locked{
     font-family: "PT Bold", sans-serif;
 }
 
+#navLinks .dropdown > a{
+    line-height: 1.4em !important;
+}
+
 #navLinks > a.active{
     border-left:none;
 }
@@ -296,7 +300,7 @@ body.locked{
     padding: 16px 20px;
     font-size: 0.9em;
     font-family: PT, sans-serif;
-    min-width: 170px;
+    min-width: 220px;
 }
 
 #navLinks .dropdown a:hover{

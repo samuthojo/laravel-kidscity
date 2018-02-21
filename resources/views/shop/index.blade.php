@@ -28,12 +28,14 @@
 						@include('shop.aside_content')
 					</div>
 					<div id="shopContent" class="col-sm-9">
-						<shop-app :cur-page="1"
+						<shop-app ref="shop" page="1"
 								  :per-page="12"
 								  :page-title="'{{$pageTitle}}'"
 								  :initial-count={{(int) count($products)}}
 								  :from-search="{{request('search') ? 'true' : 'false'}}"
-								  :products="products"></shop-app>
+								  :products="products"
+								  :pagination-buffer="3"></shop-app>
+
 {{--						@include('shop.main_content')--}}
 					</div>
 				</div>

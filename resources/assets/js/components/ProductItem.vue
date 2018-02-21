@@ -10,7 +10,7 @@
                 </div>
                 <h5 class="name">{{product.name}}</h5>
                 <span class="price">
-                <span>{{product.price}}</span>
+                <span>{{product.price_str}}</span>
                     <span>(In Cart)</span>
                 </span>
             </a>
@@ -58,7 +58,6 @@
 
                 axios.post(url,  {'id': this.product.id})
                     .then((response)=>{
-                        console.log(response);
                         this.product.loading = false;
                         this.product.in_cart = false;
                     }).catch((error)=>{
