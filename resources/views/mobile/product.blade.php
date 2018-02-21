@@ -22,7 +22,7 @@
 
 	<div id="product-{{$product->id}}" class="product-infos {{in_cart($product->id) ? 'added' : ''}}">
 		<div id="productImage">
-			<img src="{{asset('images/real_cloths/' . $product->image_url)}}" alt=""
+			<img src="{{asset($product->image())}}" alt=""
 				 height="300px">
 		</div>
 

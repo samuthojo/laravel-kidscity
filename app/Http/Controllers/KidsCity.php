@@ -15,6 +15,7 @@ class KidsCity extends Controller
 {
     public function index()
     {
+
         $agent = new Agent();
         if($agent->isPhone())
             return redirect('/mob/');

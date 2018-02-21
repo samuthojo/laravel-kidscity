@@ -9,23 +9,28 @@ use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Utils;
 
 class KidsCityMob extends Controller
 {
     public function index()
     {
         $page = "home";
+        $boysProducts = Utils\Utils::getBoysProducts();
+        $girlsProducts = Utils\Utils::getGirlsProducts();
         $brands = DB::table('brands')
-            ->leftJoin('products', 'brands.id', '=', 'products.brand_id')
+            ->leftJoin('product_brands', 'brands.id', '=', 'product_brands.brand_id')
+            ->leftJoin('products', 'products.id', '=', 'product_brands.product_id')
             ->select(DB::raw('brands.*, count(products.id) as product_count'))
             ->groupBy('brands.id')
             ->orderBy('product_count', 'desc')
             ->limit(4)
             ->get();
-        $popular = Product::where("id", ">", 6)->limit(4)->get();
-        $clothes = Product::where("category_id", 1)->limit(4)->get();
-        $baby_products = Product::where("category_id", 2)->limit(4)->get();
-        $school_items = Product::where("category_id", 5)->limit(4)->get();
+
+        $popular = Product::all()->random()->limit(4)->get();
+        $clothes = Product::all()->random()->limit(4)->get();
+        $baby_products = [];
+        $school_items = [];
 
         return view('mobile.index', compact('page', 'brands', 'popular', 'clothes', 'baby_products', 'school_items'));
     }
@@ -34,21 +39,28 @@ class KidsCityMob extends Controller
     {
         $selectedCategory = -1;
         $page = "shop";
-        $categories = Category::with("subCategories")->get();
-
-        if(isset($_GET['category'])){
-            $id = $_GET['category'];
-            $selectedCategory = $id;
-            $sub_categories = SubCategory::where("category_id", $id)->get();
-            $products = Product::where("category_id", $id)->orderBy('created_at', 'asc')
-                ->get();
-
-            return view('mobile.shop', compact('page', 'categories', 'selectedCategory', 'sub_categories', 'products'));
-        }
-
         $sub_categories = SubCategory::all();
         $products = Product::orderBy('created_at', 'asc')
             ->get();
+        $categories = Category::with("subCategories")->get();
+
+
+        if(isset($_GET['category'])){
+            $id = $_GET['category'];
+            $category = Category::find($id);
+
+            $selectedCategory = $id;
+            $products = $category->products()->orderBy('created_at', 'asc')->get();
+            $sub_categories = $category->subCategories()->get();
+
+            if(isset($_GET['sub_category'])){
+                $subid = $_GET['sub_category'];
+                $sub_category = SubCategory::find($subid);
+
+                $products = $sub_category->products()->orderBy('created_at', 'asc')->get();
+            }
+        }
+
         return view('mobile.shop', compact('page', 'categories', 'selectedCategory', 'sub_categories', 'products'));
     }
 

@@ -164,6 +164,13 @@ body.locked{
     margin-top: 4px;
     margin-right: -12px;
     max-width: 600px;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+#navAd img{
+    max-height: 100% !important;
+    max-width: 100% !important;
 }
 
 #topNav.mini #navAd{
