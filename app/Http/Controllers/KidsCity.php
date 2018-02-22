@@ -30,6 +30,7 @@ class KidsCity extends Controller
             ->groupBy('brands.id')
             ->orderBy('product_count', 'desc')
             ->get();
+
         return view('index', compact('boysProducts', 'girlsProducts', 'brands', 'page'));
     }
 

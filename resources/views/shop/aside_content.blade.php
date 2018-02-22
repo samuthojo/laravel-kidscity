@@ -96,7 +96,7 @@
 	<div class="filter-options age-filters">
 		@foreach($age_ranges as $range)
 			<div class="option-wrapper">
-				<input type="checkbox" class="filter-input" name="ageRange" id="ageRange{{$range->id}}" value="{{$range->id}}">
+				<input type="checkbox" data-filter-what="age" class="filter-input" name="ageRange" id="ageRange{{$range->id}}" value="{{$range->id}}">
 				<label for="ageRange{{$range->id}}" class="option">
 					<i class="fa fa-home"></i>
 					{{$range->range}}
@@ -112,14 +112,14 @@
 	</div>
 	<div class="filter-options">
 		<div class="option-wrapper">
-			<input type="checkbox" class="filter-input" name="gender" id="gender1" value="1">
+			<input type="checkbox" data-filter-what="gender" class="filter-input" name="gender" id="gender1" value="1">
 			<label for="gender1" class="option">
 				<i class="fa"></i>
 				Girls
 			</label>
 		</div>
 		<div class="option-wrapper">
-			<input type="checkbox" class="filter-input" name="gender" id="gender0" value="0">
+			<input type="checkbox"  data-filter-what="gender" class="filter-input" name="gender" id="gender0" value="0">
 			<label for="gender0" class="option">
 				<i class="fa"></i>
 				Boys
