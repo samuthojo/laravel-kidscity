@@ -69,7 +69,7 @@ class KidsCity extends Controller
                 $category = App\Category::find($id)->first();
                 $selectedCategoryName = $category->name;
                 $selectedCategory = $id;
-                $products = $category->products()->orderBy('created_at', 'asc')->get();;
+                $products = $category->products()->orderBy('created_at', 'asc')->get();
 
                 $pageTitle = $selectedCategoryName;
             }
