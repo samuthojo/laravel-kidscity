@@ -90,19 +90,44 @@ class Product extends Model
         return present_price($this->price);
     }
 
+    public function genderString()
+    {
+      $gender = '';
+      if ($this->gender == 0) {
+        $gender = 'Male';
+      }
+      else if ($this->gender == 1) {
+        $gender =  'Female';
+      }
+      else if ($this->gender == 2) {
+        $gender =  'Unisex';
+      }
+      else {
+        $gender =  'null';
+      }
+      return $gender;
+    }
+
     public function toSearchableArray()
     {
         $array = $this->toArray();
 
         // Customize array...
-        // $array['category'] = $this->category()->withTrashed()->first()->name;
-        // $subCategory = $this->subCategory()->withTrashed()->first();
-        // $array['sub_category'] = ($subCategory != null) ?
-        //                                           $subCategory->name : "null";
-        // $array['brand'] = $this->brand()->withTrashed()->first()->name;
-        // $array['age_range'] = $this->productAgeRange()->withTrashed()->first()->range;
-        // $array['price_category'] = $this->priceCategory()->withTrashed()->first()->range;
-        $array['gender_string'] = ($this->gender) ? 'Female' : 'Male';
+        $array['categories'] = $this->categories()->pluck('name')->toArray();
+
+        $array['sub_categories'] =
+                  $this->subCategories()->pluck('name')->toArray();
+
+        $array['brands'] = $this->brands()->pluck('name')->toArray();
+
+        $array['sizes'] = $this->sizes()->pluck('size')->toArray();
+
+        $array['age_ranges'] = $this->ages()->pluck('range')->toArray();
+
+        $array['price_categories'] =
+                 $this->priceCategories()->pluck('range')->toArray();
+
+        $array['gender_string'] = $this->genderString();
 
         return $array;
     }
