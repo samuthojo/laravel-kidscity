@@ -86,6 +86,7 @@ body{
 }
 
 #banner .title{
+    display: block;
     position: relative;
     width: 100%;
     background-color: #000;
@@ -94,11 +95,11 @@ body{
     background-size: cover;
     text-align: center;
     z-index: 2;
+    min-height: 200px;
 }
 
 #banner .title .layout{
     position: relative;
-    min-height: 200px;
     padding: 20px;
     background-color: rgba(0,0,0,0.4);
 }

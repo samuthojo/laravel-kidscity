@@ -10,7 +10,7 @@
                 @yield('page-title')
             </a>
         @else
-            <a id="mainLogo" href="javascript:void(0);" class="layout center action-bar-title">
+            <a id="mainLogo" href="{{url('/')}}" class="layout center action-bar-title">
                 <img src="{{asset('images/logo.png')}}" alt="">
                 @yield('page-title')
             </a>

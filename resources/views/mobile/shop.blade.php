@@ -34,7 +34,7 @@
 				All
 			</a>
 
-			@foreach($categories as $category)
+			@foreach(get_valid_cats() as $category)
 				@php
 					$category_class =
                         ($category->id == $selectedCategory) ? 'active' : '';

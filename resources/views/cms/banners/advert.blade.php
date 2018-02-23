@@ -1,4 +1,4 @@
-<p style="margin-top: 15px; color: #ff9740;">Advised Dimensions: 982 X 20</p>
+<p style="margin-top: 15px; color: #ff9740;">Advised Dimensions: 600 X 80 or Higher with ratio: 1:7.5</p>
 
 <div class="panel panel-default">
 

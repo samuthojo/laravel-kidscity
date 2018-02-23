@@ -7,19 +7,11 @@
     }
 
     function get_valid_cats(){
-        $cats = DB::table('categories')
-            ->leftJoin('product_categories', 'categories.id', '=', 'product_categories.category_id')
-            ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
-            ->select(DB::raw('categories.*, count(products.id) as product_count'))
-            ->groupBy('categories.id')
-            ->orderBy('categories.id', 'asc')
+        return App\Category::with('subcategories', 'products')
             ->get()
-            ->filter(function($cat){
-                return $cat->product_count > 0;
-            })
-            ->pluck('id');
-
-        return App\Category::with('subCategories')->whereIn('id', $cats)->get();
+            ->filter(function($c){
+                return $c->deleted_at == null && count($c->products);
+            });
     }
 
     function in_cart($id){

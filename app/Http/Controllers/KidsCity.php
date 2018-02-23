@@ -23,13 +23,16 @@ class KidsCity extends Controller
         $page = "home";
         $boysProducts = Utils\Utils::getBoysProducts();
         $girlsProducts = Utils\Utils::getGirlsProducts();
-        $brands = DB::table('brands')
-            ->leftJoin('product_brands', 'brands.id', '=', 'product_brands.brand_id')
-            ->leftJoin('products', 'products.id', '=', 'product_brands.product_id')
-            ->select(DB::raw('brands.*, count(products.id) as product_count'))
-            ->groupBy('brands.id')
-            ->orderBy('product_count', 'desc')
-            ->get();
+        $sorted = Brand::with('products')
+            ->get()
+            ->filter(function($c){
+                return $c->deleted_at == null && count($c->products);
+            })
+            ->sortByDesc(function ($brand) {
+                return count($brand->products);
+            });
+
+        $brands = $sorted->values()->all();
 
         return view('index', compact('boysProducts', 'girlsProducts', 'brands', 'page'));
     }

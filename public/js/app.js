@@ -1382,7 +1382,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(67);
+module.exports = __webpack_require__(72);
 
 
 /***/ }),
@@ -1406,7 +1406,7 @@ Vue.component('shop-app', __webpack_require__(47));
 Vue.component('shop-actions', __webpack_require__(52));
 Vue.component('product-list', __webpack_require__(57));
 Vue.component('product-item', __webpack_require__(62));
-Vue.component('shop-footer', __webpack_require__(77));
+Vue.component('shop-footer', __webpack_require__(67));
 
 window.vue_app = new Vue({
     el: '#kidCityApp',
@@ -44072,7 +44072,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         endIndex: function endIndex() {
             if (!this.products || !this.products || !this.products.length) return 0;
-            return this.perPage > this.products.length ? this.products.length : this.perPage * this.curPage;
+            var end = this.perPage > this.products.length ? this.products.length : this.perPage * this.curPage;
+
+            console.log(end > this.products.length);
+            console.log(end, this.products.length);
+
+            if (end > this.products.length) return this.products.length;else return end;
         }
     }
 });
@@ -44867,33 +44872,18 @@ if (false) {
 
 /***/ }),
 /* 67 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(78)
+  __webpack_require__(68)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(80)
+var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(81)
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44932,13 +44922,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(79);
+var content = __webpack_require__(69);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -44958,7 +44948,7 @@ if(false) {
 }
 
 /***/ }),
-/* 79 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -44972,7 +44962,7 @@ exports.push([module.i, "\n#shopFooter[data-v-4d8a1668]{\n    margin-top: 1em;\n
 
 
 /***/ }),
-/* 80 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45100,7 +45090,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 81 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45242,6 +45232,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4d8a1668", module.exports)
   }
 }
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

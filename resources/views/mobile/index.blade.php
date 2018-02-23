@@ -10,8 +10,8 @@
 
 @section('content')
 	<div id="banner">
-		<div class="title scrim" style="background-image: url({{url('images/kidstar.jpg')}});">
-			<div class="layout vertical center-center fill">
+		<a href="{{url('/mob/shop')}}" class="title scrim" style="background-image: url({{App\MainBanner::current()->image()}});">
+			<div class="layout vertical center-center fill" style="display: none;">
 				<h1>
 					YOUR VERY OWN <br>
 					SUPERSTAR
@@ -20,7 +20,7 @@
 					START SHOPPING
 				</a>
 			</div>
-		</div>
+		</a>
 	</div>
 
 	@if(count($brands) > 0)
@@ -33,36 +33,6 @@
 			<div class="row">
 				@foreach($brands as $brand)
 					@include('mobile.tpl.brand')
-				@endforeach
-			</div>
-		</div>
-	@endif
-
-	@if(count($clothes) > 0)
-		<div class="featured-section">
-			<div class="featured-title layout center justified">
-				<h3>Kids Clothing</h3>
-				<a href="{{url('/mob/shop/?category=1')}}" class="btn link accent">VIEW ALL</a>
-			</div>
-
-			<div class="row">
-				@foreach($clothes as $product)
-					@include('mobile.tpl.product_cell')
-				@endforeach
-			</div>
-		</div>
-	@endif
-
-	@if(count($baby_products) > 0)
-		<div class="featured-section">
-			<div class="featured-title layout center justified">
-				<h3>Baby Products</h3>
-				<a href="{{url('/mob/shop/?category=2')}}" class="btn link accent">VIEW ALL</a>
-			</div>
-
-			<div class="row">
-				@foreach($baby_products as $product)
-					@include('mobile.tpl.product_cell')
 				@endforeach
 			</div>
 		</div>
@@ -91,18 +61,24 @@
 		</div>
 	</div>
 
-	@if(count($school_items) > 0)
+	@if(!is_null($categories))
 		<div class="featured-section">
-			<div class="featured-title layout center justified">
-				<h3>Kids Clothing</h3>
-				<a href="{{url('/mob/shop/?category=3')}}" class="btn link accent">VIEW ALL</a>
-			</div>
+			@foreach($categories as $category)
+				<div class="featured-title layout center justified">
+					<h3>{{$category->name}}</h3>
+					<a href="{{url('/mob/shop/?category='.$category->id)}}" class="btn link accent">VIEW ALL</a>
+				</div>
 
-			<div class="row">
-				@foreach($school_items as $product)
-					@include('mobile.tpl.product_cell')
-				@endforeach
-			</div>
+				<div class="row">
+					@if(!is_null($category))
+						@foreach($category->products as $product)
+							@if($loop->index < 4)
+								@include('mobile.tpl.product_cell')
+							@endif
+						@endforeach
+					@endif
+				</div>
+			@endforeach
 		</div>
 	@endif
 

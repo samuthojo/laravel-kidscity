@@ -7,7 +7,7 @@
 					<div class="feature-section-title layout vertical end-justified" style="
 							background-image: url({{$cat->image()}});">
 						<div class="title-text">
-							<h3>{{$cat->name}}</h3>
+							{{--<h3>{{$cat->name}}</h3>--}}
 							{{--<p>Wanna see your handsome champ look mighty fly? Okay then, let's do it.</p>--}}
 						</div>
 					</div>

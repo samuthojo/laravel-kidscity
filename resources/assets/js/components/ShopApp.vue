@@ -88,7 +88,15 @@
             endIndex: function() {
                 if(!this.products || !this.products || !this.products.length)
                     return 0;
-                return this.perPage > this.products.length ? this.products.length : this.perPage*this.curPage;
+                let end = this.perPage > this.products.length ? this.products.length : this.perPage*this.curPage;
+
+                console.log(end > this.products.length);
+                console.log(end, this.products.length);
+
+                if(end > this.products.length)
+                    return this.products.length;
+                else
+                    return end;
             }
         }
     }

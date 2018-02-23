@@ -456,6 +456,7 @@ body.has-cart-summary{
 .product .image img{
     display: inline-block;
     height: 45px;
+    max-width: 100%;
 }
 
 .product .name{

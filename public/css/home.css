@@ -97,10 +97,10 @@
 }
 
 .card-cta .image{
+    background-color: #dddddd;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center;
-    background: #fff;
 }
 
 .card-cta h3{
