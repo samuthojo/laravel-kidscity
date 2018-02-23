@@ -33,7 +33,7 @@ class UpdateProduct extends FormRequest
           'dimensions' => 'nullable|string',
           'stock' => 'required|integer',
           'gender' => 'nullable|integer',
-          'video_url' => 'nullable|url',
+          'video_url' => 'nullable',
         ];
         $brand_id = count($this->input('brand_id')) - 1;
         foreach(range(0, $brand_id) as $index) {

@@ -685,7 +685,7 @@ content_css: [
 
     <div class="col-md-offset-2 col-md-8">
       {!!
-          Form::label('video_url', 'Product Video:', [
+          Form::label('video_url', 'Product Video ID:', [
 
               'class' => 'control-label',
 
@@ -699,7 +699,7 @@ content_css: [
 
                 'aria-describedby'=> 'videoHelpBlock',
 
-                'placeholder' => 'Product Video Link',
+                'placeholder' => 'Enter Video ID',
 
             ])
         !!}
