@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\NewOrderPlaced' => [
           'App\Listeners\SendNewOrderNotification',
         ],
+        'App\Events\ProductDeleting' => [
+          'App\Listeners\DeletePictures',
+        ],
     ];
 
     /**

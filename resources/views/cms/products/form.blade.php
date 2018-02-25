@@ -804,6 +804,8 @@ content_css: [
 
 </div>
 
+@if(!$editForm)
+
 <div class="form-group {{ $errors->has('image_url*') ? 'has-error' : ''}}">
 
     <div class="col-md-offset-2 col-md-8">
@@ -841,11 +843,9 @@ content_css: [
 
             <p id="imageHelpBlock" class="help-block">
 
-              @if($editForm)
-                Replace Existing Pictures
-              @else
+
                 Attach Product Pictures
-              @endif
+
 
             </p>
 
@@ -854,3 +854,5 @@ content_css: [
     </div>
 
 </div>
+
+@endif

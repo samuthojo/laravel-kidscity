@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class Products extends Controller
 {
-    private $productImages = 'images/real_cloths/';
+    private $productImages;
 
-    private $firstImageName = "";
+    public function __construct()
+    {
+        $this->productImages = App\Product::getImagesLocation();
+    }
 
     public function product(App\Product $product)
     {
@@ -38,12 +41,12 @@ class Products extends Controller
 
     public function create()
     {
-      $categories = \App\Category::pluck('name', 'id');
-      $productSizes = \App\ProductSize::pluck('size', 'id');
-      $subCategories = \App\SubCategory::pluck('name', 'id');
-      $brands = \App\Brand::pluck('name', 'id');
-      $priceCategories = \App\PriceCategory::pluck('range', 'id');
-      $ageRanges = \App\ProductAgeRange::pluck('range', 'id');
+      $categories = App\Category::pluck('name', 'id');
+      $productSizes = App\ProductSize::pluck('size', 'id');
+      $subCategories = App\SubCategory::pluck('name', 'id');
+      $brands = App\Brand::pluck('name', 'id');
+      $priceCategories = App\PriceCategory::pluck('range', 'id');
+      $ageRanges = App\ProductAgeRange::pluck('range', 'id');
       $selectedSubCategory = null;
       $selectedBrands = null;
       $selectedCategories = null;
@@ -199,12 +202,13 @@ class Products extends Controller
 
     public function edit(App\Product $product)
     {
-      $categories = \App\Category::pluck('name', 'id');
-      $productSizes = \App\ProductSize::pluck('size', 'id');;
-      $subCategories = \App\SubCategory::pluck('name', 'id');
-      $brands = \App\Brand::pluck('name', 'id');
-      $priceCategories = \App\PriceCategory::pluck('range', 'id');
-      $ageRanges = \App\ProductAgeRange::pluck('range', 'id');
+      $categories = App\Category::pluck('name', 'id');
+      $productSizes = App\ProductSize::pluck('size', 'id');
+      $subCategories = App\SubCategory::pluck('name', 'id');
+      $brands = App\Brand::pluck('name', 'id');
+      $priceCategories = App\PriceCategory::pluck('range', 'id');
+      $ageRanges = App\ProductAgeRange::pluck('range', 'id');
+      $pictures = $product->pictures()->get();
       $selectedSubCategory = null;
 
       $selectedBrands = $this->getSelectedBrands($product);
@@ -229,7 +233,7 @@ class Products extends Controller
                 'selectedSubCategory', 'editForm', 'selectedSubCategories',
                 'selectedCategories', 'selectedPriceCategories',
                 'selectedAgeRanges', 'selectedProductSizes', 'selectedGender',
-                'selectedBrands'));
+                'selectedBrands', 'pictures'));
     }
 
     private function getSelectedBrands($product)
@@ -325,28 +329,10 @@ class Products extends Controller
           $this->saveAllSizes($request, $product);
         }
 
-        //To update all the productPictures
-        if($request->hasFile('image_url')) {
-          $this->updateAllPictures($request, $product);
-        }
-
       }
-
-    private function updateAllPictures($request, $product)
-    {
-      if(count($product->pictures()->get()) > 0) {
-        //delete the pictures from the file-system
-        $this->deleteProductPictures($product);
-        //remove the database references
-        $product->pictures()->delete();
-      }
-      $this->saveAllPictures($request, $product);
-    }
 
     public function destroy(App\Product $product)
     {
-      //Delete its pictures from file system
-      $this->deleteProductPictures($product);
       //Detach this product from all its relationships
       $this->detachProduct($product);
       //Now delete the product
@@ -359,63 +345,34 @@ class Products extends Controller
     private function detachProduct($product)
     {
       //Detach from brands
-      $this->detachFromBrands($product);
+      $product->brands()->detach();
 
       //Detach from categories
-      $this->detachFromCategories($product);
+      $product->categories()->detach();
 
       //Detach from sub_categories
-      $this->detachFromSubCategories($product);
+      $product->subCategories()->detach();
 
       //Detach from price_categories
-      $this->detachFromPriceCategories($product);
+      $product->priceCategories()->detach();
 
       //Detach from ages
-      $this->detachFromAges($product);
+      $product->ages()->detach();
 
       //Detach from sizes
-      $this->detachFromSizes($product);
-    }
-
-    private function detachFromBrands($product)
-    {
-      $product->brands()->detach();
-    }
-
-    private function detachFromCategories($product)
-    {
-      $product->categories()->detach();
-    }
-
-    private function detachFromSubCategories($product)
-    {
-      $product->subCategories()->detach();
-    }
-
-    private function detachFromPriceCategories($product)
-    {
-      $product->priceCategories()->detach();
-    }
-
-    private function detachFromAges($product)
-    {
-      $product->ages()->detach();
-    }
-
-    private function detachFromSizes($product)
-    {
       $product->sizes()->detach();
     }
 
-    //deletes pictures from the file-system
-    private function deleteProductPictures($product)
+    public function replacePicture(Request $request, App\ProductPicture $picture)
     {
-      $base_path = public_path($this->productImages);
-      $product->pictures()
-              ->get()->map(function($picture)
-                use ($base_path){
-                unlink($base_path . $picture->image_url);
-              });
+        $request->validate([
+          'image_url' => 'file|image|max:2048',
+        ]);
+
+        $image_url = Utils\Utils::saveImage($request->file('image_url'),
+                                                          $this->productImages);
+
+        $picture->update(compact('image_url'));
     }
 
     private function productsTable()
@@ -430,20 +387,4 @@ class Products extends Controller
         'subCategories', 'brands', 'priceCategories', 'ageRanges', 'products'));
     }
 
-    private function saveProductWithImage($request)
-    {
-      $imageName = Utils\Utils::saveImage($request->file('image_url'),
-                                                          $this->productImages);
-      $newProduct = array_add($request->except('image_url'), 'image_url', $imageName);
-      return App\Product::create($newProduct);
-    }
-
-    private function updateProductWithImage($request, $id)
-    {
-      $imageName = Utils\Utils::saveImage($request->file('image_url'),
-                                                          $this->productImages);
-      $editedProduct = array_add($request->except('image_url'), 'image_url', $imageName);
-      App\Product::where(compact('id'))->update($editedProduct);
-      App\Product::where(compact('id'))->searchable();
-    }
 }

@@ -2,57 +2,46 @@
 
 @section('content')
 
-{!!
-    Form::model($product, [
-        'files'  => true,
+<style>
+  .pictureContainer {
+    display: inline-block;
+    max-width: 430px;
+    margin-bottom: 10px;
+  }
+  .pictureDiv {
+    position: relative;
+    width: 100%;
+  }
+  img {
+    width: 100%;
+  }
+  .pictureSpinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 3em;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+  }
+</style>
 
-        'class' =>  'form-horizontal',
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#editProduct">Product Details</a></li>
+  <li><a data-toggle="tab" href="#changePicture">Change Pictures</a></li>
+</ul>
 
-        'method' => 'PATCH',
+<div class="tab-content" style="margin-top: 20px;">
 
-        'route'  => ['products.update', $product->id],
-    ])
-!!}
-
-<div class="panel panel-default">
-
-  <div class="panel-heading">
-
-    <h4 class="title pull-left">Edit Product</h4>
-
-    <div class="btn-group pull-right">
-
-      <a
-          class="btn btn-default"
-          href="{{ route('products.index') }}"
-          title="Cancel">
-          Cancel
-      </a>
-
-      {!!
-          Form::button('Save', [
-              'type' => 'submit',
-
-              'class' => 'btn btn-primary',
-
-              'title' => 'Save',
-          ])
-      !!}
-
-    </div>
-
-    <div class="clearfix"></div>
-
+  <div id="editProduct" class="tab-pane fade active in">
+    @include('cms.products.edit_form')
   </div>
 
-  <div class="panel-body">
-
-    @include ('cms.products.form')
-
+  <div id="changePicture" class="tab-pane fade">
+    @include('cms.products.change_pictures')
   </div>
 
 </div>
-
-{!! Form::close() !!}
 
 @endsection

@@ -55,12 +55,7 @@ class UpdateProduct extends FormRequest
             $rules['price_category_id.' . $index] =
               ($index) ? 'required|integer' : 'nullable|integer';
         }
-        if($this->input('image_url')) {
-	        $image_url = count($this->input('image_url')) - 1;
-	        foreach(range(0, $image_url) as $index) {
-	            $rules['image_url.' . $index] = 'nullable|file|image|max:2048';
-	        }
-	      }
+    
         return $rules;
     }
 

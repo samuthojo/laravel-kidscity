@@ -1,7 +1,6 @@
 @extends('cms.layouts.cms')
 
 @section('more')
-<script src="{{asset('js/banners.js')}}"></script>
 <style>
   .bannerContainer {
     display: inline-block;

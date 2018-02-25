@@ -1,16 +1,12 @@
-@extends('cms.layouts.cms')
-
-@section('content')
-
 {!!
-    Form::open([
+    Form::model($product, [
         'files'  => true,
 
         'class' =>  'form-horizontal',
 
-        'method' => 'POST',
+        'method' => 'PATCH',
 
-        'route'  => ['products.store'],
+        'route'  => ['products.update', $product->id],
     ])
 !!}
 
@@ -18,7 +14,7 @@
 
   <div class="panel-heading">
 
-    <h4 class="title pull-left">New Product</h4>
+    <h4 class="title pull-left">Edit Product</h4>
 
     <div class="btn-group pull-right">
 
@@ -30,12 +26,12 @@
       </a>
 
       {!!
-          Form::button('Create', [
+          Form::button('Save', [
               'type' => 'submit',
 
               'class' => 'btn btn-primary',
 
-              'title' => 'Create',
+              'title' => 'Save',
           ])
       !!}
 
@@ -63,12 +59,12 @@
       </a>
 
       {!!
-          Form::button('Create', [
+          Form::button('Save', [
               'type' => 'submit',
 
               'class' => 'btn btn-primary',
 
-              'title' => 'Create',
+              'title' => 'Save',
           ])
       !!}
 
@@ -81,5 +77,3 @@
 </div>
 
 {!! Form::close() !!}
-
-@endsection

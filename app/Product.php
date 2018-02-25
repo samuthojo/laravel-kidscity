@@ -6,17 +6,20 @@ use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
+use App\Events\ProductDeleting;
 
 class Product extends Model
 {
-    use Searchable, SoftDeletes, CascadeSoftDeletes;
-
-    protected $cascadeDeletes = ['pictures'];
+    use Searchable, SoftDeletes;
 
     protected $fillable = [
         'name', 'price', 'description', 'sale_price',
         'gender', 'stock', 'weight', 'dimensions',
         'video_url', 'code', 'barcode',
+    ];
+
+    protected $dispatchesEvents = [
+        'deleting' => ProductDeleting::class,
     ];
 
     public function pictures()
@@ -137,4 +140,8 @@ class Product extends Model
       $this->stock = ($stock) ? $stock : 0;
     }
 
+    public static function getImagesLocation()
+    {
+      return 'images/real_cloths/';
+    }
 }
