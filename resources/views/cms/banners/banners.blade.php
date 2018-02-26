@@ -4,12 +4,12 @@
 <style>
   .bannerContainer {
     display: inline-block;
-    max-width: 430px;
-    margin-bottom: 10px;
+    width: 430px;
+    margin: 20px 20px 10px auto;
   }
   .bannerDiv {
     position: relative;
-    width: 100%;
+    max-width: 430px;
   }
   img {
     width: 100%;

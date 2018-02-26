@@ -13,7 +13,7 @@
         </a>
         <div class="bannerSpinner">
           <i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"
-            style="display: none;"></i>
+            style="display: none;" id="main_spinner{{$mainBanners->first()->id}}"></i>
         </div>
       </div>
       <span style="font-weight: bold;">Change picture: </span><br/>
@@ -26,7 +26,7 @@
 
 <script>
   function previewMainBanner(id){
-      $(".fa-spinner").fadeIn(0);
+      $("#main_spinner" + id).fadeIn(0);
       var preview = document.querySelector('#mainImage');
       preview.style.opacity = "0.3";
       var file = document.getElementById('mainFile').files[0];
@@ -54,12 +54,12 @@
         contentType: false,
         processData: false,
         success: function (){
-          $(".fa-spinner").fadeOut(0);
+          $("#main_spinner" + id).fadeOut(0);
           preview.style.opacity = "1";
         },
         error: function(error) {
           console.log(error);
-          $(".fa-spinner").fadeOut(0);
+          $("#main_spinner" + id).fadeOut(0);
           preview.style.opacity = "1";
         }
       });
