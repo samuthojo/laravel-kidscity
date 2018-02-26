@@ -58,3 +58,12 @@
         $data->products = $formated_products;
         return json_encode($data);
     }
+
+    function genderString($gender)
+    {
+      if ($gender) {
+        //Female: gender == 1; Unisex: gender == 2
+        return ($gender == 1) ? 'Female' : 'Unisex';
+      }
+      return (isset($gender)) ? 'Male' : 'Unisex';
+    }

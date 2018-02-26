@@ -87,7 +87,7 @@
                   {{$product->brands()->first()->name}}
                 </td>
                 <td>
-                  {{$product->genderString()}}
+                  {{genderString($product->gender)}}
                 </td>
                 <td>
                   {{ number_format($product->price) }}

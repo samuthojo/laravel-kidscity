@@ -361,34 +361,11 @@ class Products extends Controller
 
     public function destroy(App\Product $product)
     {
-      //Detach this product from all its relationships
-      $this->detachProduct($product);
-      //Now delete the product
+      //Several events are fired and handled before actual soft-deletion
       $product->delete();
+
       //return the view
       return $this->productsTable();
-    }
-
-    //Detaches this product from all its relationships
-    private function detachProduct($product)
-    {
-      //Detach from brands
-      $product->brands()->detach();
-
-      //Detach from categories
-      $product->categories()->detach();
-
-      //Detach from sub_categories
-      $product->subCategories()->detach();
-
-      //Detach from price_categories
-      $product->priceCategories()->detach();
-
-      //Detach from ages
-      $product->ages()->detach();
-
-      //Detach from sizes
-      $product->sizes()->detach();
     }
 
     public function replacePicture(Request $request, App\ProductPicture $picture)

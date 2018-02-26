@@ -95,17 +95,7 @@ class Product extends Model
 
     public function genderString()
     {
-      $gender = '';
-      if ($this->gender == 0) {
-        $gender = 'Male';
-      }
-      else if ($this->gender == 1) {
-        $gender =  'Female';
-      }
-      else {
-        $gender =  'Unisex';
-      }
-      return $gender;
+      return genderString($this->gender);
     }
 
     public function toSearchableArray()
