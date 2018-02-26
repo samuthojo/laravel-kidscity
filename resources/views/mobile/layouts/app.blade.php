@@ -61,18 +61,18 @@
 
     @yield('styles')
 
-    {{--<!-- Global site tag (gtag.js) - Google Analytics -->--}}
-    {{--<script async defer="defer" src="https://www.googletagmanager.com/gtag/js?id=UA-70765388-8"></script>--}}
-    {{--<script async defer="defer" src="{{asset('js/googletics.js')}}"></script>--}}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async defer="defer" src="https://www.googletagmanager.com/gtag/js?id=UA-70765388-8"></script>
+    <script async defer="defer" src="{{asset('js/googletics.js')}}"></script>
 
-    {{--<!-- Facebook Pixel Code -->--}}
-    {{--<script async defer="defer" src="{{asset('js/fbtics.js')}}"></script>--}}
-    {{--<noscript>--}}
-        {{--<img height="1" width="1"--}}
-             {{--src="https://www.facebook.com/tr?id=260341067715329&ev=PageView--}}
-        {{--&noscript=1"/>--}}
-    {{--</noscript>--}}
-    {{--<!-- End Facebook Pixel Code -->--}}
+    <!-- Facebook Pixel Code -->
+    <script async defer="defer" src="{{asset('js/fbtics.js')}}"></script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=260341067715329&ev=PageView
+        &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
 </head>
 <body class="searchin">
     <div id="alertMessage" class="animated">
