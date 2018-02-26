@@ -68,41 +68,26 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$product->name}}</td>
                 <td>
-                  {{$product->categories->first()->name}}
+                  {{$product->categories()->first()->name}}
                 </td>
                 <td>
-                  @if($product->subCategories->first())
-                    {{$product->subCategories->first()->name}}
+                  @if($product->subCategories()->first())
+                    {{$product->subCategories()->first()->name}}
                   @else
                     null
                   @endif
                 </td>
                 <td>
-                  {{$product->priceCategories->first()->range}}
+                  {{$product->priceCategories()->first()->range}}
                 </td>
                 <td>
-                  {{$product->ages->first()->range}}
+                  {{$product->ages()->first()->range}}
                 </td>
                 <td>
-                  {{$product->brands->first()->name}}
+                  {{$product->brands()->first()->name}}
                 </td>
                 <td>
-                  @php
-                   $gender = '';
-                   if ($product->gender == 0) {
-                     $gender = 'Male';
-                   }
-                   else if ($product->gender == 1) {
-                     $gender =  'Female';
-                   }
-                   else if ($product->gender == 2) {
-                     $gender =  'Unisex';
-                   }
-                   else {
-                     $gender =  'null';
-                   }
-                  @endphp
-                  {{$gender}}
+                  {{$product->genderString()}}
                 </td>
                 <td>
                   {{ number_format($product->price) }}

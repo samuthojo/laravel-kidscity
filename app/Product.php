@@ -102,11 +102,8 @@ class Product extends Model
       else if ($this->gender == 1) {
         $gender =  'Female';
       }
-      else if ($this->gender == 2) {
-        $gender =  'Unisex';
-      }
       else {
-        $gender =  'null';
+        $gender =  'Unisex';
       }
       return $gender;
     }
