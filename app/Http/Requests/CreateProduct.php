@@ -37,7 +37,7 @@ class CreateProduct extends FormRequest
             'barcode' => 'nullable|string',
             'weight' => 'nullable|string',
             'dimensions' => 'nullable|string',
-            'stock' => 'required|integer',
+            'stock' => 'nullable|integer',
             'gender' => 'nullable|integer',
             'video_url' => 'nullable',
         ];

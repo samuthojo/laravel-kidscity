@@ -27,6 +27,14 @@
   }
 </style>
 
+<div class="row">
+
+  <div class="col-md-12">
+    @include('flash::message')
+  </div>
+
+</div>
+
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#editProduct">Product Details</a></li>
   <li><a data-toggle="tab" href="#changePicture">Change Pictures</a></li>

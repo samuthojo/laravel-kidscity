@@ -1,6 +1,12 @@
+
 <div class="panel panel-default">
 
   <div class="panel-body">
+
+    @if(count($pictures) == 0)
+      @include('cms.products.empty_state_pictures')
+    @endif
+
     @foreach($pictures as $picture)
       <div class="pictureContainer">
         <div class="pictureDiv">

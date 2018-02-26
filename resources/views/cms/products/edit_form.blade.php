@@ -48,7 +48,7 @@
   </div>
 
   <div class="panel-footer">
-    
+
     <div class="btn-group pull-right">
 
       <a

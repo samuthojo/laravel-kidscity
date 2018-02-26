@@ -89,6 +89,8 @@ class Products extends Controller
     {
       $this->createProduct($request);
 
+      flash('Product created successfully')->success();
+
       return redirect()->route('products.index');
     }
 
@@ -292,6 +294,8 @@ class Products extends Controller
 
       App\Product::where('id', $product_id)->searchable(); //Sync With Algolia
 
+      flash('Product updated successfully')->success();
+
       return redirect()->route('products.index');
     }
 
@@ -383,6 +387,31 @@ class Products extends Controller
 
         //Update database reference
         $picture->update(compact('image_url'));
+    }
+
+    public function storePictures(Request $request, App\Product $product)
+    {
+      $request->validate($this->pictureRules($request));
+
+      if($request->hasFile('image_url')) {
+        $this->saveAllPictures($request, $product);
+      }
+
+      flash('Pictures uploaded successfully')->success();
+
+      return redirect()->route('products.edit', ['product' => $product->id, ]);
+    }
+
+    private function pictureRules($request)
+    {
+      $rules = [];
+
+      $images = count($request->input('image_url')) - 1;
+      foreach(range(0, $images) as $index) {
+          $rules['image_url.' . $index] = 'nullable|file|image|max:2048';
+      }
+
+      return $rules;
     }
 
     private function productsTable()

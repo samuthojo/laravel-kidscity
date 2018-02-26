@@ -124,6 +124,7 @@ Route::middleware('auth:admin')->prefix('/admin')->group(function() {
   Route::get('/products/{product}', 'Products@edit')->name('products.edit');
   Route::patch('/products/{product}', 'Products@update')->name('products.update');
   Route::post('/products/picture/{picture}', 'Products@replacePicture')->name('products.replace_picture');
+  Route::post('/products/{product}/pictures', 'Products@storePictures')->name('products.store_pictures');
   Route::delete('/products/{product}', 'Products@destroy')->name('products.destroy');
 
   Route::get('/orders', 'Orders@cmsIndex')->name('orders.index');

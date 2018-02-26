@@ -12,6 +12,7 @@
         "gloudemans/shoppingcart": "^2.4",
         "iatstuti/laravel-cascade-soft-deletes": "^1.3",
         "jenssegers/agent": "^2.6",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
