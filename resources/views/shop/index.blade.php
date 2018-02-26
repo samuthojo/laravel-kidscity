@@ -29,7 +29,7 @@
 					</div>
 					<div id="shopContent" class="col-sm-9">
 						<shop-app ref="shop" page="1"
-								  :per-page="12"
+								  :per-page="5"
 								  :page-title="'{{$pageTitle}}'"
 								  :initial-count={{(int) count($products)}}
 								  :from-search="{{request('search') ? 'true' : 'false'}}"

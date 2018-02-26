@@ -13,9 +13,11 @@ class Search extends Controller
     {
       $searchKey = $request->search;
       $products = App\Product::search($searchKey)->get();
+
       if($request->expectsJson()) {
         //Is ajax request
-        return $products; //Laravel automatically converts to Json
+        return view('mobile.tpl.products_list', compact('products'))->render();
+//        return $products; //Laravel automatically converts to Json
       }
       return $this->shop($products, $searchKey);
     }

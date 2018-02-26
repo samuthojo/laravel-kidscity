@@ -14,8 +14,8 @@
 
             <div class="layout center">
                 {{subtitle}}
-                <a href="https://www.algolia.com" class="layout center">
-                    <img src="images/algolia.svg" alt="" style="margin-left: 0.5rem;width:120px" v-if="fromSearch">
+                <a href="https://www.algolia.com" class="layout center" v-if="fromSearch">
+                    <img :src="algolia_image" alt="" style="margin-left: 0.5rem;width:120px">
                 </a>
             </div>
         </div>
@@ -43,7 +43,8 @@
         },
         data() {
             return {
-                filter_by: "date"
+                filter_by: "date",
+                algolia_image: window.Laravel.asset_url + "/algolia.svg"
             };
         },
         methods: {

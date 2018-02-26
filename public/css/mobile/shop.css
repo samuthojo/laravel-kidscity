@@ -110,13 +110,13 @@ body:not(.searching) #mobSearchResults{
     pointer-events: none;
 }
 
-#mobSearchArea:not(.found-results) #mobSearchResults{
+#mobSearchArea:not(.loaded-results):not(.found-results) #mobSearchResults{
     height: 200px;
     overflow-y: hidden;
 }
 
-#mobSearchArea:not(.loading) #mobSearchResults .loader{
-    display: none;
+#mobSearchArea:not(.loading) #mobSearchResults #loader{
+    display: none !important;
 }
 
 #mobSearchBar #backBtn{
@@ -141,9 +141,11 @@ body:not(.searching) #mobSearchResults{
     background-color: transparent;
     outline: none;
     font-size: 1em;
-    padding-left: 0.15em;
+    /*padding-left: 0.15em;*/
+    padding-left: 0.45em;
     padding-right: 0.7em;
     color: #ddd;
+    min-width: 0;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
