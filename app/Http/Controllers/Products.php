@@ -94,25 +94,45 @@ class Products extends Controller
 
     private function createProduct($request)
     {
-      DB::transaction(function () use($request) {
 
-         $product = App\Product::create([
-          'code' => $request->code,
-          'barcode' => $request->barcode,
-          'name' => $request->name,
-          'description' => $request->description,
-          'price' => $request->price,
-          'sale_price' => $request->sale_price,
-          'stock' => $request->stock,
-          'gender' => $request->gender,
-          'video_url' => $request->video_url,
-          'dimensions' => $request->dimensions,
-          'weight' => $request->weight,
-        ]);
+      $product = App\Product::withoutSyncingToSearch(function ()
+                                                     use ($request) {
 
-        $this->saveProductExtras($request, $product);
+        DB::beginTransaction();
 
+        $product = null;
+
+        try {
+          $product = App\Product::create([
+           'code' => $request->code,
+           'barcode' => $request->barcode,
+           'name' => $request->name,
+           'description' => $request->description,
+           'price' => $request->price,
+           'sale_price' => $request->sale_price,
+           'stock' => $request->stock,
+           'gender' => $request->gender,
+           'video_url' => $request->video_url,
+           'dimensions' => $request->dimensions,
+           'weight' => $request->weight,
+         ]);
+
+         $this->saveProductExtras($request, $product);
+
+         DB::commit();
+        }
+        catch (Throwable $e)
+        {
+          DB::rollBack();
+
+          return response()->json(["message" => "Error, product not added"], 500);
+        }
+
+        return $product;
       });
+
+      //Now Sync With Algolia
+      App\Product::where('id', $product->id)->searchable();
     }
 
     private function saveProductExtras($request, $product)
@@ -277,27 +297,35 @@ class Products extends Controller
 
     private function updateProduct($request, $product_id)
     {
-      DB::transaction(function () use($request,
-                                      $product_id) {
+      DB::beginTransaction();
 
-         App\Product::where('id', $product_id)
-                    ->update([
-                      'code' => $request->code,
-                      'barcode' => $request->barcode,
-                      'name' => $request->name,
-                      'description' => $request->description,
-                      'price' => $request->price,
-                      'sale_price' => $request->sale_price,
-                      'stock' => $request->stock,
-                      'gender' => $request->gender,
-                      'video_url' => $request->video_url,
-                      'dimensions' => $request->dimensions,
-                      'weight' => $request->weight,
-                    ]);
+      try {
+        App\Product::where('id', $product_id)
+                   ->update([
+                     'code' => $request->code,
+                     'barcode' => $request->barcode,
+                     'name' => $request->name,
+                     'description' => $request->description,
+                     'price' => $request->price,
+                     'sale_price' => $request->sale_price,
+                     'stock' => $request->stock,
+                     'gender' => $request->gender,
+                     'video_url' => $request->video_url,
+                     'dimensions' => $request->dimensions,
+                     'weight' => $request->weight,
+                   ]);
 
-        $this->updateProductExtras($request, $product_id);
+       $this->updateProductExtras($request, $product_id);
 
-      });
+       DB::commit();
+      }
+      catch(Throwable $e)
+      {
+        DB::rollBack();
+
+        return response()->json(["message" => "Error, product not added"], 500);
+      }
+
     }
 
 
@@ -369,9 +397,14 @@ class Products extends Controller
           'image_url' => 'file|image|max:2048',
         ]);
 
+        //Delete the old picture from the file-system
+        unlink(public_path($this->productImages) . $picture->image_url);
+
+        //Save the new picture to the file-system
         $image_url = Utils\Utils::saveImage($request->file('image_url'),
                                                           $this->productImages);
 
+        //Update database reference
         $picture->update(compact('image_url'));
     }
 

@@ -29,10 +29,11 @@ class DeletePictures
     {
         $product = $event->product;
 
-        $product->pictures()->forceDelete();
-
         //Delete the pictures from file system
         $this->deleteProductPictures($product);
+
+        //Delete the database references
+        $product->pictures()->forceDelete();
     }
 
     private function deleteProductPictures($product)
