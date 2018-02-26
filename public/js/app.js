@@ -44282,7 +44282,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            filter_by: "date"
+            filter_by: "date",
+            algolia_image: window.Laravel.asset_url + "/algolia.svg"
         };
     },
 
@@ -44335,7 +44336,7 @@ var render = function() {
               _vm.fromSearch
                 ? _c("img", {
                     staticStyle: { "margin-left": "0.5rem", width: "120px" },
-                    attrs: { src: "images/algolia.svg", alt: "" }
+                    attrs: { src: _vm.algolia_image, alt: "" }
                   })
                 : _vm._e()
             ]

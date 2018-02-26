@@ -44,7 +44,9 @@
         @foreach($subCategories as $subCategory)
         <tr class="{{($loop->index % 2 == 0) ? 'active' : ''}}">
           <td>{{$loop->iteration}}</td>
-          <td>{{$subCategory->name}}</td>
+          <td>
+              {{$subCategory->name}}
+          </td>
           <td>{{$subCategory->category}}</td>
           <td>
             <div class="btn-group">

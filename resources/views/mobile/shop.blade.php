@@ -3,6 +3,35 @@
 @section('styles')
 	<link href="{{asset('css/mobile/shop.css')}}" rel="stylesheet">
 	<script src="{{asset('js/lib/jquery.scrollTo-min.js')}}"></script>
+
+    <style>
+        *{
+            /*transition: none !important;*/
+        }
+
+        .found-results #mobSearchBar {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .found-results #mobSearchBar #backBtn{
+            background: #eee;
+        }
+
+        .found-results #mobSearchBar #backBtn svg,
+        .found-results #mobSearchBar #searchClearer svg {
+            fill: #333 !important;
+        }
+
+        .found-results #mobSearchBar input{
+            color: #333;
+        }
+
+        .found-results #mobSearchResults{
+            background-color: #fff;
+            color: #676767;
+        }
+    </style>
 @endsection
 
 @section('page-title')
@@ -59,14 +88,88 @@
 	@include('mobile.tpl.products_list')
 
 	<script>
-		function loadResults(val){
-		    if(val && val.length > 2)
-				$("#mobSearchArea").addClass('loading');
-			else
-                $("#mobSearchArea").removeClass('loading');
+        var current = window.location.href;
+        var url = window.location.hash;
+        var search_query = url.match(/#(.*)$/);
+        var search_listener = null;
+        var actual_query;
+        var query_submitted = false;
+
+        if (search_query && search_query[1].indexOf('/search/') !== -1) {
+            var q = search_query[1].split('/search/')[1];
+            actual_query = q.replace(/%20/g, ' ');
+            console.log("Searching on!!", actual_query);
+
+            turnOnSearching(actual_query);
+            search(actual_query);
+        }
+
+        function search(query) {
+            window.location.href = current.match(/#(.*)$/) ? current.replace(/#(.*)$/, '#/search/'+query) : current + "#/search/" + query;
+
+            if(search_listener === null)
+                listen();
+
+            if($("#mobSearchInput").val().toLowerCase() !== query.toLowerCase())
+                $("#mobSearchInput").val(query).focus();
+        }
+
+        function getCurrent() {
+            return window.location.hash;
+        }
+
+        function listen() {
+            var current = getCurrent();
+            var turn_off = false;
+
+            if (current !== url) {
+                console.log('URL changed to ' + current);
+                url = current;
+                search_query = url.match(/#(.*)$/);
+
+                if (search_query && search_query[1].indexOf('/search/') !== -1) {
+                    var q = search_query[1].split('/search/')[1];
+                    actual_query = q.replace(/%20/g, ' ');
+                    turnOnSearching(actual_query);
+                    console.log(actual_query);
+
+//                    if(actual_query.length < 1){
+                        $("#mobSearchArea").removeClass('found-results');
+                        document.getElementById("themeTag").setAttribute("content", "#f38536");
+                        $("#theResults").html("");
+//                    }
+                }
+                else {
+                    console.log("Searching off!!");
+                    turnOffSearching();
+
+                    turn_off = true;
+                }
+            }
+
+            if(!turn_off)
+                search_listener = setTimeout(listen);
+            else{
+                clearTimeout(search_listener);
+                search_listener = null;
+            }
+        }
+
+		function queryChanged(val){
+//            search(val);
+            actual_query = val;
+
+            if(query_submitted){
+                cancelQuery();
+                query_submitted = false;
+            }
         }
 
         function startSearching(){
+		    search("");
+        }
+
+        function turnOnSearching(query){
             document.body.classList.add("searching");
             $("#mainSiteContent").addClass("animating");
 
@@ -75,7 +178,7 @@
             }, 350);
         }
 
-        function stopSearching(){
+        function turnOffSearching(){
             $("#mobSearchArea").removeClass('loading');
             $("#mobSearchArea").removeClass('found-results');
             $("#mobSearchInput").val("");
@@ -83,12 +186,17 @@
             document.body.classList.remove("searching");
             setTimeout(function () {
                 $("#mainSiteContent").removeClass("animating");
-            }, 600)
+            }, 600);
+        }
+
+        function stopSearching(){
+//            window.location.href = current.replace(/#(.*)$/, '#/');
+            search("");
         }
 
         function clearSearchInput() {
+//            search("");
             $("#mobSearchInput").val("").focus();
-            loadResults("");
         }
 
         $(document).ready(function () {
@@ -106,6 +214,73 @@
                 $('#cateGoryTabs').scrollTo($(this));
                 return false;
 			});
-        })
+
+            $("#mobSearchBar").on("submit", function(e){
+                e.preventDefault();
+//                console.log("Search submitted!", actual_query);
+                query_submitted = true;
+
+                submitQuery();
+            })
+        });
+
+        var fetch_timeout;
+
+        function submitQuery(){
+            $("#mobSearchInput").blur();
+
+            if(actual_query && actual_query.length > 2)
+                $("#mobSearchArea").addClass('loading');
+            else
+                $("#mobSearchArea").removeClass('loading');
+
+            $("#theResults").html("");
+
+            searchDb(actual_query, function(success, res){
+                if(success){
+                    console.log("Result from search...");
+                    window.location.href = current.replace(/#(.*)$/, '') + '#/search/' + actual_query.trim().replace(/\s/g, '%20');
+                    $("#mobSearchArea").addClass('loaded-results');
+                    document.getElementById("themeTag").setAttribute("content", "#FFFFFF");
+
+                    setTimeout(function(){
+                        $("#mobSearchArea").removeClass('loading');
+                        $("#mobSearchArea").removeClass('loaded-results');
+
+                        $("#mobSearchArea").addClass('found-results');
+                        $("#theResults").html(res);
+                    }, 200);
+                }else{
+                    console.log("Error fetching resources!!!");
+                }
+            });
+
+//            $("#mobSearchInput").on("focusin", function(){
+//               cancelQuery();
+//            });
+        }
+
+        function cancelQuery(){
+            console.log("Cancelling query!!!");
+//            $("#mobSearchArea").removeClass('loading found-results');
+//            clearTimeout(fetch_timeout);
+        }
+
+        function searchDb(query, callback){
+            var url= window.Laravel.base_url + '/search?search=' + query;
+//            $.get(url, callback);
+
+            $.ajax({
+                type		:'GET',
+                url         :url,
+                success     : function(res) {
+                    callback(true, res);
+                },
+                error: function (err) {
+                    console.log(err);
+                    callback(false);
+                }
+            });
+        }
 	</script>
 @endsection

@@ -31,7 +31,8 @@
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-            'base_url' => url('/')
+            'base_url' => url('/'),
+            'asset_url' => asset('images/')
         ]) !!};
     </script>
 
