@@ -22,7 +22,7 @@
         </form>
 
         <div id="mobSearchResults">
-            <div id="loader" class="layout vertical center-center">
+            <div id="loader" class="loader">
                 Fetching products...
             </div>
             <a id="algoliaImage" href="https://www.algolia.com" class="layout center-justified">

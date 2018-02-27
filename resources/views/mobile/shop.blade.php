@@ -229,6 +229,11 @@
 //                console.log("Search submitted!", actual_query);
                 query_submitted = true;
 
+                $("#mobSearchInput").blur();
+                $("#mobSearchArea").removeClass('loading loaded-results found-results');
+                document.getElementById("themeTag").setAttribute("content", "#f38536");
+                $("#theResults").html("");
+
                 submitQuery();
             })
         });
@@ -236,14 +241,7 @@
         var fetch_timeout;
 
         function submitQuery(){
-            $("#mobSearchInput").blur();
-
-            if(actual_query && actual_query.length > 2)
-                $("#mobSearchArea").addClass('loading');
-            else
-                $("#mobSearchArea").removeClass('loading');
-
-            $("#theResults").html("");
+            $("#mobSearchArea").addClass('loading');
 
             searchDb(actual_query, function(success, res){
                 if(success){
