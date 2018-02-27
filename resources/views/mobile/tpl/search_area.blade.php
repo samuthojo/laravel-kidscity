@@ -1,5 +1,5 @@
 <div id="mobSearchArea">
-    <div class="modal-bg" onclick="stopSearching()"></div>
+    <div class="modal-bg" onclick="function back(){window.history.back();};back()"></div>
     <div id="content">
         <form id="mobSearchBar" class="an-action-bar layout center justified">
             <button type="button" id="backBtn" class="layout center action-button" onclick="function back(){window.history.back();};back()">
