@@ -25,7 +25,9 @@
             <div id="loader" class="layout vertical center-center">
                 Fetching products...
             </div>
-
+            <a id="algoliaImage" href="https://www.algolia.com" class="layout center-justified">
+                <img src="{{asset('images/algolia.svg')}}" alt="" height="20px">
+            </a>
             <div id="theResults">
 
             </div>
