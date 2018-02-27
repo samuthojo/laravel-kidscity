@@ -163,6 +163,10 @@
                 cancelQuery();
                 query_submitted = false;
             }
+            console.log("Changed!!!");
+            $("#mobSearchArea").removeClass('loading loaded-results found-results');
+            document.getElementById("themeTag").setAttribute("content", "#f38536");
+            $("#theResults").html("");
         }
 
         function startSearching(){
@@ -190,13 +194,18 @@
         }
 
         function stopSearching(){
-//            window.location.href = current.replace(/#(.*)$/, '#/');
             search("");
+            $("#mobSearchArea").removeClass('loading loaded-results found-results');
+            document.getElementById("themeTag").setAttribute("content", "#f38536");
+            $("#theResults").html("");
         }
 
         function clearSearchInput() {
 //            search("");
             $("#mobSearchInput").val("").focus();
+            $("#mobSearchArea").removeClass('loading loaded-results found-results');
+            document.getElementById("themeTag").setAttribute("content", "#f38536");
+            $("#theResults").html("");
         }
 
         $(document).ready(function () {
@@ -254,10 +263,6 @@
                     console.log("Error fetching resources!!!");
                 }
             });
-
-//            $("#mobSearchInput").on("focusin", function(){
-//               cancelQuery();
-//            });
         }
 
         function cancelQuery(){
