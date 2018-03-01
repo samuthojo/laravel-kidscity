@@ -17,8 +17,6 @@
 
 @section('content')
 
-@include('cms.modals.add_product_modal')
-@include('cms.modals.edit_product_modal')
 @include('cms.modals.confirmation_modal',
   ['id' => 'delete_confirmation_modal',
   'title' => 'Confirm',
@@ -26,12 +24,16 @@
   'action' => 'Confirm',
   'function' => 'deleteProduct()',])
 
-@if(request()->session()->has('message'))
-<div id="alert-success" class="alert alert-success">
-  {{request()->session()->pull('message')}}
-</div>
-@endif
 @include('cms.alerts.success-alert')
+
+<div class="row">
+
+  <div class="col-md-12">
+    @include('flash::message')
+  </div>
+
+</div>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 style="font-weight: bold; color: #337ab7;" class="panel-title pull-left">
