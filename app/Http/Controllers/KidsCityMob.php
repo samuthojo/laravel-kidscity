@@ -8,6 +8,7 @@ use App\DeliveryLocation;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Utils;
 
@@ -93,5 +94,17 @@ class KidsCityMob extends Controller
     {
         $page = "profile";
         return view('mobile.profile', compact('page'));
+    }
+
+    public function login()
+    {
+        $page = "profile";
+        return view('mobile.login', compact('page'));
+    }
+
+    public function register()
+    {
+        $page = "profile";
+        return view('mobile.register', compact('page'));
     }
 }

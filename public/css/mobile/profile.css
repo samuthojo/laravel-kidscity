@@ -1,19 +1,12 @@
-body{
-    padding-top: 0;
-    background-position: -30px 0;
-    background-color: #333;
-    background-image: url(../../images/login-image.jpg);
-}
-#appBar{
-    display: none;
-}
-
 #loginInfo{
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 60px;
+    background-position: -30px 0;
+    background-color: #333;
+    background-image: url(../../images/login-image.jpg);
 }
 
 #loginInfo #content{

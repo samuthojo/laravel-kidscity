@@ -53,6 +53,8 @@ Route::prefix('/mob')->group(function() {
     Route::get('/cart/', 'KidsCityMob@cart');
     Route::get('/checkout/', 'KidsCityMob@checkout');
     Route::get('/profile/', 'KidsCityMob@profile');
+    Route::get('/login/', 'KidsCityMob@login');
+    Route::get('/register/', 'KidsCityMob@register');
 });
 
 Route::get('/search', 'Search@search')->name('search');

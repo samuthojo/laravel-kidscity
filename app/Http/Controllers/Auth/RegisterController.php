@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Jenssegers\Agent\Agent;
 
 class RegisterController extends Controller
 {
@@ -82,6 +83,11 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $user = $this->create($request->all());
+
+        $agent = new Agent();
+
+        if($agent->isPhone())
+            return redirect('/mob/login');
 
         return redirect($this->redirectPath());
     }

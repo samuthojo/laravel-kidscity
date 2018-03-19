@@ -16,7 +16,7 @@
 				background-position: -30px 0;
 				background-image: url({{asset('../images/login-image.jpg')}});
 			}
-			
+
 			#appBar, #bottomNav{
 				display: none;
 			}
@@ -96,35 +96,37 @@
 				text-decoration: underline;
 			}
 		</style>
-		
+
 		<div id="loginInfo">
 			<div id="content" class="layout vertical center-center">
 				<img src="{{asset('images/logo.png')}}" alt="" height="80px">
 				<h1>Kid City Login</h1>
-				<form action="{{ route('login') }}" id="form" method="POST" style="width: 100%;">
+
+				<form action="{{ route('register') }}" id="form" method="POST">
 					{{ csrf_field() }}
 
-					<div class="input-group layout center">
-						<i class="fa fa-user"></i>
-						<input type="text" class="input" placeholder="Enter phone number"
-							   name="phone_number" value="{{old('phone_number')}}" autofocus>
-					</div>
+					<label>FULL NAME</label>
+					<input type="text" class="input" placeholder="E.g Juma Hamisi"
+						   name="name" value="{{old('name')}}" autofocus>
 
-					<div class="input-group layout center">
-						<i class="fa fa-lock"></i>
-						<input type="password" class="input" placeholder="Your Password"
-							   name="password">
-					</div>
+					<label>PHONE NUMBER</label>
+					<input type="phone" class="input" placeholder="E.g +255 785 922 001"
+						   name="phone_number" value="{{old('phone_number')}}">
 
-					<div class="input-group layout center">
-						<i class="fa fa-"></i>
-						<button class="btn block large accent" style="opacity: 1;">
-							SUBMIT
-						</button>
-					</div>
+					<label>PASSWORD</label>
+					<input type="password" class="input" placeholder="******"
+						   name="password">
+
+					<label>CONFIRM PASSWORD</label>
+					<input type="password" class="input" placeholder="*******"
+						   name="password_confirmation">
+
+					<button class="btn block large accent" style="opacity: 1;">
+						SUBMIT
+					</button>
+
+					<span>Already a kidcity member? <br> <a href="{{url('/mob/login')}}">Login Here</a></span>
 				</form>
-
-				<span>Not a member on kidcity yet? <br> <a href="{{url('/mob/register')}}">Register Now</a></span>
 			</div>
 		</div>
 	@endif

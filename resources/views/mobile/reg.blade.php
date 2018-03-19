@@ -41,7 +41,7 @@
 				position: absolute;
 				left: 0;
 				bottom: 0;
-				height: 100%;
+				height: 100vh;
 				width: 100%;
 				background: rgba(0,0,0,0.5);
 				z-index: 0;
@@ -81,50 +81,37 @@
 				font-size: 1.4em;
 				min-width: 1.2em;
 			}
-
-			#loginInfo span{
-				display: block;
-				margin-top: 1.8em;
-				line-height: 1.4em;
-				text-align: center;
-				color: #ddd;
-			}
-
-			#loginInfo span a{
-				font-size: 1.1em;
-				color: #fff;
-				text-decoration: underline;
-			}
 		</style>
 		
 		<div id="loginInfo">
 			<div id="content" class="layout vertical center-center">
 				<img src="{{asset('images/logo.png')}}" alt="" height="80px">
 				<h1>Kid City Login</h1>
-				<form action="{{ route('login') }}" id="form" method="POST" style="width: 100%;">
+
+				<form action="{{ route('register') }}" id="form" method="POST">
 					{{ csrf_field() }}
 
-					<div class="input-group layout center">
-						<i class="fa fa-user"></i>
-						<input type="text" class="input" placeholder="Enter phone number"
-							   name="phone_number" value="{{old('phone_number')}}" autofocus>
-					</div>
+					<label>FULL NAME</label>
+					<input type="text" class="input" placeholder="Enter your name"
+						   name="name" value="{{old('name')}}" autofocus>
 
-					<div class="input-group layout center">
-						<i class="fa fa-lock"></i>
-						<input type="password" class="input" placeholder="Your Password"
-							   name="password">
-					</div>
+					<label>PHONE NUMBER</label>
+					<input type="phone" class="input" placeholder="Enter phone number"
+						   name="phone_number" value="{{old('phone_number')}}">
 
-					<div class="input-group layout center">
-						<i class="fa fa-"></i>
-						<button class="btn block large accent" style="opacity: 1;">
-							SUBMIT
-						</button>
-					</div>
+					<label>PASSWORD</label>
+					<input type="password" class="input" placeholder="Your Password"
+						   name="password">
+
+					<label>CONFIRM PASSWORD</label>
+					<input type="password" class="input" placeholder="Confirm Password"
+						   name="password_confirmation">
+
+					<button class="btn block large">
+						SUBMIT
+					</button>
+					<br><br><br><br>
 				</form>
-
-				<span>Not a member on kidcity yet? <br> <a href="{{url('/mob/register')}}">Register Now</a></span>
 			</div>
 		</div>
 	@endif
