@@ -20,14 +20,38 @@
       <input type='file'
         onchange="previewMainBanner('{{$mainBanners->first()->id}}')"
         id="mainFile">
+      <p class="text-danger" id="main_banner-error" style="display: none;"></p><br>
+
     </div>
+
+    <div class="form-group" class="form-group {{ $errors->has('link') ? 'has-error' : '' }}">
+      <p style="font-weight: bold; color: #000">Link:</p>
+      <input type="text" name="link" value="{{old('link')}}"
+        placeholder="link" class="form-control" id="mainLink"
+        style="width: 430px !important; display:inline-block;" required>
+      <i class="fa fa-spinner fa-spin fa-2x fa-fw text-primary" id="mainSpinner"
+        style="display: none;"></i>
+      <p class="text-danger" id="mainLinkError"></p>
+    </div>
+
+   <button type="button" name="button"
+     onclick="updateBannerLink('mainLink', '{{'/admin/main_link/' . $mainBanners->first()->id}}', 'mainSpinner', 'mainLinkError')">
+     Submit
+   </button>
+
  </div>
 </div>
 
 <script>
+
+  $(function() {
+    $("#mainLink").val("{{$mainBanners->first()->link}}");
+  });
+
   function previewMainBanner(id){
       $("#main_spinner" + id).fadeIn(0);
       var preview = document.querySelector('#mainImage');
+      var original_main_banner = preview.src;
       preview.style.opacity = "0.3";
       var file = document.getElementById('mainFile').files[0];
 
@@ -58,10 +82,23 @@
           preview.style.opacity = "1";
         },
         error: function(error) {
-          console.log(error);
+          data = JSON.parse(error.responseText);
+          displayMainBannerErrors(data.errors);
           $("#main_spinner" + id).fadeOut(0);
+          preview.src = original_main_banner; //restore the previous image
           preview.style.opacity = "1";
         }
       });
  }
+
+ function displayMainBannerErrors(errors)
+{
+  if(errors.image_url != null) {
+    $("#main_banner-error").text(errors.image_url);
+    $("#main_banner-error").fadeIn(0, function() {
+      $("#main_banner-error").fadeOut(3000);
+      $("#main_banner-error").text("");
+    });
+  }
+}
 </script>

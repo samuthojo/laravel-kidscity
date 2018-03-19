@@ -148,6 +148,11 @@ Route::middleware('auth:admin')->prefix('/admin')->group(function() {
   Route::post('/featured_banner/{featured}', 'Banners@updateFeaturedBanner')->name('banners.updateFeaturedBanner');
   Route::post('/category_banner/{category}', 'Banners@updateCategoryBanner')->name('banners.updateCategoryBanner');
 
+  Route::post('/advert_link/{advert}', 'Banners@updateAdvertLink')->name('advert_link');
+  Route::post('/main_link/{main}', 'Banners@updateMainLink')->name('main_link');
+  Route::post('/featured_link/{featured}', 'Banners@updateFeaturedLink')->name('featured_link');
+  Route::post('/category_link/{category}', 'Banners@updateCategoryLink')->name('category_link');
+
   Route::view('/change_password', 'cms.change_password')->name('change_password');
   Route::post('/change_password', 'Auth\AdminResetPasswordController@reset')->name("reset_admin_password");
 

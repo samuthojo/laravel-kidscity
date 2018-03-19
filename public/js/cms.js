@@ -39,7 +39,7 @@ $(function () {
     if(document.getElementById("category_id") != null) {
       $("#sub_category_id").prop("disabled", true);
     }
-    
+
     if(document.getElementById("edit_category_id") != null) {
       $("#edit_sub_category_id").prop("disabled", true);
     }
@@ -202,4 +202,43 @@ function resetSubCategories(data) {
        // then append it to the select element
        mySelect.appendChild(opt);
     }
+}
+
+function updateBannerLink(linkTextFieldId, endPoint, spinnerId, errorId)
+{
+  $("#" + spinnerId).fadeIn(0);
+  var formData =  new FormData();
+  var link = $("#" + linkTextFieldId).val();
+  formData.append('link', link);
+  $.ajax({
+    type: 'post',
+    url:  endPoint,
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (t) {
+      console.log(t);
+      $("#" + spinnerId).fadeOut(0);
+      $("#success-alert").text("Link Saved Successfully");
+      $("#success-alert").fadeIn(0, function() {
+        $("#success-alert").fadeOut(1500);
+      });
+    },
+    error: function(error) {
+      data = JSON.parse(error.responseText);
+      displayLinkErrors(data.errors, errorId);
+      $("#" + spinnerId).fadeOut(0);
+    }
+  });
+}
+
+function displayLinkErrors(errors, errorId)
+{
+ if(errors.link != null) {
+   $("#" + errorId).text(errors.link);
+   $("#" + errorId).fadeIn(0, function() {
+     $("#" + errorId).fadeOut(3000);
+     $("#" + errorId).text("");
+   });
+ }
 }

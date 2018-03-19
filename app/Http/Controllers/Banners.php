@@ -9,6 +9,8 @@ class Banners extends Controller
 {
     private $images = 'images';
 
+    private $redirectTo = '/banners';
+
     public function cmsIndex()
     {
       $adverts = App\Advert::all();
@@ -53,5 +55,36 @@ class Banners extends Controller
         \App\Utils\Utils::saveImage($request->file('image_url'), $this->images);
         App\CategoryBanner::where(compact('id'))->update(compact('image_url'));
       }
+    }
+
+    public function updateAdvertLink(Request $request, $id)
+    {
+      $this->validate($request, $this->linkRules());
+      App\Advert::where(compact('id'))->update($request->only('link'));
+    }
+
+    public function updateMainLink(Request $request, App\MainBanner $main)
+    {
+      $this->validate($request, $this->linkRules());
+      $main->update($request->only('link'));
+    }
+
+    public function updateFeaturedLink(Request $request, App\FeaturedBanner $featured)
+    {
+      $this->validate($request, $this->linkRules());
+      $featured->update($request->only('link'));
+    }
+
+    public function updateCategoryLink(Request $request, App\CategoryBanner $category)
+    {
+      $this->validate($request, $this->linkRules());
+      $category->update($request->only('link'));
+    }
+
+    private function linkRules()
+    {
+      return [
+        'link' => 'nullable|url',
+      ];
     }
 }

@@ -10,5 +10,5 @@ class Advert extends Model
     use SoftDeletes;
     use BannerProps;
 
-    protected $fillable = ['image_url',];
+    protected $fillable = ['image_url', 'link'];
 }

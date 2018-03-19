@@ -10,5 +10,5 @@ class CategoryBanner extends Model
     use SoftDeletes;
     use BannerProps;
 
-    protected $fillable = ['name', 'image_url',];
+    protected $fillable = ['name', 'image_url', 'link',];
 }

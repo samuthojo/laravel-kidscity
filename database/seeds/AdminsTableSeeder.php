@@ -17,5 +17,6 @@ class AdminsTableSeeder extends Seeder
         'phone_number' => env('ADMIN_PHONENUMBER'),
         'password' => Hash::make(env('ADMIN_PASSWORD')),
       ]);
+      
     }
 }

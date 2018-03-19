@@ -22,7 +22,27 @@
       <span style="font-weight: bold;">Change picture: </span><br/>
       <input type='file' id="category{{$banner->id}}"
         onchange="previewCategoryBanner('{{$banner->id}}')">
+      <p class="text-danger" id="category-error{{$banner->id}}" style="display: none;"></p><br>
+
+      <div class="form-group" class="form-group" style="text-align: center;">
+        <p style="font-weight: bold; color: #000; text-align: left;">Link:</p>
+        <input type="text" name="link" value="{{old('link')}}"
+          placeholder="link" class="form-control" id="categoryLink{{$banner->id}}"
+          style="width: 430px !important; display:inline-block;" required>
+        <i class="fa fa-spinner fa-spin fa-2x fa-fw text-primary" id="categorySpinner{{$banner->id}}"
+          style="display: none;"></i>
+        <p class="text-danger" id="categoryLinkError{{$banner->id}}"></p>
+      </div>
+
+     <button type="button" name="button"
+       onclick="updateBannerLink('categoryLink{{$banner->id}}', '{{'/admin/category_link/' . $banner->id}}', 'categorySpinner{{$banner->id}}', 'categoryLinkError{{$banner->id}}')">
+       Submit
+     </button>
     </div>
+
+    <script>
+      $("#categoryLink{{$banner->id}}").val('{{$banner->link}}');
+    </script>
     @endforeach
   </div>
 
@@ -32,6 +52,7 @@
   function previewCategoryBanner(id){
       $("#category_spinner" + id).fadeIn(0);
       var preview = document.querySelector('#catImg' + id);
+      var original_category = preview.src; //Original category image
       preview.style.opacity = "0.3";
       var file = document.getElementById('category'+id).files[0];
 
@@ -62,10 +83,23 @@
           preview.style.opacity = "1";
         },
         error: function(error) {
-          console.log(error);
+          data = JSON.parse(error.responseText);
+          displayCategoryErrors(data.errors, id);
           $("#category_spinner" + id).fadeOut(0);
+          preview.src = original_category; //restore the previous image
           preview.style.opacity = "1";
         }
       });
  }
+
+ function displayCategoryErrors(errors, id)
+{
+  if(errors.image_url != null) {
+    $("#category-error" + id).text(errors.image_url);
+    $("#category-error" + id).fadeIn(0, function() {
+      $("#category-error" + id).fadeOut(3000);
+      $("#category-error" + id).text("");
+    });
+  }
+}
 </script>

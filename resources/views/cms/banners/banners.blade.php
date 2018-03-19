@@ -29,6 +29,8 @@
 
 @section('content')
 
+@include('cms.alerts.success-alert')
+
 <h3 class="text-primary">Manage Banners</h3>
 
 <ul class="nav nav-tabs">
